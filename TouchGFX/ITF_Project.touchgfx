@@ -619,6 +619,38 @@
             "TextId": "__SingleUse_OWHL",
             "TextRotation": "0",
             "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2",
+            "X": 112,
+            "Y": 73,
+            "Width": 157,
+            "Height": 24,
+            "TextId": "__SingleUse_VFFK",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_AK80",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea3",
+            "X": 112,
+            "Y": 112,
+            "Width": 177,
+            "Height": 24,
+            "TextId": "__SingleUse_FPPC",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_28ND",
+              "UseBuffer": true,
+              "BufferSize": 6
+            }
           }
         ],
         "Interactions": [
