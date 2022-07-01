@@ -4,6 +4,7 @@
 #include <gui_generated/screen2_screen/Screen2ViewBase.hpp>
 #include <touchgfx/Color.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
+#include <BitmapDatabase.hpp>
 
 Screen2ViewBase::Screen2ViewBase() :
     flexButtonCallback(this, &Screen2ViewBase::flexButtonCallbackHandler)
@@ -18,10 +19,10 @@ Screen2ViewBase::Screen2ViewBase() :
     flexButton1.setBoxWithBorderPosition(0, 0, 124, 27);
     flexButton1.setBorderSize(5);
     flexButton1.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(1, 68, 135), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    flexButton1.setPosition(24, 245, 124, 27);
+    flexButton1.setPosition(66, 209, 124, 27);
     flexButton1.setAction(flexButtonCallback);
 
-    textArea1.setXY(41, 249);
+    textArea1.setXY(80, 213);
     textArea1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea1.setLinespacing(0);
     textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_OWHL));
@@ -42,12 +43,22 @@ Screen2ViewBase::Screen2ViewBase() :
     textArea3.resizeToCurrentText();
     textArea3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FPPC));
 
+    imageProgress1.setXY(269, 167);
+    imageProgress1.setProgressIndicatorPosition(2, 2, 180, 16);
+    imageProgress1.setRange(0, 100);
+    imageProgress1.setDirection(touchgfx::AbstractDirectionProgress::RIGHT);
+    imageProgress1.setBackground(touchgfx::Bitmap(BITMAP_BLUE_PROGRESSINDICATORS_BG_MEDIUM_PROGRESS_INDICATOR_BG_SQUARE_0_DEGREES_ID));
+    imageProgress1.setBitmap(BITMAP_BLUE_PROGRESSINDICATORS_FILL_TILING_PROGRESS_INDICATOR_FILL_STRIPED_NORMAL_HORIZONTAL_ID);
+    imageProgress1.setValue(60);
+    imageProgress1.setAnchorAtZero(false);
+
     add(__background);
     add(box1);
     add(flexButton1);
     add(textArea1);
     add(textArea2);
     add(textArea3);
+    add(imageProgress1);
 }
 
 void Screen2ViewBase::setupScreen()

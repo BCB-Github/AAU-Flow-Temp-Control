@@ -64,8 +64,13 @@ TouchGFX/build/STM32F746-DISCO/TouchGFX/generated/gui_generated/src/screen2_scre
  Middlewares/ST/touchgfx/framework/include/touchgfx/containers/buttons/TwoWildcardTextButtonStyle.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/containers/buttons/WildcardTextButtonStyle.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/containers/progress_indicators/ImageProgress.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/containers/progress_indicators/AbstractDirectionProgress.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/containers/progress_indicators/AbstractProgressIndicator.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/EasingEquations.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/Color.hpp \
- TouchGFX/generated/texts/include/texts/TextKeysAndLanguages.hpp
+ TouchGFX/generated/texts/include/texts/TextKeysAndLanguages.hpp \
+ TouchGFX/generated/images/include/BitmapDatabase.hpp
 
 TouchGFX/generated/gui_generated/include/gui_generated/screen2_screen/Screen2ViewBase.hpp:
 
@@ -195,6 +200,16 @@ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.
 
 Middlewares/ST/touchgfx/framework/include/touchgfx/containers/buttons/WildcardTextButtonStyle.hpp:
 
+Middlewares/ST/touchgfx/framework/include/touchgfx/containers/progress_indicators/ImageProgress.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/containers/progress_indicators/AbstractDirectionProgress.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/containers/progress_indicators/AbstractProgressIndicator.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/EasingEquations.hpp:
+
 Middlewares/ST/touchgfx/framework/include/touchgfx/Color.hpp:
 
 TouchGFX/generated/texts/include/texts/TextKeysAndLanguages.hpp:
+
+TouchGFX/generated/images/include/BitmapDatabase.hpp:

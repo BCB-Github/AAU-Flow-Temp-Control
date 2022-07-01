@@ -6,9 +6,156 @@
         "CanvasBufferSize": 7200,
         "Components": [
           {
+            "Type": "FlexButton",
+            "Name": "flexDownTemp",
+            "X": 248,
+            "Y": 222,
+            "Width": 50,
+            "Height": 50,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 50,
+                "Height": 50,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "flexUpTemp",
+            "X": 248,
+            "Y": 150,
+            "Width": 50,
+            "Height": 50,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 50,
+                "Height": 50,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "flexUpFlow",
+            "X": 345,
+            "Y": 150,
+            "Width": 50,
+            "Height": 50,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 50,
+                "Height": 50,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "flexDownFlow",
+            "X": 345,
+            "Y": 222,
+            "Width": 50,
+            "Height": 50,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 50,
+                "Height": 50,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
             "Type": "Box",
             "Name": "background",
-            "X": -1,
             "Width": 480,
             "Height": 272,
             "Color": {
@@ -172,7 +319,7 @@
           {
             "Type": "TextArea",
             "Name": "labelFlow",
-            "X": 448,
+            "X": 446,
             "Y": 138,
             "Width": 31,
             "Height": 12,
@@ -244,14 +391,14 @@
             "Wildcard1": {
               "TextId": "__SingleUse_MXIN",
               "UseBuffer": true,
-              "BufferSize": 3
+              "BufferSize": 5
             }
           },
           {
             "Type": "TextArea",
             "Name": "SPFlow",
             "X": 338,
-            "Y": 198,
+            "Y": 195,
             "Width": 64,
             "Height": 24,
             "TextId": "__SingleUse_U15I",
@@ -273,185 +420,10 @@
             "AutoSize": true
           },
           {
-            "Type": "CircleProgress",
-            "Name": "circleProgress1",
-            "X": 426,
-            "Y": 218,
-            "Width": 54,
-            "Height": 54,
-            "FileNameProgress": "__designer\\Blue_ProgressIndicators_fill_small_circle_indicator_fill_line_full.png",
-            "Color": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "CenterX": 27,
-            "CenterY": 27,
-            "Radius": 20,
-            "LineWidth": 10,
-            "EndAngle": 360,
-            "CapPrecision": "Butt",
-            "FileNameBackground": "__designer\\Blue_ProgressIndicators_bg_small_circle_indicator_bg_line_full.png",
-            "ProgressRangeMax": 100,
-            "ProgressInitialValue": 60
-          },
-          {
-            "Type": "FlexButton",
-            "Name": "flexDownTemp",
-            "X": 248,
-            "Y": 222,
-            "Width": 50,
-            "Height": 50,
-            "Visible": false,
-            "ButtonTrigger": {
-              "Type": "ClickButtonTrigger"
-            },
-            "ButtonStyles": [
-              {
-                "Type": "BoxWithBorderButtonStyle",
-                "Width": 50,
-                "Height": 50,
-                "LockToFlexButtonSize": true,
-                "BorderSize": 5,
-                "ColorReleased": {
-                  "Green": 102,
-                  "Blue": 153
-                },
-                "ColorPressed": {
-                  "Green": 153,
-                  "Blue": 204
-                },
-                "ColorBorderReleased": {
-                  "Green": 51,
-                  "Blue": 102
-                },
-                "ColorBorderPressed": {
-                  "Red": 51,
-                  "Green": 102,
-                  "Blue": 153
-                }
-              }
-            ]
-          },
-          {
-            "Type": "FlexButton",
-            "Name": "flexUpTemp",
-            "X": 248,
-            "Y": 150,
-            "Width": 50,
-            "Height": 50,
-            "Visible": false,
-            "ButtonTrigger": {
-              "Type": "ClickButtonTrigger"
-            },
-            "ButtonStyles": [
-              {
-                "Type": "BoxWithBorderButtonStyle",
-                "Width": 50,
-                "Height": 50,
-                "LockToFlexButtonSize": true,
-                "BorderSize": 5,
-                "ColorReleased": {
-                  "Green": 102,
-                  "Blue": 153
-                },
-                "ColorPressed": {
-                  "Green": 153,
-                  "Blue": 204
-                },
-                "ColorBorderReleased": {
-                  "Green": 51,
-                  "Blue": 102
-                },
-                "ColorBorderPressed": {
-                  "Red": 51,
-                  "Green": 102,
-                  "Blue": 153
-                }
-              }
-            ]
-          },
-          {
-            "Type": "FlexButton",
-            "Name": "flexUpFlow",
-            "X": 345,
-            "Y": 150,
-            "Width": 50,
-            "Height": 50,
-            "Visible": false,
-            "ButtonTrigger": {
-              "Type": "ClickButtonTrigger"
-            },
-            "ButtonStyles": [
-              {
-                "Type": "BoxWithBorderButtonStyle",
-                "Width": 50,
-                "Height": 50,
-                "LockToFlexButtonSize": true,
-                "BorderSize": 5,
-                "ColorReleased": {
-                  "Green": 102,
-                  "Blue": 153
-                },
-                "ColorPressed": {
-                  "Green": 153,
-                  "Blue": 204
-                },
-                "ColorBorderReleased": {
-                  "Green": 51,
-                  "Blue": 102
-                },
-                "ColorBorderPressed": {
-                  "Red": 51,
-                  "Green": 102,
-                  "Blue": 153
-                }
-              }
-            ]
-          },
-          {
-            "Type": "FlexButton",
-            "Name": "flexDownFlow",
-            "X": 345,
-            "Y": 222,
-            "Width": 50,
-            "Height": 50,
-            "Visible": false,
-            "ButtonTrigger": {
-              "Type": "ClickButtonTrigger"
-            },
-            "ButtonStyles": [
-              {
-                "Type": "BoxWithBorderButtonStyle",
-                "Width": 50,
-                "Height": 50,
-                "LockToFlexButtonSize": true,
-                "BorderSize": 5,
-                "ColorReleased": {
-                  "Green": 102,
-                  "Blue": 153
-                },
-                "ColorPressed": {
-                  "Green": 153,
-                  "Blue": 204
-                },
-                "ColorBorderReleased": {
-                  "Green": 51,
-                  "Blue": 102
-                },
-                "ColorBorderPressed": {
-                  "Red": 51,
-                  "Green": 102,
-                  "Blue": 153
-                }
-              }
-            ]
-          },
-          {
             "Type": "FlexButton",
             "Name": "flexButton1",
             "X": 24,
-            "Y": 245,
+            "Y": 239,
             "Width": 124,
             "Height": 27,
             "ButtonTrigger": {
@@ -489,7 +461,7 @@
             "Type": "TextArea",
             "Name": "textArea1",
             "X": 35,
-            "Y": 249,
+            "Y": 243,
             "Width": 103,
             "Height": 18,
             "TextId": "__SingleUse_1BLF",
@@ -574,8 +546,8 @@
           {
             "Type": "FlexButton",
             "Name": "flexButton1",
-            "X": 24,
-            "Y": 245,
+            "X": 66,
+            "Y": 209,
             "Width": 124,
             "Height": 27,
             "ButtonTrigger": {
@@ -612,8 +584,8 @@
           {
             "Type": "TextArea",
             "Name": "textArea1",
-            "X": 41,
-            "Y": 249,
+            "X": 80,
+            "Y": 213,
             "Width": 90,
             "Height": 18,
             "TextId": "__SingleUse_OWHL",
@@ -651,6 +623,24 @@
               "UseBuffer": true,
               "BufferSize": 6
             }
+          },
+          {
+            "Type": "ImageProgress",
+            "Name": "imageProgress1",
+            "X": 269,
+            "Y": 167,
+            "Width": 184,
+            "Height": 20,
+            "FileNameProgress": "__designer\\Blue_ProgressIndicators_fill_tiling_progress_indicator_fill_striped_normal_horizontal.png",
+            "Direction": "Right",
+            "Style": "Style3",
+            "FileNameBackground": "__designer\\Blue_ProgressIndicators_bg_medium_progress_indicator_bg_square_0_degrees.png",
+            "IndicatorPositionX": 2,
+            "IndicatorPositionY": 2,
+            "IndicatorPositionWidth": 180,
+            "IndicatorPositionHeight": 16,
+            "ProgressRangeMax": 100,
+            "ProgressInitialValue": 60
           }
         ],
         "Interactions": [

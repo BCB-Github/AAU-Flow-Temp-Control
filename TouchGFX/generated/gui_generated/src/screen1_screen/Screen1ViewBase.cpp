@@ -17,7 +17,31 @@ Screen1ViewBase::Screen1ViewBase() :
     __background.setPosition(0, 0, 480, 272);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
 
-    background.setPosition(-1, 0, 480, 272);
+    flexDownTemp.setBoxWithBorderPosition(0, 0, 50, 50);
+    flexDownTemp.setBorderSize(5);
+    flexDownTemp.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    flexDownTemp.setPosition(248, 222, 50, 50);
+    flexDownTemp.setAction(flexButtonCallback);
+
+    flexUpTemp.setBoxWithBorderPosition(0, 0, 50, 50);
+    flexUpTemp.setBorderSize(5);
+    flexUpTemp.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    flexUpTemp.setPosition(248, 150, 50, 50);
+    flexUpTemp.setAction(flexButtonCallback);
+
+    flexUpFlow.setBoxWithBorderPosition(0, 0, 50, 50);
+    flexUpFlow.setBorderSize(5);
+    flexUpFlow.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    flexUpFlow.setPosition(345, 150, 50, 50);
+    flexUpFlow.setAction(flexButtonCallback);
+
+    flexDownFlow.setBoxWithBorderPosition(0, 0, 50, 50);
+    flexDownFlow.setBorderSize(5);
+    flexDownFlow.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    flexDownFlow.setPosition(345, 222, 50, 50);
+    flexDownFlow.setAction(flexButtonCallback);
+
+    background.setPosition(0, 0, 480, 272);
     background.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
 
     upTempImg.setBitmap(touchgfx::Bitmap(BITMAP_UP_ARROW_ID));
@@ -283,7 +307,7 @@ Screen1ViewBase::Screen1ViewBase() :
     labelTemp.setLinespacing(0);
     labelTemp.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ZBMR));
 
-    labelFlow.setXY(448, 138);
+    labelFlow.setXY(446, 138);
     labelFlow.setColor(touchgfx::Color::getColorFromRGB(20, 151, 197));
     labelFlow.setLinespacing(0);
     labelFlow.setTypedText(touchgfx::TypedText(T___SINGLEUSE_RHSD));
@@ -320,7 +344,7 @@ Screen1ViewBase::Screen1ViewBase() :
     SPTemp.resizeToCurrentText();
     SPTemp.setTypedText(touchgfx::TypedText(T___SINGLEUSE_RQNO));
 
-    SPFlow.setXY(338, 198);
+    SPFlow.setXY(338, 195);
     SPFlow.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     SPFlow.setLinespacing(0);
     SPFlow.setWildcard(touchgfx::TypedText(T___SINGLEUSE_YF1J).getText());
@@ -332,59 +356,22 @@ Screen1ViewBase::Screen1ViewBase() :
     textAreaSP.setLinespacing(0);
     textAreaSP.setTypedText(touchgfx::TypedText(T___SINGLEUSE_19KW));
 
-    circleProgress1.setXY(426, 218);
-    circleProgress1.setProgressIndicatorPosition(0, 0, 54, 54);
-    circleProgress1.setRange(0, 100);
-    circleProgress1.setCenter(27, 27);
-    circleProgress1.setRadius(20);
-    circleProgress1.setLineWidth(10);
-    circleProgress1.setStartEndAngle(0, 360);
-    circleProgress1.setCapPrecision(180);
-    circleProgress1.setBackground(touchgfx::Bitmap(BITMAP_BLUE_PROGRESSINDICATORS_BG_SMALL_CIRCLE_INDICATOR_BG_LINE_FULL_ID));
-    circleProgress1Painter.setBitmap(touchgfx::Bitmap(BITMAP_BLUE_PROGRESSINDICATORS_FILL_SMALL_CIRCLE_INDICATOR_FILL_LINE_FULL_ID));
-    circleProgress1.setPainter(circleProgress1Painter);
-    circleProgress1.setValue(60);
-
-    flexDownTemp.setBoxWithBorderPosition(0, 0, 50, 50);
-    flexDownTemp.setBorderSize(5);
-    flexDownTemp.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    flexDownTemp.setPosition(248, 222, 50, 50);
-    flexDownTemp.setVisible(false);
-    flexDownTemp.setAction(flexButtonCallback);
-
-    flexUpTemp.setBoxWithBorderPosition(0, 0, 50, 50);
-    flexUpTemp.setBorderSize(5);
-    flexUpTemp.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    flexUpTemp.setPosition(248, 150, 50, 50);
-    flexUpTemp.setVisible(false);
-    flexUpTemp.setAction(flexButtonCallback);
-
-    flexUpFlow.setBoxWithBorderPosition(0, 0, 50, 50);
-    flexUpFlow.setBorderSize(5);
-    flexUpFlow.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    flexUpFlow.setPosition(345, 150, 50, 50);
-    flexUpFlow.setVisible(false);
-    flexUpFlow.setAction(flexButtonCallback);
-
-    flexDownFlow.setBoxWithBorderPosition(0, 0, 50, 50);
-    flexDownFlow.setBorderSize(5);
-    flexDownFlow.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    flexDownFlow.setPosition(345, 222, 50, 50);
-    flexDownFlow.setVisible(false);
-    flexDownFlow.setAction(flexButtonCallback);
-
     flexButton1.setBoxWithBorderPosition(0, 0, 124, 27);
     flexButton1.setBorderSize(5);
     flexButton1.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(1, 68, 135), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    flexButton1.setPosition(24, 245, 124, 27);
+    flexButton1.setPosition(24, 239, 124, 27);
     flexButton1.setAction(flexButtonCallback);
 
-    textArea1.setXY(35, 249);
+    textArea1.setXY(35, 243);
     textArea1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea1.setLinespacing(0);
     textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_1BLF));
 
     add(__background);
+    add(flexDownTemp);
+    add(flexUpTemp);
+    add(flexUpFlow);
+    add(flexDownFlow);
     add(background);
     add(upTempImg);
     add(downTempImg);
@@ -400,11 +387,6 @@ Screen1ViewBase::Screen1ViewBase() :
     add(SPTemp);
     add(SPFlow);
     add(textAreaSP);
-    add(circleProgress1);
-    add(flexDownTemp);
-    add(flexUpTemp);
-    add(flexUpFlow);
-    add(flexDownFlow);
     add(flexButton1);
     add(textArea1);
 }

@@ -8,6 +8,7 @@
 #include <mvp/View.hpp>
 #include <gui/screen1_screen/Screen1Presenter.hpp>
 #include <touchgfx/widgets/Box.hpp>
+#include <touchgfx/containers/buttons/Buttons.hpp>
 #include <touchgfx/widgets/ScalableImage.hpp>
 #include <touchgfx/widgets/graph/GraphWrapAndClear.hpp>
 #include <touchgfx/widgets/graph/GraphElements.hpp>
@@ -15,9 +16,6 @@
 #include <touchgfx/widgets/graph/GraphLabels.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
-#include <touchgfx/containers/progress_indicators/CircleProgress.hpp>
-#include <touchgfx/widgets/canvas/PainterRGB565Bitmap.hpp>
-#include <touchgfx/containers/buttons/Buttons.hpp>
 
 class Screen1ViewBase : public touchgfx::View<Screen1Presenter>
 {
@@ -58,6 +56,10 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexDownTemp;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexUpTemp;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexUpFlow;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexDownFlow;
     touchgfx::Box background;
     touchgfx::ScalableImage upTempImg;
     touchgfx::ScalableImage downTempImg;
@@ -80,12 +82,6 @@ protected:
     touchgfx::TextAreaWithOneWildcard SPTemp;
     touchgfx::TextAreaWithOneWildcard SPFlow;
     touchgfx::TextArea textAreaSP;
-    touchgfx::CircleProgress circleProgress1;
-    touchgfx::PainterRGB565Bitmap circleProgress1Painter;
-    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexDownTemp;
-    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexUpTemp;
-    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexUpFlow;
-    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexDownFlow;
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexButton1;
     touchgfx::TextArea textArea1;
 
@@ -98,7 +94,7 @@ protected:
     touchgfx::Unicode::UnicodeChar nowFlowBuffer[NOWFLOW_SIZE];
     static const uint16_t NOWVOL_SIZE = 5;
     touchgfx::Unicode::UnicodeChar nowVolBuffer[NOWVOL_SIZE];
-    static const uint16_t SPTEMP_SIZE = 3;
+    static const uint16_t SPTEMP_SIZE = 5;
     touchgfx::Unicode::UnicodeChar SPTempBuffer[SPTEMP_SIZE];
 
 private:
