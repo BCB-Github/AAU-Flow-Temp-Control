@@ -7,6 +7,7 @@
 #include <BitmapDatabase.hpp>
 
 Screen2ViewBase::Screen2ViewBase() :
+    buttonCallback(this, &Screen2ViewBase::buttonCallbackHandler),
     flexButtonCallback(this, &Screen2ViewBase::flexButtonCallbackHandler)
 {
 
@@ -43,14 +44,8 @@ Screen2ViewBase::Screen2ViewBase() :
     textArea3.resizeToCurrentText();
     textArea3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FPPC));
 
-    imageProgress1.setXY(269, 167);
-    imageProgress1.setProgressIndicatorPosition(2, 2, 180, 16);
-    imageProgress1.setRange(0, 100);
-    imageProgress1.setDirection(touchgfx::AbstractDirectionProgress::RIGHT);
-    imageProgress1.setBackground(touchgfx::Bitmap(BITMAP_BLUE_PROGRESSINDICATORS_BG_MEDIUM_PROGRESS_INDICATOR_BG_SQUARE_0_DEGREES_ID));
-    imageProgress1.setBitmap(BITMAP_BLUE_PROGRESSINDICATORS_FILL_TILING_PROGRESS_INDICATOR_FILL_STRIPED_NORMAL_HORIZONTAL_ID);
-    imageProgress1.setValue(60);
-    imageProgress1.setAnchorAtZero(false);
+    button1.setXY(269, 153);
+    button1.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
 
     add(__background);
     add(box1);
@@ -58,12 +53,16 @@ Screen2ViewBase::Screen2ViewBase() :
     add(textArea1);
     add(textArea2);
     add(textArea3);
-    add(imageProgress1);
+    add(button1);
 }
 
 void Screen2ViewBase::setupScreen()
 {
 
+}
+
+void Screen2ViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
+{
 }
 
 void Screen2ViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src)

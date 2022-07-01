@@ -625,22 +625,15 @@
             }
           },
           {
-            "Type": "ImageProgress",
-            "Name": "imageProgress1",
+            "Type": "Button",
+            "Name": "button1",
             "X": 269,
-            "Y": 167,
-            "Width": 184,
-            "Height": 20,
-            "FileNameProgress": "__designer\\Blue_ProgressIndicators_fill_tiling_progress_indicator_fill_striped_normal_horizontal.png",
-            "Direction": "Right",
-            "Style": "Style3",
-            "FileNameBackground": "__designer\\Blue_ProgressIndicators_bg_medium_progress_indicator_bg_square_0_degrees.png",
-            "IndicatorPositionX": 2,
-            "IndicatorPositionY": 2,
-            "IndicatorPositionWidth": 180,
-            "IndicatorPositionHeight": 16,
-            "ProgressRangeMax": 100,
-            "ProgressInitialValue": 60
+            "Y": 153,
+            "Width": 170,
+            "Height": 60,
+            "Pressed": "__designer\\Blue_Buttons_Round_Edge_small_pressed.png",
+            "Released": "__designer\\Blue_Buttons_Round_Edge_small.png",
+            "Style": "Style4"
           }
         ],
         "Interactions": [
