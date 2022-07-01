@@ -160,14 +160,14 @@ public:
                 stream.frameCount = 0;
                 stream.tickCount = 0;
                 // Seek to start of video if stopped
-                if (stream.isStopped)
+                if(stream.isStopped)
                 {
                     stream.seek_to_frame = 1;
                 }
                 stream.isStopped = false;
                 // Kick decoder if next buffer is available
                 stream.skip_frames = 0;
-                if (stream.nextBuffer == 0)
+                if(stream.nextBuffer == 0)
                 {
                     stream.doDecodeNewFrame = true;
                     SEM_POST(semDecode);
@@ -217,7 +217,7 @@ public:
         // Increase tickCount if playing
         if (stream.isPlaying)
         {
-            stream.tickCount += HAL::getInstance()->getLCDRefreshCount();
+            stream.tickCount+=HAL::getInstance()->getLCDRefreshCount();
         }
 
         // Assume more frames are available, flag is lowered once, when changing to the last frame
@@ -229,12 +229,12 @@ public:
             MUTEX_LOCK(mutexBuffers);
 
             // Do nothing if seek to frame
-            if (stream.seek_to_frame > 0)
+            if(stream.seek_to_frame > 0)
             {
                 stream.nextBuffer = 0;
             }
 
-            if (stream.nextBuffer != 0)
+            if(stream.nextBuffer != 0)
             {
                 // Use nextBuffer as current
                 stream.currentBuffer = stream.nextBuffer;
