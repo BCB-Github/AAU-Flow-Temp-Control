@@ -623,17 +623,6 @@
               "UseBuffer": true,
               "BufferSize": 6
             }
-          },
-          {
-            "Type": "Button",
-            "Name": "button1",
-            "X": 269,
-            "Y": 153,
-            "Width": 170,
-            "Height": 60,
-            "Pressed": "__designer\\Blue_Buttons_Round_Edge_small_pressed.png",
-            "Released": "__designer\\Blue_Buttons_Round_Edge_small.png",
-            "Style": "Style4"
           }
         ],
         "Interactions": [
