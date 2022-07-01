@@ -4,10 +4,8 @@
 #include <gui_generated/screen2_screen/Screen2ViewBase.hpp>
 #include <touchgfx/Color.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
-#include <BitmapDatabase.hpp>
 
 Screen2ViewBase::Screen2ViewBase() :
-    buttonCallback(this, &Screen2ViewBase::buttonCallbackHandler),
     flexButtonCallback(this, &Screen2ViewBase::flexButtonCallbackHandler)
 {
 
@@ -44,25 +42,17 @@ Screen2ViewBase::Screen2ViewBase() :
     textArea3.resizeToCurrentText();
     textArea3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FPPC));
 
-    button1.setXY(269, 153);
-    button1.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
-
     add(__background);
     add(box1);
     add(flexButton1);
     add(textArea1);
     add(textArea2);
     add(textArea3);
-    add(button1);
 }
 
 void Screen2ViewBase::setupScreen()
 {
 
-}
-
-void Screen2ViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
-{
 }
 
 void Screen2ViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src)
