@@ -13,7 +13,7 @@
         <Translation Language="GB">Test Value2: &lt;value&gt;</Translation>
       </Text>
       <Text Id="__SingleUse_AK80" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">17</Translation>
+        <Translation Language="GB">17.5</Translation>
       </Text>
       <Text Id="__SingleUse_VFFK" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">Test Value1: &lt;value&gt;</Translation>

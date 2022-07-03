@@ -31,16 +31,16 @@ protected:
     touchgfx::Box box1;
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexButton1;
     touchgfx::TextArea textArea1;
-    touchgfx::TextAreaWithOneWildcard textArea2;
-    touchgfx::TextAreaWithOneWildcard textArea3;
+    touchgfx::TextAreaWithOneWildcard testVal1;
+    touchgfx::TextAreaWithOneWildcard testVal2;
 
     /*
      * Wildcard Buffers
      */
-    static const uint16_t TEXTAREA2_SIZE = 5;
-    touchgfx::Unicode::UnicodeChar textArea2Buffer[TEXTAREA2_SIZE];
-    static const uint16_t TEXTAREA3_SIZE = 6;
-    touchgfx::Unicode::UnicodeChar textArea3Buffer[TEXTAREA3_SIZE];
+    static const uint16_t TESTVAL1_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar testVal1Buffer[TESTVAL1_SIZE];
+    static const uint16_t TESTVAL2_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar testVal2Buffer[TESTVAL2_SIZE];
 
 private:
 
