@@ -16,3 +16,13 @@ void Screen2Presenter::deactivate()
 {
 
 }
+
+void Screen2Presenter::setTestVal1(float newTestVal1)
+{
+	view.updateTestVal1(newTestVal1);
+}
+
+void Screen2Presenter::setTestVal2(float newTestVal2)
+{
+	view.updateTestVal2(newTestVal2);
+}

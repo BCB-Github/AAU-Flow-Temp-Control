@@ -674,6 +674,16 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/BitmapDatabase.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/image_Blue_ProgressIndicators_bg_small_circle_indicator_bg_full.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__designer/image_Blue_ProgressIndicators_bg_small_circle_indicator_bg_full.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_Blue_ProgressIndicators_fill_small_circle_indicator_fill_full.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__designer/image_Blue_ProgressIndicators_fill_small_circle_indicator_fill_full.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/image_down-arrow.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_down-arrow.cpp</locationURI>

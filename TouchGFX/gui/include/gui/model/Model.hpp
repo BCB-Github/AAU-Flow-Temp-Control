@@ -14,6 +14,12 @@ public:
     }
 
     void tick();
+
+    void increaseTemp();
+    void decreaseTemp();
+    void increaseFlow();
+    void decreaseFlow();
+
 protected:
     ModelListener* modelListener;
 };

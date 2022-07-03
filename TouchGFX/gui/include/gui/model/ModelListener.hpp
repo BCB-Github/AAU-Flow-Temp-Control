@@ -14,6 +14,22 @@ public:
     {
         model = m;
     }
+
+    virtual void setSVTemp(int newTempSV) {}
+	virtual void setSVFlow(int newFlowSV) {}
+	virtual void setPVTemp(float newTempPV) {}
+	virtual void setPVFlow(float newFlowPV) {}
+	virtual void setTotalFlow(float newTotalFlow) {}
+
+	virtual void addDatapointTemp(int newDP) {}
+	virtual void addDatapointFlow(int newDP) {}
+
+	virtual void setTestVal1(float newTestVal1) {}
+	virtual void setTestVal2(float newTestVal2) {}
+
+	virtual void runProgress() {}
+
+
 protected:
     Model* model;
 };

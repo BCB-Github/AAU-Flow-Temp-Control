@@ -11,6 +11,10 @@ public:
     virtual ~Screen2View() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+
+    void updateTestVal1(float newVal1);
+    void updateTestVal2(float newVal2);
+
 protected:
 };
 

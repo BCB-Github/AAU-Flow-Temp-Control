@@ -27,6 +27,9 @@ public:
 
     virtual ~Screen2Presenter() {};
 
+    void setTestVal1(float newTestVal1);
+    void setTestVal2(float newTestVal2);
+
 private:
     Screen2Presenter();
 

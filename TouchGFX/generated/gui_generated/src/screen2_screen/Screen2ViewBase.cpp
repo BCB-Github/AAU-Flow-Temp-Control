@@ -26,28 +26,28 @@ Screen2ViewBase::Screen2ViewBase() :
     textArea1.setLinespacing(0);
     textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_OWHL));
 
-    textArea2.setXY(112, 73);
-    textArea2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    textArea2.setLinespacing(0);
-    Unicode::snprintf(textArea2Buffer, TEXTAREA2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_AK80).getText());
-    textArea2.setWildcard(textArea2Buffer);
-    textArea2.resizeToCurrentText();
-    textArea2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_VFFK));
+    testVal1.setXY(112, 73);
+    testVal1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    testVal1.setLinespacing(0);
+    Unicode::snprintf(testVal1Buffer, TESTVAL1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_AK80).getText());
+    testVal1.setWildcard(testVal1Buffer);
+    testVal1.resizeToCurrentText();
+    testVal1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_VFFK));
 
-    textArea3.setXY(112, 112);
-    textArea3.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    textArea3.setLinespacing(0);
-    Unicode::snprintf(textArea3Buffer, TEXTAREA3_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_28ND).getText());
-    textArea3.setWildcard(textArea3Buffer);
-    textArea3.resizeToCurrentText();
-    textArea3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FPPC));
+    testVal2.setXY(112, 112);
+    testVal2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    testVal2.setLinespacing(0);
+    Unicode::snprintf(testVal2Buffer, TESTVAL2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_28ND).getText());
+    testVal2.setWildcard(testVal2Buffer);
+    testVal2.resizeToCurrentText();
+    testVal2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FPPC));
 
     add(__background);
     add(box1);
     add(flexButton1);
     add(textArea1);
-    add(textArea2);
-    add(textArea3);
+    add(testVal1);
+    add(testVal2);
 }
 
 void Screen2ViewBase::setupScreen()

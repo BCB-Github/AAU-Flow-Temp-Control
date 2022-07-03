@@ -11,6 +11,23 @@ public:
     virtual ~Screen1View() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+
+    void updateTempSV(int newVal);
+    void updateFlowSV(int newVal);
+    void updateTempPV(float newVal);
+    void updateFlowPV(float newVal);
+    void updateTotalFlow(float newVal);
+
+    void updateGraphTemp(int DP);
+    void updateGraphFlow(int DP);
+
+    void incrementTemp();
+    void decrementTemp();
+    void incrementFlow();
+    void decrementFlow();
+
+    void running();
+
 protected:
 };
 

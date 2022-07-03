@@ -14,3 +14,19 @@ void Screen2View::tearDownScreen()
 {
     Screen2ViewBase::tearDownScreen();
 }
+
+void Screen2View::updateTestVal1(float newVal1)
+{
+	Unicode::snprintfFloat(testVal1Buffer, TESTVAL1_SIZE, "%f", newVal1);
+	testVal1.resizeToCurrentText();
+	testVal1.invalidate();
+	box1.invalidate();
+}
+
+void Screen2View::updateTestVal2(float newVal2)
+{
+	Unicode::snprintfFloat(testVal2Buffer, TESTVAL2_SIZE, "%f", newVal2);
+	testVal2.resizeToCurrentText();
+	testVal2.invalidate();
+	box1.invalidate();
+}
