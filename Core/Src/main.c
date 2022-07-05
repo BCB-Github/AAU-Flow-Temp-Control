@@ -777,7 +777,7 @@ extern xQueueHandle updateTest2Q;
 
 extern xQueueHandle dutyUpQ;
 extern xQueueHandle dutyDownQ;
-extern xQueueHandle updateDutyQ; deb
+extern xQueueHandle updateDutyQ;
 
 
 unsigned int var = 0;
