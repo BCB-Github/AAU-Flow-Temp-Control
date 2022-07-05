@@ -42,6 +42,8 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexDownDuty;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexUpDuty;
     touchgfx::Box box1;
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexButton1;
     touchgfx::TextArea textArea1;
@@ -50,8 +52,6 @@ protected:
     touchgfx::ScalableImage upDutyImg;
     touchgfx::ScalableImage downDutyImg;
     touchgfx::TextAreaWithOneWildcard textArea2;
-    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexDownDuty;
-    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexUpDuty;
 
     /*
      * Wildcard Buffers

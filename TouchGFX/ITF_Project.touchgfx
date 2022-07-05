@@ -349,7 +349,7 @@
             "Type": "TextArea",
             "Name": "nowFlow",
             "Y": 189,
-            "Width": 172,
+            "Width": 171,
             "Height": 18,
             "TextId": "__SingleUse_81ZS",
             "TextRotation": "0",
@@ -381,8 +381,8 @@
             "Name": "SPTemp",
             "X": 244,
             "Y": 198,
-            "Width": 58,
-            "Height": 24,
+            "Width": 57,
+            "Height": 25,
             "TextId": "__SingleUse_RQNO",
             "TextRotation": "0",
             "AutoSize": true,
@@ -398,7 +398,7 @@
             "X": 338,
             "Y": 195,
             "Width": 64,
-            "Height": 24,
+            "Height": 25,
             "TextId": "__SingleUse_U15I",
             "TextRotation": "0",
             "AutoSize": true,
@@ -556,6 +556,80 @@
         "Name": "Screen2",
         "Components": [
           {
+            "Type": "FlexButton",
+            "Name": "flexDownDuty",
+            "X": 403,
+            "Y": 212,
+            "Width": 50,
+            "Height": 50,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 50,
+                "Height": 50,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "flexUpDuty",
+            "X": 403,
+            "Y": 140,
+            "Width": 50,
+            "Height": 50,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 50,
+                "Height": 50,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
             "Type": "Box",
             "Name": "box1",
             "Width": 480,
@@ -621,7 +695,7 @@
             "X": 112,
             "Y": 73,
             "Width": 177,
-            "Height": 24,
+            "Height": 25,
             "TextId": "__SingleUse_VFFK",
             "TextRotation": "0",
             "AutoSize": true,
@@ -637,7 +711,7 @@
             "X": 112,
             "Y": 112,
             "Width": 177,
-            "Height": 24,
+            "Height": 25,
             "TextId": "__SingleUse_FPPC",
             "TextRotation": "0",
             "AutoSize": true,
@@ -673,7 +747,7 @@
             "X": 289,
             "Y": 185,
             "Width": 178,
-            "Height": 24,
+            "Height": 25,
             "TextId": "__SingleUse_6V2X",
             "TextRotation": "0",
             "AutoSize": true,
@@ -682,82 +756,6 @@
               "UseBuffer": true,
               "BufferSize": 5
             }
-          },
-          {
-            "Type": "FlexButton",
-            "Name": "flexDownDuty",
-            "X": 403,
-            "Y": 212,
-            "Width": 50,
-            "Height": 50,
-            "Visible": false,
-            "ButtonTrigger": {
-              "Type": "ClickButtonTrigger"
-            },
-            "ButtonStyles": [
-              {
-                "Type": "BoxWithBorderButtonStyle",
-                "Width": 50,
-                "Height": 50,
-                "LockToFlexButtonSize": true,
-                "BorderSize": 5,
-                "ColorReleased": {
-                  "Green": 102,
-                  "Blue": 153
-                },
-                "ColorPressed": {
-                  "Green": 153,
-                  "Blue": 204
-                },
-                "ColorBorderReleased": {
-                  "Green": 51,
-                  "Blue": 102
-                },
-                "ColorBorderPressed": {
-                  "Red": 51,
-                  "Green": 102,
-                  "Blue": 153
-                }
-              }
-            ]
-          },
-          {
-            "Type": "FlexButton",
-            "Name": "flexUpDuty",
-            "X": 403,
-            "Y": 140,
-            "Width": 50,
-            "Height": 50,
-            "Visible": false,
-            "ButtonTrigger": {
-              "Type": "ClickButtonTrigger"
-            },
-            "ButtonStyles": [
-              {
-                "Type": "BoxWithBorderButtonStyle",
-                "Width": 50,
-                "Height": 50,
-                "LockToFlexButtonSize": true,
-                "BorderSize": 5,
-                "ColorReleased": {
-                  "Green": 102,
-                  "Blue": 153
-                },
-                "ColorPressed": {
-                  "Green": 153,
-                  "Blue": 204
-                },
-                "ColorBorderReleased": {
-                  "Green": 51,
-                  "Blue": 102
-                },
-                "ColorBorderPressed": {
-                  "Red": 51,
-                  "Green": 102,
-                  "Blue": 153
-                }
-              }
-            ]
           }
         ],
         "Interactions": [
