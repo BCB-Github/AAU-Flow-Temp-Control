@@ -6,8 +6,10 @@
 #include <touchgfx/hal/Types.hpp>
 #include <touchgfx/Bitmap.hpp>
 
-const uint16_t BITMAP_DOWN_ARROW_ID = 0;
-const uint16_t BITMAP_UP_ARROW_ID = 1;
+const uint16_t BITMAP_BLUE_PROGRESSINDICATORS_BG_SMALL_CIRCLE_INDICATOR_BG_FULL_ID = 0;
+const uint16_t BITMAP_BLUE_PROGRESSINDICATORS_FILL_SMALL_CIRCLE_INDICATOR_FILL_FULL_ID = 1;
+const uint16_t BITMAP_DOWN_ARROW_ID = 2;
+const uint16_t BITMAP_UP_ARROW_ID = 3;
 
 namespace BitmapDatabase
 {

@@ -6,6 +6,12 @@
   <Texts>
     <TextGroup Id="Group1" />
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_LHPL" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">50</Translation>
+      </Text>
+      <Text Id="__SingleUse_6V2X" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">Duty Cycle: &lt;value&gt; %</Translation>
+      </Text>
       <Text Id="__SingleUse_28ND" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">0.25</Translation>
       </Text>
@@ -13,7 +19,7 @@
         <Translation Language="GB">Test Value2: &lt;value&gt;</Translation>
       </Text>
       <Text Id="__SingleUse_AK80" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">17</Translation>
+        <Translation Language="GB">17.5</Translation>
       </Text>
       <Text Id="__SingleUse_VFFK" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">Test Value1: &lt;value&gt;</Translation>

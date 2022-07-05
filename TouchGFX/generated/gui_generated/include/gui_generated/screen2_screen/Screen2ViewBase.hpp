@@ -11,6 +11,7 @@
 #include <touchgfx/containers/buttons/Buttons.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
+#include <touchgfx/widgets/ScalableImage.hpp>
 
 class Screen2ViewBase : public touchgfx::View<Screen2Presenter>
 {
@@ -18,6 +19,19 @@ public:
     Screen2ViewBase();
     virtual ~Screen2ViewBase() {}
     virtual void setupScreen();
+
+    /*
+     * Virtual Action Handlers
+     */
+    virtual void decrementDuty()
+    {
+        // Override and implement this function in Screen2
+    }
+
+    virtual void incrementDuty()
+    {
+        // Override and implement this function in Screen2
+    }
 
 protected:
     FrontendApplication& application() {
@@ -31,16 +45,23 @@ protected:
     touchgfx::Box box1;
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexButton1;
     touchgfx::TextArea textArea1;
+    touchgfx::TextAreaWithOneWildcard testVal1;
+    touchgfx::TextAreaWithOneWildcard testVal2;
+    touchgfx::ScalableImage upDutyImg;
+    touchgfx::ScalableImage downDutyImg;
     touchgfx::TextAreaWithOneWildcard textArea2;
-    touchgfx::TextAreaWithOneWildcard textArea3;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexDownDuty;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexUpDuty;
 
     /*
      * Wildcard Buffers
      */
+    static const uint16_t TESTVAL1_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar testVal1Buffer[TESTVAL1_SIZE];
+    static const uint16_t TESTVAL2_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar testVal2Buffer[TESTVAL2_SIZE];
     static const uint16_t TEXTAREA2_SIZE = 5;
     touchgfx::Unicode::UnicodeChar textArea2Buffer[TEXTAREA2_SIZE];
-    static const uint16_t TEXTAREA3_SIZE = 6;
-    touchgfx::Unicode::UnicodeChar textArea3Buffer[TEXTAREA3_SIZE];
 
 private:
 

@@ -4,6 +4,7 @@
 #include <gui_generated/screen2_screen/Screen2ViewBase.hpp>
 #include <touchgfx/Color.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
+#include <BitmapDatabase.hpp>
 
 Screen2ViewBase::Screen2ViewBase() :
     flexButtonCallback(this, &Screen2ViewBase::flexButtonCallbackHandler)
@@ -26,28 +27,63 @@ Screen2ViewBase::Screen2ViewBase() :
     textArea1.setLinespacing(0);
     textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_OWHL));
 
-    textArea2.setXY(112, 73);
+    testVal1.setXY(112, 73);
+    testVal1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    testVal1.setLinespacing(0);
+    Unicode::snprintf(testVal1Buffer, TESTVAL1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_AK80).getText());
+    testVal1.setWildcard(testVal1Buffer);
+    testVal1.resizeToCurrentText();
+    testVal1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_VFFK));
+
+    testVal2.setXY(112, 112);
+    testVal2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    testVal2.setLinespacing(0);
+    Unicode::snprintf(testVal2Buffer, TESTVAL2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_28ND).getText());
+    testVal2.setWildcard(testVal2Buffer);
+    testVal2.resizeToCurrentText();
+    testVal2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FPPC));
+
+    upDutyImg.setBitmap(touchgfx::Bitmap(BITMAP_UP_ARROW_ID));
+    upDutyImg.setPosition(403, 140, 50, 50);
+    upDutyImg.setScalingAlgorithm(touchgfx::ScalableImage::NEAREST_NEIGHBOR);
+
+    downDutyImg.setBitmap(touchgfx::Bitmap(BITMAP_DOWN_ARROW_ID));
+    downDutyImg.setPosition(403, 212, 50, 50);
+    downDutyImg.setScalingAlgorithm(touchgfx::ScalableImage::NEAREST_NEIGHBOR);
+
+    textArea2.setXY(289, 185);
     textArea2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea2.setLinespacing(0);
-    Unicode::snprintf(textArea2Buffer, TEXTAREA2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_AK80).getText());
+    Unicode::snprintf(textArea2Buffer, TEXTAREA2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_LHPL).getText());
     textArea2.setWildcard(textArea2Buffer);
     textArea2.resizeToCurrentText();
-    textArea2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_VFFK));
+    textArea2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6V2X));
 
-    textArea3.setXY(112, 112);
-    textArea3.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    textArea3.setLinespacing(0);
-    Unicode::snprintf(textArea3Buffer, TEXTAREA3_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_28ND).getText());
-    textArea3.setWildcard(textArea3Buffer);
-    textArea3.resizeToCurrentText();
-    textArea3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FPPC));
+    flexDownDuty.setBoxWithBorderPosition(0, 0, 50, 50);
+    flexDownDuty.setBorderSize(5);
+    flexDownDuty.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    flexDownDuty.setPosition(403, 212, 50, 50);
+    flexDownDuty.setVisible(false);
+    flexDownDuty.setAction(flexButtonCallback);
+
+    flexUpDuty.setBoxWithBorderPosition(0, 0, 50, 50);
+    flexUpDuty.setBorderSize(5);
+    flexUpDuty.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    flexUpDuty.setPosition(403, 140, 50, 50);
+    flexUpDuty.setVisible(false);
+    flexUpDuty.setAction(flexButtonCallback);
 
     add(__background);
     add(box1);
     add(flexButton1);
     add(textArea1);
+    add(testVal1);
+    add(testVal2);
+    add(upDutyImg);
+    add(downDutyImg);
     add(textArea2);
-    add(textArea3);
+    add(flexDownDuty);
+    add(flexUpDuty);
 }
 
 void Screen2ViewBase::setupScreen()
@@ -63,5 +99,19 @@ void Screen2ViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonCo
         //When flexButton1 clicked change screen to Screen1
         //Go to Screen1 with screen transition towards West
         application().gotoScreen1ScreenSlideTransitionWest();
+    }
+    else if (&src == &flexDownDuty)
+    {
+        //Interaction2
+        //When flexDownDuty clicked call virtual function
+        //Call decrementDuty
+        decrementDuty();
+    }
+    else if (&src == &flexUpDuty)
+    {
+        //Interaction3
+        //When flexUpDuty clicked call virtual function
+        //Call incrementDuty
+        incrementDuty();
     }
 }

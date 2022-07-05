@@ -11,6 +11,16 @@ public:
     virtual ~Screen2View() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+    virtual void updateTempWildcard(float temp);
+    
+
+    void updateTestVal1(float newVal1);
+    void updateTestVal2(float newVal2);
+    void updateDutyCycle(int newDuty);
+
+    void incrementDuty();
+    void decrementDuty();
+
 protected:
 };
 

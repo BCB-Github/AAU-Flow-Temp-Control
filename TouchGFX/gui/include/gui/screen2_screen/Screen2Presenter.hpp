@@ -23,6 +23,16 @@ public:
      * The deactivate function is called automatically when this screen is "switched out"
      * (ie. made inactive). Teardown functionality can be placed here.
      */
+    virtual void updateTempWildcard(float temp);
+
+    virtual ~Screen2Presenter() {};
+
+    void setTestVal1(float newTestVal1);
+    void setTestVal2(float newTestVal2);
+    void setDutyCycle(int newDutyCycle);
+
+    void askForDutyUp();
+    void askForDutyDown();
     virtual void deactivate();
 
     virtual ~Screen2Presenter() {};

@@ -10,12 +10,14 @@
 #include <touchgfx/widgets/Box.hpp>
 #include <touchgfx/containers/buttons/Buttons.hpp>
 #include <touchgfx/widgets/ScalableImage.hpp>
-#include <touchgfx/widgets/graph/GraphWrapAndClear.hpp>
+#include <touchgfx/widgets/graph/GraphScroll.hpp>
 #include <touchgfx/widgets/graph/GraphElements.hpp>
 #include <touchgfx/widgets/canvas/PainterRGB565.hpp>
 #include <touchgfx/widgets/graph/GraphLabels.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
+#include <touchgfx/containers/progress_indicators/CircleProgress.hpp>
+#include <touchgfx/widgets/canvas/PainterRGB565Bitmap.hpp>
 
 class Screen1ViewBase : public touchgfx::View<Screen1Presenter>
 {
@@ -65,11 +67,11 @@ protected:
     touchgfx::ScalableImage downTempImg;
     touchgfx::ScalableImage upFlowImg;
     touchgfx::ScalableImage downFlowImg;
-    touchgfx::GraphWrapAndClear<100> graphFlow;
+    touchgfx::GraphScroll<100> graphFlow;
     touchgfx::GraphElementLine graphFlowLine1;
     touchgfx::PainterRGB565 graphFlowLine1Painter;
     touchgfx::GraphLabelsY graphFlowMajorYAxisLabel;
-    touchgfx::GraphWrapAndClear<100> graphTemp;
+    touchgfx::GraphScroll<100> graphTemp;
     touchgfx::GraphElementLine graphTempLine1;
     touchgfx::PainterRGB565 graphTempLine1Painter;
     touchgfx::GraphElementGridY graphTempMajorYAxisGrid;
@@ -84,6 +86,8 @@ protected:
     touchgfx::TextArea textAreaSP;
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexButton1;
     touchgfx::TextArea textArea1;
+    touchgfx::CircleProgress circleProgress;
+    touchgfx::PainterRGB565Bitmap circleProgressPainter;
 
     /*
      * Wildcard Buffers
@@ -96,6 +100,8 @@ protected:
     touchgfx::Unicode::UnicodeChar nowVolBuffer[NOWVOL_SIZE];
     static const uint16_t SPTEMP_SIZE = 5;
     touchgfx::Unicode::UnicodeChar SPTempBuffer[SPTEMP_SIZE];
+    static const uint16_t SPFLOW_SIZE = 5;
+    touchgfx::Unicode::UnicodeChar SPFlowBuffer[SPFLOW_SIZE];
 
 private:
 

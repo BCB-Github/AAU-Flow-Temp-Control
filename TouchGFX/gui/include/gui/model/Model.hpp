@@ -12,10 +12,24 @@ public:
     {
         modelListener = listener;
     }
-
+    void updateTempWildcard();
     void tick();
+
+    void increaseTemp();
+    void decreaseTemp();
+    void increaseFlow();
+    void decreaseFlow();
+
+    void increaseDuty();
+    void decreaseDuty();
+
 protected:
     ModelListener* modelListener;
 };
 
+
+
+
+
 #endif // MODEL_HPP
+

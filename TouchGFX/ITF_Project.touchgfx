@@ -212,15 +212,14 @@
             "DataSeed": -2101000824,
             "NumberOfValues": 100,
             "MaxY": 10.0,
-            "Precision": "0.01",
+            "Precision": "0.001",
             "LastIndex": 99,
             "XAxisScale": 1.0,
-            "InsertRandomValues": true,
             "LabelSizeTop": 5,
             "LabelSizeBottom": 5,
             "LabelSizeLeft": 25,
             "LabelSizeRight": 25,
-            "GraphType": "GraphWrapClear",
+            "GraphType": "GraphScroll",
             "GraphDrawers": [
               {
                 "Type": "LineDrawer",
@@ -258,13 +257,12 @@
             "Precision": "0.1",
             "LastIndex": 99,
             "XAxisScale": 1.0,
-            "InsertRandomValues": true,
             "LabelSizeTop": 5,
             "LabelSizeBottom": 5,
             "LabelSizeLeft": 25,
             "LabelSizeRight": 25,
             "PaddingTop": 2,
-            "GraphType": "GraphWrapClear",
+            "GraphType": "GraphScroll",
             "GraphDrawers": [
               {
                 "Type": "LineDrawer",
@@ -405,7 +403,9 @@
             "TextRotation": "0",
             "AutoSize": true,
             "Wildcard1": {
-              "TextId": "__SingleUse_YF1J"
+              "TextId": "__SingleUse_YF1J",
+              "UseBuffer": true,
+              "BufferSize": 5
             }
           },
           {
@@ -467,6 +467,29 @@
             "TextId": "__SingleUse_1BLF",
             "TextRotation": "0",
             "AutoSize": true
+          },
+          {
+            "Type": "CircleProgress",
+            "Name": "circleProgress",
+            "X": 419,
+            "Y": 212,
+            "Width": 54,
+            "Height": 54,
+            "FileNameProgress": "__designer\\Blue_ProgressIndicators_fill_small_circle_indicator_fill_full.png",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "CenterX": 27,
+            "CenterY": 27,
+            "Radius": 25,
+            "EndAngle": 360,
+            "CapPrecision": "Butt",
+            "Style": "Style1",
+            "FileNameBackground": "__designer\\Blue_ProgressIndicators_bg_small_circle_indicator_bg_full.png",
+            "ProgressRangeMax": 100,
+            "ProgressInitialValue": 60
           }
         ],
         "Interactions": [
@@ -594,10 +617,10 @@
           },
           {
             "Type": "TextArea",
-            "Name": "textArea2",
+            "Name": "testVal1",
             "X": 112,
             "Y": 73,
-            "Width": 157,
+            "Width": 177,
             "Height": 24,
             "TextId": "__SingleUse_VFFK",
             "TextRotation": "0",
@@ -605,12 +628,12 @@
             "Wildcard1": {
               "TextId": "__SingleUse_AK80",
               "UseBuffer": true,
-              "BufferSize": 5
+              "BufferSize": 10
             }
           },
           {
             "Type": "TextArea",
-            "Name": "textArea3",
+            "Name": "testVal2",
             "X": 112,
             "Y": 112,
             "Width": 177,
@@ -621,8 +644,120 @@
             "Wildcard1": {
               "TextId": "__SingleUse_28ND",
               "UseBuffer": true,
-              "BufferSize": 6
+              "BufferSize": 10
             }
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "upDutyImg",
+            "X": 403,
+            "Y": 140,
+            "Width": 50,
+            "Height": 50,
+            "Filename": "up-arrow.png",
+            "ScalingAlgorithm": "Nearest-neighbor"
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "downDutyImg",
+            "X": 403,
+            "Y": 212,
+            "Width": 50,
+            "Height": 50,
+            "Filename": "down-arrow.png",
+            "ScalingAlgorithm": "Nearest-neighbor"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2",
+            "X": 289,
+            "Y": 185,
+            "Width": 178,
+            "Height": 24,
+            "TextId": "__SingleUse_6V2X",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_LHPL",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "flexDownDuty",
+            "X": 403,
+            "Y": 212,
+            "Width": 50,
+            "Height": 50,
+            "Visible": false,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 50,
+                "Height": 50,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "flexUpDuty",
+            "X": 403,
+            "Y": 140,
+            "Width": 50,
+            "Height": 50,
+            "Visible": false,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 50,
+                "Height": 50,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
           }
         ],
         "Interactions": [
@@ -637,6 +772,28 @@
               "ScreenTransitionType": "ScreenTransitionSlide",
               "ScreenTransitionDirection": "West",
               "ActionComponent": "Screen1"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "flexDownDuty"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "decrementDuty"
+            }
+          },
+          {
+            "InteractionName": "Interaction3",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "flexUpDuty"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "incrementDuty"
             }
           }
         ]

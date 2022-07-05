@@ -26,6 +26,15 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stm32746g_discovery_qspi.h>
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+#include "math.h"
+
+/* Standard libraries if needed
+#include <stdio.h>
+#include <stdlib.h> */
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -70,6 +79,8 @@ LTDC_HandleTypeDef hltdc;
 
 QSPI_HandleTypeDef hqspi;
 
+TIM_HandleTypeDef htim1;
+
 SDRAM_HandleTypeDef hsdram1;
 
 /* Definitions for defaultTask */
@@ -107,6 +118,7 @@ static void MX_FMC_Init(void);
 static void MX_I2C3_Init(void);
 static void MX_LTDC_Init(void);
 static void MX_QUADSPI_Init(void);
+static void MX_TIM1_Init(void);
 void StartDefaultTask(void *argument);
 extern void TouchGFX_Task(void *argument);
 extern void videoTaskFunc(void *argument);
@@ -164,8 +176,10 @@ int main(void)
   MX_LTDC_Init();
   MX_QUADSPI_Init();
   MX_LIBJPEG_Init();
+  MX_TIM1_Init();
   MX_TouchGFX_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);
 
   /* USER CODE END 2 */
 
@@ -489,6 +503,86 @@ static void MX_QUADSPI_Init(void)
 
 }
 
+/**
+  * @brief TIM1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM1_Init(void)
+{
+
+  /* USER CODE BEGIN TIM1_Init 0 */
+
+  /* USER CODE END TIM1_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_OC_InitTypeDef sConfigOC = {0};
+  TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig = {0};
+
+  /* USER CODE BEGIN TIM1_Init 1 */
+
+  /* USER CODE END TIM1_Init 1 */
+  htim1.Instance = TIM1;
+  htim1.Init.Prescaler = 0;
+  htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim1.Init.Period = 65535;
+  htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim1.Init.RepetitionCounter = 0;
+  htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim1, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_PWM_Init(&htim1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterOutputTrigger2 = TIM_TRGO2_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = 0;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
+  sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sBreakDeadTimeConfig.OffStateRunMode = TIM_OSSR_DISABLE;
+  sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_DISABLE;
+  sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF;
+  sBreakDeadTimeConfig.DeadTime = 0;
+  sBreakDeadTimeConfig.BreakState = TIM_BREAK_DISABLE;
+  sBreakDeadTimeConfig.BreakPolarity = TIM_BREAKPOLARITY_HIGH;
+  sBreakDeadTimeConfig.BreakFilter = 0;
+  sBreakDeadTimeConfig.Break2State = TIM_BREAK2_DISABLE;
+  sBreakDeadTimeConfig.Break2Polarity = TIM_BREAK2POLARITY_HIGH;
+  sBreakDeadTimeConfig.Break2Filter = 0;
+  sBreakDeadTimeConfig.AutomaticOutput = TIM_AUTOMATICOUTPUT_DISABLE;
+  if (HAL_TIMEx_ConfigBreakDeadTime(&htim1, &sBreakDeadTimeConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM1_Init 2 */
+
+  /* USER CODE END TIM1_Init 2 */
+  HAL_TIM_MspPostInit(&htim1);
+
+}
+
 /* FMC initialization function */
 static void MX_FMC_Init(void)
 {
@@ -664,6 +758,45 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+extern xQueueHandle updateSVTempQ;
+extern xQueueHandle updateSVFlowQ;
+extern xQueueHandle updatePVTempQ;
+extern xQueueHandle updatePVFlowQ;
+extern xQueueHandle updateTotalFlowQ;
+extern xQueueHandle tempUpQ;
+extern xQueueHandle tempDownQ;
+extern xQueueHandle flowUpQ;
+extern xQueueHandle flowDownQ;
+
+extern xQueueHandle dataTempQ;
+extern xQueueHandle dataFlowQ;
+
+extern xQueueHandle updateTest1Q;
+extern xQueueHandle updateTest2Q;
+
+
+extern xQueueHandle dutyUpQ;
+extern xQueueHandle dutyDownQ;
+extern xQueueHandle updateDutyQ;
+
+
+unsigned int var = 0;
+int tempSVvar = 25;
+int flowSVvar = 4;
+float dutyvar = 0.5;
+int dutyPercent = 0;
+
+/* These are the variables to store the samples */
+float tempPVvar = 0;
+float flowPVvar = 0;
+
+/* Variables to produce sine waves on each graph */
+float increment1 = 0.01;
+float increment2 = 0.02;
+float input1 = 0;
+float input2 = 0;
+float result = 0;
+int output = 0;
 
 /* USER CODE END 4 */
 
@@ -680,7 +813,80 @@ void StartDefaultTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1000);
+	  /* Set the duty var to the duty cycle 0-1, the ccr value is then calculated */
+	  float ccr = floor(dutyvar*65535);
+	  	  TIM1->CCR1=(int)ccr; // duty%=i/65535
+
+	  /* Code for updating one of the two test values on screen 2 */
+	  float testVal = (float)rand();
+	  xQueueSend(updateTest1Q, &testVal, 0);
+
+	  /* Code for producing sine waves to graphs */
+	  result = floor(sin(input1*2*PI)*50);
+	  output = (int)result + 50;
+	  xQueueSend(dataTempQ,&output,0);
+	  input1 = input1+increment1;
+
+	  result = floor(sin(input2*2*PI)*5);
+	  output = (int)result + 5;
+	  xQueueSend(dataFlowQ,&output,0);
+	  input2 = input2+increment2;
+
+/* The following four if loops updates updates the the set values of
+ * temperature and flow if the buttons have been pressed  */
+	  if (xQueueReceive(tempUpQ, &var, 0)==pdTRUE)
+	  	  {
+		  	  if (tempSVvar < 100)
+		  	  {
+		    	  tempSVvar = tempSVvar + 1;
+		  	  }
+		  	  xQueueSend(updateSVTempQ, &tempSVvar, 0);
+	  	  }
+	  if (xQueueReceive(tempDownQ, &var, 0)==pdTRUE)
+	  	  {
+		  	  if (tempSVvar > 0)
+		  	  {
+		  		  tempSVvar = tempSVvar - 1;
+		  	  }
+		  	  xQueueSend(updateSVTempQ, &tempSVvar, 0);
+	  	  }
+	  if (xQueueReceive(flowUpQ, &var, 0)==pdTRUE)
+	  	  {
+		  	  if (flowSVvar < 50)
+		  	  {
+		  		  flowSVvar = flowSVvar + 1;
+		  	  }
+		  	  xQueueSend(updateSVFlowQ, &flowSVvar, 0);
+	  	  }
+	  if (xQueueReceive(flowDownQ, &var, 0)==pdTRUE)
+	  	  {
+		  	  if (flowSVvar > 0)
+		  	  {
+		  		  flowSVvar = flowSVvar - 1;
+		  	  }
+		  	  xQueueSend(updateSVFlowQ, &flowSVvar, 0);
+	  	  }
+
+	  if (xQueueReceive(dutyUpQ, &var, 0)==pdTRUE)
+	  	  {
+		  	  if (dutyvar < 1)
+		  	  {
+		  		dutyvar = dutyvar + 0.05;
+		  		dutyPercent = (int)(dutyvar*100);
+		  	  }
+		  	  xQueueSend(updateDutyQ, &dutyPercent, 0);
+	  	  }
+	  if (xQueueReceive(dutyDownQ, &var, 0)==pdTRUE)
+	  	  {
+		  	  if (dutyvar > 0)
+		  	  {
+		  		dutyvar = dutyvar - 0.05;
+		  		dutyPercent = (int)(dutyvar*100);
+		  	  }
+		  	  xQueueSend(updateDutyQ, &dutyPercent, 0);
+	  	  }
+
+    osDelay(40);
   }
   /* USER CODE END 5 */
 }

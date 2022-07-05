@@ -27,6 +27,22 @@ public:
 
     virtual ~Screen1Presenter() {};
 
+    void setSVTemp(int newTempSV);
+    void setSVFlow(int newFlowSV);
+    void setPVTemp(float newTempPV);
+    void setPVFlow(float newFlowPV);
+    void setTotalFlow(float newTotalFlow);
+
+    void addDatapointTemp(int newDP);
+    void addDatapointFlow(int newDP);
+
+    void askForTempUp();
+    void askForTempDown();
+    void askForFlowUp();
+    void askForFlowDown();
+
+    void runProgress();
+
 private:
     Screen1Presenter();
 
