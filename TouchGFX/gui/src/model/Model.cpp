@@ -5,6 +5,7 @@
 #include "task.h"
 #include "queue.h"
 
+/* I use SV for Set Value and PV for Present Value */
 unsigned int placeholder;
 int tempSV = 0;
 int flowSV = 0;
@@ -18,6 +19,7 @@ int loopRunning = 1;
 
 float testVal1 = 0;
 float testVal2 = 0;
+int duty = 0;
 
 extern "C"
 {
@@ -42,6 +44,10 @@ extern "C"
 	xQueueHandle updateTest1Q;
 	xQueueHandle updateTest2Q;
 
+	xQueueHandle dutyUpQ;
+	xQueueHandle dutyDownQ;
+	xQueueHandle updateDutyQ;
+
 }
 
 Model::Model() : modelListener(0)
@@ -63,6 +69,10 @@ Model::Model() : modelListener(0)
 
 	updateTest1Q = xQueueGenericCreate(1, sizeof(float), 0);
 	updateTest2Q = xQueueGenericCreate(1, sizeof(float), 0);
+	dutyUpQ = xQueueGenericCreate(1, sizeof(unsigned int), 0);
+	dutyDownQ = xQueueGenericCreate(1, sizeof(unsigned int), 0);
+	updateDutyQ = xQueueGenericCreate(1, sizeof(int), 0);
+
 }
 
 void Model::tick()
@@ -101,6 +111,10 @@ void Model::tick()
 		{
 			modelListener->setTestVal2(testVal2);
 		}
+	if (xQueueReceive(updateDutyQ, &duty, 0)==pdTRUE)
+		{
+			modelListener->setDutyCycle(duty);
+		}
 
 	while (xQueueReceive(dataTempQ, &tempDP, 0)==pdTRUE)
 	{
@@ -130,4 +144,14 @@ void Model::increaseFlow()
 void Model::decreaseFlow()
 {
 	xQueueSend(flowDownQ,&placeholder,0);
+}
+
+void Model::increaseDuty()
+{
+	xQueueSend(dutyUpQ,&placeholder,0);
+}
+
+void Model::decreaseDuty()
+{
+	xQueueSend(dutyDownQ,&placeholder,0);
 }

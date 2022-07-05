@@ -21,13 +21,16 @@ public:
 	virtual void setPVFlow(float newFlowPV) {}
 	virtual void setTotalFlow(float newTotalFlow) {}
 
+	virtual void runProgress() {}
+
 	virtual void addDatapointTemp(int newDP) {}
 	virtual void addDatapointFlow(int newDP) {}
 
 	virtual void setTestVal1(float newTestVal1) {}
 	virtual void setTestVal2(float newTestVal2) {}
+	virtual void setDutyCycle(int newDutyCycle) {}
 
-	virtual void runProgress() {}
+
 
 
 protected:

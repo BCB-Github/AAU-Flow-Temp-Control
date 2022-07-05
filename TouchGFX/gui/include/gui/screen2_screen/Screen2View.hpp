@@ -14,6 +14,10 @@ public:
 
     void updateTestVal1(float newVal1);
     void updateTestVal2(float newVal2);
+    void updateDutyCycle(int newDuty);
+
+    void incrementDuty();
+    void decrementDuty();
 
 protected:
 };

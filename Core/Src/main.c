@@ -774,9 +774,17 @@ extern xQueueHandle dataFlowQ;
 extern xQueueHandle updateTest1Q;
 extern xQueueHandle updateTest2Q;
 
+
+extern xQueueHandle dutyUpQ;
+extern xQueueHandle dutyDownQ;
+extern xQueueHandle updateDutyQ; deb
+
+
 unsigned int var = 0;
 int tempSVvar = 25;
 int flowSVvar = 4;
+float dutyvar = 0.5;
+int dutyPercent = 0;
 
 /* These are the variables to store the samples */
 float tempPVvar = 0;
@@ -806,8 +814,7 @@ void StartDefaultTask(void *argument)
   for(;;)
   {
 	  /* Set the duty var to the duty cycle 0-1, the ccr value is then calculated */
-	  float duty = 0.1;
-	  float ccr = floor(duty*65535);
+	  float ccr = floor(dutyvar*65535);
 	  	  TIM1->CCR1=(int)ccr; // duty%=i/65535
 
 	  /* Code for updating one of the two test values on screen 2 */
@@ -858,6 +865,25 @@ void StartDefaultTask(void *argument)
 		  		  flowSVvar = flowSVvar - 1;
 		  	  }
 		  	  xQueueSend(updateSVFlowQ, &flowSVvar, 0);
+	  	  }
+
+	  if (xQueueReceive(dutyUpQ, &var, 0)==pdTRUE)
+	  	  {
+		  	  if (dutyvar < 1)
+		  	  {
+		  		dutyvar = dutyvar + 0.05;
+		  		dutyPercent = (int)(dutyvar*100);
+		  	  }
+		  	  xQueueSend(updateDutyQ, &dutyPercent, 0);
+	  	  }
+	  if (xQueueReceive(dutyDownQ, &var, 0)==pdTRUE)
+	  	  {
+		  	  if (dutyvar > 0)
+		  	  {
+		  		dutyvar = dutyvar - 0.05;
+		  		dutyPercent = (int)(dutyvar*100);
+		  	  }
+		  	  xQueueSend(updateDutyQ, &dutyPercent, 0);
 	  	  }
 
     osDelay(40);

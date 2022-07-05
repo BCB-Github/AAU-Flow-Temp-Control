@@ -6,6 +6,12 @@
   <Texts>
     <TextGroup Id="Group1" />
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_LHPL" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">50</Translation>
+      </Text>
+      <Text Id="__SingleUse_6V2X" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">Duty Cycle: &lt;value&gt; %</Translation>
+      </Text>
       <Text Id="__SingleUse_28ND" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">0.25</Translation>
       </Text>

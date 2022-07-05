@@ -26,3 +26,18 @@ void Screen2Presenter::setTestVal2(float newTestVal2)
 {
 	view.updateTestVal2(newTestVal2);
 }
+
+void Screen2Presenter::setDutyCycle(int newDutyCycle)
+{
+	view.updateDutyCycle(newDutyCycle);
+}
+
+void Screen2Presenter::askForDutyUp()
+{
+	model->increaseDuty();
+}
+
+void Screen2Presenter::askForDutyDown()
+{
+	model->decreaseDuty();
+}

@@ -20,6 +20,9 @@ public:
     void increaseFlow();
     void decreaseFlow();
 
+    void increaseDuty();
+    void decreaseDuty();
+
 protected:
     ModelListener* modelListener;
 };

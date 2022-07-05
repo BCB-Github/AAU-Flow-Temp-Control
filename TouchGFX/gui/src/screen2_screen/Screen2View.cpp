@@ -30,3 +30,21 @@ void Screen2View::updateTestVal2(float newVal2)
 	testVal2.invalidate();
 	box1.invalidate();
 }
+
+void Screen2View::updateDutyCycle(int newDuty)
+{
+	Unicode::snprintf(textArea2Buffer, TEXTAREA2_SIZE, "%d", newDuty);
+	textArea2.resizeToCurrentText();
+	textArea2.invalidate();
+	box1.invalidate();
+}
+
+void Screen2View::incrementDuty()
+{
+	presenter->askForDutyUp();
+}
+
+void Screen2View::decrementDuty()
+{
+	presenter->askForDutyDown();
+}
