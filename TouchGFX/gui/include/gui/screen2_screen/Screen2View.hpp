@@ -11,11 +11,8 @@ public:
     virtual ~Screen2View() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
-<<<<<<< HEAD
     virtual void updateTempWildcard(float temp);
     
-=======
->>>>>>> refs/remotes/origin/master
 
     void updateTestVal1(float newVal1);
     void updateTestVal2(float newVal2);

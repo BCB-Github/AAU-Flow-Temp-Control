@@ -13,6 +13,18 @@ Screen2ViewBase::Screen2ViewBase() :
     __background.setPosition(0, 0, 480, 272);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
 
+    flexDownDuty.setBoxWithBorderPosition(0, 0, 50, 50);
+    flexDownDuty.setBorderSize(5);
+    flexDownDuty.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    flexDownDuty.setPosition(403, 212, 50, 50);
+    flexDownDuty.setAction(flexButtonCallback);
+
+    flexUpDuty.setBoxWithBorderPosition(0, 0, 50, 50);
+    flexUpDuty.setBorderSize(5);
+    flexUpDuty.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    flexUpDuty.setPosition(403, 140, 50, 50);
+    flexUpDuty.setAction(flexButtonCallback);
+
     box1.setPosition(0, 0, 480, 272);
     box1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
 
@@ -59,21 +71,9 @@ Screen2ViewBase::Screen2ViewBase() :
     textArea2.resizeToCurrentText();
     textArea2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6V2X));
 
-    flexDownDuty.setBoxWithBorderPosition(0, 0, 50, 50);
-    flexDownDuty.setBorderSize(5);
-    flexDownDuty.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    flexDownDuty.setPosition(403, 212, 50, 50);
-    flexDownDuty.setVisible(false);
-    flexDownDuty.setAction(flexButtonCallback);
-
-    flexUpDuty.setBoxWithBorderPosition(0, 0, 50, 50);
-    flexUpDuty.setBorderSize(5);
-    flexUpDuty.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    flexUpDuty.setPosition(403, 140, 50, 50);
-    flexUpDuty.setVisible(false);
-    flexUpDuty.setAction(flexButtonCallback);
-
     add(__background);
+    add(flexDownDuty);
+    add(flexUpDuty);
     add(box1);
     add(flexButton1);
     add(textArea1);
@@ -82,8 +82,6 @@ Screen2ViewBase::Screen2ViewBase() :
     add(upDutyImg);
     add(downDutyImg);
     add(textArea2);
-    add(flexDownDuty);
-    add(flexUpDuty);
 }
 
 void Screen2ViewBase::setupScreen()
@@ -93,14 +91,7 @@ void Screen2ViewBase::setupScreen()
 
 void Screen2ViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src)
 {
-    if (&src == &flexButton1)
-    {
-        //Interaction1
-        //When flexButton1 clicked change screen to Screen1
-        //Go to Screen1 with screen transition towards West
-        application().gotoScreen1ScreenSlideTransitionWest();
-    }
-    else if (&src == &flexDownDuty)
+    if (&src == &flexDownDuty)
     {
         //Interaction2
         //When flexDownDuty clicked call virtual function
@@ -113,5 +104,12 @@ void Screen2ViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonCo
         //When flexUpDuty clicked call virtual function
         //Call incrementDuty
         incrementDuty();
+    }
+    else if (&src == &flexButton1)
+    {
+        //Interaction1
+        //When flexButton1 clicked change screen to Screen1
+        //Go to Screen1 with screen transition towards West
+        application().gotoScreen1ScreenSlideTransitionWest();
     }
 }

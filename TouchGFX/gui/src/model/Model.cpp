@@ -3,14 +3,11 @@
 
 #include "FreeRTOS.h"
 #include "task.h"
-<<<<<<< HEAD
-#include "queue.h"½
-
-extern float temp;
-=======
 #include "queue.h"
 
->>>>>>> refs/remotes/origin/master
+extern float temp;
+#include "queue.h"
+
 /* I use SV for Set Value and PV for Present Value */
 unsigned int placeholder;
 int tempSV = 0;
@@ -83,9 +80,7 @@ Model::Model() : modelListener(0)
 
 void Model::tick()
 {
-<<<<<<< HEAD
 	Model::updateTempWildcard();
-=======
 	if (xQueueReceive(updateSVTempQ, &tempSV, 0)==pdTRUE)
 	{
 		modelListener->setSVTemp(tempSV);
@@ -111,9 +106,6 @@ void Model::tick()
 		{
 			modelListener->runProgress();
 		}
->>>>>>> refs/remotes/origin/master
-
-<<<<<<< HEAD
 	if (xQueueReceive(updateSVTempQ, &tempSV, 0)==pdTRUE)
 	{
 		modelListener->setSVTemp(tempSV);
@@ -187,60 +179,33 @@ void Model::increaseDuty()
 {
 	xQueueSend(dutyUpQ,&placeholder,0);
 }
-
-void Model::updateTempWildcard() {
-	modelListener->updateTempWildcard(temp);
-=======
-	if (xQueueReceive(updateTest1Q, &testVal1, 0)==pdTRUE)
-		{
-			modelListener->setTestVal1(testVal1);
-		}
-	if (xQueueReceive(updateTest2Q, &testVal2, 0)==pdTRUE)
-		{
-			modelListener->setTestVal2(testVal2);
-		}
-	if (xQueueReceive(updateDutyQ, &duty, 0)==pdTRUE)
-		{
-			modelListener->setDutyCycle(duty);
-		}
-
-	while (xQueueReceive(dataTempQ, &tempDP, 0)==pdTRUE)
-	{
-		modelListener->addDatapointTemp(tempDP);
-	}
-	while (xQueueReceive(dataFlowQ, &flowDP, 0)==pdTRUE)
-	{
-		modelListener->addDatapointFlow(flowDP);
-	}
-}
-
-void Model::increaseTemp()
-{
-	xQueueSend(tempUpQ,&placeholder,0);
-}
-
-void Model::decreaseTemp()
-{
-	xQueueSend(tempDownQ,&placeholder,0);
-}
-
-void Model::increaseFlow()
-{
-	xQueueSend(flowUpQ,&placeholder,0);
-}
-
-void Model::decreaseFlow()
-{
-	xQueueSend(flowDownQ,&placeholder,0);
-}
-
-void Model::increaseDuty()
-{
-	xQueueSend(dutyUpQ,&placeholder,0);
-}
-
 void Model::decreaseDuty()
 {
 	xQueueSend(dutyDownQ,&placeholder,0);
->>>>>>> refs/remotes/origin/master
+}
+
+void Model::updateTempWildcard() {
+	//modelListener->updateTempWildcard(temp);
+	/*if (xQueueReceive(updateTest1Q, &testVal1, 0)==pdTRUE)
+		{
+			modelListener->setTestVal1(testVal1);
+		}
+	if (xQueueReceive(updateTest2Q, &testVal2, 0)==pdTRUE)
+		{
+			modelListener->setTestVal2(testVal2);
+		}
+	if (xQueueReceive(updateDutyQ, &duty, 0)==pdTRUE)
+		{
+			modelListener->setDutyCycle(duty);
+		}
+
+	while (xQueueReceive(dataTempQ, &tempDP, 0)==pdTRUE)
+	{
+		modelListener->addDatapointTemp(tempDP);
+	}
+	while (xQueueReceive(dataFlowQ, &flowDP, 0)==pdTRUE)
+	{
+		modelListener->addDatapointFlow(flowDP);
+
+	}*/
 }

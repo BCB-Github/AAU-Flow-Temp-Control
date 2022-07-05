@@ -30,6 +30,9 @@
 #include "task.h"
 #include "queue.h"
 #include "math.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "i2cUserFunctionsHeader.h"
 
 /* Standard libraries if needed
 #include <stdio.h>
@@ -73,6 +76,7 @@ CRC_HandleTypeDef hcrc;
 
 DMA2D_HandleTypeDef hdma2d;
 
+I2C_HandleTypeDef hi2c1;
 I2C_HandleTypeDef hi2c3;
 
 LTDC_HandleTypeDef hltdc;
@@ -118,6 +122,7 @@ static void MX_FMC_Init(void);
 static void MX_I2C3_Init(void);
 static void MX_LTDC_Init(void);
 static void MX_QUADSPI_Init(void);
+static void MX_I2C1_Init(void);
 static void MX_TIM1_Init(void);
 void StartDefaultTask(void *argument);
 extern void TouchGFX_Task(void *argument);
@@ -176,6 +181,7 @@ int main(void)
   MX_LTDC_Init();
   MX_QUADSPI_Init();
   MX_LIBJPEG_Init();
+  MX_I2C1_Init();
   MX_TIM1_Init();
   MX_TouchGFX_Init();
   /* USER CODE BEGIN 2 */
@@ -352,6 +358,54 @@ static void MX_DMA2D_Init(void)
   /* USER CODE BEGIN DMA2D_Init 2 */
 
   /* USER CODE END DMA2D_Init 2 */
+
+}
+
+/**
+  * @brief I2C1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C1_Init(void)
+{
+
+  /* USER CODE BEGIN I2C1_Init 0 */
+
+  /* USER CODE END I2C1_Init 0 */
+
+  /* USER CODE BEGIN I2C1_Init 1 */
+
+  /* USER CODE END I2C1_Init 1 */
+  hi2c1.Instance = I2C1;
+  hi2c1.Init.Timing = 0x20404768;
+  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Analogue filter
+  */
+  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Digital filter
+  */
+  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C1_Init 2 */
+
+  /* USER CODE END I2C1_Init 2 */
 
 }
 
@@ -789,6 +843,7 @@ int dutyPercent = 0;
 /* These are the variables to store the samples */
 float tempPVvar = 0;
 float flowPVvar = 0;
+extern float temp;
 
 /* Variables to produce sine waves on each graph */
 float increment1 = 0.01;
@@ -811,15 +866,17 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
+	I2CInitialize();
+
   for(;;)
   {
+	  I2CRead();
 	  /* Set the duty var to the duty cycle 0-1, the ccr value is then calculated */
 	  float ccr = floor(dutyvar*65535);
 	  	  TIM1->CCR1=(int)ccr; // duty%=i/65535
 
 	  /* Code for updating one of the two test values on screen 2 */
-	  float testVal = (float)rand();
-	  xQueueSend(updateTest1Q, &testVal, 0);
+
 
 	  /* Code for producing sine waves to graphs */
 	  result = floor(sin(input1*2*PI)*50);
@@ -831,6 +888,7 @@ void StartDefaultTask(void *argument)
 	  output = (int)result + 5;
 	  xQueueSend(dataFlowQ,&output,0);
 	  input2 = input2+increment2;
+	  xQueueSend(updateTest1Q, &temp, 0);
 
 /* The following four if loops updates updates the the set values of
  * temperature and flow if the buttons have been pressed  */

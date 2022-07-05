@@ -61,9 +61,9 @@ void I2CStartMeasurement(void) {
 void I2CInitialize(){
 // We want to reset
 	I2CSoftReset();
-	osDelay(100);
+	//osDelay(100);
 	I2CStartMeasurement();
-	osDelay(100);
+	//osDelay(100);
 	I2CRead();
 
 
