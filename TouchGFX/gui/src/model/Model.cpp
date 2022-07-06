@@ -21,7 +21,7 @@ float flowTotal = 0;
 int loopRunning = 1;
 
 float testVal1 = 0;
-float testVal2 = 0;
+uint16_t testVal2 = 0;
 int duty = 0;
 
 extern "C"
@@ -71,7 +71,7 @@ Model::Model() : modelListener(0)
 	dataFlowQ = xQueueGenericCreate(16, sizeof(int), 0);
 
 	updateTest1Q = xQueueGenericCreate(1, sizeof(float), 0);
-	updateTest2Q = xQueueGenericCreate(1, sizeof(float), 0);
+	updateTest2Q = xQueueGenericCreate(1, sizeof(uint16_t), 0);
 	dutyUpQ = xQueueGenericCreate(1, sizeof(unsigned int), 0);
 	dutyDownQ = xQueueGenericCreate(1, sizeof(unsigned int), 0);
 	updateDutyQ = xQueueGenericCreate(1, sizeof(int), 0);

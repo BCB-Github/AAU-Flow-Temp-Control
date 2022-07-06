@@ -32,7 +32,8 @@ static const uint8_t  INITIAL_MEASURE_DELAY = 120; // LD20: 120ms; SLF3X: 50ms
 static const uint8_t  CMD_SOFT_RESET =  0x06 ;
 
 extern I2C_HandleTypeDef hi2c1;
-float flow, temp;
+float temp;
+uint16_t flow;
 
 
 

@@ -843,7 +843,7 @@ int dutyPercent = 0;
 /* These are the variables to store the samples */
 float tempPVvar = 0;
 float flowPVvar = 0;
-extern float temp;
+extern float temp, flow;
 
 /* Variables to produce sine waves on each graph */
 float increment1 = 0.01;
@@ -889,6 +889,8 @@ void StartDefaultTask(void *argument)
 	  xQueueSend(dataFlowQ,&output,0);
 	  input2 = input2+increment2;
 	  xQueueSend(updateTest1Q, &temp, 0);
+	  xQueueSend(updateTest2Q, &flow, 0);
+
 
 /* The following four if loops updates updates the the set values of
  * temperature and flow if the buttons have been pressed  */

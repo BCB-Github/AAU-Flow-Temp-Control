@@ -41,7 +41,7 @@ void Screen2View::updateTestVal1(float newVal1)
     //static const uint16_t TEXTAREA2_SIZE = 6;
   // touchgfx::Unicode::UnicodeChar textArea3Buffer[TEXTAREA3_SIZE];
     //memset(&testVal1Buffer, 0, TESTVAL1_SIZE);
-	Unicode::snprintfFloat(testVal1Buffer, TESTVAL1_SIZE, "%f", newVal1);
+	Unicode::snprintfFloat(testVal1Buffer, TESTVAL1_SIZE, "%.2f", newVal1);
 	//testVal1.setWildcard(testVal1Buffer);
     testVal1.resizeToCurrentText();
 	testVal1.invalidate();
@@ -49,9 +49,9 @@ void Screen2View::updateTestVal1(float newVal1)
 
 }
 
-void Screen2View::updateTestVal2(float newVal2)
+void Screen2View::updateTestVal2(uint16_t newVal2)
 {
-	Unicode::snprintfFloat(testVal2Buffer, TESTVAL2_SIZE, "%f", newVal2);
+	Unicode::snprintfFloat(testVal2Buffer, TESTVAL2_SIZE, "%5.f", newVal2);
 	testVal2.resizeToCurrentText();
 	testVal2.invalidate();
 	box1.invalidate();

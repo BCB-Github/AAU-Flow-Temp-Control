@@ -3,6 +3,9 @@
 
 #include <gui/model/ModelListener.hpp>
 #include <mvp/Presenter.hpp>
+#include <stdio.h>
+#include <stdlib.h>
+
 
 using namespace touchgfx;
 
@@ -28,7 +31,7 @@ public:
     virtual ~Screen2Presenter() {};
 
     void setTestVal1(float newTestVal1);
-    void setTestVal2(float newTestVal2);
+    void setTestVal2(uint16_t newTestVal2);
     void setDutyCycle(int newDutyCycle);
 
     void askForDutyUp();
