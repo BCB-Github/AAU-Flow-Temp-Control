@@ -32,6 +32,8 @@ static const uint8_t  INITIAL_MEASURE_DELAY = 120; // LD20: 120ms; SLF3X: 50ms
 static const uint8_t  CMD_SOFT_RESET =  0x06 ;
 
 extern I2C_HandleTypeDef hi2c1;
+
+//////////// DEFINE VARIABLES
 float temp;
 uint16_t flow;
 
@@ -98,6 +100,10 @@ void I2CRead(){
 
 		  HAL_I2C_Master_Receive(&hi2c1, (uint16_t)	((SLF3X_I2C_ADDRESS<<1) | 0x1), readData, DATA_LENGTH, 1000);
 		  flow = (uint16_t)((readData[0] << 8) | readData[1]);
+		  if (flow > 65500)
+		  {
+			  flow = 0;
+		  }
 		  flow = flow/10;
 
 		  temp = (uint16_t)((readData[3] << 8) | readData[4]);

@@ -33,6 +33,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "i2cUserFunctionsHeader.h"
+#include "controlTask.h"
+#include "controlTask.hpp"
+#include "time.h"
 
 /* Standard libraries if needed
 #include <stdio.h>
@@ -62,6 +65,7 @@
 #define SDRAM_MODEREG_OPERATING_MODE_STANDARD    ((uint16_t)0x0000)
 #define SDRAM_MODEREG_WRITEBURST_MODE_PROGRAMMED ((uint16_t)0x0000)
 #define SDRAM_MODEREG_WRITEBURST_MODE_SINGLE     ((uint16_t)0x0200)
+float flowRefSV = 100;
 
 /* USER CODE END PD */
 
@@ -108,6 +112,13 @@ const osThreadAttr_t videoTask_attributes = {
   .stack_size = 1000 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
+/* Definitions for controlTask */
+osThreadId_t controlTaskHandle;
+const osThreadAttr_t controlTask_attributes = {
+  .name = "controlTask",
+  .stack_size = 1025 * 4,
+  .priority = (osPriority_t) osPriorityRealtime,
+};
 /* USER CODE BEGIN PV */
 static FMC_SDRAM_CommandTypeDef Command;
 /* USER CODE END PV */
@@ -127,8 +138,12 @@ static void MX_TIM1_Init(void);
 void StartDefaultTask(void *argument);
 extern void TouchGFX_Task(void *argument);
 extern void videoTaskFunc(void *argument);
+//extern void controlTaskFunc(void* argument);
+
+extern ControlClass systemControl;
 
 /* USER CODE BEGIN PFP */
+float dummyVariable = 0;
 
 /* USER CODE END PFP */
 
@@ -217,6 +232,9 @@ int main(void)
 
   /* creation of videoTask */
   videoTaskHandle = osThreadNew(videoTaskFunc, NULL, &videoTask_attributes);
+
+  /* creation of controlTask */
+  controlTaskHandle = osThreadNew(controlTaskFunc, NULL, &controlTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -838,12 +856,13 @@ unsigned int var = 0;
 int tempSVvar = 25;
 int flowSVvar = 4;
 float dutyvar = 0.5;
-int dutyPercent = 0;
+int dutyPercent = 50;
 
 /* These are the variables to store the samples */
 float tempPVvar = 0;
 float flowPVvar = 0;
-extern float temp, flow;
+extern float  temp;
+extern uint16_t flow;
 
 /* Variables to produce sine waves on each graph */
 float increment1 = 0.01;
@@ -872,9 +891,6 @@ void StartDefaultTask(void *argument)
   {
 	  I2CRead();
 	  /* Set the duty var to the duty cycle 0-1, the ccr value is then calculated */
-	  float ccr = floor(dutyvar*65535);
-	  	  TIM1->CCR1=(int)ccr; // duty%=i/65535
-
 	  /* Code for updating one of the two test values on screen 2 */
 
 
@@ -1020,6 +1036,32 @@ void Error_Handler(void)
 
   /* USER CODE END Error_Handler_Debug */
 }
+
+
+void controlTaskFunc(void* argument){
+	for(;;)
+	{
+		float dummyPressure, dummyTemp, dummyVolume, dummyFlow, dummyRPM;
+		int systemStatusSV = 1;
+
+
+		float dummyPressureSV, dummyTempSV, dummyVolumeSV, dummyFlowSV;
+		float dummytestTimeSV = 10000;
+
+		dummyRPM = 0;
+		float dummyfloat =(float)flow;
+
+		controlSystemUpdateSV(&systemControl, dummyTempSV, flowRefSV, dummyPressureSV, dummytestTimeSV, dummyVolumeSV);
+		controlMeasurementUpdate(&systemControl, dummyPressure, dummyfloat, dummyTemp, dummyVolume, dummyRPM);
+		controlSystemRun(&systemControl, systemStatusSV);
+		controlSystemPassData(&systemControl);
+		osDelay(10);
+	}
+}
+
+
+
+
 
 #ifdef  USE_FULL_ASSERT
 /**
