@@ -36,6 +36,7 @@
 #include "controlTask.h"
 #include "controlTask.hpp"
 #include "time.h"
+#include "userStructs.h"
 
 /* Standard libraries if needed
 #include <stdio.h>
@@ -140,10 +141,19 @@ extern void TouchGFX_Task(void *argument);
 extern void videoTaskFunc(void *argument);
 //extern void controlTaskFunc(void* argument);
 
-extern ControlClass systemControl;
 
 /* USER CODE BEGIN PFP */
 float dummyVariable = 0;
+
+PassDataSV modelDataSV;
+PassDataMeas modelMeasPassData;
+int systemStatusSV = 0;
+extern ControlClass systemControl;
+//float flowSVvar;
+float tempSVVar;
+extern flowTotal;
+extern flowI2C;
+
 
 /* USER CODE END PFP */
 
@@ -892,9 +902,16 @@ void StartDefaultTask(void *argument)
 	  I2CRead();
 	  /* Set the duty var to the duty cycle 0-1, the ccr value is then calculated */
 	  /* Code for updating one of the two test values on screen 2 */
-
-
 	  /* Code for producing sine waves to graphs */
+
+		unsigned int var = 0;
+
+		// update the setvalues
+	modelDataSV.flowSV = flowSVvar;
+	modelDataSV.tempSV = tempSVVar;
+	modelDataSV.volumeSV = 0;
+	modelDataSV.systemStatusSV = systemStatusSV;
+
 	  result = floor(sin(input1*2*PI)*50);
 	  output = (int)result + 50;
 	  xQueueSend(dataTempQ,&output,0);
@@ -962,7 +979,7 @@ void StartDefaultTask(void *argument)
 		  	  xQueueSend(updateDutyQ, &dutyPercent, 0);
 	  	  }
 
-    osDelay(40);
+    osDelay(1);
   }
   /* USER CODE END 5 */
 }
@@ -1041,19 +1058,41 @@ void Error_Handler(void)
 void controlTaskFunc(void* argument){
 	for(;;)
 	{
-		float dummyPressure, dummyTemp, dummyVolume, dummyFlow, dummyRPM;
-		int systemStatusSV = 1;
+		//float dummyPressure, dummyTemp, dummyVolume, dummyFlow, dummyRPM;
+
+		float dummyPressure = 0;
+
+		// Update Measurement Array
+		modelMeasPassData.newestMeasIndex++;
+		if (modelMeasPassData.newestMeasIndex > STORED_DATA_MEAS -1)
+		{
+			modelMeasPassData.newestMeasIndex = 0;
+		}
+		modelMeasPassData.flowMeas[modelMeasPassData.newestMeasIndex] =(float)flowI2C;
+		modelMeasPassData.tempMeas[modelMeasPassData.newestMeasIndex] =(float)temp;
+		modelMeasPassData.presMeas[modelMeasPassData.newestMeasIndex] =(float)dummyPressure;
+		modelMeasPassData.time[modelMeasPassData.newestMeasIndex] = HAL_GetTick();
+		flowTotal = modelMeasPassData.volumeMeas[modelMeasPassData.newestMeasIndex];
+
+		//PassDataMeas modelMeasPassData
+		//modelDataSV;
+		//float dummyPressure, dummyTemp, dummyVolume, dummyFlow, dummyRPM;
+		//int systemStatusSV = 1;
 
 
-		float dummyPressureSV, dummyTempSV, dummyVolumeSV, dummyFlowSV;
-		float dummytestTimeSV = 10000;
+		//float dummyPressureSV, dummyTempSV, dummyVolumeSV, dummyFlowSV;
+		//float dummytestTimeSV = 10000;
 
-		dummyRPM = 0;
-		float dummyfloat =(float)flow;
+		//float dummyfloat =(float)flow;
 
-		controlSystemUpdateSV(&systemControl, dummyTempSV, flowRefSV, dummyPressureSV, dummytestTimeSV, dummyVolumeSV);
-		controlMeasurementUpdate(&systemControl, dummyPressure, dummyfloat, dummyTemp, dummyVolume, dummyRPM);
-		controlSystemRun(&systemControl, systemStatusSV);
+
+
+		controlSystemUpdateSV(&systemControl, &modelDataSV); // update the setvalues
+
+
+		controlMeasurementUpdate(&systemControl, &modelMeasPassData); // Pass Measurement data to control class
+
+		controlSystemRun(&systemControl); // run control System from statusSV
 		controlSystemPassData(&systemControl);
 		osDelay(10);
 	}

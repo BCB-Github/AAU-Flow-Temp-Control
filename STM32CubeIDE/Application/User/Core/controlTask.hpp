@@ -16,6 +16,12 @@
 #ifdef __cplusplus
 extern "C" {
 
+// Give the class the structs defined in userStructs.h
+typedef struct PassDataMeas* PassDataMeasHandle;
+typedef struct PassDataSV* PassDataSVHandle;
+
+
+// Define the controlClass
 typedef class ControlClass {
 private:
 	/*SV stands for Set value -i.e control Reference*/
@@ -47,11 +53,10 @@ public:
 	ControlClass(); // constructor
 	int getVar(char* varName);
 	void changeVar(int changeVariable);
-	void measurementUpdate(float pressureRead, float flowRead, float tempRead, float volumeRead, float motorRPMRead);
-	void systemUpdateSV(float newTempSV, float newFlowSV, float newPressureSV, int newTimeSV, float newVolumeSV);
+	void measurementUpdate(PassDataMeasHandle passDataMeas);
+	void systemUpdateSV(PassDataSVHandle passDataSVHandle);
 	//void controlSystemUpdateSV(ControlClass* ControlClass, float newTempSV, float newFlowSV, float newPressureSV, int newTimeSV){
 	void controlLoop(float controlMeas);
-	void statusUpdate(int i);
 	void systemRun();
 } ControlClass;
 
@@ -61,15 +66,15 @@ public:
 ///
 extern ControlClass* controlVarUpdate(ControlClass*, int changeVar);
 extern int controlGetVar(ControlClass*, char* varName);
-extern void controlMeasurementUpdate(ControlClass*, float pressureRead, float flowRead, float tempRead, float volumeRead, float motorRPMRead);
-extern void controlSystemRun(ControlClass*, int systemStatus);
+extern void controlMeasurementUpdate(ControlClass*, PassDataMeasHandle modelMeasPassData);
+extern void controlSystemRun(ControlClass*);
 extern void controlSystemPassData(ControlClass*);
-extern void controlSystemUpdateSV(ControlClass* ControlClass, float newTempSV, float newFlowSV, float newPressureSV, int newTimeSV, float newVolumeSV);
+//extern void controlSystemUpdateSV(ControlClass* ControlClass, float newTempSV, float newFlowSV, float newPressureSV, int newTimeSV, float newVolumeSV);
+extern void controlSystemUpdateSV(ControlClass* ControlClass, PassDataSVHandle passDataSVHandle);
 
 
 
 
 }
-
 #endif // C code wrapper
 #endif /* APPLICATION_USER_CORE_CONTROLTASK_HPP_ */

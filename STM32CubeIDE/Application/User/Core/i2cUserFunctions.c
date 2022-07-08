@@ -36,7 +36,8 @@ extern I2C_HandleTypeDef hi2c1;
 //////////// DEFINE VARIABLES
 float temp;
 uint16_t flow;
-
+#define FLOW_SMOOTHING_MAX 5
+float flowI2C = 0;
 
 
 
@@ -96,18 +97,36 @@ void I2CRead(){
 		//I2CStartMeasurement();
 		//osDelay(100);
 		uint8_t readData[DATA_LENGTH];
-
+		uint16_t flowArray[5]; // We want to make an average over the flow
+		uint8_t flowIterator;
 
 		  HAL_I2C_Master_Receive(&hi2c1, (uint16_t)	((SLF3X_I2C_ADDRESS<<1) | 0x1), readData, DATA_LENGTH, 1000);
-		  flow = (uint16_t)((readData[0] << 8) | readData[1]);
-		  if (flow > 65500)
+		  flowArray[flowIterator] = (uint16_t)((readData[0] << 8) | readData[1]);
+		  if (flowArray[flowIterator] > 32767)
 		  {
-			  flow = 0;
+			  flowArray[flowIterator] = 0;
 		  }
-		  flow = flow/10;
+
+		  flowI2C= 0;
+		  int ii = 0;
+		  for (ii = 0; ii < FLOW_SMOOTHING_MAX; ii++)
+		  {
+			  flowI2C= flowI2C+ flowArray[ii]/10;
+		  }
+		  flowI2C = flowI2C/(FLOW_SMOOTHING_MAX); // corresponds to a mean
 
 		  temp = (uint16_t)((readData[3] << 8) | readData[4]);
 		  temp = temp/200;
+
+
+
+		  if (flowIterator == FLOW_SMOOTHING_MAX)
+		  {
+			  flowIterator = 0;
+		  }else{
+			  flowIterator++;
+		  }
+
 
 		//  osDelay(100);
 

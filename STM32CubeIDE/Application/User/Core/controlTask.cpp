@@ -10,6 +10,7 @@
 #include "app_touchgfx.h"
 #include "controlTask.hpp"
 #include "controlTask.h"
+#include "userStructs.h" // include the ability to pass measurements
 
 
 //float temp;
@@ -43,20 +44,34 @@ int  controlGetVar(ControlClass* ControlClass, char* varName){
 }
 
 void ControlClass::controlLoop(float controlMeas){
-
+	static int maxVoltageCounter;
 	 static float controlMeasOld;
-	 float T = 0.01;
+	 float T = 0.01; // this might not be right
+
 	 u = u_old+ controlMeas * (kp + ki * T) - controlMeasOld * kp;
+
+	 if (u > 5)
+	 {
+		 u= 5;
+		 maxVoltageCounter++;
+	 }
+	 else if( u < 0)
+	 {
+		 maxVoltageCounter++;
+		 u = 0;
+	 }
+	 else{
+
+		 maxVoltageCounter = 0;
+	 }
+
+
+
 	 u_old = u;
-	 if (u_old > 5)
-	 {
-		 u_old = 5;
-	 }
-	 if( u_old < 0)
-	 {
-		 u_old = 0;
-	 }
 	 controlMeasOld = controlMeas;
+	 if (maxVoltageCounter > 100){
+		 // dvs nu har den kørt på max i et længer periode - send en fejl
+	 }
 
 
 }
@@ -64,27 +79,30 @@ void ControlClass::controlLoop(float controlMeas){
 
 
 // Define Class Function
-void ControlClass::measurementUpdate(float pressureRead, float flowRead, float tempRead, float volumeRead, float motorRPMRead){
-	time = HAL_GetTick();
+void ControlClass::measurementUpdate(PassDataMeasHandle passDataMeas){//float pressureRead, float flowRead, float tempRead, float volumeRead, float motorRPMRead){
+	/*time = HAL_GetTick();
 	pressure = pressureRead;
 	flow = flowRead;
 	temp = tempRead;
 	volume = volumeRead;
 	motorRPM = motorRPMRead;
+	*/
+	passDataMeas->volumeMeas[passDataMeas->newestMeasIndex] = volume;
+	pressure = passDataMeas->presMeas[passDataMeas->newestMeasIndex];
+	temp = passDataMeas->tempMeas[passDataMeas->newestMeasIndex];
+	flow = passDataMeas->flowMeas[passDataMeas->newestMeasIndex];
+	time = passDataMeas->time[passDataMeas->newestMeasIndex];
 }
+
 
 
 // Define Linker Function
-void controlMeasurementUpdate(ControlClass* ControlClass, float pressureRead, float flowRead, float tempRead, float volumeRead, float motorRPMRead)
+void controlMeasurementUpdate(ControlClass* ControlClass, PassDataMeas_Handle passDataMeas)
 {
-
-	ControlClass->measurementUpdate(pressureRead, flowRead, tempRead, volumeRead, motorRPMRead);
+	ControlClass->measurementUpdate(passDataMeas);
 }
 
-void ControlClass::statusUpdate(int systemStatusUpdate)
-{
-	systemStatusSV = systemStatusUpdate;
-}
+
 
 void ControlClass::systemRun(){
 
@@ -122,12 +140,18 @@ void ControlClass::systemRun(){
 
 		}
 	}
+
 	if(systemStatusSV == 1) // 1 means gooOOOO
 	{
 		if (systemStatus == 0)
 		{
 			systemStatus = 1;
 		}
+	}
+
+	else if(systemStatus ==5){
+
+		systemStatusSV = 0; // Test completed - do not run anymore
 	}
 
 
@@ -143,11 +167,11 @@ void ControlClass::systemRun(){
 		timeStart = time;
 		testTime = 0;
 		systemStatus = 2;
+		volume = 0;
 		break;
 
 	case 2: // control running high
 		testTime = time - timeStart - timeStop ;
-
 		// Idea here is that we run our control
 		controlLoop(flowSV - flow);
 		if (u > 5)
@@ -158,29 +182,32 @@ void ControlClass::systemRun(){
 		{
 			u =0;
 		}
+		volume+= flow*0.01; // - add the volume that had occoured during the loop
+
 		dutyVoltage= u/5;
+
 		// set output To flow
 		ccr1 = dutyVoltage*65535;
 		TIM1->CCR1=(int)ccr1; // duty%=i/65535
 
 
-
-		if (testTime >= testTimeSV){
+		if (volume >= volumeSV){
 			// The set time for the test has been passed - Ramp Down
-			systemStatus = 3;
+			//systemStatus = 3;
 		}
+
 
 		break;
 
 	case 3: // Control Ramp down
-		controlLoop(flowSV - flow); // Control the system to zero
+		controlLoop(0); // Control the system to zero
 	//	if (timeStart >= testTimeSV){ // The test time has been achieved
-		//	if (motorRPM < 10) // The motor has stopped
-			//{
+			if (flow < 10) // The motor has stopped
+			{
 				// disable pwm output
-				systemStatus = 2; // The test has been completed
-			//}
-		//}
+				systemStatus = 5; // The test has been completed
+			}
+
 		break;
 
 	case 4: // system paused
@@ -191,6 +218,7 @@ void ControlClass::systemRun(){
 		u = 0;
 		u_old = 0;
 
+		volume = 0;
 		systemStatus = 0;
 		break;
 	}
@@ -199,26 +227,32 @@ void ControlClass::systemRun(){
 
 
 
-void controlSystemRun(ControlClass* ControlClass, int systemStatus){
-	ControlClass->statusUpdate(systemStatus);
+void controlSystemRun(ControlClass* ControlClass){
 	ControlClass->systemRun();
 
 }
 
 
 // Update the control Set values
-void ControlClass::systemUpdateSV(float newTempSV, float newFlowSV, float newPressureSV, int newTimeSV, float newVolumeSV){
-	pressureSV = newPressureSV;
+void ControlClass::systemUpdateSV(PassDataSVHandle passDataSVHandle){
+	/*
+	 * pressureSV = newPressureSV;
 	flowSV = newFlowSV;
 	tempSV = newTempSV;
 	volumeSV = newVolumeSV;
 	testTimeSV = newTimeSV;
+*/
+	flowSV = passDataSVHandle->flowSV;
+	tempSV = passDataSVHandle->tempSV;
+	volumeSV = passDataSVHandle->volumeSV;
+	systemStatusSV = passDataSVHandle->systemStatusSV;
 
 
 }
 
-void controlSystemUpdateSV(ControlClass* ControlClass, float newTempSV, float newFlowSV, float newPressureSV, int newTimeSV, float newVolumeSV){
-	ControlClass->systemUpdateSV(newTempSV, newFlowSV, newPressureSV, newTimeSV, newVolumeSV);
+void controlSystemUpdateSV(ControlClass* ControlClass, PassDataSVHandle passDataSVHandle)
+{
+	ControlClass->systemUpdateSV(passDataSVHandle);
 }
 
 

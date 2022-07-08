@@ -4,7 +4,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
-
+#include "userStructs.h"
 extern float temp;
 #include "queue.h"
 
@@ -17,6 +17,7 @@ int flowDP = 0;
 float tempPV = 0;
 float flowPV = 0;
 float flowTotal = 0;
+extern PassDataMeas modelMeasPassData;
 
 int loopRunning = 1;
 
