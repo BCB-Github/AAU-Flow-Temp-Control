@@ -49,9 +49,9 @@ void Screen2View::updateTestVal1(float newVal1)
 
 }
 
-void Screen2View::updateTestVal2(uint16_t newVal2)
+void Screen2View::updateTestVal2(float newVal2)
 {
-	Unicode::snprintfFloat(testVal2Buffer, TESTVAL2_SIZE, "%5.f", newVal2);
+	Unicode::snprintfFloat(testVal2Buffer, TESTVAL2_SIZE, "%.2f", newVal2);
 	testVal2.resizeToCurrentText();
 	testVal2.invalidate();
 	box1.invalidate();

@@ -152,7 +152,7 @@ extern ControlClass systemControl;
 //float flowSVvar;
 float tempSVVar;
 extern flowTotal;
-extern flowI2C;
+extern float flowI2C;
 
 
 /* USER CODE END PFP */
@@ -922,7 +922,7 @@ void StartDefaultTask(void *argument)
 	  xQueueSend(dataFlowQ,&output,0);
 	  input2 = input2+increment2;
 	  xQueueSend(updateTest1Q, &temp, 0);
-	  xQueueSend(updateTest2Q, &flow, 0);
+	  xQueueSend(updateTest2Q, &flowI2C, 0);
 
 
 /* The following four if loops updates updates the the set values of
@@ -945,9 +945,9 @@ void StartDefaultTask(void *argument)
 	  	  }
 	  if (xQueueReceive(flowUpQ, &var, 0)==pdTRUE)
 	  	  {
-		  	  if (flowSVvar < 50)
+		  	  if (flowSVvar < 2000)
 		  	  {
-		  		  flowSVvar = flowSVvar + 1;
+		  		  flowSVvar = flowSVvar + 100;
 		  	  }
 		  	  xQueueSend(updateSVFlowQ, &flowSVvar, 0);
 	  	  }
@@ -955,7 +955,7 @@ void StartDefaultTask(void *argument)
 	  	  {
 		  	  if (flowSVvar > 0)
 		  	  {
-		  		  flowSVvar = flowSVvar - 1;
+		  		  flowSVvar = flowSVvar - 100;
 		  	  }
 		  	  xQueueSend(updateSVFlowQ, &flowSVvar, 0);
 	  	  }
@@ -979,7 +979,7 @@ void StartDefaultTask(void *argument)
 		  	  xQueueSend(updateDutyQ, &dutyPercent, 0);
 	  	  }
 
-    osDelay(1);
+    osDelay(10);
   }
   /* USER CODE END 5 */
 }

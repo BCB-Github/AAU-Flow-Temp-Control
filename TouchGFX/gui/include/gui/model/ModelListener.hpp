@@ -31,7 +31,7 @@ public:
 	virtual void addDatapointFlow(int newDP) {}
 
 	virtual void setTestVal1(float newTestVal1) {}
-	virtual void setTestVal2(uint16_t newTestVal2) {}
+	virtual void setTestVal2(float newTestVal2) {}
 	virtual void setDutyCycle(int newDutyCycle) {}
 
 

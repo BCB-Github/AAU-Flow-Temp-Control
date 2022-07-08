@@ -97,8 +97,8 @@ void I2CRead(){
 		//I2CStartMeasurement();
 		//osDelay(100);
 		uint8_t readData[DATA_LENGTH];
-		uint16_t flowArray[5]; // We want to make an average over the flow
-		uint8_t flowIterator;
+		static uint16_t flowArray[5]; // We want to make an average over the flow
+		static int flowIterator;
 
 		  HAL_I2C_Master_Receive(&hi2c1, (uint16_t)	((SLF3X_I2C_ADDRESS<<1) | 0x1), readData, DATA_LENGTH, 1000);
 		  flowArray[flowIterator] = (uint16_t)((readData[0] << 8) | readData[1]);
@@ -111,7 +111,8 @@ void I2CRead(){
 		  int ii = 0;
 		  for (ii = 0; ii < FLOW_SMOOTHING_MAX; ii++)
 		  {
-			  flowI2C= flowI2C+ flowArray[ii]/10;
+
+			  flowI2C= flowI2C+ (float) flowArray[ii] /10;
 		  }
 		  flowI2C = flowI2C/(FLOW_SMOOTHING_MAX); // corresponds to a mean
 
@@ -120,10 +121,12 @@ void I2CRead(){
 
 
 
-		  if (flowIterator == FLOW_SMOOTHING_MAX)
+		  if ((int) flowIterator >= FLOW_SMOOTHING_MAX)
 		  {
 			  flowIterator = 0;
-		  }else{
+
+		  }else
+		  {
 			  flowIterator++;
 		  }
 
