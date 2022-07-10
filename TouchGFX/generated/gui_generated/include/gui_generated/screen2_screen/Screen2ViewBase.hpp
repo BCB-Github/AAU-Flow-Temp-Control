@@ -52,6 +52,11 @@ protected:
     touchgfx::ScalableImage upDutyImg;
     touchgfx::ScalableImage downDutyImg;
     touchgfx::TextAreaWithOneWildcard textArea2;
+    touchgfx::TextArea textArea4;
+    touchgfx::TextAreaWithOneWildcard textArea3;
+    touchgfx::TextAreaWithOneWildcard textArea5;
+    touchgfx::TextAreaWithOneWildcard textArea6;
+    touchgfx::TextAreaWithOneWildcard textArea7;
 
     /*
      * Wildcard Buffers
@@ -62,6 +67,14 @@ protected:
     touchgfx::Unicode::UnicodeChar testVal2Buffer[TESTVAL2_SIZE];
     static const uint16_t TEXTAREA2_SIZE = 5;
     touchgfx::Unicode::UnicodeChar textArea2Buffer[TEXTAREA2_SIZE];
+    static const uint16_t TEXTAREA3_SIZE = 5;
+    touchgfx::Unicode::UnicodeChar textArea3Buffer[TEXTAREA3_SIZE];
+    static const uint16_t TEXTAREA5_SIZE = 5;
+    touchgfx::Unicode::UnicodeChar textArea5Buffer[TEXTAREA5_SIZE];
+    static const uint16_t TEXTAREA6_SIZE = 4;
+    touchgfx::Unicode::UnicodeChar textArea6Buffer[TEXTAREA6_SIZE];
+    static const uint16_t TEXTAREA7_SIZE = 6;
+    touchgfx::Unicode::UnicodeChar textArea7Buffer[TEXTAREA7_SIZE];
 
 private:
 

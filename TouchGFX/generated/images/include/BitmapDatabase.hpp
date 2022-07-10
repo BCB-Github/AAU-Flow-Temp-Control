@@ -7,9 +7,16 @@
 #include <touchgfx/Bitmap.hpp>
 
 const uint16_t BITMAP_BLUE_PROGRESSINDICATORS_BG_SMALL_CIRCLE_INDICATOR_BG_FULL_ID = 0;
-const uint16_t BITMAP_BLUE_PROGRESSINDICATORS_FILL_SMALL_CIRCLE_INDICATOR_FILL_FULL_ID = 1;
+const uint16_t BITMAP_DISABLED_ID = 1;
 const uint16_t BITMAP_DOWN_ARROW_ID = 2;
-const uint16_t BITMAP_UP_ARROW_ID = 3;
+const uint16_t BITMAP_ENABLED_ID = 3;
+const uint16_t BITMAP_NOTENABLED_ID = 4;
+const uint16_t BITMAP_PAUSE_ID = 5;
+const uint16_t BITMAP_PROGRESSINDICATORS_BG_ID = 6;
+const uint16_t BITMAP_START_ID = 7;
+const uint16_t BITMAP_STOP_ID = 8;
+const uint16_t BITMAP_STOPDIS_ID = 9;
+const uint16_t BITMAP_UP_ARROW_ID = 10;
 
 namespace BitmapDatabase
 {

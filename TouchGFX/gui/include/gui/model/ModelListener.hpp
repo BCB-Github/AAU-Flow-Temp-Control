@@ -19,16 +19,18 @@ public:
         model = m;
     }
 
-    virtual void setSVTemp(int newTempSV) {}
-	virtual void setSVFlow(int newFlowSV) {}
 	virtual void setPVTemp(float newTempPV) {}
 	virtual void setPVFlow(float newFlowPV) {}
 	virtual void setTotalFlow(float newTotalFlow) {}
+	virtual void setPVTempS2(float newTempPV) {}
+	virtual void setPVFlowS2(float newFlowPV) {}
+	virtual void setPressureS2(float newPressure) {}
+	virtual void setRpmS2(float newRpm) {}
 
 	virtual void runProgress() {}
 
-	virtual void addDatapointTemp(int newDP) {}
-	virtual void addDatapointFlow(int newDP) {}
+	virtual void addDatapointTemp(float newDP) {}
+	virtual void addDatapointFlow(float newDP) {}
 
 	virtual void setTestVal1(float newTestVal1) {}
 	virtual void setTestVal2(float newTestVal2) {}

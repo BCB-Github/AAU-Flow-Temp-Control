@@ -17,7 +17,7 @@
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 #include <touchgfx/containers/progress_indicators/CircleProgress.hpp>
-#include <touchgfx/widgets/canvas/PainterRGB565Bitmap.hpp>
+#include <touchgfx/widgets/canvas/Line.hpp>
 
 class Screen1ViewBase : public touchgfx::View<Screen1Presenter>
 {
@@ -49,6 +49,41 @@ public:
         // Override and implement this function in Screen1
     }
 
+    virtual void incrementVol()
+    {
+        // Override and implement this function in Screen1
+    }
+
+    virtual void decrementVol()
+    {
+        // Override and implement this function in Screen1
+    }
+
+    virtual void limitVol()
+    {
+        // Override and implement this function in Screen1
+    }
+
+    virtual void startPauseTempControl()
+    {
+        // Override and implement this function in Screen1
+    }
+
+    virtual void stopTempControl()
+    {
+        // Override and implement this function in Screen1
+    }
+
+    virtual void startPauseFlowControl()
+    {
+        // Override and implement this function in Screen1
+    }
+
+    virtual void stopFlowControl()
+    {
+        // Override and implement this function in Screen1
+    }
+
 protected:
     FrontendApplication& application() {
         return *static_cast<FrontendApplication*>(touchgfx::Application::getInstance());
@@ -62,6 +97,8 @@ protected:
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexUpTemp;
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexUpFlow;
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexDownFlow;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexDownVol;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexUpVol;
     touchgfx::Box background;
     touchgfx::ScalableImage upTempImg;
     touchgfx::ScalableImage downTempImg;
@@ -75,32 +112,59 @@ protected:
     touchgfx::GraphElementLine graphTempLine1;
     touchgfx::PainterRGB565 graphTempLine1Painter;
     touchgfx::GraphElementGridY graphTempMajorYAxisGrid;
+    touchgfx::GraphLabelsX graphTempMajorXAxisLabel;
     touchgfx::GraphLabelsY graphTempMajorYAxisLabel;
     touchgfx::TextArea labelTemp;
     touchgfx::TextArea labelFlow;
     touchgfx::TextAreaWithOneWildcard nowTemp;
     touchgfx::TextAreaWithOneWildcard nowFlow;
     touchgfx::TextAreaWithOneWildcard nowVol;
+    touchgfx::TextAreaWithOneWildcard SPVol;
     touchgfx::TextAreaWithOneWildcard SPTemp;
+    touchgfx::TextArea SPFlowUnit;
     touchgfx::TextAreaWithOneWildcard SPFlow;
-    touchgfx::TextArea textAreaSP;
+    touchgfx::TextArea tempSPTitle;
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexButton1;
     touchgfx::TextArea textArea1;
     touchgfx::CircleProgress circleProgress;
-    touchgfx::PainterRGB565Bitmap circleProgressPainter;
+    touchgfx::PainterRGB565 circleProgressPainter;
+    touchgfx::TextArea textArea2;
+    touchgfx::ScalableImage upVolImg;
+    touchgfx::ScalableImage downVolImg;
+    touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  startPauseTemp;
+    touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  startPauseFlow;
+    touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  stopTemp;
+    touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  stopFlow;
+    touchgfx::TextArea con1;
+    touchgfx::TextArea en1;
+    touchgfx::TextArea en3;
+    touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  toggleVol;
+    touchgfx::TextArea lim1;
+    touchgfx::TextArea en2;
+    touchgfx::TextArea con2;
+    touchgfx::TextArea textAreaSP_2;
+    touchgfx::TextArea flowSPTitle;
+    touchgfx::Line line1;
+    touchgfx::PainterRGB565 line1Painter;
+    touchgfx::CircleProgress circleProgress1;
+    touchgfx::PainterRGB565 circleProgress1Painter;
+    touchgfx::TextArea sysStatus;
+    touchgfx::TextAreaWithOneWildcard sysStateWildcard;
 
     /*
      * Wildcard Buffers
      */
     static const uint16_t NOWTEMP_SIZE = 5;
     touchgfx::Unicode::UnicodeChar nowTempBuffer[NOWTEMP_SIZE];
-    static const uint16_t NOWFLOW_SIZE = 4;
+    static const uint16_t NOWFLOW_SIZE = 5;
     touchgfx::Unicode::UnicodeChar nowFlowBuffer[NOWFLOW_SIZE];
     static const uint16_t NOWVOL_SIZE = 5;
     touchgfx::Unicode::UnicodeChar nowVolBuffer[NOWVOL_SIZE];
-    static const uint16_t SPTEMP_SIZE = 5;
+    static const uint16_t SPVOL_SIZE = 3;
+    touchgfx::Unicode::UnicodeChar SPVolBuffer[SPVOL_SIZE];
+    static const uint16_t SPTEMP_SIZE = 4;
     touchgfx::Unicode::UnicodeChar SPTempBuffer[SPTEMP_SIZE];
-    static const uint16_t SPFLOW_SIZE = 5;
+    static const uint16_t SPFLOW_SIZE = 6;
     touchgfx::Unicode::UnicodeChar SPFlowBuffer[SPFLOW_SIZE];
 
 private:

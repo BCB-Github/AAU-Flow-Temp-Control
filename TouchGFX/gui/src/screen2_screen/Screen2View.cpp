@@ -1,6 +1,10 @@
 #include <gui/screen2_screen/Screen2View.hpp>
 #include "string.h"
 
+/* Variable to store duty cycle percentage */
+int dutyPercent = 0;
+
+
 Screen2View::Screen2View()
 {
 
@@ -15,34 +19,43 @@ void Screen2View::tearDownScreen()
 {
     Screen2ViewBase::tearDownScreen();
 }
-void Screen2View::updateTempWildcard(float temp) {
-	//memset(&adcFrameRateTexAreaBuffer, 0, ADCFRAMERATETEXAREA_SIZE);
-	//Unicode::snprintfFloat(adcFrameRateTexAreaBuffer, ADCFRAMERATETEXAREA_SIZE, "%f", value);
 
- //   touchgfx::TextAreaWithOneWildcard textArea3;
-/*
-     static const uint16_t TEXTAREA2_SIZE = 6;
-   // touchgfx::Unicode::UnicodeChar textArea3Buffer[TEXTAREA3_SIZE];
-    memset(&textArea2Buffer, 0, TEXTAREA2_SIZE);
-	Unicode::snprintfFloat(textArea2Buffer, TEXTAREA2_SIZE, "%f", temp);
-    textArea2.setWildcard(textArea2Buffer);
-	textArea2.resizeToCurrentText();
-	textArea2.invalidate();
-	*/
-
+void Screen2View::updateTempPVS2(float newTempPV)
+{
+	Unicode::snprintfFloat(textArea5Buffer, TEXTAREA5_SIZE, "%.2f", newTempPV);
+	textArea5.resizeToCurrentText();
+	textArea5.invalidate();
+	box1.invalidate();
 }
 
+void Screen2View::updateFlowPVS2(float newFlowPV)
+{
+	Unicode::snprintfFloat(textArea3Buffer, TEXTAREA3_SIZE, "%.2f", newFlowPV);
+	textArea3.resizeToCurrentText();
+	textArea3.invalidate();
+	box1.invalidate();
+}
+
+void Screen2View::updatePressureS2(float newPressure)
+{
+	Unicode::snprintfFloat(textArea6Buffer, TEXTAREA6_SIZE, "%.2f", newPressure);
+	textArea6.resizeToCurrentText();
+	textArea6.invalidate();
+	box1.invalidate();
+}
+
+void Screen2View::updateRpmS2(float newRpm)
+{
+	Unicode::snprintfFloat(textArea7Buffer, TEXTAREA7_SIZE, "%.0f", newRpm);
+	textArea7.resizeToCurrentText();
+	textArea7.invalidate();
+	box1.invalidate();
+}
 
 void Screen2View::updateTestVal1(float newVal1)
 {
-	//Unicode::snprintfFloat(testVal1Buffer, TESTVAL1_SIZE, "%f", newVal1);
-	//testVal1.resizeToCurrentText();
-	//testVal1.invalidate();
-    //static const uint16_t TEXTAREA2_SIZE = 6;
-  // touchgfx::Unicode::UnicodeChar textArea3Buffer[TEXTAREA3_SIZE];
-    //memset(&testVal1Buffer, 0, TESTVAL1_SIZE);
+
 	Unicode::snprintfFloat(testVal1Buffer, TESTVAL1_SIZE, "%.2f", newVal1);
-	//testVal1.setWildcard(testVal1Buffer);
     testVal1.resizeToCurrentText();
 	testVal1.invalidate();
 	box1.invalidate();
@@ -67,12 +80,28 @@ void Screen2View::updateDutyCycle(int newDuty)
 
 void Screen2View::incrementDuty()
 {
-	presenter->askForDutyUp();
+	if (dutyPercent != 100)
+	{
+		dutyPercent += 5;
+		printDuty();
+	}
 }
 
 void Screen2View::decrementDuty()
 {
-	presenter->askForDutyDown();
+	if (dutyPercent != 0)
+	{
+		dutyPercent -= 5;
+		if (dutyPercent == 9 | 99)
+		{ box1.invalidate(); }
+		printDuty();
+	}
 }
 
+void Screen2View::printDuty()
+{
+	Unicode::snprintf(textArea2Buffer, TEXTAREA2_SIZE, "%d", dutyPercent);
+	textArea2.resizeToCurrentText();
+	textArea2.invalidate();
+}
 

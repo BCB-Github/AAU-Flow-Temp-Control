@@ -8,8 +8,8 @@
           {
             "Type": "FlexButton",
             "Name": "flexDownTemp",
-            "X": 248,
-            "Y": 222,
+            "X": 374,
+            "Y": 94,
             "Width": 50,
             "Height": 50,
             "ButtonTrigger": {
@@ -45,8 +45,8 @@
           {
             "Type": "FlexButton",
             "Name": "flexUpTemp",
-            "X": 248,
-            "Y": 150,
+            "X": 374,
+            "Y": 22,
             "Width": 50,
             "Height": 50,
             "ButtonTrigger": {
@@ -82,7 +82,7 @@
           {
             "Type": "FlexButton",
             "Name": "flexUpFlow",
-            "X": 345,
+            "X": 374,
             "Y": 150,
             "Width": 50,
             "Height": 50,
@@ -119,8 +119,82 @@
           {
             "Type": "FlexButton",
             "Name": "flexDownFlow",
-            "X": 345,
+            "X": 374,
             "Y": 222,
+            "Width": 50,
+            "Height": 50,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 50,
+                "Height": 50,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "flexDownVol",
+            "X": 162,
+            "Y": 222,
+            "Width": 50,
+            "Height": 50,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 50,
+                "Height": 50,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "flexUpVol",
+            "X": 162,
+            "Y": 150,
             "Width": 50,
             "Height": 50,
             "ButtonTrigger": {
@@ -167,8 +241,8 @@
           {
             "Type": "ScalableImage",
             "Name": "upTempImg",
-            "X": 248,
-            "Y": 150,
+            "X": 374,
+            "Y": 22,
             "Width": 50,
             "Height": 50,
             "Filename": "up-arrow.png",
@@ -177,8 +251,8 @@
           {
             "Type": "ScalableImage",
             "Name": "downTempImg",
-            "X": 248,
-            "Y": 222,
+            "X": 374,
+            "Y": 94,
             "Width": 50,
             "Height": 50,
             "Filename": "down-arrow.png",
@@ -187,7 +261,7 @@
           {
             "Type": "ScalableImage",
             "Name": "upFlowImg",
-            "X": 345,
+            "X": 374,
             "Y": 150,
             "Width": 50,
             "Height": 50,
@@ -197,7 +271,7 @@
           {
             "Type": "ScalableImage",
             "Name": "downFlowImg",
-            "X": 345,
+            "X": 374,
             "Y": 222,
             "Width": 50,
             "Height": 50,
@@ -207,12 +281,12 @@
           {
             "Type": "DynamicGraph",
             "Name": "graphFlow",
-            "Width": 480,
-            "Height": 136,
+            "Width": 360,
+            "Height": 120,
             "DataSeed": -2101000824,
             "NumberOfValues": 100,
-            "MaxY": 10.0,
-            "Precision": "0.001",
+            "MaxY": 4000.0,
+            "Precision": "1",
             "LastIndex": 99,
             "XAxisScale": 1.0,
             "LabelSizeTop": 5,
@@ -234,7 +308,7 @@
             ],
             "YAxisLabel": {
               "Type": "GraphLabel",
-              "Interval": 2.0,
+              "Interval": 800.0,
               "DecimalSeparator": "Point",
               "TextColor": {
                 "Red": 20,
@@ -249,8 +323,8 @@
           {
             "Type": "DynamicGraph",
             "Name": "graphTemp",
-            "Width": 480,
-            "Height": 136,
+            "Width": 360,
+            "Height": 120,
             "DataSeed": 1856252957,
             "NumberOfValues": 100,
             "MaxY": 100.0,
@@ -284,6 +358,19 @@
               "Interval": 20.0,
               "LineWidth": 1
             },
+            "XAxisLabel": {
+              "Type": "GraphLabel",
+              "Interval": 10.0,
+              "DecimalSeparator": "Point",
+              "TextColor": {
+                "Red": 20,
+                "Green": 151,
+                "Blue": 197
+              },
+              "TextId": "__SingleUse_PWED",
+              "TextRotation": "0",
+              "Position": "Bottom"
+            },
             "YAxisLabel": {
               "Type": "GraphLabel",
               "Interval": 20.0,
@@ -302,7 +389,7 @@
             "Type": "TextArea",
             "Name": "labelTemp",
             "X": 2,
-            "Y": 138,
+            "Y": 120,
             "Width": 22,
             "Height": 12,
             "TextId": "__SingleUse_ZBMR",
@@ -317,9 +404,9 @@
           {
             "Type": "TextArea",
             "Name": "labelFlow",
-            "X": 446,
-            "Y": 138,
-            "Width": 31,
+            "X": 317,
+            "Y": 120,
+            "Width": 42,
             "Height": 12,
             "TextId": "__SingleUse_RHSD",
             "TextRotation": "0",
@@ -333,8 +420,9 @@
           {
             "Type": "TextArea",
             "Name": "nowTemp",
-            "Y": 163,
-            "Width": 173,
+            "X": 5,
+            "Y": 166,
+            "Width": 110,
             "Height": 18,
             "TextId": "__SingleUse_VQ8W",
             "TextRotation": "0",
@@ -348,8 +436,9 @@
           {
             "Type": "TextArea",
             "Name": "nowFlow",
+            "X": 5,
             "Y": 189,
-            "Width": 171,
+            "Width": 110,
             "Height": 18,
             "TextId": "__SingleUse_81ZS",
             "TextRotation": "0",
@@ -357,15 +446,15 @@
             "Wildcard1": {
               "TextId": "__SingleUse_U8YI",
               "UseBuffer": true,
-              "BufferSize": 4
+              "BufferSize": 5
             }
           },
           {
             "Type": "TextArea",
             "Name": "nowVol",
-            "X": 2,
+            "X": 5,
             "Y": 213,
-            "Width": 152,
+            "Width": 111,
             "Height": 18,
             "TextId": "__SingleUse_XTYX",
             "TextRotation": "0",
@@ -378,42 +467,69 @@
           },
           {
             "Type": "TextArea",
-            "Name": "SPTemp",
-            "X": 244,
+            "Name": "SPVol",
+            "X": 168,
             "Y": 198,
-            "Width": 57,
-            "Height": 25,
+            "Width": 38,
+            "Height": 24,
+            "TextId": "__SingleUse_VX71",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_G3D0",
+              "UseBuffer": true,
+              "BufferSize": 3
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "SPTemp",
+            "X": 371,
+            "Y": 70,
+            "Width": 58,
+            "Height": 24,
             "TextId": "__SingleUse_RQNO",
             "TextRotation": "0",
             "AutoSize": true,
             "Wildcard1": {
               "TextId": "__SingleUse_MXIN",
               "UseBuffer": true,
-              "BufferSize": 5
+              "BufferSize": 4
             }
           },
           {
             "Type": "TextArea",
+            "Name": "SPFlowUnit",
+            "X": 375,
+            "Y": 213,
+            "Width": 49,
+            "Height": 18,
+            "TextId": "__SingleUse_TLTD",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
             "Name": "SPFlow",
-            "X": 338,
-            "Y": 195,
-            "Width": 64,
-            "Height": 25,
+            "X": 380,
+            "Y": 189,
+            "Width": 38,
+            "Height": 24,
             "TextId": "__SingleUse_U15I",
             "TextRotation": "0",
             "AutoSize": true,
             "Wildcard1": {
               "TextId": "__SingleUse_YF1J",
               "UseBuffer": true,
-              "BufferSize": 5
+              "BufferSize": 6
             }
           },
           {
             "Type": "TextArea",
-            "Name": "textAreaSP",
-            "X": 298,
-            "Y": 151,
-            "Width": 47,
+            "Name": "tempSPTitle",
+            "X": 361,
+            "Y": 10,
+            "Width": 73,
             "Height": 12,
             "TextId": "__SingleUse_19KW",
             "TextRotation": "0",
@@ -422,7 +538,7 @@
           {
             "Type": "FlexButton",
             "Name": "flexButton1",
-            "X": 24,
+            "X": 7,
             "Y": 239,
             "Width": 124,
             "Height": 27,
@@ -460,7 +576,7 @@
           {
             "Type": "TextArea",
             "Name": "textArea1",
-            "X": 35,
+            "X": 18,
             "Y": 243,
             "Width": 103,
             "Height": 18,
@@ -471,11 +587,387 @@
           {
             "Type": "CircleProgress",
             "Name": "circleProgress",
-            "X": 419,
-            "Y": 212,
+            "X": 284,
+            "Y": 186,
             "Width": 54,
             "Height": 54,
-            "FileNameProgress": "__designer\\Blue_ProgressIndicators_fill_small_circle_indicator_fill_full.png",
+            "Color": {
+              "Red": 34,
+              "Green": 177,
+              "Blue": 76
+            },
+            "CenterX": 27,
+            "CenterY": 27,
+            "Radius": 25,
+            "EndAngle": 360,
+            "CapPrecision": "Butt",
+            "FileNameBackground": "__designer\\Blue_ProgressIndicators_bg_small_circle_indicator_bg_full.png",
+            "ProgressRangeMax": 100
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2",
+            "X": 5,
+            "Y": 141,
+            "Width": 118,
+            "Height": 18,
+            "TextId": "__SingleUse_IABV",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "upVolImg",
+            "X": 162,
+            "Y": 150,
+            "Width": 50,
+            "Height": 50,
+            "Filename": "up-arrow.png",
+            "ScalingAlgorithm": "Nearest-neighbor"
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "downVolImg",
+            "X": 162,
+            "Y": 222,
+            "Width": 50,
+            "Height": 50,
+            "Filename": "down-arrow.png",
+            "ScalingAlgorithm": "Nearest-neighbor"
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "startPauseTemp",
+            "X": 443,
+            "Y": 42,
+            "Width": 30,
+            "Height": 30,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "ImageButtonStyle",
+                "X": 2,
+                "Y": 2,
+                "ImageReleased": "Start.png",
+                "ImagePressed": "Start.png"
+              },
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 30,
+                "Height": 30,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 2,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "startPauseFlow",
+            "X": 443,
+            "Y": 170,
+            "Width": 30,
+            "Height": 30,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "ImageButtonStyle",
+                "X": 2,
+                "Y": 2,
+                "ImageReleased": "Start.png",
+                "ImagePressed": "Start.png"
+              },
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 30,
+                "Height": 30,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 2,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "stopTemp",
+            "X": 443,
+            "Y": 89,
+            "Width": 30,
+            "Height": 30,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "ImageButtonStyle",
+                "X": 2,
+                "Y": 2,
+                "ImageReleased": "StopDis.png",
+                "ImagePressed": "StopDis.png"
+              },
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 30,
+                "Height": 30,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 2,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "stopFlow",
+            "X": 443,
+            "Y": 217,
+            "Width": 30,
+            "Height": 30,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "ImageButtonStyle",
+                "X": 2,
+                "Y": 2,
+                "ImageReleased": "StopDis.png",
+                "ImagePressed": "StopDis.png"
+              },
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 30,
+                "Height": 30,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 2,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "TextArea",
+            "Name": "con1",
+            "X": 441,
+            "Y": 22,
+            "Width": 34,
+            "Height": 12,
+            "TextId": "__SingleUse_E8MR",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "en1",
+            "X": 441,
+            "Y": 10,
+            "Width": 34,
+            "Height": 12,
+            "TextId": "__SingleUse_72AS",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "en3",
+            "X": 224,
+            "Y": 228,
+            "Width": 34,
+            "Height": 12,
+            "TextId": "__SingleUse_BZFF",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "toggleVol",
+            "X": 226,
+            "Y": 195,
+            "Width": 30,
+            "Height": 30,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "ImageButtonStyle",
+                "X": 2,
+                "Y": 2,
+                "ImageReleased": "disabled.png",
+                "ImagePressed": "disabled.png"
+              },
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 30,
+                "Height": 30,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 3,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "TextArea",
+            "Name": "lim1",
+            "X": 230,
+            "Y": 241,
+            "Width": 22,
+            "Height": 12,
+            "TextId": "__SingleUse_6YGY",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "en2",
+            "X": 441,
+            "Y": 141,
+            "Width": 34,
+            "Height": 12,
+            "TextId": "__SingleUse_DQZ7",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "con2",
+            "X": 441,
+            "Y": 154,
+            "Width": 34,
+            "Height": 12,
+            "TextId": "__SingleUse_LWY7",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textAreaSP_2",
+            "X": 148,
+            "Y": 136,
+            "Width": 78,
+            "Height": 12,
+            "TextId": "__SingleUse_6F1N",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "flowSPTitle",
+            "X": 363,
+            "Y": 141,
+            "Width": 68,
+            "Height": 12,
+            "TextId": "__SingleUse_2KT8",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "Line",
+            "Name": "line1",
+            "X": 359,
+            "Width": 15,
+            "Height": 272,
+            "Color": {
+              "Red": 133,
+              "Green": 130,
+              "Blue": 130
+            },
+            "StartX": 1,
+            "StartY": 1,
+            "EndX": 1,
+            "EndY": 271,
+            "LineWidth": 2,
+            "LineEndingStyle": "Round"
+          },
+          {
+            "Type": "CircleProgress",
+            "Name": "circleProgress1",
+            "X": 284,
+            "Y": 186,
+            "Width": 54,
+            "Height": 54,
             "Color": {
               "Red": 255,
               "Green": 255,
@@ -483,18 +975,43 @@
             },
             "CenterX": 27,
             "CenterY": 27,
-            "Radius": 25,
+            "Radius": 20,
+            "LineWidth": 10,
             "EndAngle": 360,
             "CapPrecision": "Butt",
-            "Style": "Style1",
-            "FileNameBackground": "__designer\\Blue_ProgressIndicators_bg_small_circle_indicator_bg_full.png",
+            "FileNameBackground": "ProgressIndicators_bg.png",
             "ProgressRangeMax": 100,
-            "ProgressInitialValue": 60
+            "ProgressInitialValue": 100
+          },
+          {
+            "Type": "TextArea",
+            "Name": "sysStatus",
+            "X": 274,
+            "Y": 177,
+            "Width": 74,
+            "Height": 12,
+            "TextId": "__SingleUse_SC1I",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "sysStateWildcard",
+            "X": 291,
+            "Y": 234,
+            "Width": 41,
+            "Height": 12,
+            "TextId": "__SingleUse_ICXT",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_AZSF"
+            }
           }
         ],
         "Interactions": [
           {
-            "InteractionName": "Interaction1",
+            "InteractionName": "clickTempUp",
             "Trigger": {
               "Type": "TriggerClicked",
               "TriggerComponent": "flexUpTemp"
@@ -505,7 +1022,7 @@
             }
           },
           {
-            "InteractionName": "Interaction2",
+            "InteractionName": "clickTempDown",
             "Trigger": {
               "Type": "TriggerClicked",
               "TriggerComponent": "flexDownTemp"
@@ -516,7 +1033,7 @@
             }
           },
           {
-            "InteractionName": "Interaction3",
+            "InteractionName": "clickFlowDown",
             "Trigger": {
               "Type": "TriggerClicked",
               "TriggerComponent": "flexDownFlow"
@@ -527,7 +1044,7 @@
             }
           },
           {
-            "InteractionName": "Interaction4",
+            "InteractionName": "clickFlowUp",
             "Trigger": {
               "Type": "TriggerClicked",
               "TriggerComponent": "flexUpFlow"
@@ -538,7 +1055,7 @@
             }
           },
           {
-            "InteractionName": "Interaction5",
+            "InteractionName": "toDebug",
             "Trigger": {
               "Type": "TriggerClicked",
               "TriggerComponent": "flexButton1"
@@ -548,6 +1065,83 @@
               "ScreenTransitionType": "ScreenTransitionSlide",
               "ScreenTransitionDirection": "East",
               "ActionComponent": "Screen2"
+            }
+          },
+          {
+            "InteractionName": "clickVolUp",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "flexUpVol"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "incrementVol"
+            }
+          },
+          {
+            "InteractionName": "clickVolDown",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "flexDownVol"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "decrementVol"
+            }
+          },
+          {
+            "InteractionName": "toggleVol",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "toggleVol"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "limitVol"
+            }
+          },
+          {
+            "InteractionName": "startPauseTemp",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "startPauseTemp"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "startPauseTempControl"
+            }
+          },
+          {
+            "InteractionName": "stopTemp",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "stopTemp"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "stopTempControl"
+            }
+          },
+          {
+            "InteractionName": "startPauseFlow",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "startPauseFlow"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "startPauseFlowControl"
+            }
+          },
+          {
+            "InteractionName": "stopFlow",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "stopFlow"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "stopFlowControl"
             }
           }
         ]
@@ -643,8 +1237,8 @@
           {
             "Type": "FlexButton",
             "Name": "flexButton1",
-            "X": 66,
-            "Y": 209,
+            "X": 343,
+            "Y": 9,
             "Width": 124,
             "Height": 27,
             "ButtonTrigger": {
@@ -681,8 +1275,8 @@
           {
             "Type": "TextArea",
             "Name": "textArea1",
-            "X": 80,
-            "Y": 213,
+            "X": 360,
+            "Y": 13,
             "Width": 90,
             "Height": 18,
             "TextId": "__SingleUse_OWHL",
@@ -692,10 +1286,10 @@
           {
             "Type": "TextArea",
             "Name": "testVal1",
-            "X": 112,
-            "Y": 73,
+            "X": 12,
+            "Y": 200,
             "Width": 177,
-            "Height": 25,
+            "Height": 24,
             "TextId": "__SingleUse_VFFK",
             "TextRotation": "0",
             "AutoSize": true,
@@ -708,10 +1302,10 @@
           {
             "Type": "TextArea",
             "Name": "testVal2",
-            "X": 112,
-            "Y": 112,
+            "X": 12,
+            "Y": 237,
             "Width": 177,
-            "Height": 25,
+            "Height": 24,
             "TextId": "__SingleUse_FPPC",
             "TextRotation": "0",
             "AutoSize": true,
@@ -746,8 +1340,8 @@
             "Name": "textArea2",
             "X": 289,
             "Y": 185,
-            "Width": 178,
-            "Height": 25,
+            "Width": 166,
+            "Height": 24,
             "TextId": "__SingleUse_6V2X",
             "TextRotation": "0",
             "AutoSize": true,
@@ -755,6 +1349,75 @@
               "TextId": "__SingleUse_LHPL",
               "UseBuffer": true,
               "BufferSize": 5
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea4",
+            "Width": 178,
+            "Height": 24,
+            "TextId": "__SingleUse_ICN1",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea3",
+            "Y": 24,
+            "Width": 172,
+            "Height": 24,
+            "TextId": "__SingleUse_ZP6C",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_CCVH",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea5",
+            "Y": 48,
+            "Width": 127,
+            "Height": 24,
+            "TextId": "__SingleUse_V666",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_GQBS",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea6",
+            "Y": 72,
+            "Width": 175,
+            "Height": 24,
+            "TextId": "__SingleUse_22DJ",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_OLGI",
+              "UseBuffer": true,
+              "BufferSize": 4
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea7",
+            "Y": 96,
+            "Width": 200,
+            "Height": 24,
+            "TextId": "__SingleUse_9ZJK",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_XXO3",
+              "UseBuffer": true,
+              "BufferSize": 6
             }
           }
         ],

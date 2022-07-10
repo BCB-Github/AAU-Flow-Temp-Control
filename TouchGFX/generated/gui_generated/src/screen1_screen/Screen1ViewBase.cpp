@@ -20,54 +20,66 @@ Screen1ViewBase::Screen1ViewBase() :
     flexDownTemp.setBoxWithBorderPosition(0, 0, 50, 50);
     flexDownTemp.setBorderSize(5);
     flexDownTemp.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    flexDownTemp.setPosition(248, 222, 50, 50);
+    flexDownTemp.setPosition(374, 94, 50, 50);
     flexDownTemp.setAction(flexButtonCallback);
 
     flexUpTemp.setBoxWithBorderPosition(0, 0, 50, 50);
     flexUpTemp.setBorderSize(5);
     flexUpTemp.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    flexUpTemp.setPosition(248, 150, 50, 50);
+    flexUpTemp.setPosition(374, 22, 50, 50);
     flexUpTemp.setAction(flexButtonCallback);
 
     flexUpFlow.setBoxWithBorderPosition(0, 0, 50, 50);
     flexUpFlow.setBorderSize(5);
     flexUpFlow.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    flexUpFlow.setPosition(345, 150, 50, 50);
+    flexUpFlow.setPosition(374, 150, 50, 50);
     flexUpFlow.setAction(flexButtonCallback);
 
     flexDownFlow.setBoxWithBorderPosition(0, 0, 50, 50);
     flexDownFlow.setBorderSize(5);
     flexDownFlow.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    flexDownFlow.setPosition(345, 222, 50, 50);
+    flexDownFlow.setPosition(374, 222, 50, 50);
     flexDownFlow.setAction(flexButtonCallback);
+
+    flexDownVol.setBoxWithBorderPosition(0, 0, 50, 50);
+    flexDownVol.setBorderSize(5);
+    flexDownVol.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    flexDownVol.setPosition(162, 222, 50, 50);
+    flexDownVol.setAction(flexButtonCallback);
+
+    flexUpVol.setBoxWithBorderPosition(0, 0, 50, 50);
+    flexUpVol.setBorderSize(5);
+    flexUpVol.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    flexUpVol.setPosition(162, 150, 50, 50);
+    flexUpVol.setAction(flexButtonCallback);
 
     background.setPosition(0, 0, 480, 272);
     background.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
 
     upTempImg.setBitmap(touchgfx::Bitmap(BITMAP_UP_ARROW_ID));
-    upTempImg.setPosition(248, 150, 50, 50);
+    upTempImg.setPosition(374, 22, 50, 50);
     upTempImg.setScalingAlgorithm(touchgfx::ScalableImage::NEAREST_NEIGHBOR);
 
     downTempImg.setBitmap(touchgfx::Bitmap(BITMAP_DOWN_ARROW_ID));
-    downTempImg.setPosition(248, 222, 50, 50);
+    downTempImg.setPosition(374, 94, 50, 50);
     downTempImg.setScalingAlgorithm(touchgfx::ScalableImage::NEAREST_NEIGHBOR);
 
     upFlowImg.setBitmap(touchgfx::Bitmap(BITMAP_UP_ARROW_ID));
-    upFlowImg.setPosition(345, 150, 50, 50);
+    upFlowImg.setPosition(374, 150, 50, 50);
     upFlowImg.setScalingAlgorithm(touchgfx::ScalableImage::NEAREST_NEIGHBOR);
 
     downFlowImg.setBitmap(touchgfx::Bitmap(BITMAP_DOWN_ARROW_ID));
-    downFlowImg.setPosition(345, 222, 50, 50);
+    downFlowImg.setPosition(374, 222, 50, 50);
     downFlowImg.setScalingAlgorithm(touchgfx::ScalableImage::NEAREST_NEIGHBOR);
 
-    graphFlow.setScale(1000);
-    graphFlow.setPosition(0, 0, 480, 136);
+    graphFlow.setScale(1);
+    graphFlow.setPosition(0, 0, 360, 120);
     graphFlow.setGraphAreaMargin(5, 25, 25, 5);
     graphFlow.setGraphAreaPadding(0, 0, 0, 0);
-    graphFlow.setGraphRangeY(0, 10);
+    graphFlow.setGraphRangeY(0, 4000);
 
-    graphFlowMajorYAxisLabel.setScale(1000);
-    graphFlowMajorYAxisLabel.setInterval(2);
+    graphFlowMajorYAxisLabel.setScale(1);
+    graphFlowMajorYAxisLabel.setInterval(800);
     graphFlowMajorYAxisLabel.setLabelTypedText(touchgfx::TypedText(T___SINGLEUSE_YKV5));
     graphFlowMajorYAxisLabel.setColor(touchgfx::Color::getColorFromRGB(20, 151, 197));
     graphFlow.addRightElement(graphFlowMajorYAxisLabel);
@@ -78,7 +90,7 @@ Screen1ViewBase::Screen1ViewBase() :
     graphFlow.addGraphElement(graphFlowLine1);
 
     graphTemp.setScale(10);
-    graphTemp.setPosition(0, 0, 480, 136);
+    graphTemp.setPosition(0, 0, 360, 120);
     graphTemp.setGraphAreaMargin(5, 25, 25, 5);
     graphTemp.setGraphAreaPadding(2, 0, 0, 0);
     graphTemp.setGraphRangeY(0, 100);
@@ -88,6 +100,12 @@ Screen1ViewBase::Screen1ViewBase() :
     graphTempMajorYAxisGrid.setInterval(20);
     graphTempMajorYAxisGrid.setLineWidth(1);
     graphTemp.addGraphElement(graphTempMajorYAxisGrid);
+
+    graphTempMajorXAxisLabel.setScale(10);
+    graphTempMajorXAxisLabel.setInterval(10);
+    graphTempMajorXAxisLabel.setLabelTypedText(touchgfx::TypedText(T___SINGLEUSE_PWED));
+    graphTempMajorXAxisLabel.setColor(touchgfx::Color::getColorFromRGB(20, 151, 197));
+    graphTemp.addBottomElement(graphTempMajorXAxisLabel);
 
     graphTempMajorYAxisLabel.setScale(10);
     graphTempMajorYAxisLabel.setInterval(20);
@@ -100,17 +118,17 @@ Screen1ViewBase::Screen1ViewBase() :
     graphTempLine1.setLineWidth(2);
     graphTemp.addGraphElement(graphTempLine1);
 
-    labelTemp.setXY(2, 138);
+    labelTemp.setXY(2, 120);
     labelTemp.setColor(touchgfx::Color::getColorFromRGB(196, 30, 22));
     labelTemp.setLinespacing(0);
     labelTemp.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ZBMR));
 
-    labelFlow.setXY(446, 138);
+    labelFlow.setXY(317, 120);
     labelFlow.setColor(touchgfx::Color::getColorFromRGB(20, 151, 197));
     labelFlow.setLinespacing(0);
     labelFlow.setTypedText(touchgfx::TypedText(T___SINGLEUSE_RHSD));
 
-    nowTemp.setXY(0, 163);
+    nowTemp.setXY(5, 166);
     nowTemp.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     nowTemp.setLinespacing(0);
     Unicode::snprintf(nowTempBuffer, NOWTEMP_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_XLJG).getText());
@@ -118,7 +136,7 @@ Screen1ViewBase::Screen1ViewBase() :
     nowTemp.resizeToCurrentText();
     nowTemp.setTypedText(touchgfx::TypedText(T___SINGLEUSE_VQ8W));
 
-    nowFlow.setXY(0, 189);
+    nowFlow.setXY(5, 189);
     nowFlow.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     nowFlow.setLinespacing(0);
     Unicode::snprintf(nowFlowBuffer, NOWFLOW_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_U8YI).getText());
@@ -126,7 +144,7 @@ Screen1ViewBase::Screen1ViewBase() :
     nowFlow.resizeToCurrentText();
     nowFlow.setTypedText(touchgfx::TypedText(T___SINGLEUSE_81ZS));
 
-    nowVol.setXY(2, 213);
+    nowVol.setXY(5, 213);
     nowVol.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     nowVol.setLinespacing(0);
     Unicode::snprintf(nowVolBuffer, NOWVOL_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_EMSI).getText());
@@ -134,7 +152,15 @@ Screen1ViewBase::Screen1ViewBase() :
     nowVol.resizeToCurrentText();
     nowVol.setTypedText(touchgfx::TypedText(T___SINGLEUSE_XTYX));
 
-    SPTemp.setXY(244, 198);
+    SPVol.setXY(168, 198);
+    SPVol.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    SPVol.setLinespacing(0);
+    Unicode::snprintf(SPVolBuffer, SPVOL_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_G3D0).getText());
+    SPVol.setWildcard(SPVolBuffer);
+    SPVol.resizeToCurrentText();
+    SPVol.setTypedText(touchgfx::TypedText(T___SINGLEUSE_VX71));
+
+    SPTemp.setXY(371, 70);
     SPTemp.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     SPTemp.setLinespacing(0);
     Unicode::snprintf(SPTempBuffer, SPTEMP_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_MXIN).getText());
@@ -142,7 +168,12 @@ Screen1ViewBase::Screen1ViewBase() :
     SPTemp.resizeToCurrentText();
     SPTemp.setTypedText(touchgfx::TypedText(T___SINGLEUSE_RQNO));
 
-    SPFlow.setXY(338, 195);
+    SPFlowUnit.setXY(375, 213);
+    SPFlowUnit.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    SPFlowUnit.setLinespacing(0);
+    SPFlowUnit.setTypedText(touchgfx::TypedText(T___SINGLEUSE_TLTD));
+
+    SPFlow.setXY(380, 189);
     SPFlow.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     SPFlow.setLinespacing(0);
     Unicode::snprintf(SPFlowBuffer, SPFLOW_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_YF1J).getText());
@@ -150,23 +181,23 @@ Screen1ViewBase::Screen1ViewBase() :
     SPFlow.resizeToCurrentText();
     SPFlow.setTypedText(touchgfx::TypedText(T___SINGLEUSE_U15I));
 
-    textAreaSP.setXY(298, 151);
-    textAreaSP.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    textAreaSP.setLinespacing(0);
-    textAreaSP.setTypedText(touchgfx::TypedText(T___SINGLEUSE_19KW));
+    tempSPTitle.setXY(361, 10);
+    tempSPTitle.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    tempSPTitle.setLinespacing(0);
+    tempSPTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_19KW));
 
     flexButton1.setBoxWithBorderPosition(0, 0, 124, 27);
     flexButton1.setBorderSize(5);
     flexButton1.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(1, 68, 135), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    flexButton1.setPosition(24, 239, 124, 27);
+    flexButton1.setPosition(7, 239, 124, 27);
     flexButton1.setAction(flexButtonCallback);
 
-    textArea1.setXY(35, 243);
+    textArea1.setXY(18, 243);
     textArea1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea1.setLinespacing(0);
     textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_1BLF));
 
-    circleProgress.setXY(419, 212);
+    circleProgress.setXY(284, 186);
     circleProgress.setProgressIndicatorPosition(0, 0, 54, 54);
     circleProgress.setRange(0, 100);
     circleProgress.setCenter(27, 27);
@@ -174,15 +205,143 @@ Screen1ViewBase::Screen1ViewBase() :
     circleProgress.setLineWidth(0);
     circleProgress.setStartEndAngle(0, 360);
     circleProgress.setBackground(touchgfx::Bitmap(BITMAP_BLUE_PROGRESSINDICATORS_BG_SMALL_CIRCLE_INDICATOR_BG_FULL_ID));
-    circleProgressPainter.setBitmap(touchgfx::Bitmap(BITMAP_BLUE_PROGRESSINDICATORS_FILL_SMALL_CIRCLE_INDICATOR_FILL_FULL_ID));
+    circleProgressPainter.setColor(touchgfx::Color::getColorFromRGB(34, 177, 76));
     circleProgress.setPainter(circleProgressPainter);
-    circleProgress.setValue(60);
+    circleProgress.setValue(0);
+
+    textArea2.setXY(5, 141);
+    textArea2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea2.setLinespacing(0);
+    textArea2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_IABV));
+
+    upVolImg.setBitmap(touchgfx::Bitmap(BITMAP_UP_ARROW_ID));
+    upVolImg.setPosition(162, 150, 50, 50);
+    upVolImg.setScalingAlgorithm(touchgfx::ScalableImage::NEAREST_NEIGHBOR);
+
+    downVolImg.setBitmap(touchgfx::Bitmap(BITMAP_DOWN_ARROW_ID));
+    downVolImg.setPosition(162, 222, 50, 50);
+    downVolImg.setScalingAlgorithm(touchgfx::ScalableImage::NEAREST_NEIGHBOR);
+
+    startPauseTemp.setBoxWithBorderPosition(0, 0, 30, 30);
+    startPauseTemp.setBorderSize(2);
+    startPauseTemp.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    startPauseTemp.setBitmaps(Bitmap(BITMAP_START_ID), Bitmap(BITMAP_START_ID));
+    startPauseTemp.setBitmapXY(2, 2);
+    startPauseTemp.setPosition(443, 42, 30, 30);
+    startPauseTemp.setAction(flexButtonCallback);
+
+    startPauseFlow.setBoxWithBorderPosition(0, 0, 30, 30);
+    startPauseFlow.setBorderSize(2);
+    startPauseFlow.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    startPauseFlow.setBitmaps(Bitmap(BITMAP_START_ID), Bitmap(BITMAP_START_ID));
+    startPauseFlow.setBitmapXY(2, 2);
+    startPauseFlow.setPosition(443, 170, 30, 30);
+    startPauseFlow.setAction(flexButtonCallback);
+
+    stopTemp.setBoxWithBorderPosition(0, 0, 30, 30);
+    stopTemp.setBorderSize(2);
+    stopTemp.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    stopTemp.setBitmaps(Bitmap(BITMAP_STOPDIS_ID), Bitmap(BITMAP_STOPDIS_ID));
+    stopTemp.setBitmapXY(2, 2);
+    stopTemp.setPosition(443, 89, 30, 30);
+    stopTemp.setAction(flexButtonCallback);
+
+    stopFlow.setBoxWithBorderPosition(0, 0, 30, 30);
+    stopFlow.setBorderSize(2);
+    stopFlow.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    stopFlow.setBitmaps(Bitmap(BITMAP_STOPDIS_ID), Bitmap(BITMAP_STOPDIS_ID));
+    stopFlow.setBitmapXY(2, 2);
+    stopFlow.setPosition(443, 217, 30, 30);
+    stopFlow.setAction(flexButtonCallback);
+
+    con1.setXY(441, 22);
+    con1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    con1.setLinespacing(0);
+    con1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_E8MR));
+
+    en1.setXY(441, 10);
+    en1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    en1.setLinespacing(0);
+    en1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_72AS));
+
+    en3.setXY(224, 228);
+    en3.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    en3.setLinespacing(0);
+    en3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_BZFF));
+
+    toggleVol.setBoxWithBorderPosition(0, 0, 30, 30);
+    toggleVol.setBorderSize(3);
+    toggleVol.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    toggleVol.setBitmaps(Bitmap(BITMAP_DISABLED_ID), Bitmap(BITMAP_DISABLED_ID));
+    toggleVol.setBitmapXY(2, 2);
+    toggleVol.setPosition(226, 195, 30, 30);
+    toggleVol.setAction(flexButtonCallback);
+
+    lim1.setXY(230, 241);
+    lim1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    lim1.setLinespacing(0);
+    lim1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6YGY));
+
+    en2.setXY(441, 141);
+    en2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    en2.setLinespacing(0);
+    en2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_DQZ7));
+
+    con2.setXY(441, 154);
+    con2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    con2.setLinespacing(0);
+    con2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_LWY7));
+
+    textAreaSP_2.setXY(148, 136);
+    textAreaSP_2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textAreaSP_2.setLinespacing(0);
+    textAreaSP_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6F1N));
+
+    flowSPTitle.setXY(363, 141);
+    flowSPTitle.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    flowSPTitle.setLinespacing(0);
+    flowSPTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_2KT8));
+
+    line1.setPosition(359, 0, 15, 272);
+    line1Painter.setColor(touchgfx::Color::getColorFromRGB(133, 130, 130));
+    line1.setPainter(line1Painter);
+    line1.setStart(1, 1);
+    line1.setEnd(1, 271);
+    line1.setLineWidth(2);
+    line1.setLineEndingStyle(touchgfx::Line::ROUND_CAP_ENDING);
+
+    circleProgress1.setXY(284, 186);
+    circleProgress1.setProgressIndicatorPosition(0, 0, 54, 54);
+    circleProgress1.setRange(0, 100);
+    circleProgress1.setCenter(27, 27);
+    circleProgress1.setRadius(20);
+    circleProgress1.setLineWidth(10);
+    circleProgress1.setStartEndAngle(0, 360);
+    circleProgress1.setCapPrecision(180);
+    circleProgress1.setBackground(touchgfx::Bitmap(BITMAP_PROGRESSINDICATORS_BG_ID));
+    circleProgress1Painter.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    circleProgress1.setPainter(circleProgress1Painter);
+    circleProgress1.setValue(100);
+
+    sysStatus.setXY(274, 177);
+    sysStatus.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    sysStatus.setLinespacing(0);
+    sysStatus.setTypedText(touchgfx::TypedText(T___SINGLEUSE_SC1I));
+
+    sysStateWildcard.setXY(291, 234);
+    sysStateWildcard.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    sysStateWildcard.setLinespacing(0);
+    sysStateWildcard.setWildcard(touchgfx::TypedText(T___SINGLEUSE_AZSF).getText());
+    sysStateWildcard.resizeToCurrentText();
+    sysStateWildcard.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ICXT));
 
     add(__background);
     add(flexDownTemp);
     add(flexUpTemp);
     add(flexUpFlow);
     add(flexDownFlow);
+    add(flexDownVol);
+    add(flexUpVol);
     add(background);
     add(upTempImg);
     add(downTempImg);
@@ -195,12 +354,34 @@ Screen1ViewBase::Screen1ViewBase() :
     add(nowTemp);
     add(nowFlow);
     add(nowVol);
+    add(SPVol);
     add(SPTemp);
+    add(SPFlowUnit);
     add(SPFlow);
-    add(textAreaSP);
+    add(tempSPTitle);
     add(flexButton1);
     add(textArea1);
     add(circleProgress);
+    add(textArea2);
+    add(upVolImg);
+    add(downVolImg);
+    add(startPauseTemp);
+    add(startPauseFlow);
+    add(stopTemp);
+    add(stopFlow);
+    add(con1);
+    add(en1);
+    add(en3);
+    add(toggleVol);
+    add(lim1);
+    add(en2);
+    add(con2);
+    add(textAreaSP_2);
+    add(flowSPTitle);
+    add(line1);
+    add(circleProgress1);
+    add(sysStatus);
+    add(sysStateWildcard);
 }
 
 void Screen1ViewBase::setupScreen()
@@ -212,37 +393,86 @@ void Screen1ViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonCo
 {
     if (&src == &flexDownTemp)
     {
-        //Interaction2
+        //clickTempDown
         //When flexDownTemp clicked call virtual function
         //Call decrementTemp
         decrementTemp();
     }
     else if (&src == &flexUpTemp)
     {
-        //Interaction1
+        //clickTempUp
         //When flexUpTemp clicked call virtual function
         //Call incrementTemp
         incrementTemp();
     }
     else if (&src == &flexUpFlow)
     {
-        //Interaction4
+        //clickFlowUp
         //When flexUpFlow clicked call virtual function
         //Call incrementFlow
         incrementFlow();
     }
     else if (&src == &flexDownFlow)
     {
-        //Interaction3
+        //clickFlowDown
         //When flexDownFlow clicked call virtual function
         //Call decrementFlow
         decrementFlow();
     }
+    else if (&src == &flexDownVol)
+    {
+        //clickVolDown
+        //When flexDownVol clicked call virtual function
+        //Call decrementVol
+        decrementVol();
+    }
+    else if (&src == &flexUpVol)
+    {
+        //clickVolUp
+        //When flexUpVol clicked call virtual function
+        //Call incrementVol
+        incrementVol();
+    }
     else if (&src == &flexButton1)
     {
-        //Interaction5
+        //toDebug
         //When flexButton1 clicked change screen to Screen2
         //Go to Screen2 with screen transition towards East
         application().gotoScreen2ScreenSlideTransitionEast();
+    }
+    else if (&src == &startPauseTemp)
+    {
+        //startPauseTemp
+        //When startPauseTemp clicked call virtual function
+        //Call startPauseTempControl
+        startPauseTempControl();
+    }
+    else if (&src == &startPauseFlow)
+    {
+        //startPauseFlow
+        //When startPauseFlow clicked call virtual function
+        //Call startPauseFlowControl
+        startPauseFlowControl();
+    }
+    else if (&src == &stopTemp)
+    {
+        //stopTemp
+        //When stopTemp clicked call virtual function
+        //Call stopTempControl
+        stopTempControl();
+    }
+    else if (&src == &stopFlow)
+    {
+        //stopFlow
+        //When stopFlow clicked call virtual function
+        //Call stopFlowControl
+        stopFlowControl();
+    }
+    else if (&src == &toggleVol)
+    {
+        //toggleVol
+        //When toggleVol clicked call virtual function
+        //Call limitVol
+        limitVol();
     }
 }

@@ -12,21 +12,31 @@ public:
     virtual void setupScreen();
     virtual void tearDownScreen();
 
-    void updateTempSV(int newVal);
-    void updateFlowSV(int newVal);
     void updateTempPV(float newVal);
     void updateFlowPV(float newVal);
     void updateTotalFlow(float newVal);
 
-    void updateGraphTemp(int DP);
-    void updateGraphFlow(int DP);
+    void updateGraphTemp(float DP);
+    void updateGraphFlow(float DP);
 
     void incrementTemp();
     void decrementTemp();
     void incrementFlow();
     void decrementFlow();
+    void incrementVol();
+    void decrementVol();
+
+    void startPauseTempControl();
+    void stopTempControl();
+    void startPauseFlowControl();
+    void stopFlowControl();
+    void limitVol();
 
     void running();
+
+    void printTempSV();
+    void printFlowSV();
+    void printVolSV();
 
 protected:
 };

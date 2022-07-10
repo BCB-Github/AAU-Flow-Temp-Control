@@ -679,14 +679,49 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__designer/image_Blue_ProgressIndicators_bg_small_circle_indicator_bg_full.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/image_Blue_ProgressIndicators_fill_small_circle_indicator_fill_full.cpp</name>
+			<name>Application/User/generated/image_Pause.cpp</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__designer/image_Blue_ProgressIndicators_fill_small_circle_indicator_fill_full.cpp</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_Pause.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_ProgressIndicators_bg.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_ProgressIndicators_bg.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_Start.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_Start.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_Stop.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_Stop.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_StopDis.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_StopDis.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_disabled.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_disabled.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/image_down-arrow.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_down-arrow.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_enabled.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_enabled.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_notEnabled.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_notEnabled.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/image_up-arrow.cpp</name>

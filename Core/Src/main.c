@@ -33,6 +33,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "i2cUserFunctionsHeader.h"
+#include "UserFunctionsJMK.h"
 #include "controlTask.h"
 #include "controlTask.hpp"
 #include "time.h"
@@ -139,8 +140,7 @@ static void MX_TIM1_Init(void);
 void StartDefaultTask(void *argument);
 extern void TouchGFX_Task(void *argument);
 extern void videoTaskFunc(void *argument);
-//extern void controlTaskFunc(void* argument);
-
+void controlTaskFunc(void *argument);
 
 /* USER CODE BEGIN PFP */
 float dummyVariable = 0;
@@ -151,7 +151,7 @@ int systemStatusSV = 0;
 extern ControlClass systemControl;
 //float flowSVvar;
 float tempSVVar;
-extern flowTotal;
+extern float flowTotal;
 extern float flowI2C;
 
 
@@ -809,6 +809,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(VSYNC_FREQ_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : PA15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_15;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
   /*Configure GPIO pin : LCD_BL_CTRL_Pin */
   GPIO_InitStruct.Pin = LCD_BL_CTRL_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -837,18 +843,29 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(MCU_ACTIVE_GPIO_Port, &GPIO_InitStruct);
 
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
 }
 
 /* USER CODE BEGIN 4 */
-extern xQueueHandle updateSVTempQ;
-extern xQueueHandle updateSVFlowQ;
+/* Measures the frequency from the motor RPM output */
+int counter = 0;
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	if(GPIO_Pin == GPIO_PIN_15) // INT Source is pin A15
+	{
+	counter = counter+1;
+	}
+}
+
 extern xQueueHandle updatePVTempQ;
 extern xQueueHandle updatePVFlowQ;
 extern xQueueHandle updateTotalFlowQ;
-extern xQueueHandle tempUpQ;
-extern xQueueHandle tempDownQ;
-extern xQueueHandle flowUpQ;
-extern xQueueHandle flowDownQ;
+extern xQueueHandle updatePressureQ;
+extern xQueueHandle updateRpmQ;
+
 
 extern xQueueHandle dataTempQ;
 extern xQueueHandle dataFlowQ;
@@ -857,16 +874,16 @@ extern xQueueHandle updateTest1Q;
 extern xQueueHandle updateTest2Q;
 
 
-extern xQueueHandle dutyUpQ;
-extern xQueueHandle dutyDownQ;
 extern xQueueHandle updateDutyQ;
 
+extern int limitVolState;
+extern int tempSV;
+int tvsprev=0;
 
 unsigned int var = 0;
-int tempSVvar = 25;
-int flowSVvar = 4;
+int tempSVvar = 20;
+int flowSVvar = 700;
 float dutyvar = 0.5;
-int dutyPercent = 50;
 
 /* These are the variables to store the samples */
 float tempPVvar = 0;
@@ -875,13 +892,19 @@ extern float  temp;
 extern uint16_t flow;
 
 /* Variables to produce sine waves on each graph */
-float increment1 = 0.01;
-float increment2 = 0.02;
+float increment1 = 0.05;
+float increment2 = 0.1;
 float input1 = 0;
 float input2 = 0;
 float result = 0;
 int output = 0;
+int trigger = 0;
 
+float t1 = 0;
+float dt1 = 0;
+int init_int = 0;
+float freqRPM = 0;
+float rpm = 0;
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartDefaultTask */
@@ -900,11 +923,21 @@ void StartDefaultTask(void *argument)
   for(;;)
   {
 	  I2CRead();
-	  /* Set the duty var to the duty cycle 0-1, the ccr value is then calculated */
-	  /* Code for updating one of the two test values on screen 2 */
-	  /* Code for producing sine waves to graphs */
 
-		unsigned int var = 0;
+	  xQueueSend(dataTempQ,&temp,0);
+	  xQueueSend(dataFlowQ,&flowI2C,0);
+	  xQueueSend(updatePVTempQ,&temp,0);
+	  xQueueSend(updatePVFlowQ,&flowI2C,0);
+
+	  if (init_int == 1)
+	  {
+	  dt1 = HAL_GetTick()-t1;
+	  freqRPM = counter*1000/dt1;
+	  counter = 0;
+	  rpm = freqRPM*10;
+	  xQueueSend(updateRpmQ, &rpm,0);
+	  } else { init_int = 1; }
+	  t1 = HAL_GetTick();
 
 		// update the setvalues
 	modelDataSV.flowSV = flowSVvar;
@@ -912,76 +945,69 @@ void StartDefaultTask(void *argument)
 	modelDataSV.volumeSV = 0;
 	modelDataSV.systemStatusSV = systemStatusSV;
 
-	  result = floor(sin(input1*2*PI)*50);
-	  output = (int)result + 50;
-	  xQueueSend(dataTempQ,&output,0);
-	  input1 = input1+increment1;
-
-	  result = floor(sin(input2*2*PI)*5);
-	  output = (int)result + 5;
-	  xQueueSend(dataFlowQ,&output,0);
-	  input2 = input2+increment2;
-	  xQueueSend(updateTest1Q, &temp, 0);
-	  xQueueSend(updateTest2Q, &flowI2C, 0);
 
 
-/* The following four if loops updates updates the the set values of
- * temperature and flow if the buttons have been pressed  */
-	  if (xQueueReceive(tempUpQ, &var, 0)==pdTRUE)
-	  	  {
-		  	  if (tempSVvar < 100)
-		  	  {
-		    	  tempSVvar = tempSVvar + 1;
-		  	  }
-		  	  xQueueSend(updateSVTempQ, &tempSVvar, 0);
-	  	  }
-	  if (xQueueReceive(tempDownQ, &var, 0)==pdTRUE)
-	  	  {
-		  	  if (tempSVvar > 0)
-		  	  {
-		  		  tempSVvar = tempSVvar - 1;
-		  	  }
-		  	  xQueueSend(updateSVTempQ, &tempSVvar, 0);
-	  	  }
-	  if (xQueueReceive(flowUpQ, &var, 0)==pdTRUE)
-	  	  {
-		  	  if (flowSVvar < 2000)
-		  	  {
-		  		  flowSVvar = flowSVvar + 100;
-		  	  }
-		  	  xQueueSend(updateSVFlowQ, &flowSVvar, 0);
-	  	  }
-	  if (xQueueReceive(flowDownQ, &var, 0)==pdTRUE)
-	  	  {
-		  	  if (flowSVvar > 0)
-		  	  {
-		  		  flowSVvar = flowSVvar - 100;
-		  	  }
-		  	  xQueueSend(updateSVFlowQ, &flowSVvar, 0);
-	  	  }
 
-	  if (xQueueReceive(dutyUpQ, &var, 0)==pdTRUE)
-	  	  {
-		  	  if (dutyvar < 1)
-		  	  {
-		  		dutyvar = dutyvar + 0.05;
-		  		dutyPercent = (int)(dutyvar*100);
-		  	  }
-		  	  xQueueSend(updateDutyQ, &dutyPercent, 0);
-	  	  }
-	  if (xQueueReceive(dutyDownQ, &var, 0)==pdTRUE)
-	  	  {
-		  	  if (dutyvar > 0)
-		  	  {
-		  		dutyvar = dutyvar - 0.05;
-		  		dutyPercent = (int)(dutyvar*100);
-		  	  }
-		  	  xQueueSend(updateDutyQ, &dutyPercent, 0);
-	  	  }
-
-    osDelay(10);
+	  float ccr = 0.5*65535;
+	  TIM1->CCR1=(int)ccr; // duty%=i/65535
+	  osDelay(50);
   }
   /* USER CODE END 5 */
+}
+
+/* USER CODE BEGIN Header_controlTaskFunc */
+/**
+* @brief Function implementing the controlTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_controlTaskFunc */
+void controlTaskFunc(void *argument)
+{
+  /* USER CODE BEGIN controlTaskFunc */
+  /* Infinite loop */
+  for(;;)
+  {
+
+		//float dummyPressure, dummyTemp, dummyVolume, dummyFlow, dummyRPM;
+
+		float dummyPressure = 0;
+
+		// Update Measurement Array
+		modelMeasPassData.newestMeasIndex++;
+		if (modelMeasPassData.newestMeasIndex > STORED_DATA_MEAS -1)
+		{
+			modelMeasPassData.newestMeasIndex = 0;
+		}
+		modelMeasPassData.flowMeas[modelMeasPassData.newestMeasIndex] =(float)flowI2C;
+		modelMeasPassData.tempMeas[modelMeasPassData.newestMeasIndex] =(float)temp;
+		modelMeasPassData.presMeas[modelMeasPassData.newestMeasIndex] =(float)dummyPressure;
+		modelMeasPassData.time[modelMeasPassData.newestMeasIndex] = HAL_GetTick();
+		flowTotal = modelMeasPassData.volumeMeas[modelMeasPassData.newestMeasIndex];
+
+		//PassDataMeas modelMeasPassData
+		//modelDataSV;
+		//float dummyPressure, dummyTemp, dummyVolume, dummyFlow, dummyRPM;
+		//int systemStatusSV = 1;
+
+
+		//float dummyPressureSV, dummyTempSV, dummyVolumeSV, dummyFlowSV;
+		//float dummytestTimeSV = 10000;
+
+		//float dummyfloat =(float)flow;
+
+
+
+		controlSystemUpdateSV(&systemControl, &modelDataSV); // update the setvalues
+
+
+		controlMeasurementUpdate(&systemControl, &modelMeasPassData); // Pass Measurement data to control class
+
+		controlSystemRun(&systemControl); // run control System from statusSV
+		controlSystemPassData(&systemControl);
+		osDelay(10);
+  }
+  /* USER CODE END controlTaskFunc */
 }
 
 /* MPU Configuration */
@@ -1053,54 +1079,6 @@ void Error_Handler(void)
 
   /* USER CODE END Error_Handler_Debug */
 }
-
-
-void controlTaskFunc(void* argument){
-	for(;;)
-	{
-		//float dummyPressure, dummyTemp, dummyVolume, dummyFlow, dummyRPM;
-
-		float dummyPressure = 0;
-
-		// Update Measurement Array
-		modelMeasPassData.newestMeasIndex++;
-		if (modelMeasPassData.newestMeasIndex > STORED_DATA_MEAS -1)
-		{
-			modelMeasPassData.newestMeasIndex = 0;
-		}
-		modelMeasPassData.flowMeas[modelMeasPassData.newestMeasIndex] =(float)flowI2C;
-		modelMeasPassData.tempMeas[modelMeasPassData.newestMeasIndex] =(float)temp;
-		modelMeasPassData.presMeas[modelMeasPassData.newestMeasIndex] =(float)dummyPressure;
-		modelMeasPassData.time[modelMeasPassData.newestMeasIndex] = HAL_GetTick();
-		flowTotal = modelMeasPassData.volumeMeas[modelMeasPassData.newestMeasIndex];
-
-		//PassDataMeas modelMeasPassData
-		//modelDataSV;
-		//float dummyPressure, dummyTemp, dummyVolume, dummyFlow, dummyRPM;
-		//int systemStatusSV = 1;
-
-
-		//float dummyPressureSV, dummyTempSV, dummyVolumeSV, dummyFlowSV;
-		//float dummytestTimeSV = 10000;
-
-		//float dummyfloat =(float)flow;
-
-
-
-		controlSystemUpdateSV(&systemControl, &modelDataSV); // update the setvalues
-
-
-		controlMeasurementUpdate(&systemControl, &modelMeasPassData); // Pass Measurement data to control class
-
-		controlSystemRun(&systemControl); // run control System from statusSV
-		controlSystemPassData(&systemControl);
-		osDelay(10);
-	}
-}
-
-
-
-
 
 #ifdef  USE_FULL_ASSERT
 /**
