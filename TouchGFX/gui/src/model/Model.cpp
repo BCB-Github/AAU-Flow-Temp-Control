@@ -77,11 +77,13 @@ void Model::tick()
 	{
 		modelListener->setPVTemp(tempPV);
 		modelListener->setPVTempS2(tempPV);
+		modelListener->addDatapointTemp(tempPV);
 	}
 	if (xQueueReceive(updatePVFlowQ, &flowPV, 0)==pdTRUE)
 	{
 		modelListener->setPVFlow(flowPV);
 		modelListener->setPVFlowS2(flowPV);
+		modelListener->addDatapointFlow(flowPV);
 	}
 	if (xQueueReceive(updateTotalFlowQ, &flowTotal, 0)==pdTRUE)
 	{
@@ -119,14 +121,14 @@ void Model::tick()
 			modelListener->setDutyCycle(duty);
 		}
 
-	while (xQueueReceive(dataTempQ, &tempDP, 0)==pdTRUE)
+	/*while (xQueueReceive(dataTempQ, &tempDP, 0)==pdTRUE)
 	{
 		modelListener->addDatapointTemp(tempDP);
 	}
 	while (xQueueReceive(dataFlowQ, &flowDP, 0)==pdTRUE)
 	{
 		modelListener->addDatapointFlow(flowDP);
-	}
+	}*/
 }
 
 

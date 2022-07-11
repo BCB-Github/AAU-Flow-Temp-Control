@@ -13,6 +13,7 @@ Screen2View::Screen2View()
 void Screen2View::setupScreen()
 {
     Screen2ViewBase::setupScreen();
+    printDuty();
 }
 
 void Screen2View::tearDownScreen()

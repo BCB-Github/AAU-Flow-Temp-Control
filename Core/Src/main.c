@@ -67,7 +67,6 @@
 #define SDRAM_MODEREG_OPERATING_MODE_STANDARD    ((uint16_t)0x0000)
 #define SDRAM_MODEREG_WRITEBURST_MODE_PROGRAMMED ((uint16_t)0x0000)
 #define SDRAM_MODEREG_WRITEBURST_MODE_SINGLE     ((uint16_t)0x0200)
-float flowRefSV = 100;
 
 /* USER CODE END PD */
 
@@ -121,6 +120,13 @@ const osThreadAttr_t controlTask_attributes = {
   .stack_size = 1025 * 4,
   .priority = (osPriority_t) osPriorityRealtime,
 };
+/* Definitions for samplingTask */
+osThreadId_t samplingTaskHandle;
+const osThreadAttr_t samplingTask_attributes = {
+  .name = "samplingTask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityAboveNormal,
+};
 /* USER CODE BEGIN PV */
 static FMC_SDRAM_CommandTypeDef Command;
 /* USER CODE END PV */
@@ -141,6 +147,7 @@ void StartDefaultTask(void *argument);
 extern void TouchGFX_Task(void *argument);
 extern void videoTaskFunc(void *argument);
 void controlTaskFunc(void *argument);
+void StartTaskSampling(void *argument);
 
 /* USER CODE BEGIN PFP */
 float dummyVariable = 0;
@@ -150,9 +157,13 @@ PassDataMeas modelMeasPassData;
 int systemStatusSV = 0;
 extern ControlClass systemControl;
 //float flowSVvar;
-float tempSVVar;
+
 extern float flowTotal;
 extern float flowI2C;
+extern float temp;
+float tempArray[10];
+float flowArray[10];
+float pressureArray[10];
 
 
 /* USER CODE END PFP */
@@ -245,6 +256,9 @@ int main(void)
 
   /* creation of controlTask */
   controlTaskHandle = osThreadNew(controlTaskFunc, NULL, &controlTask_attributes);
+
+  /* creation of samplingTask */
+  samplingTaskHandle = osThreadNew(StartTaskSampling, NULL, &samplingTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -866,39 +880,32 @@ extern xQueueHandle updateTotalFlowQ;
 extern xQueueHandle updatePressureQ;
 extern xQueueHandle updateRpmQ;
 
-
 extern xQueueHandle dataTempQ;
 extern xQueueHandle dataFlowQ;
 
 extern xQueueHandle updateTest1Q;
 extern xQueueHandle updateTest2Q;
 
-
 extern xQueueHandle updateDutyQ;
 
-extern int limitVolState;
+/* Access set values of the system */
 extern int tempSV;
-int tvsprev=0;
+extern int flowSV;
+extern int volSV;
 
-unsigned int var = 0;
-int tempSVvar = 20;
-int flowSVvar = 700;
+/* Access states of the system */
+extern int limitVolState;
+extern int tempStartState;
+extern int tempStopState;
+extern int flowStartState;
+extern int flowStopState;
+
 float dutyvar = 0.5;
 
 /* These are the variables to store the samples */
-float tempPVvar = 0;
-float flowPVvar = 0;
-extern float  temp;
-extern uint16_t flow;
-
-/* Variables to produce sine waves on each graph */
-float increment1 = 0.05;
-float increment2 = 0.1;
-float input1 = 0;
-float input2 = 0;
-float result = 0;
-int output = 0;
-int trigger = 0;
+float avgTemp = 0;
+float avgFlow = 0;
+float avgPressure = 0;
 
 float t1 = 0;
 float dt1 = 0;
@@ -918,17 +925,10 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
-	I2CInitialize();
+
 
   for(;;)
   {
-	  I2CRead();
-
-	  xQueueSend(dataTempQ,&temp,0);
-	  xQueueSend(dataFlowQ,&flowI2C,0);
-	  xQueueSend(updatePVTempQ,&temp,0);
-	  xQueueSend(updatePVFlowQ,&flowI2C,0);
-
 	  if (init_int == 1)
 	  {
 	  dt1 = HAL_GetTick()-t1;
@@ -939,11 +939,15 @@ void StartDefaultTask(void *argument)
 	  } else { init_int = 1; }
 	  t1 = HAL_GetTick();
 
+	  xQueueSend(updatePVTempQ, &avgTemp,0);
+	  xQueueSend(updatePVFlowQ, &avgFlow,0);
+	  xQueueSend(updatePressureQ, &avgPressure,0);
+
 		// update the setvalues
-	modelDataSV.flowSV = flowSVvar;
-	modelDataSV.tempSV = tempSVVar;
-	modelDataSV.volumeSV = 0;
-	modelDataSV.systemStatusSV = systemStatusSV;
+	  modelDataSV.flowSV = flowSV;
+	  modelDataSV.tempSV = tempSV;
+	  modelDataSV.volumeSV = volSV;
+	  modelDataSV.systemStatusSV = systemStatusSV;
 
 
 
@@ -966,22 +970,34 @@ void controlTaskFunc(void *argument)
 {
   /* USER CODE BEGIN controlTaskFunc */
   /* Infinite loop */
+
+
   for(;;)
   {
 
-		//float dummyPressure, dummyTemp, dummyVolume, dummyFlow, dummyRPM;
+	  float sumTemp = 0;
+	  float sumFlow = 0;
+	  float sumPressure = 0;
 
-		float dummyPressure = 0;
+	  for (int j = 0 ; j<10 ; j++)
+	  {
+		  sumTemp += tempArray[j];
+		  sumFlow += flowArray[j];
+		  sumPressure += pressureArray[j];
+	  }
+	  avgTemp = sumTemp/10;
+	  avgFlow = sumFlow/10;
+	  avgPressure = sumPressure/10;
 
-		// Update Measurement Array
+	  // Update Measurement Array
 		modelMeasPassData.newestMeasIndex++;
 		if (modelMeasPassData.newestMeasIndex > STORED_DATA_MEAS -1)
 		{
 			modelMeasPassData.newestMeasIndex = 0;
 		}
-		modelMeasPassData.flowMeas[modelMeasPassData.newestMeasIndex] =(float)flowI2C;
-		modelMeasPassData.tempMeas[modelMeasPassData.newestMeasIndex] =(float)temp;
-		modelMeasPassData.presMeas[modelMeasPassData.newestMeasIndex] =(float)dummyPressure;
+		modelMeasPassData.flowMeas[modelMeasPassData.newestMeasIndex] =avgFlow;
+		modelMeasPassData.tempMeas[modelMeasPassData.newestMeasIndex] =avgTemp;
+		modelMeasPassData.presMeas[modelMeasPassData.newestMeasIndex] =avgPressure;
 		modelMeasPassData.time[modelMeasPassData.newestMeasIndex] = HAL_GetTick();
 		flowTotal = modelMeasPassData.volumeMeas[modelMeasPassData.newestMeasIndex];
 
@@ -1008,6 +1024,35 @@ void controlTaskFunc(void *argument)
 		osDelay(10);
   }
   /* USER CODE END controlTaskFunc */
+}
+
+/* USER CODE BEGIN Header_StartTaskSampling */
+/**
+* @brief Function implementing the samplingTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartTaskSampling */
+void StartTaskSampling(void *argument)
+{
+  /* USER CODE BEGIN StartTaskSampling */
+  /* Infinite loop */
+	I2CInitialize();
+
+  for(;;)
+  {
+	  for (int count = 0;count<10;count++)
+	  {
+		  I2CRead();
+		  float pressure = 0;
+		  tempArray[count] = temp;
+		  flowArray[count] = flowI2C;
+		  pressureArray[count] = pressure;
+		  osDelay(1);
+	  }
+
+  }
+  /* USER CODE END StartTaskSampling */
 }
 
 /* MPU Configuration */

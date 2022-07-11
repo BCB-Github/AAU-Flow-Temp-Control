@@ -23,6 +23,9 @@ Screen1View::Screen1View()
 void Screen1View::setupScreen()
 {
     Screen1ViewBase::setupScreen();
+    printTempSV();
+    printFlowSV();
+    printVolSV();
 }
 
 void Screen1View::tearDownScreen()
@@ -70,8 +73,10 @@ void Screen1View::updateGraphFlow(float DP)
 
 void Screen1View::incrementTemp()
 {
-	tempSV++;
-	printTempSV();
+	if (tempSV != 100) {
+		tempSV++;
+		printTempSV();
+	}
 }
 
 void Screen1View::decrementTemp()
@@ -86,8 +91,10 @@ void Screen1View::decrementTemp()
 
 void Screen1View::incrementFlow()
 {
-	flowSV += 100;
-	printFlowSV();
+	if (flowSV != 10000) {
+		flowSV += 100;
+		printFlowSV();
+	}
 }
 
 void Screen1View::decrementFlow()
@@ -102,8 +109,10 @@ void Screen1View::decrementFlow()
 
 void Screen1View::incrementVol()
 {
-	volSV++;
-	printVolSV();
+	if (volSV !=100) {
+		volSV++;
+		printVolSV();
+	}
 }
 
 void Screen1View::decrementVol()
@@ -231,7 +240,6 @@ void Screen1View::printTempSV()
 		SPTemp.setXY(370, 70);
 	}
 	Unicode::snprintf(SPTempBuffer, SPTEMP_SIZE, "%d", tempSV);
-	SPTemp.setWildcard(SPTempBuffer);
 	SPTemp.resizeToCurrentText();
 	SPTemp.invalidate();
 }
