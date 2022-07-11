@@ -19,7 +19,7 @@
 
 
 
-ControlClass::ControlClass() : pressure(0), pressureSV(0), kp(0.01) , ki(.3){
+ControlClass::ControlClass() : pressure(0), pressureSV(0), kp_flow(0.001) , ki_flow(.003){
 
 }; // initialize sampleVar to 0
 
@@ -44,6 +44,7 @@ int  controlGetVar(ControlClass* ControlClass, char* varName){
 }
 
 void ControlClass::controlLoop(float controlMeas){
+	/*
 	static int maxVoltageCounter;
 	 static float controlMeasOld;
 	 float T = 0.01; // this might not be right
@@ -65,15 +66,71 @@ void ControlClass::controlLoop(float controlMeas){
 		 maxVoltageCounter = 0;
 	 }
 
-
-
 	 u_old = u;
 	 controlMeasOld = controlMeas;
 	 if (maxVoltageCounter > 100){
 		 // dvs nu har den kørt på max i et længer periode - send en fejl
 	 }
+	 */
+}
 
 
+void ControlClass::controlTemp(float controlMeas){
+	 static int maxVoltageCounter;
+		 static float controlMeasOld;
+		 float T = 0.01; // this might not be right
+
+		 u_temp = u_old_temp+ controlMeas * (kp_temp + ki_temp * T) - controlMeasOld * kp_temp;
+
+		 if (u_temp> 5)
+		 {
+			 u_temp= 5;
+			 maxVoltageCounter++;
+		 }
+		 else if( u_temp < 0)
+		 {
+			 maxVoltageCounter++;
+			 u_temp = 0;
+		 }
+		 else{
+
+			 maxVoltageCounter = 0;
+		 }
+
+		 u_old_temp = u_temp;
+		 controlMeasOld = controlMeas;
+		 if (maxVoltageCounter > 100){
+			 // dvs nu har den kørt på max i et længer periode - send en fejl
+		 }
+
+}
+void ControlClass::controlFlow(float controlMeas){
+	 static int maxVoltageCounter;
+		 static float controlMeasOld;
+		 float T = 0.01; // this might not be right
+
+		 u_flow = u_old_flow+ controlMeas * (kp_flow + ki_flow * T) - controlMeasOld * kp_flow;
+
+		 if (u_flow > 5)
+		 {
+			 u_flow= 5;
+			 maxVoltageCounter++;
+		 }
+		 else if( u_flow < 0)
+		 {
+			 maxVoltageCounter++;
+			 u_flow = 0;
+		 }
+		 else{
+
+			 maxVoltageCounter = 0;
+		 }
+
+		 u_old_flow = u_flow;
+		 controlMeasOld = controlMeas;
+		 if (maxVoltageCounter > 100){
+			 // dvs nu har den kørt på max i et længer periode - send en fejl
+		 }
 }
 
 
@@ -173,18 +230,19 @@ void ControlClass::systemRun(){
 	case 2: // control running high
 		testTime = time - timeStart - timeStop ;
 		// Idea here is that we run our control
-		controlLoop(flowSV - flow);
-		if (u > 5)
+		controlFlow(flowSV - flow);
+		if (u_flow > 5)
 		{
-			u = 5;
+			u_flow = 5;
 		}
-		if (u < 0)
+		if (u_flow < 0)
 		{
-			u =0;
+			u_flow =0;
 		}
 		volume+= flow*0.01; // - add the volume that had occoured during the loop
 
-		dutyVoltage= u/5;
+		dutyVoltage= u_flow/5;
+
 
 		// set output To flow
 		ccr1 = dutyVoltage*65535;
@@ -215,8 +273,8 @@ void ControlClass::systemRun(){
 		break;
 	case 5: //testCompleted
 		// Return to Standby
-		u = 0;
-		u_old = 0;
+		u_flow = 0;
+		u_old_flow = 0;
 
 		volume = 0;
 		systemStatus = 0;
@@ -264,15 +322,7 @@ void controlSystemPassData(ControlClass*){
 
 
 
-/*
-extern "C" {float controlTaskFuncH(void){
-	int sampleInt = 50;
-	//return call_Control_int();
-	//return sampleInt;
-	return 5;
-}
-}
-*/
+
 
 ControlClass systemControl;
 

@@ -43,10 +43,15 @@ private:
 	int testTimeSV;
 	int testTime;
 
-	float kp;
-	float ki;
-	float u;
-	float u_old;
+	float kp_flow;
+	float ki_flow;
+	float u_flow;
+	float u_old_flow;
+
+	float kp_temp;
+	float ki_temp;
+	float u_temp;
+	float u_old_temp;
 
 
 public:
@@ -57,6 +62,8 @@ public:
 	void systemUpdateSV(PassDataSVHandle passDataSVHandle);
 	//void controlSystemUpdateSV(ControlClass* ControlClass, float newTempSV, float newFlowSV, float newPressureSV, int newTimeSV){
 	void controlLoop(float controlMeas);
+	void controlTemp(float controlMeas);
+	void controlFlow(float controlMeas);
 	void systemRun();
 } ControlClass;
 

@@ -20,7 +20,6 @@
 extern TIM_HandleTypeDef htim1;
 extern osSemaphoreId_t myBinarySem01Handle;
 
-uint16_t uhADCxConvertedValue[10] = {0};
 
 unsigned int tvar;
 float tresult, increase;
