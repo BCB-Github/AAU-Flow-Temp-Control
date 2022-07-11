@@ -58,7 +58,7 @@
         <Translation Language="GB">Pressure: &lt;value&gt; bar</Translation>
       </Text>
       <Text Id="__SingleUse_GQBS" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">20</Translation>
+        <Translation Language="GB">20.1</Translation>
       </Text>
       <Text Id="__SingleUse_V666" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">Temp: &lt;value&gt; C°</Translation>

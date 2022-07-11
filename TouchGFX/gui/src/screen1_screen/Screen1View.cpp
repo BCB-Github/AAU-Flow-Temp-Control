@@ -26,6 +26,39 @@ void Screen1View::setupScreen()
     printTempSV();
     printFlowSV();
     printVolSV();
+
+    if (tempStartState == 1)
+    	{
+    		startPauseTemp.setBitmaps(Bitmap(BITMAP_PAUSE_ID), Bitmap(BITMAP_PAUSE_ID));
+    		startPauseTemp.setPosition(443, 42, 30, 30);
+    		startPauseTemp.invalidate();
+    	}
+    if (tempStopState == 1)
+        {
+    	    stopTemp.setBitmaps(Bitmap(BITMAP_STOP_ID), Bitmap(BITMAP_STOP_ID));
+    	    stopTemp.setPosition(443, 89, 30, 30);
+    	    stopTemp.invalidate();
+    	}
+    if (flowStartState == 1)
+    	{
+    		startPauseFlow.setBitmaps(Bitmap(BITMAP_PAUSE_ID), Bitmap(BITMAP_PAUSE_ID));
+    		startPauseFlow.setPosition(443, 170, 30, 30);
+    		startPauseFlow.invalidate();
+    	}
+    if (flowStopState == 1)
+    	{
+    	    stopFlow.setBitmaps(Bitmap(BITMAP_STOP_ID), Bitmap(BITMAP_STOP_ID));
+    	    stopFlow.setPosition(443, 217, 30, 30);
+    	    stopFlow.invalidate();
+    	    flowStopState = 1;
+    	}
+    if (limitVolState == 1)
+    {
+	    toggleVol.setBitmaps(Bitmap(BITMAP_ENABLED_ID), Bitmap(BITMAP_ENABLED_ID));
+	    toggleVol.setPosition(226, 195, 30, 30);
+		toggleVol.invalidate();
+    }
+
 }
 
 void Screen1View::tearDownScreen()
@@ -157,6 +190,7 @@ void Screen1View::stopTempControl()
 	    stopTemp.setBitmaps(Bitmap(BITMAP_STOPDIS_ID), Bitmap(BITMAP_STOPDIS_ID));
 	    stopTemp.setPosition(443, 89, 30, 30);
 	    stopTemp.invalidate();
+	    tempStopState = 0;
 	}
 }
 
@@ -192,6 +226,7 @@ void Screen1View::stopFlowControl()
 		stopFlow.setBitmaps(Bitmap(BITMAP_STOPDIS_ID), Bitmap(BITMAP_STOPDIS_ID));
 		stopFlow.setPosition(443, 217, 30, 30);
 		stopFlow.invalidate();
+		flowStopState = 0;
 	}
 }
 

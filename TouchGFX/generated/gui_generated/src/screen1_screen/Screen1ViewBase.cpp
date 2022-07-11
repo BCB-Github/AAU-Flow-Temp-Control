@@ -437,8 +437,8 @@ void Screen1ViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonCo
     {
         //toDebug
         //When flexButton1 clicked change screen to Screen2
-        //Go to Screen2 with screen transition towards East
-        application().gotoScreen2ScreenSlideTransitionEast();
+        //Go to Screen2 with no screen transition
+        application().gotoScreen2ScreenNoTransition();
     }
     else if (&src == &startPauseTemp)
     {
