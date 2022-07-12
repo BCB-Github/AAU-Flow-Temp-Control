@@ -17,7 +17,7 @@
 extern "C" {
 
 // Give the class the structs defined in userStructs.h
-typedef struct PassDataMeas* PassDataMeas_Handle;
+typedef struct PassDataMeas* PassDataMeasHandle;
 typedef struct PassDataSV* PassDataSVHandle;
 
 
@@ -35,28 +35,35 @@ private:
 	float volumeSV;
 	float motorRPM;
 	float time;
-	int systemStatusSV;
-	int systemStatus;
+	int systemFlowStatusSV;
+	int systemTempStatusSV;
+	int systemFlowStatus;
+	int systemTempStatus;
 
 	int timeStart;
 	int timeStop;
 	int testTimeSV;
 	int testTime;
 
-	float kp;
-	float ki;
-	float u;
-	float u_old;
+	float kp_flow;
+	float ki_flow;
+	float u_flow;
+	float u_old_flow;
+
+	float kp_temp;
+	float ki_temp;
+	float u_temp;
+	float u_old_temp;
 
 
 public:
 	ControlClass(); // constructor
 	int getVar(char* varName);
 	void changeVar(int changeVariable);
-	void measurementUpdate(PassDataMeas_Handle passDataMeas);
+	void measurementUpdate(PassDataMeasHandle passDataMeas);
 	void systemUpdateSV(PassDataSVHandle passDataSVHandle);
-	//void controlSystemUpdateSV(ControlClass* ControlClass, float newTempSV, float newFlowSV, float newPressureSV, int newTimeSV){
-	void controlLoop(float controlMeas);
+	void controlTemp(float controlMeas);
+	void controlFlow(float controlMeas);
 	void systemRun();
 } ControlClass;
 
@@ -66,7 +73,7 @@ public:
 ///
 extern ControlClass* controlVarUpdate(ControlClass*, int changeVar);
 extern int controlGetVar(ControlClass*, char* varName);
-extern void controlMeasurementUpdate(ControlClass*, PassDataMeas_Handle modelMeasPassData);
+extern void controlMeasurementUpdate(ControlClass*, PassDataMeasHandle modelMeasPassData);
 extern void controlSystemRun(ControlClass*);
 extern void controlSystemPassData(ControlClass*);
 //extern void controlSystemUpdateSV(ControlClass* ControlClass, float newTempSV, float newFlowSV, float newPressureSV, int newTimeSV, float newVolumeSV);
