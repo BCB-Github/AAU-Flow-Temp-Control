@@ -13,7 +13,8 @@ typedef struct PassDataSV {
 	float flowSV;
 	float tempSV;
 	float volumeSV;
-	int systemStatusSV;
+	int systemFlowStatusSV;
+	int systemTempStatusSV;
 
 }PassDataSV;
 

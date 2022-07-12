@@ -35,8 +35,10 @@ private:
 	float volumeSV;
 	float motorRPM;
 	float time;
-	int systemStatusSV;
-	int systemStatus;
+	int systemFlowStatusSV;
+	int systemTempStatusSV;
+	int systemFlowStatus;
+	int systemTempStatus;
 
 	int timeStart;
 	int timeStop;
@@ -60,8 +62,6 @@ public:
 	void changeVar(int changeVariable);
 	void measurementUpdate(PassDataMeasHandle passDataMeas);
 	void systemUpdateSV(PassDataSVHandle passDataSVHandle);
-	//void controlSystemUpdateSV(ControlClass* ControlClass, float newTempSV, float newFlowSV, float newPressureSV, int newTimeSV){
-	void controlLoop(float controlMeas);
 	void controlTemp(float controlMeas);
 	void controlFlow(float controlMeas);
 	void systemRun();

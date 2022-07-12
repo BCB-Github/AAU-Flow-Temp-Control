@@ -13,9 +13,6 @@
 #include "userStructs.h" // include the ability to pass measurements
 
 
-//float temp;
-//uint16_t flow;
-
 
 
 
@@ -42,38 +39,6 @@ ControlClass* controlVarUpdate(ControlClass* ControlClass, int newVar){
 int  controlGetVar(ControlClass* ControlClass, char* varName){
 	return ControlClass->getVar(varName);
 }
-
-void ControlClass::controlLoop(float controlMeas){
-	/*
-	static int maxVoltageCounter;
-	 static float controlMeasOld;
-	 float T = 0.01; // this might not be right
-
-	 u = u_old+ controlMeas * (kp + ki * T) - controlMeasOld * kp;
-
-	 if (u > 5)
-	 {
-		 u= 5;
-		 maxVoltageCounter++;
-	 }
-	 else if( u < 0)
-	 {
-		 maxVoltageCounter++;
-		 u = 0;
-	 }
-	 else{
-
-		 maxVoltageCounter = 0;
-	 }
-
-	 u_old = u;
-	 controlMeasOld = controlMeas;
-	 if (maxVoltageCounter > 100){
-		 // dvs nu har den kørt på max i et længer periode - send en fejl
-	 }
-	 */
-}
-
 
 void ControlClass::controlTemp(float controlMeas){
 	 static int maxVoltageCounter;
@@ -104,6 +69,7 @@ void ControlClass::controlTemp(float controlMeas){
 		 }
 
 }
+
 void ControlClass::controlFlow(float controlMeas){
 	 static int maxVoltageCounter;
 		 static float controlMeasOld;
@@ -163,33 +129,36 @@ void controlMeasurementUpdate(ControlClass* ControlClass, PassDataMeas_Handle pa
 
 void ControlClass::systemRun(){
 
-	float dutyVoltage;
+	float dutyVoltageFlow;
+	float dutyVoltageTemp;
 	// set output To flow
 	float ccr1;
+	// set output to Temp
+	float ccr2;
 
 	// The idea is we want to make a buffer between the reference set point and the system status
 	// Then we can make sure that the ramp up and down work as intended
-	if (systemStatusSV == 0){
+	if (systemFlowStatusSV == 0){
 		// i.e system is set to not run
-		switch (systemStatus){
+		switch (systemFlowStatus){
 		case 1:
-			systemStatus = 0;
+			systemFlowStatus = 0;
 			break;
 		case 2 : // The system is currently running
-			systemStatus = 3; // Set the control to ramp down to zero
+			systemFlowStatus = 3; // Set the control to ramp down to zero
 			break;
 		case 3:
 			if (motorRPM < 10) {
-		systemStatus = 4;
+			systemFlowStatus = 4;
 			}
 			break;
 		case 4:
 			if (motorRPM == 0){
-				systemStatus = 5;
+			systemFlowStatus = 5;
 			}
 			break;
 		case 5: // Test Completed - return to standby
-			systemStatus = 0;
+			systemFlowStatus = 0;
 			break;
 		default :
 			// if the system status is at zero, do nothing
@@ -198,23 +167,28 @@ void ControlClass::systemRun(){
 		}
 	}
 
-	if(systemStatusSV == 1) // 1 means gooOOOO
+	if(systemFlowStatusSV == 1) // 1 means gooOOOO
 	{
-		if (systemStatus == 0)
+		if (systemFlowStatus == 0)
 		{
-			systemStatus = 1;
+			systemFlowStatus = 1;
 		}
 	}
 
-	else if(systemStatus ==5){
+	if (systemFlowStatusSV == 2)
+	{
+		systemFlowStatus = 4;
+	}
 
-		systemStatusSV = 0; // Test completed - do not run anymore
+	else if(systemFlowStatus ==5){
+
+		systemFlowStatusSV = 0; // Test completed - do not run anymore
 	}
 
 
 
 	// This will be the operation of the control system
-	switch (systemStatus) {
+	switch (systemFlowStatus) {
 	default: // system Standby
 		break;
 	case 1: // initialize
@@ -223,7 +197,7 @@ void ControlClass::systemRun(){
 		timeStop = 0;
 		timeStart = time;
 		testTime = 0;
-		systemStatus = 2;
+		systemFlowStatus = 2;
 		volume = 0;
 		break;
 
@@ -241,12 +215,12 @@ void ControlClass::systemRun(){
 		}
 		volume+= flow*0.01; // - add the volume that had occoured during the loop
 
-		dutyVoltage= u_flow/5;
+		dutyVoltageFlow= u_flow/5;
 
 
 		// set output To flow
-		ccr1 = dutyVoltage*65535;
-		TIM1->CCR1=(int)ccr1; // duty%=i/65535
+		ccr1 = dutyVoltageFlow*32767;
+		TIM12->CCR1=(int)ccr1; // duty%=i/65535
 
 
 		if (volume >= volumeSV){
@@ -258,12 +232,12 @@ void ControlClass::systemRun(){
 		break;
 
 	case 3: // Control Ramp down
-		controlLoop(0); // Control the system to zero
+		controlFlow(0); // Control the system to zero
 	//	if (timeStart >= testTimeSV){ // The test time has been achieved
 			if (flow < 10) // The motor has stopped
 			{
 				// disable pwm output
-				systemStatus = 5; // The test has been completed
+				systemFlowStatus = 5; // The test has been completed
 			}
 
 		break;
@@ -277,8 +251,93 @@ void ControlClass::systemRun(){
 		u_old_flow = 0;
 
 		volume = 0;
-		systemStatus = 0;
+		systemFlowStatus = 0;
 		break;
+	}
+
+
+	/* Temperature control */
+
+	// The idea is we want to make a buffer between the reference set point and the system status
+	// Then we can make sure that the ramp up and down work as intended
+	if (systemTempStatusSV == 0){
+		// i.e system is set to not run
+		switch (systemTempStatus){
+		case 1:
+			systemTempStatus = 0;
+			break;
+		case 2 : // The system is currently running
+			systemTempStatus = 0; // Set the control to ramp down to zero
+			break;
+		case 3:
+
+			systemTempStatus = 0;
+
+			break;
+
+		default :
+			// if the system status is at zero, do nothing
+			break;
+
+		}
+	}
+
+	if(systemTempStatusSV == 1) // 1 means gooOOOO
+	{
+		if (systemTempStatus == 0)
+		{
+			systemTempStatus = 1;
+		}
+	}
+
+	if (systemTempStatusSV == 2)
+	{
+		systemTempStatus = 3;
+	}
+
+	else if(systemTempStatus ==4){
+
+		systemTempStatusSV = 0; // Test completed - do not run anymore
+	}
+
+
+
+	// This will be the operation of the control system
+	switch (systemTempStatus) {
+	default: // system Standby
+		break;
+	case 1: // initialize
+
+		// update setValues
+		systemTempStatus = 2;
+
+		break;
+
+	case 2: // control running high
+		// Idea here is that we run our control
+		controlTemp(tempSV - temp);
+		if (u_temp > 5)
+		{
+			u_temp = 5;
+		}
+		if (u_temp < 0)
+		{
+			u_temp =0;
+		}
+
+
+		dutyVoltageTemp= u_temp/5;
+
+		// set output To temp
+		ccr2 = dutyVoltageTemp*32767;
+		TIM5->CCR4=(int)ccr2;
+
+		break;
+
+	case 3: // system paused
+
+		break;
+
 	}
 }
 
@@ -303,7 +362,8 @@ void ControlClass::systemUpdateSV(PassDataSVHandle passDataSVHandle){
 	flowSV = passDataSVHandle->flowSV;
 	tempSV = passDataSVHandle->tempSV;
 	volumeSV = passDataSVHandle->volumeSV;
-	systemStatusSV = passDataSVHandle->systemStatusSV;
+	systemFlowStatusSV = passDataSVHandle->systemFlowStatusSV;
+	systemTempStatusSV = passDataSVHandle->systemTempStatusSV;
 
 
 }
