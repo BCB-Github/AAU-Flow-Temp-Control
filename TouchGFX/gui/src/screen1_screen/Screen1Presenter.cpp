@@ -48,3 +48,8 @@ void Screen1Presenter::runProgress()
 {
 	view.running();
 }
+
+void Screen1Presenter::resetFlowControl()
+{
+	view.resetFlowIcons();
+}

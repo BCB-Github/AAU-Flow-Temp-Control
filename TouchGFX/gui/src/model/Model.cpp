@@ -15,7 +15,7 @@ float tempDP = 0;
 float flowDP = 0;
 float tempPV = 0;
 float flowPV = 0;
-float flowTotal = 0;
+float flowTot = 0;
 float pressurePV = 0;
 float rpmPV = 0;
 
@@ -71,7 +71,7 @@ Model::Model() : modelListener(0)
 
 void Model::tick()
 {
-	//Model::updateTempWildcard();
+
 	/* The following five if statements check whether new Present Values have been sent to the queues */
 	if (xQueueReceive(updatePVTempQ, &tempPV, 0)==pdTRUE)
 	{
@@ -85,9 +85,9 @@ void Model::tick()
 		modelListener->setPVFlowS2(flowPV);
 		modelListener->addDatapointFlow(flowPV);
 	}
-	if (xQueueReceive(updateTotalFlowQ, &flowTotal, 0)==pdTRUE)
+	if (xQueueReceive(updateTotalFlowQ, &flowTot, 0)==pdTRUE)
 	{
-		modelListener->setTotalFlow(flowPV);
+		modelListener->setTotalFlow(flowTot);
 	}
 	if (xQueueReceive(updatePressureQ, &pressurePV, 0)==pdTRUE)
 	{
@@ -121,14 +121,9 @@ void Model::tick()
 			modelListener->setDutyCycle(duty);
 		}
 
-	/*while (xQueueReceive(dataTempQ, &tempDP, 0)==pdTRUE)
-	{
-		modelListener->addDatapointTemp(tempDP);
+	if (flowStartState == 2) {
+		modelListener->resetFlowControl();
 	}
-	while (xQueueReceive(dataFlowQ, &flowDP, 0)==pdTRUE)
-	{
-		modelListener->addDatapointFlow(flowDP);
-	}*/
 }
 
 

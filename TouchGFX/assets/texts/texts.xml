@@ -73,7 +73,7 @@
         <Translation Language="GB">Flow: &lt;value&gt; µl/min</Translation>
       </Text>
       <Text Id="__SingleUse_VX71" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">&lt;value&gt; dl</Translation>
+        <Translation Language="GB">&lt;value&gt; ml</Translation>
       </Text>
       <Text Id="__SingleUse_TLTD" Alignment="Left" TypographyId="Typography15">
         <Translation Language="GB">µl/min</Translation>
@@ -124,10 +124,10 @@
         <Translation Language="GB">&lt;value&gt; C°</Translation>
       </Text>
       <Text Id="__SingleUse_EMSI" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">7.3</Translation>
+        <Translation Language="GB">0</Translation>
       </Text>
       <Text Id="__SingleUse_XTYX" Alignment="Left" TypographyId="Typography15">
-        <Translation Language="GB">Volume: &lt;value&gt; dl</Translation>
+        <Translation Language="GB">Volume: &lt;value&gt; ml</Translation>
       </Text>
       <Text Id="__SingleUse_U8YI" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">0</Translation>

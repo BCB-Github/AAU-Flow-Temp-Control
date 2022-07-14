@@ -133,8 +133,8 @@ const osThreadAttr_t controlTask_attributes = {
 osThreadId_t samplingTaskHandle;
 const osThreadAttr_t samplingTask_attributes = {
   .name = "samplingTask",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityAboveNormal,
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
 };
 /* USER CODE BEGIN PV */
 static FMC_SDRAM_CommandTypeDef Command;
@@ -171,7 +171,7 @@ int systemTempStatusSV = 0;
 extern ControlClass systemControl;
 //float flowSVvar;
 
-extern float flowTotal;
+float flowTotal;
 extern float flowI2C;
 extern float temp;
 float tempArray[10];
@@ -985,7 +985,7 @@ static void MX_GPIO_Init(void)
 int counter = 0;
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-	if(GPIO_Pin == GPIO_PIN_3) // INT Source is pin H6
+	if(GPIO_Pin == GPIO_PIN_3) // INT Source is pin I3
 	{
 	counter = counter+1;
 	}
@@ -1006,9 +1006,11 @@ extern xQueueHandle updateTest2Q;
 extern xQueueHandle updateDutyQ;
 
 /* Access set values of the system */
-extern int tempSV;
-extern int flowSV;
-extern int volSV;
+extern int tempSetValue;
+extern int flowSetValue;
+extern int volSetValue;
+
+extern int dutyPercent;
 
 /* Access states of the system */
 extern int limitVolState;
@@ -1031,6 +1033,8 @@ float dt1 = 0;
 int init_int = 0;
 float freqRPM = 0;
 float rpm = 0;
+
+float volumeCounter = 0;
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartDefaultTask */
@@ -1060,6 +1064,8 @@ void StartDefaultTask(void *argument)
 
 	  xQueueSend(updatePVTempQ, &avgTemp,0);
 	  xQueueSend(updatePVFlowQ, &avgFlow,0);
+	  float flowMl = flowTotal/1000;
+	  if (systemFlowStatusSV != 0) {xQueueSend(updateTotalFlowQ, &flowMl,0);}
 	  xQueueSend(updatePressureQ, &avgPressure,0);
 
 		// update the system state
@@ -1080,18 +1086,20 @@ void StartDefaultTask(void *argument)
 	  }
 
 	  // update the setvalues
-	  modelDataSV.flowSV = flowSV;
-	  modelDataSV.tempSV = tempSV;
-	  modelDataSV.volumeSV = volSV;
+	  modelDataSV.flowSV = (float)flowSetValue;
+	  modelDataSV.tempSV = (float)tempSetValue;
+	  modelDataSV.volumeSV = ((float)volSetValue)*1000;
 	  modelDataSV.systemFlowStatusSV = systemFlowStatusSV;
 	  modelDataSV.systemTempStatusSV = systemTempStatusSV;
+	  modelDataSV.systemVolLimitStatus = limitVolState;
 
 
-	  float ccr = 0.5*32767;
-	  TIM5->CCR4 = (int)ccr;
-	  TIM12->CCR1=(int)ccr; // duty%=i/65535
-
+	  //float dutyCycle = ((float)dutyPercent)/100;
+	  //float ccr = dutyCycle*32767;
+	  //TIM5->CCR4 = (int)ccr;
+	  //TIM12->CCR1=(int)ccr; // duty%=i/65535
 	  //TIM1->CCR1=(int)ccr; // duty%=i/65535
+
 	  osDelay(50);
   }
   /* USER CODE END 5 */
@@ -1133,9 +1141,10 @@ void controlTaskFunc(void *argument)
 		{
 			modelMeasPassData.newestMeasIndex = 0;
 		}
-		modelMeasPassData.flowMeas[modelMeasPassData.newestMeasIndex] =avgFlow;
-		modelMeasPassData.tempMeas[modelMeasPassData.newestMeasIndex] =avgTemp;
-		modelMeasPassData.presMeas[modelMeasPassData.newestMeasIndex] =avgPressure;
+		modelMeasPassData.flowMeas[modelMeasPassData.newestMeasIndex] = avgFlow;
+		modelMeasPassData.tempMeas[modelMeasPassData.newestMeasIndex] = avgTemp;
+		modelMeasPassData.presMeas[modelMeasPassData.newestMeasIndex] = avgPressure;
+		modelMeasPassData.motorRPMMeas[modelMeasPassData.newestMeasIndex] = rpm;
 		modelMeasPassData.time[modelMeasPassData.newestMeasIndex] = HAL_GetTick();
 		flowTotal = modelMeasPassData.volumeMeas[modelMeasPassData.newestMeasIndex];
 
@@ -1165,19 +1174,20 @@ void StartTaskSampling(void *argument)
   	I2CInitialize();
     HAL_ADC_Start(&hadc1);
 	HAL_ADC_Start_DMA(&hadc1, &uhADCxConvertedValue, 10);
-
+	int count = 0;
 
 
     for(;;)
     {
-  	  for (int count = 0;count<10;count++)
-  	  {
+
+
+		  if (count==10) {count = 0;}
   	  	  HAL_ADC_Start_DMA(&hadc1, &uhADCxConvertedValue, PRESSURE_ANALOG_SAMPLES); // A0 pressure reading
 
   		  I2CRead();
-  		  float pressure = 0;
   		  tempArray[count] = temp;
   		  flowArray[count] = flowI2C;
+  		  volumeCounter += flowI2C/60000;
 
     	  static int tmpPressure = 0; // static so the variable isn't created every time
     	  for (int a = 0; a < PRESSURE_ANALOG_SAMPLES; a++)
@@ -1187,14 +1197,10 @@ void StartTaskSampling(void *argument)
     	 tmpPressure = tmpPressure / PRESSURE_ANALOG_SAMPLES; // Take mean of samples
     	 presMeasValue = (float) tmpPressure * 16/4096; // Idea is if max pressure is measured
 
-
   		  pressureArray[count] = presMeasValue;
-  	  }
-
-  	  osDelay(1);
-
-
-    }
+  		  count++;
+  		  osDelay(2);
+  }
   /* USER CODE END StartTaskSampling */
 }
 

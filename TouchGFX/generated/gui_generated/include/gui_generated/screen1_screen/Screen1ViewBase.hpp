@@ -158,7 +158,7 @@ protected:
     touchgfx::Unicode::UnicodeChar nowTempBuffer[NOWTEMP_SIZE];
     static const uint16_t NOWFLOW_SIZE = 5;
     touchgfx::Unicode::UnicodeChar nowFlowBuffer[NOWFLOW_SIZE];
-    static const uint16_t NOWVOL_SIZE = 5;
+    static const uint16_t NOWVOL_SIZE = 6;
     touchgfx::Unicode::UnicodeChar nowVolBuffer[NOWVOL_SIZE];
     static const uint16_t SPVOL_SIZE = 3;
     touchgfx::Unicode::UnicodeChar SPVolBuffer[SPVOL_SIZE];

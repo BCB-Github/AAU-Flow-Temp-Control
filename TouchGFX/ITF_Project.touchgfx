@@ -454,7 +454,7 @@
             "Name": "nowVol",
             "X": 5,
             "Y": 213,
-            "Width": 111,
+            "Width": 102,
             "Height": 18,
             "TextId": "__SingleUse_XTYX",
             "TextRotation": "0",
@@ -462,7 +462,7 @@
             "Wildcard1": {
               "TextId": "__SingleUse_EMSI",
               "UseBuffer": true,
-              "BufferSize": 5
+              "BufferSize": 6
             }
           },
           {
@@ -470,7 +470,7 @@
             "Name": "SPVol",
             "X": 168,
             "Y": 198,
-            "Width": 38,
+            "Width": 45,
             "Height": 24,
             "TextId": "__SingleUse_VX71",
             "TextRotation": "0",

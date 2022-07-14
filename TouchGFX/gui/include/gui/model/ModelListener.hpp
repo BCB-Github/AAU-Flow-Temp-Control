@@ -36,7 +36,7 @@ public:
 	virtual void setTestVal2(float newTestVal2) {}
 	virtual void setDutyCycle(int newDutyCycle) {}
 
-
+	virtual void resetFlowControl() {}
 
 
 protected:

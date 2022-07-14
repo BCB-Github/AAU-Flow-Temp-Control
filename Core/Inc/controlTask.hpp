@@ -37,6 +37,7 @@ private:
 	float time;
 	int systemFlowStatusSV;
 	int systemTempStatusSV;
+	int systemVolLimitStatus;
 	int systemFlowStatus;
 	int systemTempStatus;
 

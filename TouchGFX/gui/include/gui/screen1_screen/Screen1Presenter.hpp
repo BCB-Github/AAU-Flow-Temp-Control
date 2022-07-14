@@ -30,6 +30,7 @@ public:
     void setPVTemp(float newTempPV);
     void setPVFlow(float newFlowPV);
     void setTotalFlow(float newTotalFlow);
+    void resetFlowControl();
 
     void addDatapointTemp(float newDP);
     void addDatapointFlow(float newDP);

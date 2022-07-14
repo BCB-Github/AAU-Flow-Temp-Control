@@ -10,7 +10,7 @@ KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE;
 TEXT_LOCATION_FLASH_PRAGMA
 KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE = {
     79, // T___SingleUse_ICXT
-    303, // T___SingleUse_G3D0
+    299, // T___SingleUse_G3D0
     244, // T___SingleUse_AZSF
     79, // T_jimmy
     196, // T___SingleUse_SC1I
@@ -22,20 +22,20 @@ KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE = {
     260, // T___SingleUse_BZFF
     260, // T___SingleUse_72AS
     252, // T___SingleUse_E8MR
-    303, // T___SingleUse_XXO3
+    299, // T___SingleUse_XXO3
     0, // T___SingleUse_9ZJK
     293, // T___SingleUse_OLGI
     35, // T___SingleUse_22DJ
     283, // T___SingleUse_GQBS
     126, // T___SingleUse_V666
-    301, // T___SingleUse_CCVH
+    297, // T___SingleUse_CCVH
     109, // T___SingleUse_ICN1
     51, // T___SingleUse_ZP6C
     104, // T___SingleUse_VX71
     59, // T___SingleUse_TLTD
     137, // T___SingleUse_IABV
     79, // T___SingleUse_PWED
-    303, // T___SingleUse_LHPL
+    299, // T___SingleUse_LHPL
     19, // T___SingleUse_6V2X
     273, // T___SingleUse_28ND
     81, // T___SingleUse_FPPC
@@ -44,13 +44,13 @@ KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE = {
     223, // T___SingleUse_OWHL
     210, // T___SingleUse_1BLF
     182, // T___SingleUse_19KW
-    301, // T___SingleUse_YF1J
+    297, // T___SingleUse_YF1J
     79, // T___SingleUse_U15I
-    305, // T___SingleUse_MXIN
+    301, // T___SingleUse_MXIN
     132, // T___SingleUse_RQNO
-    297, // T___SingleUse_EMSI
+    299, // T___SingleUse_EMSI
     96, // T___SingleUse_XTYX
-    303, // T___SingleUse_U8YI
+    299, // T___SingleUse_U8YI
     51, // T___SingleUse_81ZS
     283, // T___SingleUse_XLJG
     126, // T___SingleUse_VQ8W

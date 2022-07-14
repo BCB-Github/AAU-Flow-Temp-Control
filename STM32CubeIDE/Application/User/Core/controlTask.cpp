@@ -12,7 +12,8 @@
 #include "controlTask.h"
 #include "userStructs.h" // include the ability to pass measurements
 
-
+extern int flowStartState;
+extern int flowStopState;
 
 
 
@@ -148,14 +149,13 @@ void ControlClass::systemRun(){
 			systemFlowStatus = 3; // Set the control to ramp down to zero
 			break;
 		case 3:
-			if (motorRPM < 10) {
-			systemFlowStatus = 4;
+			if (motorRPM < 100) {
+			systemFlowStatus = 5;
 			}
 			break;
 		case 4:
-			if (motorRPM == 0){
-			systemFlowStatus = 5;
-			}
+			systemFlowStatus = 3;
+
 			break;
 		case 5: // Test Completed - return to standby
 			systemFlowStatus = 0;
@@ -169,9 +169,13 @@ void ControlClass::systemRun(){
 
 	if(systemFlowStatusSV == 1) // 1 means gooOOOO
 	{
-		if (systemFlowStatus == 0)
+		if ( systemFlowStatus == 0 )
 		{
 			systemFlowStatus = 1;
+		}
+		if (systemFlowStatus == 4)
+		{
+			systemFlowStatus = 2;
 		}
 	}
 
@@ -205,35 +209,34 @@ void ControlClass::systemRun(){
 		testTime = time - timeStart - timeStop ;
 		// Idea here is that we run our control
 		controlFlow(flowSV - flow);
-		if (u_flow > 5)
-		{
-			u_flow = 5;
-		}
-		if (u_flow < 0)
-		{
-			u_flow =0;
-		}
-		volume+= flow*0.01; // - add the volume that had occoured during the loop
+
+		volume = volume+flow/3000; // - add the volume that had occoured during the loop
 
 		dutyVoltageFlow= u_flow/5;
 
-
 		// set output To flow
 		ccr1 = dutyVoltageFlow*32767;
-		TIM12->CCR1=(int)ccr1; // duty%=i/65535
+		TIM12->CCR1=(int)ccr1; // duty%=i/32767
 
-
-		if (volume >= volumeSV){
+		if (systemVolLimitStatus == 1) {
+			if (volume >= volumeSV){
 			// The set time for the test has been passed - Ramp Down
-			//systemStatus = 3;
+			systemFlowStatus = 3;
+			}
 		}
 
 
 		break;
 
 	case 3: // Control Ramp down
-		controlFlow(0); // Control the system to zero
-	//	if (timeStart >= testTimeSV){ // The test time has been achieved
+		 // Control the system to zero
+		controlFlow(0-flow);
+		dutyVoltageFlow= u_flow/5;
+
+		// set output To flow
+		ccr1 = dutyVoltageFlow*32767;
+		TIM12->CCR1=(int)ccr1; // duty%=i/32767
+		//	if (timeStart >= testTimeSV){ // The test time has been achieved
 			if (flow < 10) // The motor has stopped
 			{
 				// disable pwm output
@@ -250,7 +253,10 @@ void ControlClass::systemRun(){
 		u_flow = 0;
 		u_old_flow = 0;
 
-		volume = 0;
+		TIM12->CCR1=(int)1;
+		flowStartState = 2;
+		flowStopState = 0;
+		systemFlowStatusSV = 0;
 		systemFlowStatus = 0;
 		break;
 	}
@@ -364,6 +370,7 @@ void ControlClass::systemUpdateSV(PassDataSVHandle passDataSVHandle){
 	volumeSV = passDataSVHandle->volumeSV;
 	systemFlowStatusSV = passDataSVHandle->systemFlowStatusSV;
 	systemTempStatusSV = passDataSVHandle->systemTempStatusSV;
+	systemVolLimitStatus = passDataSVHandle->systemVolLimitStatus;
 
 
 }
