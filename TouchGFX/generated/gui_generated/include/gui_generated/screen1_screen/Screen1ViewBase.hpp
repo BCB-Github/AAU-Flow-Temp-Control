@@ -84,11 +84,6 @@ public:
         // Override and implement this function in Screen1
     }
 
-    virtual void enableMotor()
-    {
-        // Override and implement this function in Screen1
-    }
-
 protected:
     FrontendApplication& application() {
         return *static_cast<FrontendApplication*>(touchgfx::Application::getInstance());
@@ -155,9 +150,6 @@ protected:
     touchgfx::PainterRGB565 circleProgress1Painter;
     touchgfx::TextArea sysStatus;
     touchgfx::TextAreaWithOneWildcard sysStateWildcard;
-    touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  toggleMotor;
-    touchgfx::TextArea en4;
-    touchgfx::TextArea textArea3;
 
     /*
      * Wildcard Buffers

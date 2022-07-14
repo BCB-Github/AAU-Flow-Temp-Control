@@ -1007,72 +1007,6 @@
             "Wildcard1": {
               "TextId": "__SingleUse_AZSF"
             }
-          },
-          {
-            "Type": "FlexButton",
-            "Name": "toggleMotor",
-            "X": 284,
-            "Y": 151,
-            "Width": 30,
-            "Height": 30,
-            "ButtonTrigger": {
-              "Type": "ClickButtonTrigger"
-            },
-            "ButtonStyles": [
-              {
-                "Type": "ImageButtonStyle",
-                "X": 2,
-                "Y": 2,
-                "ImageReleased": "disabled.png",
-                "ImagePressed": "disabled.png"
-              },
-              {
-                "Type": "BoxWithBorderButtonStyle",
-                "Width": 30,
-                "Height": 30,
-                "LockToFlexButtonSize": true,
-                "BorderSize": 3,
-                "ColorReleased": {
-                  "Green": 102,
-                  "Blue": 153
-                },
-                "ColorPressed": {
-                  "Green": 153,
-                  "Blue": 204
-                },
-                "ColorBorderReleased": {
-                  "Green": 51,
-                  "Blue": 102
-                },
-                "ColorBorderPressed": {
-                  "Red": 51,
-                  "Green": 102,
-                  "Blue": 153
-                }
-              }
-            ]
-          },
-          {
-            "Type": "TextArea",
-            "Name": "en4",
-            "X": 321,
-            "Y": 150,
-            "Width": 34,
-            "Height": 12,
-            "TextId": "__SingleUse_TOC7",
-            "TextRotation": "0",
-            "AutoSize": true
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea3",
-            "X": 323,
-            "Y": 166,
-            "Width": 30,
-            "Height": 12,
-            "TextId": "__SingleUse_XAAF",
-            "TextRotation": "0",
-            "AutoSize": true
           }
         ],
         "Interactions": [
@@ -1207,17 +1141,6 @@
             "Action": {
               "Type": "ActionCustom",
               "FunctionName": "stopFlowControl"
-            }
-          },
-          {
-            "InteractionName": "toggleMotor",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "toggleMotor"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "enableMotor"
             }
           }
         ]
