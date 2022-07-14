@@ -133,8 +133,8 @@ const osThreadAttr_t controlTask_attributes = {
 osThreadId_t samplingTaskHandle;
 const osThreadAttr_t samplingTask_attributes = {
   .name = "samplingTask",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityAboveNormal,
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
 };
 /* USER CODE BEGIN PV */
 static FMC_SDRAM_CommandTypeDef Command;
@@ -172,7 +172,7 @@ extern ControlClass systemControl;
 //float flowSVvar;
 
 float flowTotal;
-extern float flowI2C;
+extern int16_t flowI2C;
 extern float temp;
 float tempArray[10];
 float flowArray[10];
@@ -1113,6 +1113,7 @@ void StartDefaultTask(void *argument)
 	  {
 		  if (motorState == 1)
 		  {
+			  I2CInitialize();
 			  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7|MCU_ACTIVE_Pin, GPIO_PIN_SET);
 		  } else {
 			  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7|MCU_ACTIVE_Pin, GPIO_PIN_RESET);
@@ -1145,15 +1146,15 @@ void controlTaskFunc(void *argument)
 	  float sumFlow = 0;
 	  float sumPressure = 0;
 
-	  for (int j = 0 ; j<10 ; j++)
+	  for (int j = 0 ; j<5 ; j++)
 	  {
 		  sumTemp += tempArray[j];
 		  sumFlow += flowArray[j];
 		  sumPressure += pressureArray[j];
 	  }
-	  avgTemp = sumTemp/10;
-	  avgFlow = sumFlow/10;
-	  avgPressure = sumPressure/10;
+	  avgTemp = sumTemp/5;
+	  avgFlow = sumFlow/5;
+	  avgPressure = sumPressure/5;
 
 	  // Update Measurement Array
 		modelMeasPassData.newestMeasIndex++;
@@ -1191,7 +1192,7 @@ void StartTaskSampling(void *argument)
 {
   /* USER CODE BEGIN StartTaskSampling */
     /* Infinite loop */
-  	I2CInitialize();
+
     HAL_ADC_Start(&hadc1);
 	HAL_ADC_Start_DMA(&hadc1, &uhADCxConvertedValue, 10);
 	int count = 0;
@@ -1201,13 +1202,12 @@ void StartTaskSampling(void *argument)
     {
 
 
-		  if (count==10) {count = 0;}
+		  if (count==5) {count = 0;}
   	  	  HAL_ADC_Start_DMA(&hadc1, &uhADCxConvertedValue, PRESSURE_ANALOG_SAMPLES); // A0 pressure reading
 
   		  I2CRead();
-  		  tempArray[count] = temp;
-  		  flowArray[count] = flowI2C;
-  		  volumeCounter += flowI2C/60000;
+  		  tempArray[count] = (float)temp;
+  		  flowArray[count] = (float)flowI2C;
 
     	  static int tmpPressure = 0; // static so the variable isn't created every time
     	  for (int a = 0; a < PRESSURE_ANALOG_SAMPLES; a++)

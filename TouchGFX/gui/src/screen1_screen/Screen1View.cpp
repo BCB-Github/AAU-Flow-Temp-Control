@@ -34,16 +34,11 @@ void Screen1View::setupScreen()
     if (limitVolState == 1)
     {
 	    toggleVol.setBitmaps(Bitmap(BITMAP_ENABLED_ID), Bitmap(BITMAP_ENABLED_ID));
-	    toggleVol.setPosition(226, 195, 30, 30);
+	    toggleVol.setWidthHeight(30, 30);
 		toggleVol.invalidate();
     }
 
-    if (enableMotorState == 1)
-    {
-    	toggleMotor.setBitmaps(Bitmap(BITMAP_ENABLED_ID), Bitmap(BITMAP_ENABLED_ID));
-    	toggleMotor.setWidthHeight(30, 30);
-    	toggleMotor.invalidate();
-    }
+
 
 }
 
@@ -172,6 +167,8 @@ void Screen1View::startPauseFlowControl()
 	{
 		flowStartState = 1;
 	    flowStopState = 1;
+		enableMotorState = 1;
+		presenter->switchMotorState(enableMotorState);
 	} else {
 		flowStartState = 0;
 	}
@@ -184,6 +181,8 @@ void Screen1View::stopFlowControl()
 	{
 		flowStartState = 0;
 		flowStopState = 0;
+		enableMotorState = 0;
+		presenter->switchMotorState(enableMotorState);
 	}
 	setFlowIcons();
 }
@@ -205,7 +204,7 @@ void Screen1View::limitVol()
 	}
 }
 
-void Screen1View::enableMotor()
+/*void Screen1View::enableMotor()
 {
 	if (enableMotorState == 0)
 	{
@@ -221,7 +220,7 @@ void Screen1View::enableMotor()
 		enableMotorState = 0;
 		presenter->switchMotorState(enableMotorState);
 	}
-}
+}*/
 /* This function is used to animate the progress circle */
 void Screen1View::running()
 {
@@ -284,25 +283,22 @@ void Screen1View::printVolSV()
 
 void Screen1View::setTempIcons()
 {
-	int16_t xyStop[2] = {stopTemp.getX(), stopTemp.getY()};
-	int16_t xyStart[2] = {startPauseTemp.getX(), startPauseTemp.getY()};
-
-    if (tempStopState == 1) {
+	if (tempStopState == 1) {
     	stopTemp.setBitmaps(Bitmap(BITMAP_STOP_ID), Bitmap(BITMAP_STOP_ID));
-    	stopTemp.setPosition(xyStop[0], xyStop[1], 30, 30);
+    	stopTemp.setWidthHeight(30, 30);
     	stopTemp.invalidate();
     	} else {
     	    stopTemp.setBitmaps(Bitmap(BITMAP_STOPDIS_ID), Bitmap(BITMAP_STOPDIS_ID));
-    	    stopTemp.setPosition(xyStop[0], xyStop[1], 30, 30);
+    	    stopTemp.setWidthHeight(30, 30);
     	    stopTemp.invalidate();
     	}
     if (tempStartState == 1) {
 		startPauseTemp.setBitmaps(Bitmap(BITMAP_PAUSE_ID), Bitmap(BITMAP_PAUSE_ID));
-		startPauseTemp.setPosition(xyStart[0], xyStart[1], 30, 30);
+		startPauseTemp.setWidthHeight(30, 30);
 		startPauseTemp.invalidate();
     	} else {
     		startPauseTemp.setBitmaps(Bitmap(BITMAP_START_ID), Bitmap(BITMAP_START_ID));
-    		startPauseTemp.setPosition(xyStart[0], xyStart[1], 30, 30);
+    		startPauseTemp.setWidthHeight(30, 30);
     		startPauseTemp.invalidate();
     	}
 
@@ -310,25 +306,22 @@ void Screen1View::setTempIcons()
 
 void Screen1View::setFlowIcons()
 {
-	int16_t xyStop[2] = {stopFlow.getX(), stopFlow.getY()};
-	int16_t xyStart[2] = {startPauseFlow.getX(), startPauseFlow.getY()};
-
-    if (flowStopState == 1) {
+	if (flowStopState == 1) {
     	stopFlow.setBitmaps(Bitmap(BITMAP_STOP_ID), Bitmap(BITMAP_STOP_ID));
-    	stopFlow.setPosition(xyStop[0], xyStop[1], 30, 30);
+    	stopFlow.setWidthHeight(30, 30);
     	stopFlow.invalidate();
     	} else {
     		stopFlow.setBitmaps(Bitmap(BITMAP_STOPDIS_ID), Bitmap(BITMAP_STOPDIS_ID));
-    		stopFlow.setPosition(xyStop[0], xyStop[1], 30, 30);
+    		stopFlow.setWidthHeight(30, 30);
     		stopFlow.invalidate();
     	}
     if (flowStartState == 1) {
     	startPauseFlow.setBitmaps(Bitmap(BITMAP_PAUSE_ID), Bitmap(BITMAP_PAUSE_ID));
-    	startPauseFlow.setPosition(xyStart[0], xyStart[1], 30, 30);
+    	startPauseFlow.setWidthHeight(30, 30);
     	startPauseFlow.invalidate();
     	} else {
     		startPauseFlow.setBitmaps(Bitmap(BITMAP_START_ID), Bitmap(BITMAP_START_ID));
-    		startPauseFlow.setPosition(xyStart[0], xyStart[1], 30, 30);
+    		startPauseFlow.setWidthHeight(30, 30);
     		startPauseFlow.invalidate();
     	}
 
@@ -336,14 +329,11 @@ void Screen1View::setFlowIcons()
 
 void Screen1View::resetFlowIcons()
 {
-	int16_t xyStop[2] = {stopFlow.getX(), stopFlow.getY()};
-	int16_t xyStart[2] = {startPauseFlow.getX(), startPauseFlow.getY()};
-
 	startPauseFlow.setBitmaps(Bitmap(BITMAP_START_ID), Bitmap(BITMAP_START_ID));
-	startPauseFlow.setPosition(xyStart[0], xyStart[1], 30, 30);
+	startPauseFlow.setWidthHeight(30, 30);
 	startPauseFlow.invalidate();
 	stopFlow.setBitmaps(Bitmap(BITMAP_STOPDIS_ID), Bitmap(BITMAP_STOPDIS_ID));
-	stopFlow.setPosition(xyStop[0], xyStop[1], 30, 30);
+	stopFlow.setWidthHeight(30, 30);
 	stopFlow.invalidate();
 	flowStartState = 0;
 }

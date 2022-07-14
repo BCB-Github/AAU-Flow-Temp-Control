@@ -335,24 +335,6 @@ Screen1ViewBase::Screen1ViewBase() :
     sysStateWildcard.resizeToCurrentText();
     sysStateWildcard.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ICXT));
 
-    toggleMotor.setBoxWithBorderPosition(0, 0, 30, 30);
-    toggleMotor.setBorderSize(3);
-    toggleMotor.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    toggleMotor.setBitmaps(Bitmap(BITMAP_DISABLED_ID), Bitmap(BITMAP_DISABLED_ID));
-    toggleMotor.setBitmapXY(2, 2);
-    toggleMotor.setPosition(284, 151, 30, 30);
-    toggleMotor.setAction(flexButtonCallback);
-
-    en4.setXY(321, 150);
-    en4.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    en4.setLinespacing(0);
-    en4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_TOC7));
-
-    textArea3.setXY(323, 166);
-    textArea3.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    textArea3.setLinespacing(0);
-    textArea3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_XAAF));
-
     add(__background);
     add(flexDownTemp);
     add(flexUpTemp);
@@ -400,9 +382,6 @@ Screen1ViewBase::Screen1ViewBase() :
     add(circleProgress1);
     add(sysStatus);
     add(sysStateWildcard);
-    add(toggleMotor);
-    add(en4);
-    add(textArea3);
 }
 
 void Screen1ViewBase::setupScreen()
@@ -495,12 +474,5 @@ void Screen1ViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonCo
         //When toggleVol clicked call virtual function
         //Call limitVol
         limitVol();
-    }
-    else if (&src == &toggleMotor)
-    {
-        //toggleMotor
-        //When toggleMotor clicked call virtual function
-        //Call enableMotor
-        enableMotor();
     }
 }

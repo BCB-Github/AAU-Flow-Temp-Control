@@ -33,7 +33,7 @@ public:
     void stopTempControl();
     void startPauseFlowControl();
     void stopFlowControl();
-    void enableMotor();
+    //void enableMotor();
     void limitVol();
 
     void running();

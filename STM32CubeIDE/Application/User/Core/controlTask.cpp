@@ -210,12 +210,13 @@ void ControlClass::systemRun(){
 		// Idea here is that we run our control
 		controlFlow(flowSV - flow);
 
-		volume = volume+flow/3000; // - add the volume that had occoured during the loop
+		volume = volume+flow/6000; // - add the volume that had occoured during the loop
 
 		dutyVoltageFlow= u_flow/5;
 
 		// set output To flow
 		ccr1 = dutyVoltageFlow*32767;
+		if (dutyVoltageFlow == 0) {ccr1 = 1;}
 		TIM12->CCR1=(int)ccr1; // duty%=i/32767
 
 		if (systemVolLimitStatus == 1) {
@@ -247,12 +248,17 @@ void ControlClass::systemRun(){
 
 	case 4: // system paused
 		timeStop = time - testTime - timeStart;
+		 // Control the system to zero
+		controlFlow(0-flow);
+		dutyVoltageFlow= u_flow/5;
+
+		// set output To flow
+		ccr1 = dutyVoltageFlow*32767;
+		TIM12->CCR1=(int)ccr1; // duty%=i/32767
 		break;
 	case 5: //testCompleted
 		// Return to Standby
-		u_flow = 0;
 		u_old_flow = 0;
-
 		TIM12->CCR1=(int)1;
 		flowStartState = 2;
 		flowStopState = 0;
