@@ -40,6 +40,8 @@ extern "C"
 	xQueueHandle dataTempQ;
 	xQueueHandle dataFlowQ;
 
+	//Queue used to enable/disable the motor
+	xQueueHandle motorSwitchQ;
 
 /* Queues used to update test values on screen 2 */
 	xQueueHandle updateTest1Q;
@@ -58,6 +60,8 @@ Model::Model() : modelListener(0)
 	updateTotalFlowQ = xQueueGenericCreate(1, sizeof(float), 0);
 	updatePressureQ = xQueueGenericCreate(1, sizeof(float), 0);
 	updateRpmQ = xQueueGenericCreate(1, sizeof(float), 0);
+
+	motorSwitchQ = xQueueGenericCreate(1, sizeof(int), 0);
 
 	dataTempQ = xQueueGenericCreate(16, sizeof(float), 0);
 	dataFlowQ = xQueueGenericCreate(16, sizeof(float), 0);
@@ -127,6 +131,7 @@ void Model::tick()
 }
 
 
-void Model::updateWildcards() {
-
+void Model::updateMotorState(int state)
+{
+	xQueueSend(motorSwitchQ, &state, 0);
 }

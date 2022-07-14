@@ -31,6 +31,7 @@ public:
     void setPVFlow(float newFlowPV);
     void setTotalFlow(float newTotalFlow);
     void resetFlowControl();
+    void switchMotorState(int state);
 
     void addDatapointTemp(float newDP);
     void addDatapointFlow(float newDP);

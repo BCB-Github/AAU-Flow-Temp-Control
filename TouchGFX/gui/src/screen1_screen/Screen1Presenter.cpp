@@ -49,6 +49,11 @@ void Screen1Presenter::runProgress()
 	view.running();
 }
 
+void Screen1Presenter::switchMotorState(int state)
+{
+	model->updateMotorState(state);
+}
+
 void Screen1Presenter::resetFlowControl()
 {
 	view.resetFlowIcons();

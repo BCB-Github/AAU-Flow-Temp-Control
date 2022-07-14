@@ -133,8 +133,8 @@ const osThreadAttr_t controlTask_attributes = {
 osThreadId_t samplingTaskHandle;
 const osThreadAttr_t samplingTask_attributes = {
   .name = "samplingTask",
-  .stack_size = 256 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityAboveNormal,
 };
 /* USER CODE BEGIN PV */
 static FMC_SDRAM_CommandTypeDef Command;
@@ -931,7 +931,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOC, FRAME_RATE_Pin|RENDER_TIME_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(MCU_ACTIVE_GPIO_Port, MCU_ACTIVE_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7|MCU_ACTIVE_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : VSYNC_FREQ_Pin */
   GPIO_InitStruct.Pin = VSYNC_FREQ_Pin;
@@ -967,6 +967,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : PG7 */
+  GPIO_InitStruct.Pin = GPIO_PIN_7;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
   /*Configure GPIO pin : MCU_ACTIVE_Pin */
   GPIO_InitStruct.Pin = MCU_ACTIVE_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -997,6 +1004,8 @@ extern xQueueHandle updateTotalFlowQ;
 extern xQueueHandle updatePressureQ;
 extern xQueueHandle updateRpmQ;
 
+extern xQueueHandle motorSwitchQ;
+
 extern xQueueHandle dataTempQ;
 extern xQueueHandle dataFlowQ;
 
@@ -1013,6 +1022,7 @@ extern int volSetValue;
 extern int dutyPercent;
 
 /* Access states of the system */
+int motorState;
 extern int limitVolState;
 extern int tempStartState;
 extern int tempStopState;
@@ -1099,6 +1109,16 @@ void StartDefaultTask(void *argument)
 	  //TIM5->CCR4 = (int)ccr;
 	  //TIM12->CCR1=(int)ccr; // duty%=i/65535
 	  //TIM1->CCR1=(int)ccr; // duty%=i/65535
+	  if (xQueueReceive(motorSwitchQ, &motorState, 0)==pdTRUE)
+	  {
+		  if (motorState = 1)
+		  {
+			  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7|MCU_ACTIVE_Pin, GPIO_PIN_SET);
+		  } else {
+			  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7|MCU_ACTIVE_Pin, GPIO_PIN_RESET);
+		  }
+	  }
+
 
 	  osDelay(50);
   }

@@ -7,6 +7,7 @@ int tempSetValue = 20;
 int flowSetValue = 700;
 
 /* Variables to store the state of the pause/stop/enable buttons */
+int enableMotorState = 0;
 int limitVolState = 0;
 int tempStartState = 0;
 int tempStopState = 0;
@@ -35,6 +36,13 @@ void Screen1View::setupScreen()
 	    toggleVol.setBitmaps(Bitmap(BITMAP_ENABLED_ID), Bitmap(BITMAP_ENABLED_ID));
 	    toggleVol.setPosition(226, 195, 30, 30);
 		toggleVol.invalidate();
+    }
+
+    if (enableMotorState == 1)
+    {
+    	toggleMotor.setBitmaps(Bitmap(BITMAP_ENABLED_ID), Bitmap(BITMAP_ENABLED_ID));
+    	toggleMotor.setWidthHeight(30, 30);
+    	toggleMotor.invalidate();
     }
 
 }
@@ -185,7 +193,7 @@ void Screen1View::limitVol()
 	if (limitVolState == 0)
 	{
 	    toggleVol.setBitmaps(Bitmap(BITMAP_ENABLED_ID), Bitmap(BITMAP_ENABLED_ID));
-	    toggleVol.setPosition(226, 195, 30, 30);
+	    toggleVol.setWidthHeight(30, 30);
 		toggleVol.invalidate();
 		limitVolState = 1;
 
@@ -197,6 +205,23 @@ void Screen1View::limitVol()
 	}
 }
 
+void Screen1View::enableMotor()
+{
+	if (enableMotorState == 0)
+	{
+		toggleMotor.setBitmaps(Bitmap(BITMAP_ENABLED_ID), Bitmap(BITMAP_ENABLED_ID));
+		toggleMotor.setWidthHeight(30, 30);
+		toggleMotor.invalidate();
+		enableMotorState == 1;
+		presenter->switchMotorState(enableMotorState);
+	} else {
+		toggleMotor.setBitmaps(Bitmap(BITMAP_DISABLED_ID), Bitmap(BITMAP_DISABLED_ID));
+		toggleMotor.setWidthHeight(30, 30);
+		toggleMotor.invalidate();
+		enableMotorState = 0;
+		presenter->switchMotorState(enableMotorState);
+	}
+}
 /* This function is used to animate the progress circle */
 void Screen1View::running()
 {

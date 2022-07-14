@@ -112,7 +112,7 @@ void I2CRead(){
 		  for (ii = 0; ii < FLOW_SMOOTHING_MAX; ii++)
 		  {
 
-			  flowI2C= flowI2C+ (float) flowArray[ii] /10;
+			  flowI2C= flowI2C+ (((float)flowArray[ii])/10);
 		  }
 		  flowI2C = flowI2C/(FLOW_SMOOTHING_MAX); // corresponds to a mean
 

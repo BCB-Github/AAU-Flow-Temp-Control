@@ -12,8 +12,10 @@ public:
     {
         modelListener = listener;
     }
-    void updateWildcards();
+
     void tick();
+
+    void updateMotorState(int state);
 
 
 protected:

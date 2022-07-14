@@ -9,8 +9,10 @@ KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE;
 
 TEXT_LOCATION_FLASH_PRAGMA
 KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE = {
+    273, // T___SingleUse_XAAF
+    260, // T___SingleUse_TOC7
     79, // T___SingleUse_ICXT
-    299, // T___SingleUse_G3D0
+    305, // T___SingleUse_G3D0
     244, // T___SingleUse_AZSF
     79, // T_jimmy
     196, // T___SingleUse_SC1I
@@ -22,40 +24,40 @@ KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE = {
     260, // T___SingleUse_BZFF
     260, // T___SingleUse_72AS
     252, // T___SingleUse_E8MR
-    299, // T___SingleUse_XXO3
+    305, // T___SingleUse_XXO3
     0, // T___SingleUse_9ZJK
-    293, // T___SingleUse_OLGI
+    299, // T___SingleUse_OLGI
     35, // T___SingleUse_22DJ
-    283, // T___SingleUse_GQBS
+    289, // T___SingleUse_GQBS
     126, // T___SingleUse_V666
-    297, // T___SingleUse_CCVH
+    303, // T___SingleUse_CCVH
     109, // T___SingleUse_ICN1
     51, // T___SingleUse_ZP6C
     104, // T___SingleUse_VX71
     59, // T___SingleUse_TLTD
     137, // T___SingleUse_IABV
     79, // T___SingleUse_PWED
-    299, // T___SingleUse_LHPL
+    305, // T___SingleUse_LHPL
     19, // T___SingleUse_6V2X
-    273, // T___SingleUse_28ND
+    279, // T___SingleUse_28ND
     81, // T___SingleUse_FPPC
-    278, // T___SingleUse_AK80
+    284, // T___SingleUse_AK80
     66, // T___SingleUse_VFFK
     223, // T___SingleUse_OWHL
     210, // T___SingleUse_1BLF
     182, // T___SingleUse_19KW
-    297, // T___SingleUse_YF1J
+    303, // T___SingleUse_YF1J
     79, // T___SingleUse_U15I
-    301, // T___SingleUse_MXIN
+    307, // T___SingleUse_MXIN
     132, // T___SingleUse_RQNO
-    299, // T___SingleUse_EMSI
+    305, // T___SingleUse_EMSI
     96, // T___SingleUse_XTYX
-    299, // T___SingleUse_U8YI
+    305, // T___SingleUse_U8YI
     51, // T___SingleUse_81ZS
-    283, // T___SingleUse_XLJG
+    289, // T___SingleUse_XLJG
     126, // T___SingleUse_VQ8W
     235, // T___SingleUse_RHSD
-    288, // T___SingleUse_ZBMR
+    294, // T___SingleUse_ZBMR
     79, // T___SingleUse_YKV5
     79 // T___SingleUse_5P8J
 };

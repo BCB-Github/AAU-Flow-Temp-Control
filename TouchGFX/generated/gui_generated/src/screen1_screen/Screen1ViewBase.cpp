@@ -197,7 +197,7 @@ Screen1ViewBase::Screen1ViewBase() :
     textArea1.setLinespacing(0);
     textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_1BLF));
 
-    circleProgress.setXY(284, 186);
+    circleProgress.setXY(284, 206);
     circleProgress.setProgressIndicatorPosition(0, 0, 54, 54);
     circleProgress.setRange(0, 100);
     circleProgress.setCenter(27, 27);
@@ -310,7 +310,7 @@ Screen1ViewBase::Screen1ViewBase() :
     line1.setLineWidth(2);
     line1.setLineEndingStyle(touchgfx::Line::ROUND_CAP_ENDING);
 
-    circleProgress1.setXY(284, 186);
+    circleProgress1.setXY(284, 206);
     circleProgress1.setProgressIndicatorPosition(0, 0, 54, 54);
     circleProgress1.setRange(0, 100);
     circleProgress1.setCenter(27, 27);
@@ -323,17 +323,35 @@ Screen1ViewBase::Screen1ViewBase() :
     circleProgress1.setPainter(circleProgress1Painter);
     circleProgress1.setValue(100);
 
-    sysStatus.setXY(274, 177);
+    sysStatus.setXY(274, 197);
     sysStatus.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     sysStatus.setLinespacing(0);
     sysStatus.setTypedText(touchgfx::TypedText(T___SINGLEUSE_SC1I));
 
-    sysStateWildcard.setXY(291, 234);
+    sysStateWildcard.setXY(291, 254);
     sysStateWildcard.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     sysStateWildcard.setLinespacing(0);
     sysStateWildcard.setWildcard(touchgfx::TypedText(T___SINGLEUSE_AZSF).getText());
     sysStateWildcard.resizeToCurrentText();
     sysStateWildcard.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ICXT));
+
+    toggleMotor.setBoxWithBorderPosition(0, 0, 30, 30);
+    toggleMotor.setBorderSize(3);
+    toggleMotor.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    toggleMotor.setBitmaps(Bitmap(BITMAP_DISABLED_ID), Bitmap(BITMAP_DISABLED_ID));
+    toggleMotor.setBitmapXY(2, 2);
+    toggleMotor.setPosition(284, 151, 30, 30);
+    toggleMotor.setAction(flexButtonCallback);
+
+    en4.setXY(321, 150);
+    en4.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    en4.setLinespacing(0);
+    en4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_TOC7));
+
+    textArea3.setXY(323, 166);
+    textArea3.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea3.setLinespacing(0);
+    textArea3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_XAAF));
 
     add(__background);
     add(flexDownTemp);
@@ -382,6 +400,9 @@ Screen1ViewBase::Screen1ViewBase() :
     add(circleProgress1);
     add(sysStatus);
     add(sysStateWildcard);
+    add(toggleMotor);
+    add(en4);
+    add(textArea3);
 }
 
 void Screen1ViewBase::setupScreen()
@@ -474,5 +495,12 @@ void Screen1ViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonCo
         //When toggleVol clicked call virtual function
         //Call limitVol
         limitVol();
+    }
+    else if (&src == &toggleMotor)
+    {
+        //toggleMotor
+        //When toggleMotor clicked call virtual function
+        //Call enableMotor
+        enableMotor();
     }
 }
