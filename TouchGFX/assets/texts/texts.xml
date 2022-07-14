@@ -6,6 +6,12 @@
   <Texts>
     <TextGroup Id="Group1" />
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_XAAF" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">motor</Translation>
+      </Text>
+      <Text Id="__SingleUse_TOC7" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">enable</Translation>
+      </Text>
       <Text Id="__SingleUse_ICXT" Alignment="Left" TypographyId="Small">
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
