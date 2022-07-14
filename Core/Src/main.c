@@ -1111,7 +1111,7 @@ void StartDefaultTask(void *argument)
 	  //TIM1->CCR1=(int)ccr; // duty%=i/65535
 	  if (xQueueReceive(motorSwitchQ, &motorState, 0)==pdTRUE)
 	  {
-		  if (motorState = 1)
+		  if (motorState == 1)
 		  {
 			  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7|MCU_ACTIVE_Pin, GPIO_PIN_SET);
 		  } else {

@@ -10,7 +10,7 @@ extern float temp;
 #include "queue.h"
 
 /* I use SV for Set Value and PV for Present Value */
-unsigned int placeholder;
+int placeholder;
 float tempDP = 0;
 float flowDP = 0;
 float tempPV = 0;

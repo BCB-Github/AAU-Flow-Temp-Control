@@ -212,7 +212,7 @@ void Screen1View::enableMotor()
 		toggleMotor.setBitmaps(Bitmap(BITMAP_ENABLED_ID), Bitmap(BITMAP_ENABLED_ID));
 		toggleMotor.setWidthHeight(30, 30);
 		toggleMotor.invalidate();
-		enableMotorState == 1;
+		enableMotorState = 1;
 		presenter->switchMotorState(enableMotorState);
 	} else {
 		toggleMotor.setBitmaps(Bitmap(BITMAP_DISABLED_ID), Bitmap(BITMAP_DISABLED_ID));
