@@ -1,0 +1,4 @@
+../Application/User/Core/i2cUserFunctions.c:44:6:I2CSoftReset	24	static
+../Application/User/Core/i2cUserFunctions.c:53:6:I2CStartMeasurement	24	static
+../Application/User/Core/i2cUserFunctions.c:85:6:I2CRead	40	static
+../Application/User/Core/i2cUserFunctions.c:65:6:I2CInitialize	8	static

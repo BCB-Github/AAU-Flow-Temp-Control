@@ -176,7 +176,10 @@ extern int16_t flowI2C;
 extern float temp;
 float tempArray[10];
 float flowArray[10];
-float pressureArray[10];
+float pressureArray[5];
+float adcOffset = 4096 *(0.004*150)/3.3;
+float adcToPressure =16/( 4096*(1-0.004*150/3.3));
+
 
 
 /* USER CODE END PFP */
@@ -1209,13 +1212,14 @@ void StartTaskSampling(void *argument)
   		  tempArray[count] = (float)temp;
   		  flowArray[count] = (float)flowI2C;
 
-    	  static int tmpPressure = 0; // static so the variable isn't created every time
+    	  int tmpPressure = 0; // static so the variable isn't created every time
     	  for (int a = 0; a < PRESSURE_ANALOG_SAMPLES; a++)
     	  {
-    		  tmpPressure+=  uhADCxConvertedValue[a];
+    		  tmpPressure+=  (int) uhADCxConvertedValue[a];
     	  }
-    	 tmpPressure = tmpPressure / PRESSURE_ANALOG_SAMPLES; // Take mean of samples
-    	 presMeasValue = (float) tmpPressure * 16/4096; // Idea is if max pressure is measured
+    	 tmpPressure = tmpPressure / PRESSURE_ANALOG_SAMPLES;
+    	 presMeasValue = (float) (tmpPressure - adcOffset) *adcToPressure; // Idea is if max pressure is measured
+
 
   		  pressureArray[count] = presMeasValue;
   		  count++;
