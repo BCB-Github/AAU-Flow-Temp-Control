@@ -21,6 +21,7 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "libjpeg.h"
+#include "lwip.h"
 #include "app_touchgfx.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -38,6 +39,8 @@
 #include "controlTask.hpp"
 #include "time.h"
 #include "userStructs.h"
+//#include "tcpClient.h"
+//#include "tcpServer.h"
 
 /* Standard libraries if needed
 #include <stdio.h>
@@ -96,6 +99,7 @@ LTDC_HandleTypeDef hltdc;
 
 QSPI_HandleTypeDef hqspi;
 
+TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim5;
 TIM_HandleTypeDef htim12;
 
@@ -105,7 +109,7 @@ SDRAM_HandleTypeDef hsdram1;
 osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
   .name = "defaultTask",
-  .stack_size = 128 * 4,
+  .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for TouchGFXTask */
@@ -155,6 +159,7 @@ static void MX_DMA_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM12_Init(void);
 static void MX_TIM5_Init(void);
+static void MX_TIM1_Init(void);
 void StartDefaultTask(void *argument);
 extern void TouchGFX_Task(void *argument);
 extern void videoTaskFunc(void *argument);
@@ -174,8 +179,8 @@ extern ControlClass systemControl;
 float flowTotal;
 extern int16_t flowI2C;
 extern float temp;
-float tempArray[10];
-float flowArray[10];
+float tempArray[5];
+float flowArray[5];
 float pressureArray[5];
 float adcOffset = 4096 *(0.004*150)/3.3;
 float adcToPressure =16/( 4096*(1-0.004*150/3.3));
@@ -186,7 +191,7 @@ float adcToPressure =16/( 4096*(1-0.004*150/3.3));
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+//struct netif gonetif;
 /* USER CODE END 0 */
 
 /**
@@ -238,10 +243,13 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM12_Init();
   MX_TIM5_Init();
+  MX_TIM1_Init();
   MX_TouchGFX_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_PWM_Start(&htim12,TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim5,TIM_CHANNEL_4);
+  HAL_TIM_Base_Start_IT(&htim1);
+
 
 
   /* USER CODE END 2 */
@@ -673,6 +681,53 @@ static void MX_QUADSPI_Init(void)
 }
 
 /**
+  * @brief TIM1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM1_Init(void)
+{
+
+  /* USER CODE BEGIN TIM1_Init 0 */
+
+  /* USER CODE END TIM1_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM1_Init 1 */
+
+  /* USER CODE END TIM1_Init 1 */
+  htim1.Instance = TIM1;
+  htim1.Init.Prescaler = 21600-1;
+  htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim1.Init.Period = 10000-1;
+  htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim1.Init.RepetitionCounter = 0;
+  htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim1, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterOutputTrigger2 = TIM_TRGO2_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM1_Init 2 */
+
+  /* USER CODE END TIM1_Init 2 */
+
+}
+
+/**
   * @brief TIM5 Initialization Function
   * @param None
   * @retval None
@@ -910,9 +965,9 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOG_CLK_ENABLE();
   __HAL_RCC_GPIOJ_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOK_CLK_ENABLE();
@@ -1059,7 +1114,10 @@ float volumeCounter = 0;
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void *argument)
 {
+  /* init code for LWIP */
+  MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
+ // tcpserver_init();
   /* Infinite loop */
 
 
@@ -1106,6 +1164,8 @@ void StartDefaultTask(void *argument)
 	  modelDataSV.systemTempStatusSV = systemTempStatusSV;
 	  modelDataSV.systemVolLimitStatus = limitVolState;
 
+	  //ethernetif_input(&gonetif);
+	  //sys_check_timeouts();
 
 	  //float dutyCycle = ((float)dutyPercent)/100;
 	  //float ccr = dutyCycle*32767;
@@ -1139,6 +1199,9 @@ void StartDefaultTask(void *argument)
 void controlTaskFunc(void *argument)
 {
   /* USER CODE BEGIN controlTaskFunc */
+
+	  MX_I2C3_Init();
+
   /* Infinite loop */
 
 
@@ -1258,6 +1321,16 @@ void MPU_Config(void)
   MPU_InitStruct.Number = MPU_REGION_NUMBER1;
   MPU_InitStruct.Size = MPU_REGION_SIZE_16MB;
   MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /** Initializes and configures the Region and the memory to be protected
+  */
+  MPU_InitStruct.Number = MPU_REGION_NUMBER2;
+  MPU_InitStruct.BaseAddress = 0x0;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_1MB;
+  MPU_InitStruct.AccessPermission = MPU_REGION_NO_ACCESS;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
   /* Enables the MPU */

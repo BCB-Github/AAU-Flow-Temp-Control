@@ -14,6 +14,10 @@
 
 extern int flowStartState;
 extern int flowStopState;
+float oldFlow = 0;
+float oldFlow2 = 0;
+float oldFlow3 = 0;
+float T1 = 0.01/60;
 
 
 
@@ -210,8 +214,12 @@ void ControlClass::systemRun(){
 		// Idea here is that we run our control
 		controlFlow(flowSV - flow);
 
-		volume = volume+flow/6000; // - add the volume that had occoured during the loop
 
+
+		volume = volume +  	T1 *3/8 * (flow + 3 * oldFlow + 3*oldFlow2 + oldFlow3); // - add the volume that had occoured during the loop
+		oldFlow3 = oldFlow2;
+		oldFlow2 = oldFlow;
+		oldFlow = flow;
 		dutyVoltageFlow= u_flow/5;
 
 		// set output To flow

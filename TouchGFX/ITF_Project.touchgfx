@@ -446,7 +446,7 @@
             "Wildcard1": {
               "TextId": "__SingleUse_U8YI",
               "UseBuffer": true,
-              "BufferSize": 5
+              "BufferSize": 6
             }
           },
           {
