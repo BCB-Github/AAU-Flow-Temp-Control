@@ -6,14 +6,86 @@
   <Texts>
     <TextGroup Id="Group1" />
     <TextGroup Id="Unsorted">
-      <Text Id="__SingleUse_ICXT" Alignment="Left" TypographyId="Small">
+      <Text Id="__SingleUse_6CLK" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">ET to finish:</Translation>
+      </Text>
+      <Text Id="__SingleUse_XPQ2" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">Elapsed:</Translation>
+      </Text>
+      <Text Id="__SingleUse_UQXR" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">00</Translation>
+      </Text>
+      <Text Id="__SingleUse_KDAH" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">00</Translation>
+      </Text>
+      <Text Id="__SingleUse_PDFB" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">&lt;value&gt;:&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_YD5G" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">00</Translation>
+      </Text>
+      <Text Id="__SingleUse_GCCP" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">00</Translation>
+      </Text>
+      <Text Id="__SingleUse_8RG6" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">&lt;value&gt;:&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_C7HQ" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">ET to volume:</Translation>
+      </Text>
+      <Text Id="__SingleUse_MIAO" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">Elapsed:</Translation>
+      </Text>
+      <Text Id="__SingleUse_K8A6" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">00</Translation>
+      </Text>
+      <Text Id="__SingleUse_27JP" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">00</Translation>
+      </Text>
+      <Text Id="__SingleUse_XTOH" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">&lt;value&gt;:&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_I9HP" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">00</Translation>
+      </Text>
+      <Text Id="__SingleUse_A6QO" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">00</Translation>
+      </Text>
+      <Text Id="__SingleUse_QXL3" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">&lt;value&gt;:&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_E467" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">Stop at Volume</Translation>
+      </Text>
+      <Text Id="__SingleUse_UZL2" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">limit</Translation>
+      </Text>
+      <Text Id="__SingleUse_GWT3" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">enable</Translation>
+      </Text>
+      <Text Id="__SingleUse_LERE" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_UR5C" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt; ml</Translation>
+      </Text>
+      <Text Id="__SingleUse_S6BU" Alignment="Right" TypographyId="Small">
+        <Translation Language="GB">&lt;&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_U2DH" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">Main screen</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZXAU" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">Calib.</Translation>
+      </Text>
+      <Text Id="__SingleUse_ICXT" Alignment="Center" TypographyId="Small">
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
       <Text Id="__SingleUse_G3D0" Alignment="Left" TypographyId="Small">
         <Translation Language="GB">0</Translation>
       </Text>
       <Text Id="__SingleUse_AZSF" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">Running</Translation>
+        <Translation Language="GB">Standby</Translation>
       </Text>
       <Text Id="jimmy" Alignment="Left" TypographyId="Small">
         <Translation Language="GB">&lt;value&gt;</Translation>
@@ -106,7 +178,7 @@
         <Translation Language="GB">Main screen</Translation>
       </Text>
       <Text Id="__SingleUse_1BLF" Alignment="Left" TypographyId="Typography15">
-        <Translation Language="GB">Debug screen</Translation>
+        <Translation Language="GB">Debug</Translation>
       </Text>
       <Text Id="__SingleUse_19KW" Alignment="Left" TypographyId="Small">
         <Translation Language="GB">Setpoint Temp</Translation>

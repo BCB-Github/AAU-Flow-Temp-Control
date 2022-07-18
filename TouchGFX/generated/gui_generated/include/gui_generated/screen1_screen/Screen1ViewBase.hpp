@@ -150,6 +150,12 @@ protected:
     touchgfx::PainterRGB565 circleProgress1Painter;
     touchgfx::TextArea sysStatus;
     touchgfx::TextAreaWithOneWildcard sysStateWildcard;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexButton1_1;
+    touchgfx::TextArea textArea3;
+    touchgfx::TextAreaWithTwoWildcards timeElapsed;
+    touchgfx::TextAreaWithTwoWildcards timeETA;
+    touchgfx::TextArea textArea4;
+    touchgfx::TextArea textArea5;
 
     /*
      * Wildcard Buffers
@@ -166,6 +172,16 @@ protected:
     touchgfx::Unicode::UnicodeChar SPTempBuffer[SPTEMP_SIZE];
     static const uint16_t SPFLOW_SIZE = 6;
     touchgfx::Unicode::UnicodeChar SPFlowBuffer[SPFLOW_SIZE];
+    static const uint16_t SYSSTATEWILDCARD_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar sysStateWildcardBuffer[SYSSTATEWILDCARD_SIZE];
+    static const uint16_t TIMEELAPSEDBUFFER1_SIZE = 3;
+    touchgfx::Unicode::UnicodeChar timeElapsedBuffer1[TIMEELAPSEDBUFFER1_SIZE];
+    static const uint16_t TIMEELAPSEDBUFFER2_SIZE = 3;
+    touchgfx::Unicode::UnicodeChar timeElapsedBuffer2[TIMEELAPSEDBUFFER2_SIZE];
+    static const uint16_t TIMEETABUFFER1_SIZE = 3;
+    touchgfx::Unicode::UnicodeChar timeETABuffer1[TIMEETABUFFER1_SIZE];
+    static const uint16_t TIMEETABUFFER2_SIZE = 3;
+    touchgfx::Unicode::UnicodeChar timeETABuffer2[TIMEETABUFFER2_SIZE];
 
 private:
 
