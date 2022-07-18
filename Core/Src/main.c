@@ -184,6 +184,7 @@ float flowArray[5];
 float pressureArray[5];
 float adcOffset = 4096 *(0.004*150)/3.3;
 float adcToPressure =16/( 4096*(1-0.004*150/3.3));
+float startTime = 0;
 
 
 
@@ -1062,6 +1063,8 @@ extern xQueueHandle updateTotalFlowQ;
 extern xQueueHandle updatePressureQ;
 extern xQueueHandle updateRpmQ;
 
+extern xQueueHandle updateTimeQ;
+
 extern xQueueHandle motorSwitchQ;
 
 extern xQueueHandle dataTempQ;
@@ -1132,6 +1135,8 @@ void StartDefaultTask(void *argument)
 	  xQueueSend(updateRpmQ, &rpm,0);
 	  } else { init_int = 1; }
 	  t1 = HAL_GetTick();
+	  float timeElapsed = (t1-startTime)/1000;
+	  if (systemFlowStatusSV != 0) {xQueueSend(updateTimeQ, &timeElapsed, 0);}
 
 	  xQueueSend(updatePVTempQ, &avgTemp,0);
 	  xQueueSend(updatePVFlowQ, &avgFlow,0);
@@ -1234,6 +1239,7 @@ void controlTaskFunc(void *argument)
 		modelMeasPassData.motorRPMMeas[modelMeasPassData.newestMeasIndex] = rpm;
 		modelMeasPassData.time[modelMeasPassData.newestMeasIndex] = HAL_GetTick();
 		flowTotal = modelMeasPassData.volumeMeas[modelMeasPassData.newestMeasIndex];
+		startTime = modelMeasPassData.timeStart[modelMeasPassData.newestMeasIndex];
 
 		controlSystemUpdateSV(&systemControl, &modelDataSV); // update the setvalues
 		controlMeasurementUpdate(&systemControl, &modelMeasPassData); // Pass Measurement data to control class

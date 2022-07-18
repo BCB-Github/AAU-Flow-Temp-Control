@@ -30,6 +30,8 @@ public:
     void setPVTemp(float newTempPV);
     void setPVFlow(float newFlowPV);
     void setTotalFlow(float newTotalFlow);
+
+    void setTimeElapsed(float time);
     void resetFlowControl();
     void switchMotorState(int state);
 

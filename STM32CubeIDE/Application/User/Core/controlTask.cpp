@@ -116,6 +116,7 @@ void ControlClass::measurementUpdate(PassDataMeasHandle passDataMeas){//float pr
 	motorRPM = motorRPMRead;
 	*/
 	passDataMeas->volumeMeas[passDataMeas->newestMeasIndex] = volume;
+	passDataMeas->timeStart[passDataMeas->newestMeasIndex] = timeStart;
 	pressure = passDataMeas->presMeas[passDataMeas->newestMeasIndex];
 	temp = passDataMeas->tempMeas[passDataMeas->newestMeasIndex];
 	flow = passDataMeas->flowMeas[passDataMeas->newestMeasIndex];
@@ -188,10 +189,7 @@ void ControlClass::systemRun(){
 		systemFlowStatus = 4;
 	}
 
-	else if(systemFlowStatus ==5){
 
-		systemFlowStatusSV = 0; // Test completed - do not run anymore
-	}
 
 
 
@@ -207,6 +205,7 @@ void ControlClass::systemRun(){
 		testTime = 0;
 		systemFlowStatus = 2;
 		volume = 0;
+
 		break;
 
 	case 2: // control running high

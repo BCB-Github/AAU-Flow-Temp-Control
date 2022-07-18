@@ -72,6 +72,26 @@ void Screen1View::updateTotalFlow(float newVal)
 	background.invalidate();
 }
 
+void Screen1View::updateTime(float time)
+{
+	int minutes = (int)time/60;
+	int seconds = (int)time % 60;
+	if (minutes<10) {
+		Unicode::snprintf(timeElapsedBuffer1, TIMEELAPSEDBUFFER1_SIZE, "0%d", minutes);
+	} else {
+		Unicode::snprintf(timeElapsedBuffer1, TIMEELAPSEDBUFFER1_SIZE, "%d", minutes);
+	}
+
+	if (seconds<10) {
+		Unicode::snprintf(timeElapsedBuffer2, TIMEELAPSEDBUFFER2_SIZE, "0%d", seconds);
+	} else {
+		Unicode::snprintf(timeElapsedBuffer2, TIMEELAPSEDBUFFER2_SIZE, "%d", seconds);
+	}
+	timeElapsed.resizeToCurrentText();
+	timeElapsed.invalidate();
+	background.invalidate();
+}
+
 /* The functions update the graphs */
 void Screen1View::updateGraphTemp(float DP)
 {
@@ -168,9 +188,25 @@ void Screen1View::startPauseFlowControl()
 		flowStartState = 1;
 	    flowStopState = 1;
 		enableMotorState = 1;
+		Unicode::snprintf(sysStateWildcardBuffer, SYSSTATEWILDCARD_SIZE, "Running");
+		int time = volSetValue*60*1000 / flowSetValue;
+		int minutes = time/60;
+		int seconds = time%60;
+		if (minutes<10) {
+			Unicode::snprintf(timeETABuffer1, TIMEETABUFFER1_SIZE, "0%d", minutes);
+		} else {
+			Unicode::snprintf(timeETABuffer1, TIMEETABUFFER1_SIZE, "%d", minutes);
+		}
+
+		if (seconds<10) {
+			Unicode::snprintf(timeETABuffer2, TIMEETABUFFER2_SIZE, "0%d", seconds);
+		} else {
+			Unicode::snprintf(timeETABuffer2, TIMEETABUFFER2_SIZE, "%d", seconds);
+		}
 		presenter->switchMotorState(enableMotorState);
 	} else {
 		flowStartState = 0;
+		Unicode::snprintf(sysStateWildcardBuffer, SYSSTATEWILDCARD_SIZE, "Paused");
 	}
 	setFlowIcons();
 }
@@ -182,6 +218,8 @@ void Screen1View::stopFlowControl()
 		flowStartState = 0;
 		flowStopState = 0;
 		enableMotorState = 0;
+		Unicode::snprintf(sysStateWildcardBuffer, SYSSTATEWILDCARD_SIZE, "Standby");
+		circleProgress.setValue(100);
 		presenter->switchMotorState(enableMotorState);
 	}
 	setFlowIcons();
@@ -198,7 +236,7 @@ void Screen1View::limitVol()
 
 	} else {
 	    toggleVol.setBitmaps(Bitmap(BITMAP_DISABLED_ID), Bitmap(BITMAP_DISABLED_ID));
-	    toggleVol.setPosition(226, 195, 30, 30);
+	    toggleVol.setWidthHeight(30, 30);
 		toggleVol.invalidate();
 		limitVolState = 0;
 	}
@@ -206,21 +244,10 @@ void Screen1View::limitVol()
 
 /*void Screen1View::enableMotor()
 {
-	if (enableMotorState == 0)
-	{
-		toggleMotor.setBitmaps(Bitmap(BITMAP_ENABLED_ID), Bitmap(BITMAP_ENABLED_ID));
-		toggleMotor.setWidthHeight(30, 30);
-		toggleMotor.invalidate();
-		enableMotorState = 1;
-		presenter->switchMotorState(enableMotorState);
-	} else {
-		toggleMotor.setBitmaps(Bitmap(BITMAP_DISABLED_ID), Bitmap(BITMAP_DISABLED_ID));
-		toggleMotor.setWidthHeight(30, 30);
-		toggleMotor.invalidate();
-		enableMotorState = 0;
-		presenter->switchMotorState(enableMotorState);
+
 	}
 }*/
+
 /* This function is used to animate the progress circle */
 void Screen1View::running()
 {

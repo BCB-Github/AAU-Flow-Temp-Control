@@ -18,6 +18,7 @@ float flowPV = 0;
 float flowTot = 0;
 float pressurePV = 0;
 float rpmPV = 0;
+float timeVar = 0;
 
 extern PassDataMeas modelMeasPassData;
 extern int tempStartState;
@@ -35,6 +36,8 @@ extern "C"
 	xQueueHandle updateTotalFlowQ;
 	xQueueHandle updatePressureQ;
 	xQueueHandle updateRpmQ;
+
+	xQueueHandle updateTimeQ;
 
 /* The Queues used to send datapoints to graphs */
 	xQueueHandle dataTempQ;
@@ -60,6 +63,8 @@ Model::Model() : modelListener(0)
 	updateTotalFlowQ = xQueueGenericCreate(1, sizeof(float), 0);
 	updatePressureQ = xQueueGenericCreate(1, sizeof(float), 0);
 	updateRpmQ = xQueueGenericCreate(1, sizeof(float), 0);
+
+	updateTimeQ = xQueueGenericCreate(1, sizeof(float), 0);
 
 	motorSwitchQ = xQueueGenericCreate(1, sizeof(int), 0);
 
@@ -92,6 +97,7 @@ void Model::tick()
 	if (xQueueReceive(updateTotalFlowQ, &flowTot, 0)==pdTRUE)
 	{
 		modelListener->setTotalFlow(flowTot);
+		modelListener->addDatapointVol(flowTot);
 	}
 	if (xQueueReceive(updatePressureQ, &pressurePV, 0)==pdTRUE)
 	{
@@ -101,6 +107,12 @@ void Model::tick()
 	{
 		modelListener->setRpmS2(rpmPV);
 	}
+
+	if (xQueueReceive(updateTimeQ, &timeVar, 0)==pdTRUE)
+		{
+		  modelListener->setTimeElapsed(timeVar);
+		  modelListener->setTimeElapsedS3(timeVar);
+		}
 
 	if ((flowStartState == 1) | (tempStartState == 1))
 		{

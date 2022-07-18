@@ -15,6 +15,7 @@ public:
     void updateTempPV(float newVal);
     void updateFlowPV(float newVal);
     void updateTotalFlow(float newVal);
+    void updateTime(float time);
     void setTempIcons();
     void setFlowIcons();
     void resetFlowIcons();

@@ -34,6 +34,11 @@ void Screen1Presenter::setTotalFlow(float newTotalFlow)
 	view.updateTotalFlow(newTotalFlow);
 }
 
+void Screen1Presenter::setTimeElapsed(float time)
+{
+	view.updateTime(time);
+}
+
 void Screen1Presenter::addDatapointTemp(float newDP)
 {
 	view.updateGraphTemp(newDP);

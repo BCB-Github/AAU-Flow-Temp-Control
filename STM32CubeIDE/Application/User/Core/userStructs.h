@@ -20,6 +20,7 @@ typedef struct PassDataSV {
 }PassDataSV;
 
 typedef struct PassDataMeas{
+	float timeStart[STORED_DATA_MEAS];
 	float time[STORED_DATA_MEAS];
 	float flowMeas[STORED_DATA_MEAS];
 	float tempMeas[STORED_DATA_MEAS];

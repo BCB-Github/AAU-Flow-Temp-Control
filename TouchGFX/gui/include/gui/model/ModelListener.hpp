@@ -27,10 +27,14 @@ public:
 	virtual void setPressureS2(float newPressure) {}
 	virtual void setRpmS2(float newRpm) {}
 
+	virtual void setTimeElapsed(float time) {}
+	virtual void setTimeElapsedS3(float time) {}
+
 	virtual void runProgress() {}
 
 	virtual void addDatapointTemp(float newDP) {}
 	virtual void addDatapointFlow(float newDP) {}
+	virtual void addDatapointVol(float VolDP) {}
 
 	virtual void setTestVal1(float newTestVal1) {}
 	virtual void setTestVal2(float newTestVal2) {}

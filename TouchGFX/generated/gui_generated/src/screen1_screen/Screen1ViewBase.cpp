@@ -44,13 +44,13 @@ Screen1ViewBase::Screen1ViewBase() :
     flexDownVol.setBoxWithBorderPosition(0, 0, 50, 50);
     flexDownVol.setBorderSize(5);
     flexDownVol.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    flexDownVol.setPosition(162, 222, 50, 50);
+    flexDownVol.setPosition(151, 222, 50, 50);
     flexDownVol.setAction(flexButtonCallback);
 
     flexUpVol.setBoxWithBorderPosition(0, 0, 50, 50);
     flexUpVol.setBorderSize(5);
     flexUpVol.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    flexUpVol.setPosition(162, 150, 50, 50);
+    flexUpVol.setPosition(151, 150, 50, 50);
     flexUpVol.setAction(flexButtonCallback);
 
     background.setPosition(0, 0, 480, 272);
@@ -152,7 +152,7 @@ Screen1ViewBase::Screen1ViewBase() :
     nowVol.resizeToCurrentText();
     nowVol.setTypedText(touchgfx::TypedText(T___SINGLEUSE_XTYX));
 
-    SPVol.setXY(168, 198);
+    SPVol.setXY(157, 198);
     SPVol.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     SPVol.setLinespacing(0);
     Unicode::snprintf(SPVolBuffer, SPVOL_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_G3D0).getText());
@@ -186,13 +186,13 @@ Screen1ViewBase::Screen1ViewBase() :
     tempSPTitle.setLinespacing(0);
     tempSPTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_19KW));
 
-    flexButton1.setBoxWithBorderPosition(0, 0, 124, 27);
+    flexButton1.setBoxWithBorderPosition(0, 0, 60, 27);
     flexButton1.setBorderSize(5);
     flexButton1.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(1, 68, 135), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    flexButton1.setPosition(7, 239, 124, 27);
+    flexButton1.setPosition(7, 239, 60, 27);
     flexButton1.setAction(flexButtonCallback);
 
-    textArea1.setXY(18, 243);
+    textArea1.setXY(13, 243);
     textArea1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea1.setLinespacing(0);
     textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_1BLF));
@@ -207,7 +207,7 @@ Screen1ViewBase::Screen1ViewBase() :
     circleProgress.setBackground(touchgfx::Bitmap(BITMAP_BLUE_PROGRESSINDICATORS_BG_SMALL_CIRCLE_INDICATOR_BG_FULL_ID));
     circleProgressPainter.setColor(touchgfx::Color::getColorFromRGB(34, 177, 76));
     circleProgress.setPainter(circleProgressPainter);
-    circleProgress.setValue(0);
+    circleProgress.setValue(100);
 
     textArea2.setXY(5, 141);
     textArea2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -215,11 +215,11 @@ Screen1ViewBase::Screen1ViewBase() :
     textArea2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_IABV));
 
     upVolImg.setBitmap(touchgfx::Bitmap(BITMAP_UP_ARROW_ID));
-    upVolImg.setPosition(162, 150, 50, 50);
+    upVolImg.setPosition(151, 150, 50, 50);
     upVolImg.setScalingAlgorithm(touchgfx::ScalableImage::NEAREST_NEIGHBOR);
 
     downVolImg.setBitmap(touchgfx::Bitmap(BITMAP_DOWN_ARROW_ID));
-    downVolImg.setPosition(162, 222, 50, 50);
+    downVolImg.setPosition(151, 222, 50, 50);
     downVolImg.setScalingAlgorithm(touchgfx::ScalableImage::NEAREST_NEIGHBOR);
 
     startPauseTemp.setBoxWithBorderPosition(0, 0, 30, 30);
@@ -264,7 +264,7 @@ Screen1ViewBase::Screen1ViewBase() :
     en1.setLinespacing(0);
     en1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_72AS));
 
-    en3.setXY(224, 228);
+    en3.setXY(217, 229);
     en3.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     en3.setLinespacing(0);
     en3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_BZFF));
@@ -274,10 +274,10 @@ Screen1ViewBase::Screen1ViewBase() :
     toggleVol.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
     toggleVol.setBitmaps(Bitmap(BITMAP_DISABLED_ID), Bitmap(BITMAP_DISABLED_ID));
     toggleVol.setBitmapXY(2, 2);
-    toggleVol.setPosition(226, 195, 30, 30);
+    toggleVol.setPosition(219, 195, 30, 30);
     toggleVol.setAction(flexButtonCallback);
 
-    lim1.setXY(230, 241);
+    lim1.setXY(223, 242);
     lim1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     lim1.setLinespacing(0);
     lim1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6YGY));
@@ -292,7 +292,7 @@ Screen1ViewBase::Screen1ViewBase() :
     con2.setLinespacing(0);
     con2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_LWY7));
 
-    textAreaSP_2.setXY(148, 136);
+    textAreaSP_2.setXY(137, 136);
     textAreaSP_2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textAreaSP_2.setLinespacing(0);
     textAreaSP_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6F1N));
@@ -331,9 +331,51 @@ Screen1ViewBase::Screen1ViewBase() :
     sysStateWildcard.setXY(291, 254);
     sysStateWildcard.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     sysStateWildcard.setLinespacing(0);
-    sysStateWildcard.setWildcard(touchgfx::TypedText(T___SINGLEUSE_AZSF).getText());
+    Unicode::snprintf(sysStateWildcardBuffer, SYSSTATEWILDCARD_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_AZSF).getText());
+    sysStateWildcard.setWildcard(sysStateWildcardBuffer);
     sysStateWildcard.resizeToCurrentText();
     sysStateWildcard.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ICXT));
+
+    flexButton1_1.setBoxWithBorderPosition(0, 0, 60, 27);
+    flexButton1_1.setBorderSize(5);
+    flexButton1_1.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(1, 68, 135), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    flexButton1_1.setPosition(77, 239, 60, 27);
+    flexButton1_1.setAction(flexButtonCallback);
+
+    textArea3.setXY(86, 243);
+    textArea3.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea3.setLinespacing(0);
+    textArea3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ZXAU));
+
+    timeElapsed.setXY(303, 136);
+    timeElapsed.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    timeElapsed.setLinespacing(0);
+    touchgfx::Unicode::snprintf(timeElapsedBuffer1, TIMEELAPSEDBUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_A6QO).getText());
+    timeElapsed.setWildcard1(timeElapsedBuffer1);
+    touchgfx::Unicode::snprintf(timeElapsedBuffer2, TIMEELAPSEDBUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_I9HP).getText());
+    timeElapsed.setWildcard2(timeElapsedBuffer2);
+    timeElapsed.resizeToCurrentText();
+    timeElapsed.setTypedText(touchgfx::TypedText(T___SINGLEUSE_QXL3));
+
+    timeETA.setXY(303, 159);
+    timeETA.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    timeETA.setLinespacing(0);
+    touchgfx::Unicode::snprintf(timeETABuffer1, TIMEETABUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_27JP).getText());
+    timeETA.setWildcard1(timeETABuffer1);
+    touchgfx::Unicode::snprintf(timeETABuffer2, TIMEETABUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_K8A6).getText());
+    timeETA.setWildcard2(timeETABuffer2);
+    timeETA.resizeToCurrentText();
+    timeETA.setTypedText(touchgfx::TypedText(T___SINGLEUSE_XTOH));
+
+    textArea4.setXY(234, 136);
+    textArea4.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea4.setLinespacing(0);
+    textArea4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_MIAO));
+
+    textArea5.setXY(193, 159);
+    textArea5.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea5.setLinespacing(0);
+    textArea5.setTypedText(touchgfx::TypedText(T___SINGLEUSE_C7HQ));
 
     add(__background);
     add(flexDownTemp);
@@ -382,6 +424,12 @@ Screen1ViewBase::Screen1ViewBase() :
     add(circleProgress1);
     add(sysStatus);
     add(sysStateWildcard);
+    add(flexButton1_1);
+    add(textArea3);
+    add(timeElapsed);
+    add(timeETA);
+    add(textArea4);
+    add(textArea5);
 }
 
 void Screen1ViewBase::setupScreen()
@@ -474,5 +522,12 @@ void Screen1ViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonCo
         //When toggleVol clicked call virtual function
         //Call limitVol
         limitVol();
+    }
+    else if (&src == &flexButton1_1)
+    {
+        //toCalibration
+        //When flexButton1_1 clicked change screen to Screen3
+        //Go to Screen3 with no screen transition
+        application().gotoScreen3ScreenNoTransition();
     }
 }
