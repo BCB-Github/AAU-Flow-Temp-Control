@@ -215,9 +215,9 @@ void ControlClass::systemRun(){
 
 
 
-		volume = volume +  	T1 *3/8 * (flow + 3 * oldFlow + 3*oldFlow2 + oldFlow3); // - add the volume that had occoured during the loop
-		oldFlow3 = oldFlow2;
-		oldFlow2 = oldFlow;
+		volume = volume +  	T1/2 * (flow + oldFlow); // - add the volume that had occoured during the loop
+		//oldFlow3 = oldFlow2;
+		//oldFlow2 = oldFlow;
 		oldFlow = flow;
 		dutyVoltageFlow= u_flow/5;
 

@@ -179,6 +179,7 @@ extern ControlClass systemControl;
 float flowTotal;
 extern int16_t flowI2C;
 extern float temp;
+float flowCurrent = 0;
 float tempArray[5];
 float flowArray[5];
 float pressureArray[5];
@@ -186,7 +187,7 @@ float adcOffset = 4096 *(0.004*150)/3.3;
 float adcToPressure =16/( 4096*(1-0.004*150/3.3));
 float startTime = 0;
 
-
+int count = 0;
 
 /* USER CODE END PFP */
 
@@ -1224,7 +1225,7 @@ void controlTaskFunc(void *argument)
 		  sumPressure += pressureArray[j];
 	  }
 	  avgTemp = sumTemp/5;
-	  avgFlow = sumFlow/5;
+	  avgFlow = flowCurrent;
 	  avgPressure = sumPressure/5;
 
 	  // Update Measurement Array
@@ -1267,19 +1268,20 @@ void StartTaskSampling(void *argument)
 
     HAL_ADC_Start(&hadc1);
 	HAL_ADC_Start_DMA(&hadc1, &uhADCxConvertedValue, 10);
-	int count = 0;
+
 
 
     for(;;)
     {
 
 
-		  if (count==5) {count = 0;}
+
   	  	  HAL_ADC_Start_DMA(&hadc1, &uhADCxConvertedValue, PRESSURE_ANALOG_SAMPLES); // A0 pressure reading
 
   		  I2CRead();
   		  tempArray[count] = (float)temp;
   		  flowArray[count] = (float)flowI2C;
+  		  flowCurrent = (float)flowI2C;
 
     	  int tmpPressure = 0; // static so the variable isn't created every time
     	  for (int a = 0; a < PRESSURE_ANALOG_SAMPLES; a++)
@@ -1292,6 +1294,7 @@ void StartTaskSampling(void *argument)
 
   		  pressureArray[count] = presMeasValue;
   		  count++;
+  		  if (count==5) {count = 0;}
   		  osDelay(2);
   }
   /* USER CODE END StartTaskSampling */
