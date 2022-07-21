@@ -322,7 +322,7 @@ Screen1ViewBase::Screen1ViewBase() :
     graphTimeLabel.setLinespacing(0);
     graphTimeLabel.setTypedText(touchgfx::TypedText(T___SINGLEUSE_RAM8));
 
-    textArea6.setXY(183, 142);
+    textArea6.setXY(183, 141);
     textArea6.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea6.setLinespacing(0);
     textArea6.setTypedText(touchgfx::TypedText(T___SINGLEUSE_60MR));
