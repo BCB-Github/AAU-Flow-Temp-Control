@@ -19,9 +19,11 @@ extern int volSetValue;
 extern int data3DaysFlow[1000];
 extern int data3DaysTemp[1000];
 extern int daysDataCount;
+extern int daysLoops;
 extern int data3MinsFlow[1000];
 extern int data3MinsTemp[1000];
 extern int minsDataCount;
+extern int minsLoops;
 
 int i = 1; // integer to animate circle progress
 
@@ -335,7 +337,7 @@ void Screen1View::setSpanDays()
 	graphTemp.dataCounterReset();
 	graphFlow.clear();
 	graphFlow.dataCounterReset();
-	if (data3DaysFlow[999] == 0) {
+	if (daysLoops == 0) {
 		for (int x = 0; x<daysDataCount; x++) {
 			graphTemp.addDataPointScaled(data3DaysTemp[x]);
 			graphFlow.addDataPoint(data3DaysFlow[x]);
@@ -358,7 +360,7 @@ void Screen1View::setSpanMinutes()
 	graphTemp.dataCounterReset();
 	graphFlow.clear();
 	graphFlow.dataCounterReset();
-	if (data3MinsFlow[999] == 0) {
+	if (minsLoops == 0) {
 		for (int x = 0; x<minsDataCount; x++) {
 			graphTemp.addDataPointScaled(data3MinsTemp[x]);
 			graphFlow.addDataPoint(data3MinsFlow[x]);

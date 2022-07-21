@@ -1369,6 +1369,7 @@ void MPU_Config(void)
   MPU_InitStruct.Number = MPU_REGION_NUMBER1;
   MPU_InitStruct.Size = MPU_REGION_SIZE_16MB;
   MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
@@ -1378,7 +1379,6 @@ void MPU_Config(void)
   MPU_InitStruct.BaseAddress = 0x0;
   MPU_InitStruct.Size = MPU_REGION_SIZE_1MB;
   MPU_InitStruct.AccessPermission = MPU_REGION_NO_ACCESS;
-  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
   /* Enables the MPU */
