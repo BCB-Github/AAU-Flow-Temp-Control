@@ -6,6 +6,7 @@
  */
 #include "main.h"
 #include "cmsis_os.h"
+#include "queue.h"
 #include "libjpeg.h"
 #include "app_touchgfx.h"
 #include "controlTask.hpp"
@@ -19,7 +20,7 @@ float oldFlow2 = 0;
 float oldFlow3 = 0;
 float T1 = 0.01/60;
 
-
+extern xQueueHandle motorSwitchQ;
 
 ControlClass::ControlClass() : pressure(0), pressureSV(0), kp_flow(0.001) , ki_flow(.003){
 
@@ -209,6 +210,13 @@ void ControlClass::systemRun(){
 		break;
 
 	case 2: // control running high
+
+		// Pressure check
+		if (pressure > 1) {
+			systemFlowStatus = 3;
+			break;
+		}
+
 		testTime = time - timeStart - timeStop ;
 		// Idea here is that we run our control
 		controlFlow(flowSV - flow);
@@ -216,6 +224,7 @@ void ControlClass::systemRun(){
 
 
 		volume = volume +  	T1/2 * (flow + oldFlow); // - add the volume that had occoured during the loop
+
 		//oldFlow3 = oldFlow2;
 		//oldFlow2 = oldFlow;
 		oldFlow = flow;
@@ -237,6 +246,7 @@ void ControlClass::systemRun(){
 		break;
 
 	case 3: // Control Ramp down
+
 		 // Control the system to zero
 		controlFlow(0-flow);
 		dutyVoltageFlow= u_flow/5;
@@ -266,11 +276,13 @@ void ControlClass::systemRun(){
 	case 5: //testCompleted
 		// Return to Standby
 		u_old_flow = 0;
+		volume = 0;
 		TIM12->CCR1=(int)1;
 		flowStartState = 2;
 		flowStopState = 0;
 		systemFlowStatusSV = 0;
 		systemFlowStatus = 0;
+		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7|MCU_ACTIVE_Pin, GPIO_PIN_RESET);
 		break;
 	}
 

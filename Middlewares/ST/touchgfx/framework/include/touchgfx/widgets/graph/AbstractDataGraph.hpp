@@ -1336,7 +1336,7 @@ public:
     {
         DynamicDataGraph::setGraphRangeX(0, capacity - 1);
     }
-
+    void dataCounterReset() { dataCounter = 0; }
     /**
      * Sets a scaling factor to be multiplied on each added element. Since the graph only stores
      * integer values internally, it is possible to set a scale to e.g. 1000 and make the graph

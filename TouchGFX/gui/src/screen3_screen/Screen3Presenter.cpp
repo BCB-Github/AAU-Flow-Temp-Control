@@ -19,5 +19,12 @@ void Screen3Presenter::deactivate()
 
 void Screen3Presenter::addDatapointVol(float VolDP)
 {
-	view.updateGraphFlow(VolDP);
+	view.updateGraphVol(VolDP);
+	view.updateVol(VolDP);
 }
+
+void Screen3Presenter::setTimeElapsedS3(float time)
+{
+	view.updateTimeS3(time);
+}
+

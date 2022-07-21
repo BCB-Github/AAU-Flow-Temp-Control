@@ -11,7 +11,31 @@ public:
     virtual ~Screen3View() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
-    void updateGraphFlow(float DP);
+
+    void incrementVol();
+    void decrementVol();
+    void limitVol();
+    void printVolSV();
+    void updateGraphVol(float DP);
+    void updateVol(float Vol);
+
+    void updateTimeS3(float time);
+    void setTimeEstimate();
+    void calcETA(float Vol);
+
+    void incrementDigit1();
+    void decrementDigit1();
+    void incrementDigit2();
+    void decrementDigit2();
+    void incrementDigit3();
+    void decrementDigit3();
+
+    void printInput1();
+    void printInput2();
+    void printInput3();
+
+    void enableCorrection();
+
 protected:
 };
 

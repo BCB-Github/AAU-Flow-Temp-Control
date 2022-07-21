@@ -2,17 +2,26 @@
 #include <BitmapDatabase.hpp>
 
 /* Variables to store the Set Value of volume, temp and flow */
-int volSetValue = 0;
 int tempSetValue = 20;
 int flowSetValue = 700;
 
 /* Variables to store the state of the pause/stop/enable buttons */
 int enableMotorState = 0;
-int limitVolState = 0;
 int tempStartState = 0;
 int tempStopState = 0;
 int flowStartState = 0;
 int flowStopState = 0;
+int graphState = 0;
+
+extern int timeEstimate;
+
+extern int volSetValue;
+extern int data3DaysFlow[1000];
+extern int data3DaysTemp[1000];
+extern int daysDataCount;
+extern int data3MinsFlow[1000];
+extern int data3MinsTemp[1000];
+extern int minsDataCount;
 
 int i = 1; // integer to animate circle progress
 
@@ -26,19 +35,15 @@ void Screen1View::setupScreen()
     Screen1ViewBase::setupScreen();
     printTempSV();
     printFlowSV();
-    printVolSV();
 
     setTempIcons();
     setFlowIcons();
 
-    if (limitVolState == 1)
-    {
-	    toggleVol.setBitmaps(Bitmap(BITMAP_ENABLED_ID), Bitmap(BITMAP_ENABLED_ID));
-	    toggleVol.setWidthHeight(30, 30);
-		toggleVol.invalidate();
+    if (graphState == 1) {
+    	setSpanDays();
+    } else {
+    	setSpanMinutes();
     }
-
-
 
 }
 
@@ -74,8 +79,16 @@ void Screen1View::updateTotalFlow(float newVal)
 
 void Screen1View::updateTime(float time)
 {
-	int minutes = (int)time/60;
+	int hours = (int)time/3600;
+	int minutes = (int)time/60 - hours*60;
 	int seconds = (int)time % 60;
+
+	if (hours<10) {
+		Unicode::snprintf(hoursElapsedBuffer, HOURSELAPSED_SIZE, "0%d", hours);
+	} else {
+		Unicode::snprintf(hoursElapsedBuffer, HOURSELAPSED_SIZE, "%d", hours);
+	}
+
 	if (minutes<10) {
 		Unicode::snprintf(timeElapsedBuffer1, TIMEELAPSEDBUFFER1_SIZE, "0%d", minutes);
 	} else {
@@ -87,20 +100,26 @@ void Screen1View::updateTime(float time)
 	} else {
 		Unicode::snprintf(timeElapsedBuffer2, TIMEELAPSEDBUFFER2_SIZE, "%d", seconds);
 	}
+	hoursElapsed.resizeToCurrentText();
+	hoursElapsed.invalidate();
 	timeElapsed.resizeToCurrentText();
 	timeElapsed.invalidate();
-	background.invalidate();
+	//background.invalidate();
 }
 
 /* The functions update the graphs */
 void Screen1View::updateGraphTemp(float DP)
 {
+	if (graphState == 0) {
 	graphTemp.addDataPoint(DP);
+	}
 }
 
 void Screen1View::updateGraphFlow(float DP)
 {
+	if (graphState == 0) {
 	graphFlow.addDataPoint(DP);
+	}
 }
 
 /* The following functions are called from buttons on the screen */
@@ -141,24 +160,6 @@ void Screen1View::decrementFlow()
 	}
 }
 
-void Screen1View::incrementVol()
-{
-	if (volSetValue !=100) {
-		volSetValue++;
-		printVolSV();
-	}
-}
-
-void Screen1View::decrementVol()
-{
-	if (volSetValue != 0) {
-		volSetValue--;
-		if ((volSetValue == 9) | (volSetValue == 99))
-		{ background.invalidate(); }
-		printVolSV();
-	}
-}
-
 void Screen1View::startPauseTempControl()
 {
 	if (tempStartState == 0)
@@ -189,20 +190,8 @@ void Screen1View::startPauseFlowControl()
 	    flowStopState = 1;
 		enableMotorState = 1;
 		Unicode::snprintf(sysStateWildcardBuffer, SYSSTATEWILDCARD_SIZE, "Running");
-		int time = volSetValue*60*1000 / flowSetValue;
-		int minutes = time/60;
-		int seconds = time%60;
-		if (minutes<10) {
-			Unicode::snprintf(timeETABuffer1, TIMEETABUFFER1_SIZE, "0%d", minutes);
-		} else {
-			Unicode::snprintf(timeETABuffer1, TIMEETABUFFER1_SIZE, "%d", minutes);
-		}
+		calcETA();
 
-		if (seconds<10) {
-			Unicode::snprintf(timeETABuffer2, TIMEETABUFFER2_SIZE, "0%d", seconds);
-		} else {
-			Unicode::snprintf(timeETABuffer2, TIMEETABUFFER2_SIZE, "%d", seconds);
-		}
 		presenter->switchMotorState(enableMotorState);
 	} else {
 		flowStartState = 0;
@@ -225,22 +214,7 @@ void Screen1View::stopFlowControl()
 	setFlowIcons();
 }
 
-void Screen1View::limitVol()
-{
-	if (limitVolState == 0)
-	{
-	    toggleVol.setBitmaps(Bitmap(BITMAP_ENABLED_ID), Bitmap(BITMAP_ENABLED_ID));
-	    toggleVol.setWidthHeight(30, 30);
-		toggleVol.invalidate();
-		limitVolState = 1;
 
-	} else {
-	    toggleVol.setBitmaps(Bitmap(BITMAP_DISABLED_ID), Bitmap(BITMAP_DISABLED_ID));
-	    toggleVol.setWidthHeight(30, 30);
-		toggleVol.invalidate();
-		limitVolState = 0;
-	}
-}
 
 /*void Screen1View::enableMotor()
 {
@@ -293,18 +267,7 @@ void Screen1View::printFlowSV()
 	SPFlow.invalidate();
 }
 
-void Screen1View::printVolSV()
-{
-	if (volSetValue < 10)
-	{
-		SPVol.setXY(168, 198);
-	}	else {
-		SPVol.setXY(162, 198);
-	}
-	Unicode::snprintf(SPVolBuffer, SPVOL_SIZE, "%d", volSetValue);
-	SPVol.resizeToCurrentText();
-	SPVol.invalidate();
-}
+
 
 
 
@@ -363,4 +326,55 @@ void Screen1View::resetFlowIcons()
 	stopFlow.setWidthHeight(30, 30);
 	stopFlow.invalidate();
 	flowStartState = 0;
+}
+
+void Screen1View::setSpanDays()
+{
+	graphState = 1;
+	graphTemp.clear();
+	graphTemp.dataCounterReset();
+	graphFlow.clear();
+	graphFlow.dataCounterReset();
+	if (data3DaysFlow[999] == 0) {
+		for (int x = 0; x<daysDataCount; x++) {
+			graphTemp.addDataPointScaled(data3DaysTemp[x]);
+			graphFlow.addDataPoint(data3DaysFlow[x]);
+		}
+	} else {
+		int k = daysDataCount+1;
+		for (int y = 0; y<1000; y++) {
+			if (k == 1000) {k=0;}
+			graphTemp.addDataPointScaled(data3DaysTemp[k]);
+			graphFlow.addDataPoint(data3DaysFlow[k]);
+			k += 1;
+		}
+	}
+}
+
+void Screen1View::setSpanMinutes()
+{
+	graphState = 0;
+	graphTemp.clear();
+	graphTemp.dataCounterReset();
+	graphFlow.clear();
+	graphFlow.dataCounterReset();
+	if (data3MinsFlow[999] == 0) {
+		for (int x = 0; x<minsDataCount; x++) {
+			graphTemp.addDataPointScaled(data3MinsTemp[x]);
+			graphFlow.addDataPoint(data3MinsFlow[x]);
+		}
+	} else {
+		int k = minsDataCount+1;
+		for (int y = 0; y<1000; y++) {
+			if (k == 1000) {k=0;}
+			graphTemp.addDataPointScaled(data3MinsTemp[k]);
+			graphFlow.addDataPoint(data3MinsFlow[k]);
+			k += 1;
+		}
+	}
+}
+
+void Screen1View::calcETA()
+{
+	timeEstimate = volSetValue*60*1000 / flowSetValue;
 }

@@ -109,7 +109,7 @@ SDRAM_HandleTypeDef hsdram1;
 osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
   .name = "defaultTask",
-  .stack_size = 256 * 4,
+  .stack_size = 512 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for TouchGFXTask */
@@ -123,7 +123,7 @@ const osThreadAttr_t TouchGFXTask_attributes = {
 osThreadId_t videoTaskHandle;
 const osThreadAttr_t videoTask_attributes = {
   .name = "videoTask",
-  .stack_size = 1000 * 4,
+  .stack_size = 1280 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
 /* Definitions for controlTask */
@@ -186,7 +186,17 @@ float pressureArray[5];
 float adcOffset = 4096 *(0.004*150)/3.3;
 float adcToPressure =16/( 4096*(1-0.004*150/3.3));
 float startTime = 0;
+float timeElapsed = 0;
 
+int data3DaysFlow[1000] = {0};
+int data3DaysTemp[1000] = {0};
+int data3MinsFlow[1000] = {0};
+int data3MinsTemp[1000] = {0};
+
+int daysDataCount = 0;
+int daysLoops = 0;
+int minsDataCount = 0;
+int minsLoops = 0;
 int count = 0;
 
 /* USER CODE END PFP */
@@ -203,6 +213,10 @@ int count = 0;
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+/*
+	for (int k=0; k<1000; k++) {
+	dataSetDays[k] = k - (k/100)*100;
+} */
 
   /* USER CODE END 1 */
 
@@ -1127,17 +1141,42 @@ void StartDefaultTask(void *argument)
 
   for(;;)
   {
-	  if (init_int == 1)
-	  {
-	  dt1 = HAL_GetTick()-t1;
-	  freqRPM = counter*1000/dt1;
-	  counter = 0;
-	  rpm = freqRPM*10;
-	  xQueueSend(updateRpmQ, &rpm,0);
+	  /* First part calculates motor rpm from EXTI counter
+	   * waits an iteration to initiate  */
+
+	  if (init_int == 1) {
+		  dt1 = HAL_GetTick()-t1;
+		  freqRPM = counter*1000/dt1;
+		  counter = 0;
+		  rpm = freqRPM*10;
+		  xQueueSend(updateRpmQ, &rpm,0);
 	  } else { init_int = 1; }
 	  t1 = HAL_GetTick();
-	  float timeElapsed = (t1-startTime)/1000;
-	  if (systemFlowStatusSV != 0) {xQueueSend(updateTimeQ, &timeElapsed, 0);}
+
+	  if (startTime != 0) {
+		  timeElapsed = (t1-startTime)/1000; /* Time since start of test in seconds */
+		  if (systemFlowStatusSV != 0) {xQueueSend(updateTimeQ, &timeElapsed, 0);}
+	  }
+
+	  if ((t1/1000 - daysLoops*72*60*60) > daysDataCount*260) {
+		  data3DaysFlow[daysDataCount] = avgFlow;
+		  data3DaysTemp[daysDataCount] = avgTemp*10;
+		  daysDataCount++;
+		  if (daysDataCount == 1000) {
+			  daysDataCount = 0;
+			  daysLoops++;
+		  }
+	  }
+
+	  if ((t1 - minsLoops*180*1000) > minsDataCount*180) {
+		  data3MinsFlow[minsDataCount] = avgFlow;
+		  data3MinsTemp[minsDataCount] = avgTemp*10;
+		  minsDataCount++;
+		  if (minsDataCount == 1000) {
+			  minsDataCount = 0;
+			  minsLoops++;
+		  }
+	  }
 
 	  xQueueSend(updatePVTempQ, &avgTemp,0);
 	  xQueueSend(updatePVFlowQ, &avgFlow,0);
@@ -1268,7 +1307,7 @@ void StartTaskSampling(void *argument)
 
     HAL_ADC_Start(&hadc1);
 	HAL_ADC_Start_DMA(&hadc1, &uhADCxConvertedValue, 10);
-
+	extern float correctionFactor;
 
 
     for(;;)
@@ -1281,7 +1320,7 @@ void StartTaskSampling(void *argument)
   		  I2CRead();
   		  tempArray[count] = (float)temp;
   		  flowArray[count] = (float)flowI2C;
-  		  flowCurrent = (float)flowI2C;
+  		  flowCurrent = (float)flowI2C*correctionFactor;
 
     	  int tmpPressure = 0; // static so the variable isn't created every time
     	  for (int a = 0; a < PRESSURE_ANALOG_SAMPLES; a++)

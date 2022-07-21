@@ -26,6 +26,7 @@ public:
     virtual void deactivate();
 
     void addDatapointVol(float VolDP);
+    void setTimeElapsedS3(float time);
 
     virtual ~Screen3Presenter() {};
 

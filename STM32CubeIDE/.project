@@ -1169,6 +1169,16 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_notEnabled.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/image_small-down-arrow.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_small-down-arrow.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_small-up-arrow.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_small-up-arrow.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/image_up-arrow.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_up-arrow.cpp</locationURI>

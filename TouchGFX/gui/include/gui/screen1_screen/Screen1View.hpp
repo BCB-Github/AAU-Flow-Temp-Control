@@ -27,21 +27,23 @@ public:
     void decrementTemp();
     void incrementFlow();
     void decrementFlow();
-    void incrementVol();
-    void decrementVol();
+
 
     void startPauseTempControl();
     void stopTempControl();
     void startPauseFlowControl();
     void stopFlowControl();
     //void enableMotor();
-    void limitVol();
+    void setSpanDays();
+    void setSpanMinutes();
+    void calcETA();
+
 
     void running();
 
     void printTempSV();
     void printFlowSV();
-    void printVolSV();
+
 
 protected:
 };
