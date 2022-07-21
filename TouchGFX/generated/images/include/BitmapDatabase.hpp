@@ -13,10 +13,12 @@ const uint16_t BITMAP_ENABLED_ID = 3;
 const uint16_t BITMAP_NOTENABLED_ID = 4;
 const uint16_t BITMAP_PAUSE_ID = 5;
 const uint16_t BITMAP_PROGRESSINDICATORS_BG_ID = 6;
-const uint16_t BITMAP_START_ID = 7;
-const uint16_t BITMAP_STOP_ID = 8;
-const uint16_t BITMAP_STOPDIS_ID = 9;
-const uint16_t BITMAP_UP_ARROW_ID = 10;
+const uint16_t BITMAP_SMALL_DOWN_ARROW_ID = 7;
+const uint16_t BITMAP_SMALL_UP_ARROW_ID = 8;
+const uint16_t BITMAP_START_ID = 9;
+const uint16_t BITMAP_STOP_ID = 10;
+const uint16_t BITMAP_STOPDIS_ID = 11;
+const uint16_t BITMAP_UP_ARROW_ID = 12;
 
 namespace BitmapDatabase
 {

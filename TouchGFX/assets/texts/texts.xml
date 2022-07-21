@@ -6,11 +6,86 @@
   <Texts>
     <TextGroup Id="Group1" />
     <TextGroup Id="Unsorted">
-      <Text Id="__SingleUse_6CLK" Alignment="Left" TypographyId="Typography15">
-        <Translation Language="GB">ET to finish:</Translation>
+      <Text Id="__SingleUse_5WSV" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">correction</Translation>
       </Text>
-      <Text Id="__SingleUse_XPQ2" Alignment="Left" TypographyId="Typography15">
-        <Translation Language="GB">Elapsed:</Translation>
+      <Text Id="__SingleUse_VO46" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">Apply</Translation>
+      </Text>
+      <Text Id="__SingleUse_8K8O" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">.</Translation>
+      </Text>
+      <Text Id="__SingleUse_QP9Y" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_1APN" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_115H" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_GP7I" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_1VDA" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_1DAN" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_0ANE" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">Input measured volume</Translation>
+      </Text>
+      <Text Id="__SingleUse_FZ8F" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_SJCG" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">&lt;value&gt; ml</Translation>
+      </Text>
+      <Text Id="__SingleUse_M22K" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">Current Volume: </Translation>
+      </Text>
+      <Text Id="__SingleUse_N7PY" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">00</Translation>
+      </Text>
+      <Text Id="__SingleUse_WTVE" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">&lt;value&gt;:</Translation>
+      </Text>
+      <Text Id="__SingleUse_AKV7" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">00</Translation>
+      </Text>
+      <Text Id="__SingleUse_BUBU" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">&lt;value&gt;:</Translation>
+      </Text>
+      <Text Id="__SingleUse_9ZAK" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">Elapsed time:</Translation>
+      </Text>
+      <Text Id="__SingleUse_KHKS" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">00</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZNIO" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">00</Translation>
+      </Text>
+      <Text Id="__SingleUse_PLNT" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">&lt;value&gt;:&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_Z2VN" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">00</Translation>
+      </Text>
+      <Text Id="__SingleUse_5F99" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">&lt;value&gt;:</Translation>
+      </Text>
+      <Text Id="__SingleUse_131B" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">3 days</Translation>
+      </Text>
+      <Text Id="__SingleUse_60MR" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">3 mins</Translation>
+      </Text>
+      <Text Id="__SingleUse_RAM8" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">Graph span</Translation>
+      </Text>
+      <Text Id="__SingleUse_6CLK" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">Estimated time left:</Translation>
       </Text>
       <Text Id="__SingleUse_UQXR" Alignment="Left" TypographyId="Typography15">
         <Translation Language="GB">00</Translation>
@@ -21,29 +96,8 @@
       <Text Id="__SingleUse_PDFB" Alignment="Left" TypographyId="Typography15">
         <Translation Language="GB">&lt;value&gt;:&lt;value&gt;</Translation>
       </Text>
-      <Text Id="__SingleUse_YD5G" Alignment="Left" TypographyId="Typography15">
-        <Translation Language="GB">00</Translation>
-      </Text>
-      <Text Id="__SingleUse_GCCP" Alignment="Left" TypographyId="Typography15">
-        <Translation Language="GB">00</Translation>
-      </Text>
-      <Text Id="__SingleUse_8RG6" Alignment="Left" TypographyId="Typography15">
-        <Translation Language="GB">&lt;value&gt;:&lt;value&gt;</Translation>
-      </Text>
-      <Text Id="__SingleUse_C7HQ" Alignment="Left" TypographyId="Typography15">
-        <Translation Language="GB">ET to volume:</Translation>
-      </Text>
       <Text Id="__SingleUse_MIAO" Alignment="Left" TypographyId="Typography15">
-        <Translation Language="GB">Elapsed:</Translation>
-      </Text>
-      <Text Id="__SingleUse_K8A6" Alignment="Left" TypographyId="Typography15">
-        <Translation Language="GB">00</Translation>
-      </Text>
-      <Text Id="__SingleUse_27JP" Alignment="Left" TypographyId="Typography15">
-        <Translation Language="GB">00</Translation>
-      </Text>
-      <Text Id="__SingleUse_XTOH" Alignment="Left" TypographyId="Typography15">
-        <Translation Language="GB">&lt;value&gt;:&lt;value&gt;</Translation>
+        <Translation Language="GB">Elapsed time:</Translation>
       </Text>
       <Text Id="__SingleUse_I9HP" Alignment="Left" TypographyId="Typography15">
         <Translation Language="GB">00</Translation>
@@ -81,9 +135,6 @@
       <Text Id="__SingleUse_ICXT" Alignment="Center" TypographyId="Small">
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
-      <Text Id="__SingleUse_G3D0" Alignment="Left" TypographyId="Small">
-        <Translation Language="GB">0</Translation>
-      </Text>
       <Text Id="__SingleUse_AZSF" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">Standby</Translation>
       </Text>
@@ -96,19 +147,10 @@
       <Text Id="__SingleUse_2KT8" Alignment="Left" TypographyId="Small">
         <Translation Language="GB">Setpoint Flow</Translation>
       </Text>
-      <Text Id="__SingleUse_6F1N" Alignment="Left" TypographyId="Small">
-        <Translation Language="GB">Stop at Volume</Translation>
-      </Text>
       <Text Id="__SingleUse_LWY7" Alignment="Left" TypographyId="Small">
         <Translation Language="GB">control</Translation>
       </Text>
       <Text Id="__SingleUse_DQZ7" Alignment="Left" TypographyId="Small">
-        <Translation Language="GB">enable</Translation>
-      </Text>
-      <Text Id="__SingleUse_6YGY" Alignment="Left" TypographyId="Small">
-        <Translation Language="GB">limit</Translation>
-      </Text>
-      <Text Id="__SingleUse_BZFF" Alignment="Left" TypographyId="Small">
         <Translation Language="GB">enable</Translation>
       </Text>
       <Text Id="__SingleUse_72AS" Alignment="Left" TypographyId="Small">
@@ -143,9 +185,6 @@
       </Text>
       <Text Id="__SingleUse_ZP6C" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">Flow: &lt;value&gt; µl/min</Translation>
-      </Text>
-      <Text Id="__SingleUse_VX71" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">&lt;value&gt; ml</Translation>
       </Text>
       <Text Id="__SingleUse_TLTD" Alignment="Left" TypographyId="Typography15">
         <Translation Language="GB">µl/min</Translation>

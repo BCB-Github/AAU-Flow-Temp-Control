@@ -154,80 +154,6 @@
             ]
           },
           {
-            "Type": "FlexButton",
-            "Name": "flexDownVol",
-            "X": 151,
-            "Y": 222,
-            "Width": 50,
-            "Height": 50,
-            "ButtonTrigger": {
-              "Type": "ClickButtonTrigger"
-            },
-            "ButtonStyles": [
-              {
-                "Type": "BoxWithBorderButtonStyle",
-                "Width": 50,
-                "Height": 50,
-                "LockToFlexButtonSize": true,
-                "BorderSize": 5,
-                "ColorReleased": {
-                  "Green": 102,
-                  "Blue": 153
-                },
-                "ColorPressed": {
-                  "Green": 153,
-                  "Blue": 204
-                },
-                "ColorBorderReleased": {
-                  "Green": 51,
-                  "Blue": 102
-                },
-                "ColorBorderPressed": {
-                  "Red": 51,
-                  "Green": 102,
-                  "Blue": 153
-                }
-              }
-            ]
-          },
-          {
-            "Type": "FlexButton",
-            "Name": "flexUpVol",
-            "X": 151,
-            "Y": 150,
-            "Width": 50,
-            "Height": 50,
-            "ButtonTrigger": {
-              "Type": "ClickButtonTrigger"
-            },
-            "ButtonStyles": [
-              {
-                "Type": "BoxWithBorderButtonStyle",
-                "Width": 50,
-                "Height": 50,
-                "LockToFlexButtonSize": true,
-                "BorderSize": 5,
-                "ColorReleased": {
-                  "Green": 102,
-                  "Blue": 153
-                },
-                "ColorPressed": {
-                  "Green": 153,
-                  "Blue": 204
-                },
-                "ColorBorderReleased": {
-                  "Green": 51,
-                  "Blue": 102
-                },
-                "ColorBorderPressed": {
-                  "Red": 51,
-                  "Green": 102,
-                  "Blue": 153
-                }
-              }
-            ]
-          },
-          {
             "Type": "Box",
             "Name": "background",
             "Width": 480,
@@ -284,10 +210,10 @@
             "Width": 360,
             "Height": 120,
             "DataSeed": -2101000824,
-            "NumberOfValues": 100,
+            "NumberOfValues": 1000,
             "MaxY": 4000.0,
             "Precision": "1",
-            "LastIndex": 99,
+            "LastIndex": 999,
             "XAxisScale": 1.0,
             "LabelSizeTop": 5,
             "LabelSizeBottom": 5,
@@ -326,10 +252,10 @@
             "Width": 360,
             "Height": 120,
             "DataSeed": 1856252957,
-            "NumberOfValues": 100,
+            "NumberOfValues": 1000,
             "MaxY": 100.0,
             "Precision": "0.1",
-            "LastIndex": 99,
+            "LastIndex": 999,
             "XAxisScale": 1.0,
             "LabelSizeTop": 5,
             "LabelSizeBottom": 5,
@@ -467,22 +393,6 @@
           },
           {
             "Type": "TextArea",
-            "Name": "SPVol",
-            "X": 157,
-            "Y": 198,
-            "Width": 45,
-            "Height": 24,
-            "TextId": "__SingleUse_VX71",
-            "TextRotation": "0",
-            "AutoSize": true,
-            "Wildcard1": {
-              "TextId": "__SingleUse_G3D0",
-              "UseBuffer": true,
-              "BufferSize": 3
-            }
-          },
-          {
-            "Type": "TextArea",
             "Name": "SPTemp",
             "X": 371,
             "Y": 70,
@@ -587,8 +497,8 @@
           {
             "Type": "CircleProgress",
             "Name": "circleProgress",
-            "X": 284,
-            "Y": 206,
+            "X": 281,
+            "Y": 176,
             "Width": 54,
             "Height": 54,
             "Color": {
@@ -615,26 +525,6 @@
             "TextId": "__SingleUse_IABV",
             "TextRotation": "0",
             "AutoSize": true
-          },
-          {
-            "Type": "ScalableImage",
-            "Name": "upVolImg",
-            "X": 151,
-            "Y": 150,
-            "Width": 50,
-            "Height": 50,
-            "Filename": "up-arrow.png",
-            "ScalingAlgorithm": "Nearest-neighbor"
-          },
-          {
-            "Type": "ScalableImage",
-            "Name": "downVolImg",
-            "X": 151,
-            "Y": 222,
-            "Width": 50,
-            "Height": 50,
-            "Filename": "down-arrow.png",
-            "ScalingAlgorithm": "Nearest-neighbor"
           },
           {
             "Type": "FlexButton",
@@ -836,72 +726,6 @@
           },
           {
             "Type": "TextArea",
-            "Name": "en3",
-            "X": 217,
-            "Y": 229,
-            "Width": 34,
-            "Height": 12,
-            "TextId": "__SingleUse_BZFF",
-            "TextRotation": "0",
-            "AutoSize": true
-          },
-          {
-            "Type": "FlexButton",
-            "Name": "toggleVol",
-            "X": 219,
-            "Y": 195,
-            "Width": 30,
-            "Height": 30,
-            "ButtonTrigger": {
-              "Type": "ClickButtonTrigger"
-            },
-            "ButtonStyles": [
-              {
-                "Type": "ImageButtonStyle",
-                "X": 2,
-                "Y": 2,
-                "ImageReleased": "disabled.png",
-                "ImagePressed": "disabled.png"
-              },
-              {
-                "Type": "BoxWithBorderButtonStyle",
-                "Width": 30,
-                "Height": 30,
-                "LockToFlexButtonSize": true,
-                "BorderSize": 3,
-                "ColorReleased": {
-                  "Green": 102,
-                  "Blue": 153
-                },
-                "ColorPressed": {
-                  "Green": 153,
-                  "Blue": 204
-                },
-                "ColorBorderReleased": {
-                  "Green": 51,
-                  "Blue": 102
-                },
-                "ColorBorderPressed": {
-                  "Red": 51,
-                  "Green": 102,
-                  "Blue": 153
-                }
-              }
-            ]
-          },
-          {
-            "Type": "TextArea",
-            "Name": "lim1",
-            "X": 223,
-            "Y": 242,
-            "Width": 22,
-            "Height": 12,
-            "TextId": "__SingleUse_6YGY",
-            "TextRotation": "0",
-            "AutoSize": true
-          },
-          {
-            "Type": "TextArea",
             "Name": "en2",
             "X": 441,
             "Y": 141,
@@ -919,17 +743,6 @@
             "Width": 34,
             "Height": 12,
             "TextId": "__SingleUse_LWY7",
-            "TextRotation": "0",
-            "AutoSize": true
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textAreaSP_2",
-            "X": 137,
-            "Y": 136,
-            "Width": 78,
-            "Height": 12,
-            "TextId": "__SingleUse_6F1N",
             "TextRotation": "0",
             "AutoSize": true
           },
@@ -965,8 +778,8 @@
           {
             "Type": "CircleProgress",
             "Name": "circleProgress1",
-            "X": 284,
-            "Y": 206,
+            "X": 281,
+            "Y": 176,
             "Width": 54,
             "Height": 54,
             "Color": {
@@ -987,8 +800,8 @@
           {
             "Type": "TextArea",
             "Name": "sysStatus",
-            "X": 274,
-            "Y": 197,
+            "X": 272,
+            "Y": 172,
             "Width": 74,
             "Height": 12,
             "TextId": "__SingleUse_SC1I",
@@ -998,8 +811,8 @@
           {
             "Type": "TextArea",
             "Name": "sysStateWildcard",
-            "X": 291,
-            "Y": 254,
+            "X": 288,
+            "Y": 224,
             "Width": 42,
             "Height": 12,
             "TextId": "__SingleUse_ICXT",
@@ -1063,8 +876,8 @@
           {
             "Type": "TextArea",
             "Name": "timeElapsed",
-            "X": 303,
-            "Y": 136,
+            "X": 297,
+            "Y": 243,
             "Width": 45,
             "Height": 18,
             "TextId": "__SingleUse_QXL3",
@@ -1083,46 +896,141 @@
           },
           {
             "Type": "TextArea",
-            "Name": "timeETA",
-            "X": 303,
-            "Y": 159,
-            "Width": 45,
-            "Height": 18,
-            "TextId": "__SingleUse_XTOH",
-            "TextRotation": "0",
-            "AutoSize": true,
-            "Wildcard1": {
-              "TextId": "__SingleUse_27JP",
-              "UseBuffer": true,
-              "BufferSize": 3
-            },
-            "Wildcard2": {
-              "TextId": "__SingleUse_K8A6",
-              "UseBuffer": true,
-              "BufferSize": 3
-            }
-          },
-          {
-            "Type": "TextArea",
             "Name": "textArea4",
-            "X": 234,
-            "Y": 136,
-            "Width": 65,
+            "X": 165,
+            "Y": 243,
+            "Width": 104,
             "Height": 18,
             "TextId": "__SingleUse_MIAO",
             "TextRotation": "0",
             "AutoSize": true
           },
           {
+            "Type": "FlexButton",
+            "Name": "graphSpanMin",
+            "X": 175,
+            "Y": 135,
+            "Width": 50,
+            "Height": 24,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 50,
+                "Height": 24,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 3,
+                "ColorReleased": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "ColorPressed": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
             "Type": "TextArea",
-            "Name": "textArea5",
-            "X": 193,
-            "Y": 159,
-            "Width": 106,
-            "Height": 18,
-            "TextId": "__SingleUse_C7HQ",
+            "Name": "graphTimeLabel",
+            "X": 196,
+            "Y": 120,
+            "Width": 58,
+            "Height": 12,
+            "TextId": "__SingleUse_RAM8",
             "TextRotation": "0",
             "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea6",
+            "X": 183,
+            "Y": 142,
+            "Width": 34,
+            "Height": 12,
+            "TextId": "__SingleUse_60MR",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "graphSpanDay",
+            "X": 231,
+            "Y": 135,
+            "Width": 50,
+            "Height": 24,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 50,
+                "Height": 24,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 3,
+                "ColorReleased": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "ColorPressed": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea6_1_1",
+            "X": 240,
+            "Y": 141,
+            "Width": 33,
+            "Height": 12,
+            "TextId": "__SingleUse_131B",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "hoursElapsed",
+            "X": 271,
+            "Y": 243,
+            "Width": 26,
+            "Height": 18,
+            "TextId": "__SingleUse_5F99",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_Z2VN",
+              "UseBuffer": true,
+              "BufferSize": 3
+            }
           }
         ],
         "Interactions": [
@@ -1183,39 +1091,6 @@
             }
           },
           {
-            "InteractionName": "clickVolUp",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "flexUpVol"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "incrementVol"
-            }
-          },
-          {
-            "InteractionName": "clickVolDown",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "flexDownVol"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "decrementVol"
-            }
-          },
-          {
-            "InteractionName": "toggleVol",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "toggleVol"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "limitVol"
-            }
-          },
-          {
             "InteractionName": "startPauseTemp",
             "Trigger": {
               "Type": "TriggerClicked",
@@ -1269,6 +1144,28 @@
               "Type": "ActionGotoScreen",
               "ScreenTransitionType": "ScreenTransitionNone",
               "ActionComponent": "Screen3"
+            }
+          },
+          {
+            "InteractionName": "minutes",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "graphSpanMin"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "setSpanMinutes"
+            }
+          },
+          {
+            "InteractionName": "days",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "graphSpanDay"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "setSpanDays"
             }
           }
         ]
@@ -1664,6 +1561,228 @@
             ]
           },
           {
+            "Type": "FlexButton",
+            "Name": "upInput1",
+            "X": 10,
+            "Y": 165,
+            "Width": 30,
+            "Height": 30,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 30,
+                "Height": 30,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "upInput2",
+            "X": 40,
+            "Y": 165,
+            "Width": 30,
+            "Height": 30,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 30,
+                "Height": 30,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "upInput3",
+            "X": 75,
+            "Y": 165,
+            "Width": 30,
+            "Height": 30,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 30,
+                "Height": 30,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "downInput1",
+            "X": 10,
+            "Y": 215,
+            "Width": 30,
+            "Height": 30,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 30,
+                "Height": 30,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "downInput2",
+            "X": 40,
+            "Y": 215,
+            "Width": 30,
+            "Height": 30,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 30,
+                "Height": 30,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "downInput3",
+            "X": 75,
+            "Y": 215,
+            "Width": 30,
+            "Height": 30,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 30,
+                "Height": 30,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
             "Type": "Box",
             "Name": "box1",
             "Width": 480,
@@ -1726,8 +1845,9 @@
           {
             "Type": "DynamicGraph",
             "Name": "graphVol",
+            "X": 183,
             "Y": 136,
-            "Width": 480,
+            "Width": 297,
             "Height": 136,
             "DataSeed": -1130101435,
             "NumberOfValues": 1000,
@@ -1780,7 +1900,7 @@
           {
             "Type": "TextArea",
             "Name": "SPVol",
-            "X": 31,
+            "X": 28,
             "Y": 62,
             "Width": 45,
             "Height": 24,
@@ -1891,29 +2011,8 @@
           },
           {
             "Type": "TextArea",
-            "Name": "timeElapsed",
-            "X": 266,
-            "Y": 54,
-            "Width": 45,
-            "Height": 18,
-            "TextId": "__SingleUse_8RG6",
-            "TextRotation": "0",
-            "AutoSize": true,
-            "Wildcard1": {
-              "TextId": "__SingleUse_GCCP",
-              "UseBuffer": true,
-              "BufferSize": 3
-            },
-            "Wildcard2": {
-              "TextId": "__SingleUse_YD5G",
-              "UseBuffer": true,
-              "BufferSize": 3
-            }
-          },
-          {
-            "Type": "TextArea",
             "Name": "timeETA",
-            "X": 266,
+            "X": 383,
             "Y": 77,
             "Width": 45,
             "Height": 18,
@@ -1933,23 +2032,299 @@
           },
           {
             "Type": "TextArea",
-            "Name": "textArea4",
-            "X": 197,
-            "Y": 54,
-            "Width": 65,
+            "Name": "textArea5",
+            "X": 199,
+            "Y": 77,
+            "Width": 150,
             "Height": 18,
-            "TextId": "__SingleUse_XPQ2",
+            "TextId": "__SingleUse_6CLK",
             "TextRotation": "0",
             "AutoSize": true
           },
           {
             "Type": "TextArea",
-            "Name": "textArea5",
-            "X": 170,
-            "Y": 77,
-            "Width": 91,
+            "Name": "timeElapsed",
+            "X": 383,
+            "Y": 49,
+            "Width": 45,
             "Height": 18,
-            "TextId": "__SingleUse_6CLK",
+            "TextId": "__SingleUse_PLNT",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_ZNIO",
+              "UseBuffer": true,
+              "BufferSize": 3
+            },
+            "Wildcard2": {
+              "TextId": "__SingleUse_KHKS",
+              "UseBuffer": true,
+              "BufferSize": 3
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea4",
+            "X": 245,
+            "Y": 49,
+            "Width": 104,
+            "Height": 18,
+            "TextId": "__SingleUse_9ZAK",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "hoursElapsed",
+            "X": 357,
+            "Y": 49,
+            "Width": 26,
+            "Height": 18,
+            "TextId": "__SingleUse_BUBU",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_AKV7",
+              "UseBuffer": true,
+              "BufferSize": 3
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "hoursETA",
+            "X": 357,
+            "Y": 77,
+            "Width": 26,
+            "Height": 18,
+            "TextId": "__SingleUse_WTVE",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_N7PY",
+              "UseBuffer": true,
+              "BufferSize": 3
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea6",
+            "X": 223,
+            "Y": 108,
+            "Width": 130,
+            "Height": 18,
+            "TextId": "__SingleUse_M22K",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "currentVol",
+            "X": 357,
+            "Y": 108,
+            "Width": 34,
+            "Height": 18,
+            "TextId": "__SingleUse_SJCG",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_FZ8F",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "upFirstImg",
+            "X": 10,
+            "Y": 170,
+            "Width": 30,
+            "Height": 20,
+            "Filename": "small-up-arrow.png",
+            "ScalingAlgorithm": "Bilinear Interpolation"
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "upSecondImg",
+            "X": 40,
+            "Y": 170,
+            "Width": 30,
+            "Height": 20,
+            "Filename": "small-up-arrow.png",
+            "ScalingAlgorithm": "Bilinear Interpolation"
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "upThirdImg",
+            "X": 75,
+            "Y": 170,
+            "Width": 30,
+            "Height": 20,
+            "Filename": "small-up-arrow.png",
+            "ScalingAlgorithm": "Bilinear Interpolation"
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "downFirstImg",
+            "X": 10,
+            "Y": 220,
+            "Width": 30,
+            "Height": 20,
+            "Filename": "small-down-arrow.png",
+            "ScalingAlgorithm": "Bilinear Interpolation"
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "downSecondImg",
+            "X": 40,
+            "Y": 220,
+            "Width": 30,
+            "Height": 20,
+            "Filename": "small-down-arrow.png",
+            "ScalingAlgorithm": "Bilinear Interpolation"
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "downThirdImg",
+            "X": 75,
+            "Y": 220,
+            "Width": 30,
+            "Height": 20,
+            "Filename": "small-down-arrow.png",
+            "ScalingAlgorithm": "Bilinear Interpolation"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea7",
+            "X": 5,
+            "Y": 151,
+            "Width": 120,
+            "Height": 12,
+            "TextId": "__SingleUse_0ANE",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "volInput1",
+            "X": 19,
+            "Y": 192,
+            "Width": 13,
+            "Height": 24,
+            "TextId": "__SingleUse_1DAN",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_1VDA",
+              "UseBuffer": true,
+              "BufferSize": 2
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "volInput2",
+            "X": 49,
+            "Y": 192,
+            "Width": 13,
+            "Height": 24,
+            "TextId": "__SingleUse_GP7I",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_115H",
+              "UseBuffer": true,
+              "BufferSize": 2
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "volInput3",
+            "X": 84,
+            "Y": 192,
+            "Width": 13,
+            "Height": 24,
+            "TextId": "__SingleUse_1APN",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_QP9Y",
+              "UseBuffer": true,
+              "BufferSize": 2
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea8",
+            "X": 70,
+            "Y": 192,
+            "Width": 7,
+            "Height": 24,
+            "TextId": "__SingleUse_8K8O",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "applyCalibration",
+            "X": 119,
+            "Y": 185,
+            "Width": 30,
+            "Height": 30,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "ImageButtonStyle",
+                "X": 2,
+                "Y": 2,
+                "ImageReleased": "disabled.png",
+                "ImagePressed": "disabled.png"
+              },
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 30,
+                "Height": 30,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 3,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea9",
+            "X": 120,
+            "Y": 218,
+            "Width": 28,
+            "Height": 12,
+            "TextId": "__SingleUse_VO46",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea9_1",
+            "X": 109,
+            "Y": 233,
+            "Width": 50,
+            "Height": 12,
+            "TextId": "__SingleUse_5WSV",
             "TextRotation": "0",
             "AutoSize": true
           }
@@ -1965,6 +2340,116 @@
               "Type": "ActionGotoScreen",
               "ScreenTransitionType": "ScreenTransitionNone",
               "ActionComponent": "Screen1"
+            }
+          },
+          {
+            "InteractionName": "clickVolUp",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "flexUpVol"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "incrementVol"
+            }
+          },
+          {
+            "InteractionName": "clickVolDown",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "flexDownVol"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "decrementVol"
+            }
+          },
+          {
+            "InteractionName": "toggleVol",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "toggleVol"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "limitVol"
+            }
+          },
+          {
+            "InteractionName": "upInput1",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "upInput1"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "incrementDigit1"
+            }
+          },
+          {
+            "InteractionName": "upInput2",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "upInput2"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "incrementDigit2"
+            }
+          },
+          {
+            "InteractionName": "upInput3",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "upInput3"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "incrementDigit3"
+            }
+          },
+          {
+            "InteractionName": "downInput1",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "downInput1"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "decrementDigit1"
+            }
+          },
+          {
+            "InteractionName": "downInput2",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "downInput2"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "decrementDigit2"
+            }
+          },
+          {
+            "InteractionName": "downInput3",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "downInput3"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "decrementDigit3"
+            }
+          },
+          {
+            "InteractionName": "applyCorrection",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "applyCalibration"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "enableCorrection"
             }
           }
         ]

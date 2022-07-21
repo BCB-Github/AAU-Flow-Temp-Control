@@ -49,21 +49,6 @@ public:
         // Override and implement this function in Screen1
     }
 
-    virtual void incrementVol()
-    {
-        // Override and implement this function in Screen1
-    }
-
-    virtual void decrementVol()
-    {
-        // Override and implement this function in Screen1
-    }
-
-    virtual void limitVol()
-    {
-        // Override and implement this function in Screen1
-    }
-
     virtual void startPauseTempControl()
     {
         // Override and implement this function in Screen1
@@ -84,6 +69,16 @@ public:
         // Override and implement this function in Screen1
     }
 
+    virtual void setSpanMinutes()
+    {
+        // Override and implement this function in Screen1
+    }
+
+    virtual void setSpanDays()
+    {
+        // Override and implement this function in Screen1
+    }
+
 protected:
     FrontendApplication& application() {
         return *static_cast<FrontendApplication*>(touchgfx::Application::getInstance());
@@ -97,18 +92,16 @@ protected:
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexUpTemp;
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexUpFlow;
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexDownFlow;
-    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexDownVol;
-    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexUpVol;
     touchgfx::Box background;
     touchgfx::ScalableImage upTempImg;
     touchgfx::ScalableImage downTempImg;
     touchgfx::ScalableImage upFlowImg;
     touchgfx::ScalableImage downFlowImg;
-    touchgfx::GraphScroll<100> graphFlow;
+    touchgfx::GraphScroll<1000> graphFlow;
     touchgfx::GraphElementLine graphFlowLine1;
     touchgfx::PainterRGB565 graphFlowLine1Painter;
     touchgfx::GraphLabelsY graphFlowMajorYAxisLabel;
-    touchgfx::GraphScroll<100> graphTemp;
+    touchgfx::GraphScroll<1000> graphTemp;
     touchgfx::GraphElementLine graphTempLine1;
     touchgfx::PainterRGB565 graphTempLine1Painter;
     touchgfx::GraphElementGridY graphTempMajorYAxisGrid;
@@ -119,7 +112,6 @@ protected:
     touchgfx::TextAreaWithOneWildcard nowTemp;
     touchgfx::TextAreaWithOneWildcard nowFlow;
     touchgfx::TextAreaWithOneWildcard nowVol;
-    touchgfx::TextAreaWithOneWildcard SPVol;
     touchgfx::TextAreaWithOneWildcard SPTemp;
     touchgfx::TextArea SPFlowUnit;
     touchgfx::TextAreaWithOneWildcard SPFlow;
@@ -129,20 +121,14 @@ protected:
     touchgfx::CircleProgress circleProgress;
     touchgfx::PainterRGB565 circleProgressPainter;
     touchgfx::TextArea textArea2;
-    touchgfx::ScalableImage upVolImg;
-    touchgfx::ScalableImage downVolImg;
     touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  startPauseTemp;
     touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  startPauseFlow;
     touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  stopTemp;
     touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  stopFlow;
     touchgfx::TextArea con1;
     touchgfx::TextArea en1;
-    touchgfx::TextArea en3;
-    touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  toggleVol;
-    touchgfx::TextArea lim1;
     touchgfx::TextArea en2;
     touchgfx::TextArea con2;
-    touchgfx::TextArea textAreaSP_2;
     touchgfx::TextArea flowSPTitle;
     touchgfx::Line line1;
     touchgfx::PainterRGB565 line1Painter;
@@ -153,9 +139,13 @@ protected:
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  flexButton1_1;
     touchgfx::TextArea textArea3;
     touchgfx::TextAreaWithTwoWildcards timeElapsed;
-    touchgfx::TextAreaWithTwoWildcards timeETA;
     touchgfx::TextArea textArea4;
-    touchgfx::TextArea textArea5;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  graphSpanMin;
+    touchgfx::TextArea graphTimeLabel;
+    touchgfx::TextArea textArea6;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  graphSpanDay;
+    touchgfx::TextArea textArea6_1_1;
+    touchgfx::TextAreaWithOneWildcard hoursElapsed;
 
     /*
      * Wildcard Buffers
@@ -166,8 +156,6 @@ protected:
     touchgfx::Unicode::UnicodeChar nowFlowBuffer[NOWFLOW_SIZE];
     static const uint16_t NOWVOL_SIZE = 6;
     touchgfx::Unicode::UnicodeChar nowVolBuffer[NOWVOL_SIZE];
-    static const uint16_t SPVOL_SIZE = 3;
-    touchgfx::Unicode::UnicodeChar SPVolBuffer[SPVOL_SIZE];
     static const uint16_t SPTEMP_SIZE = 4;
     touchgfx::Unicode::UnicodeChar SPTempBuffer[SPTEMP_SIZE];
     static const uint16_t SPFLOW_SIZE = 6;
@@ -178,10 +166,8 @@ protected:
     touchgfx::Unicode::UnicodeChar timeElapsedBuffer1[TIMEELAPSEDBUFFER1_SIZE];
     static const uint16_t TIMEELAPSEDBUFFER2_SIZE = 3;
     touchgfx::Unicode::UnicodeChar timeElapsedBuffer2[TIMEELAPSEDBUFFER2_SIZE];
-    static const uint16_t TIMEETABUFFER1_SIZE = 3;
-    touchgfx::Unicode::UnicodeChar timeETABuffer1[TIMEETABUFFER1_SIZE];
-    static const uint16_t TIMEETABUFFER2_SIZE = 3;
-    touchgfx::Unicode::UnicodeChar timeETABuffer2[TIMEETABUFFER2_SIZE];
+    static const uint16_t HOURSELAPSED_SIZE = 3;
+    touchgfx::Unicode::UnicodeChar hoursElapsedBuffer[HOURSELAPSED_SIZE];
 
 private:
 
