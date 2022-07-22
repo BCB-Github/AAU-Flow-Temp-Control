@@ -1135,7 +1135,7 @@ void StartDefaultTask(void *argument)
   /* init code for LWIP */
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
- // tcpserver_init();
+  tcpserver_init();
   /* Infinite loop */
 
 
@@ -1327,8 +1327,8 @@ void StartTaskSampling(void *argument)
     	  {
     		  tmpPressure+=  (int) uhADCxConvertedValue[a];
     	  }
-    	 tmpPressure = tmpPressure / PRESSURE_ANALOG_SAMPLES;
-    	 presMeasValue = (float) (tmpPressure - adcOffset) *adcToPressure; // Idea is if max pressure is measured
+    	  tmpPressure = tmpPressure / PRESSURE_ANALOG_SAMPLES;
+    	  presMeasValue = (float) (tmpPressure - adcOffset) *adcToPressure; // Idea is if max pressure is measured
 
 
   		  pressureArray[count] = presMeasValue;
