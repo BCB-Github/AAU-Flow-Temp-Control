@@ -131,6 +131,7 @@ protected:
     touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  applyCalibration;
     touchgfx::TextArea textArea9;
     touchgfx::TextArea textArea9_1;
+    touchgfx::TextAreaWithOneWildcard calibrationFactor;
 
     /*
      * Wildcard Buffers
@@ -157,6 +158,8 @@ protected:
     touchgfx::Unicode::UnicodeChar volInput2Buffer[VOLINPUT2_SIZE];
     static const uint16_t VOLINPUT3_SIZE = 2;
     touchgfx::Unicode::UnicodeChar volInput3Buffer[VOLINPUT3_SIZE];
+    static const uint16_t CALIBRATIONFACTOR_SIZE = 5;
+    touchgfx::Unicode::UnicodeChar calibrationFactorBuffer[CALIBRATIONFACTOR_SIZE];
 
 private:
 

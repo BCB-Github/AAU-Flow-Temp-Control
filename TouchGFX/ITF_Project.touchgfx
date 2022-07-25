@@ -210,10 +210,10 @@
             "Width": 360,
             "Height": 120,
             "DataSeed": -2101000824,
-            "NumberOfValues": 1000,
+            "NumberOfValues": 100,
             "MaxY": 4000.0,
             "Precision": "1",
-            "LastIndex": 999,
+            "LastIndex": 99,
             "XAxisScale": 1.0,
             "LabelSizeTop": 5,
             "LabelSizeBottom": 5,
@@ -252,10 +252,10 @@
             "Width": 360,
             "Height": 120,
             "DataSeed": 1856252957,
-            "NumberOfValues": 1000,
+            "NumberOfValues": 100,
             "MaxY": 100.0,
             "Precision": "0.1",
-            "LastIndex": 999,
+            "LastIndex": 99,
             "XAxisScale": 1.0,
             "LabelSizeTop": 5,
             "LabelSizeBottom": 5,
@@ -283,19 +283,6 @@
               },
               "Interval": 20.0,
               "LineWidth": 1
-            },
-            "XAxisLabel": {
-              "Type": "GraphLabel",
-              "Interval": 10.0,
-              "DecimalSeparator": "Point",
-              "TextColor": {
-                "Red": 20,
-                "Green": 151,
-                "Blue": 197
-              },
-              "TextId": "__SingleUse_PWED",
-              "TextRotation": "0",
-              "Position": "Bottom"
             },
             "YAxisLabel": {
               "Type": "GraphLabel",
@@ -1030,6 +1017,136 @@
               "TextId": "__SingleUse_Z2VN",
               "UseBuffer": true,
               "BufferSize": 3
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "pressureError1",
+            "X": 83,
+            "Y": 52,
+            "Width": 173,
+            "Height": 18,
+            "TextId": "__SingleUse_PDSI",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 194,
+              "Green": 92,
+              "Blue": 19
+            },
+            "Alpha": 0,
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "pressureError2",
+            "X": 101,
+            "Y": 71,
+            "Width": 136,
+            "Height": 18,
+            "TextId": "__SingleUse_18QL",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 194,
+              "Green": 92,
+              "Blue": 19
+            },
+            "Alpha": 0,
+            "AutoSize": true
+          },
+          {
+            "Type": "DynamicGraph",
+            "Name": "graphFlowDays",
+            "Width": 360,
+            "Height": 120,
+            "DataSeed": -2101000824,
+            "NumberOfValues": 1000,
+            "MaxY": 4000.0,
+            "Precision": "1",
+            "LastIndex": 999,
+            "XAxisScale": 1.0,
+            "Alpha": 0,
+            "LabelSizeTop": 5,
+            "LabelSizeBottom": 5,
+            "LabelSizeLeft": 25,
+            "LabelSizeRight": 25,
+            "GraphType": "GraphScroll",
+            "GraphDrawers": [
+              {
+                "Type": "LineDrawer",
+                "LineWidth": 2,
+                "FileNameImage": "",
+                "Color": {
+                  "Red": 20,
+                  "Green": 151,
+                  "Blue": 197
+                }
+              }
+            ],
+            "YAxisLabel": {
+              "Type": "GraphLabel",
+              "Interval": 800.0,
+              "DecimalSeparator": "Point",
+              "TextColor": {
+                "Red": 20,
+                "Green": 151,
+                "Blue": 197
+              },
+              "TextId": "__SingleUse_S1HR",
+              "TextRotation": "0",
+              "Position": "Right"
+            }
+          },
+          {
+            "Type": "DynamicGraph",
+            "Name": "graphTempDays",
+            "Width": 360,
+            "Height": 120,
+            "DataSeed": 1856252957,
+            "NumberOfValues": 1000,
+            "MaxY": 100.0,
+            "Precision": "0.1",
+            "LastIndex": 999,
+            "XAxisScale": 1.0,
+            "Alpha": 6,
+            "LabelSizeTop": 5,
+            "LabelSizeBottom": 5,
+            "LabelSizeLeft": 25,
+            "LabelSizeRight": 25,
+            "PaddingTop": 2,
+            "GraphType": "GraphScroll",
+            "GraphDrawers": [
+              {
+                "Type": "LineDrawer",
+                "LineWidth": 2,
+                "Color": {
+                  "Red": 196,
+                  "Green": 30,
+                  "Blue": 22
+                }
+              }
+            ],
+            "YAxisGrid": {
+              "Type": "GraphGrid",
+              "Color": {
+                "Red": 61,
+                "Green": 65,
+                "Blue": 66
+              },
+              "Interval": 20.0,
+              "LineWidth": 1
+            },
+            "YAxisLabel": {
+              "Type": "GraphLabel",
+              "Interval": 20.0,
+              "DecimalSeparator": "Point",
+              "TextColor": {
+                "Red": 196,
+                "Green": 30,
+                "Blue": 22
+              },
+              "TextId": "__SingleUse_JUEB",
+              "TextRotation": "0",
+              "Position": "Left"
             }
           }
         ],
@@ -2327,6 +2444,22 @@
             "TextId": "__SingleUse_5WSV",
             "TextRotation": "0",
             "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "calibrationFactor",
+            "X": 3,
+            "Y": 252,
+            "Width": 127,
+            "Height": 18,
+            "TextId": "__SingleUse_TW7T",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_U4W4",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
           }
         ],
         "Interactions": [

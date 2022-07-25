@@ -97,15 +97,14 @@ protected:
     touchgfx::ScalableImage downTempImg;
     touchgfx::ScalableImage upFlowImg;
     touchgfx::ScalableImage downFlowImg;
-    touchgfx::GraphScroll<1000> graphFlow;
+    touchgfx::GraphScroll<100> graphFlow;
     touchgfx::GraphElementLine graphFlowLine1;
     touchgfx::PainterRGB565 graphFlowLine1Painter;
     touchgfx::GraphLabelsY graphFlowMajorYAxisLabel;
-    touchgfx::GraphScroll<1000> graphTemp;
+    touchgfx::GraphScroll<100> graphTemp;
     touchgfx::GraphElementLine graphTempLine1;
     touchgfx::PainterRGB565 graphTempLine1Painter;
     touchgfx::GraphElementGridY graphTempMajorYAxisGrid;
-    touchgfx::GraphLabelsX graphTempMajorXAxisLabel;
     touchgfx::GraphLabelsY graphTempMajorYAxisLabel;
     touchgfx::TextArea labelTemp;
     touchgfx::TextArea labelFlow;
@@ -146,6 +145,17 @@ protected:
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  graphSpanDay;
     touchgfx::TextArea textArea6_1_1;
     touchgfx::TextAreaWithOneWildcard hoursElapsed;
+    touchgfx::TextArea pressureError1;
+    touchgfx::TextArea pressureError2;
+    touchgfx::GraphScroll<1000> graphFlowDays;
+    touchgfx::GraphElementLine graphFlowDaysLine1;
+    touchgfx::PainterRGB565 graphFlowDaysLine1Painter;
+    touchgfx::GraphLabelsY graphFlowDaysMajorYAxisLabel;
+    touchgfx::GraphScroll<1000> graphTempDays;
+    touchgfx::GraphElementLine graphTempDaysLine1;
+    touchgfx::PainterRGB565 graphTempDaysLine1Painter;
+    touchgfx::GraphElementGridY graphTempDaysMajorYAxisGrid;
+    touchgfx::GraphLabelsY graphTempDaysMajorYAxisLabel;
 
     /*
      * Wildcard Buffers
