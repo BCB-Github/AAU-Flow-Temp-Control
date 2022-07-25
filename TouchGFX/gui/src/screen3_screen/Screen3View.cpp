@@ -24,6 +24,7 @@ void Screen3View::setupScreen()
     printInput1();
     printInput2();
     printInput3();
+    printFactor();
     if (limitVolState == 1)
     {
 	    toggleVol.setBitmaps(Bitmap(BITMAP_ENABLED_ID), Bitmap(BITMAP_ENABLED_ID));
@@ -253,6 +254,7 @@ void Screen3View::enableCorrection()
 		if (volSetValue != 0) {
 			correctionFactor = volMeasured/volSetValue;
 		}
+		printFactor();
 
 	} else {
 		applyCalibration.setBitmaps(Bitmap(BITMAP_DISABLED_ID), Bitmap(BITMAP_DISABLED_ID));
@@ -260,5 +262,13 @@ void Screen3View::enableCorrection()
 		applyCalibration.invalidate();
 		enableCorrectionState = 0;
 		correctionFactor = 1;
+		printFactor();
 	}
+}
+
+void Screen3View::printFactor()
+{
+	Unicode::snprintf(calibrationFactorBuffer, CALIBRATIONFACTOR_SIZE, "%d", correctionFactor);
+	calibrationFactor.resizeToCurrentText();
+	calibrationFactor.invalidate();
 }

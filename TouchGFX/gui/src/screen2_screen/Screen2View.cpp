@@ -93,7 +93,7 @@ void Screen2View::decrementDuty()
 	if (dutyPercent != 0)
 	{
 		dutyPercent -= 5;
-		if (dutyPercent == 9 | 99)
+		if ((dutyPercent == 9) | (dutyPercent == 99))
 		{ box1.invalidate(); }
 		printDuty();
 	}

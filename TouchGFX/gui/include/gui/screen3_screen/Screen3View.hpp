@@ -35,6 +35,7 @@ public:
     void printInput3();
 
     void enableCorrection();
+    void printFactor();
 
 protected:
 };

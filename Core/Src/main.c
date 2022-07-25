@@ -190,8 +190,8 @@ float timeElapsed = 0;
 
 int data3DaysFlow[1000] = {0};
 int data3DaysTemp[1000] = {0};
-int data3MinsFlow[1000] = {0};
-int data3MinsTemp[1000] = {0};
+int data3MinsFlow[100] = {0};
+int data3MinsTemp[100] = {0};
 
 int daysDataCount = 0;
 int daysLoops = 0;
@@ -1168,11 +1168,11 @@ void StartDefaultTask(void *argument)
 		  }
 	  }
 
-	  if ((t1 - minsLoops*180*1000) > minsDataCount*180) {
+	  if ((t1 - minsLoops*1800*100) > minsDataCount*1800) {
 		  data3MinsFlow[minsDataCount] = avgFlow;
 		  data3MinsTemp[minsDataCount] = avgTemp*10;
 		  minsDataCount++;
-		  if (minsDataCount == 1000) {
+		  if (minsDataCount == 100) {
 			  minsDataCount = 0;
 			  minsLoops++;
 		  }

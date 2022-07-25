@@ -9,6 +9,6 @@
 #define INC_TCPSERVER_H_
 
 void tcpserver_init (void);
-void executeCommand(char command[]);
+void checkCommand(char input[]);
 
 #endif /* INC_TCPSERVER_H_ */

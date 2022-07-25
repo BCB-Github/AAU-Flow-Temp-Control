@@ -20,6 +20,7 @@ float oldFlow2 = 0;
 float oldFlow3 = 0;
 float T1 = 0.01/60;
 
+extern xQueueHandle pressureErrorQ;
 extern xQueueHandle motorSwitchQ;
 
 ControlClass::ControlClass() : pressure(0), pressureSV(0), kp_flow(0.001) , ki_flow(.003){
@@ -212,8 +213,9 @@ void ControlClass::systemRun(){
 	case 2: // control running high
 
 		// Pressure check
-		if (pressure > 1) {
+		if (pressure > 5) {
 			systemFlowStatus = 3;
+			xQueueSend(pressureErrorQ, &flowStartState, 0);
 			break;
 		}
 

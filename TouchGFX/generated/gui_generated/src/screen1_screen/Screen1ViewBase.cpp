@@ -89,12 +89,6 @@ Screen1ViewBase::Screen1ViewBase() :
     graphTempMajorYAxisGrid.setLineWidth(1);
     graphTemp.addGraphElement(graphTempMajorYAxisGrid);
 
-    graphTempMajorXAxisLabel.setScale(10);
-    graphTempMajorXAxisLabel.setInterval(10);
-    graphTempMajorXAxisLabel.setLabelTypedText(touchgfx::TypedText(T___SINGLEUSE_PWED));
-    graphTempMajorXAxisLabel.setColor(touchgfx::Color::getColorFromRGB(20, 151, 197));
-    graphTemp.addBottomElement(graphTempMajorXAxisLabel);
-
     graphTempMajorYAxisLabel.setScale(10);
     graphTempMajorYAxisLabel.setInterval(20);
     graphTempMajorYAxisLabel.setLabelTypedText(touchgfx::TypedText(T___SINGLEUSE_5P8J));
@@ -346,6 +340,60 @@ Screen1ViewBase::Screen1ViewBase() :
     hoursElapsed.resizeToCurrentText();
     hoursElapsed.setTypedText(touchgfx::TypedText(T___SINGLEUSE_5F99));
 
+    pressureError1.setXY(83, 52);
+    pressureError1.setColor(touchgfx::Color::getColorFromRGB(194, 92, 19));
+    pressureError1.setLinespacing(0);
+    pressureError1.setAlpha(0);
+    pressureError1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_PDSI));
+
+    pressureError2.setXY(101, 71);
+    pressureError2.setColor(touchgfx::Color::getColorFromRGB(194, 92, 19));
+    pressureError2.setLinespacing(0);
+    pressureError2.setAlpha(0);
+    pressureError2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_18QL));
+
+    graphFlowDays.setScale(1);
+    graphFlowDays.setPosition(0, 0, 360, 120);
+    graphFlowDays.setAlpha(0);
+    graphFlowDays.setGraphAreaMargin(5, 25, 25, 5);
+    graphFlowDays.setGraphAreaPadding(0, 0, 0, 0);
+    graphFlowDays.setGraphRangeY(0, 4000);
+
+    graphFlowDaysMajorYAxisLabel.setScale(1);
+    graphFlowDaysMajorYAxisLabel.setInterval(800);
+    graphFlowDaysMajorYAxisLabel.setLabelTypedText(touchgfx::TypedText(T___SINGLEUSE_S1HR));
+    graphFlowDaysMajorYAxisLabel.setColor(touchgfx::Color::getColorFromRGB(20, 151, 197));
+    graphFlowDays.addRightElement(graphFlowDaysMajorYAxisLabel);
+
+    graphFlowDaysLine1Painter.setColor(touchgfx::Color::getColorFromRGB(20, 151, 197));
+    graphFlowDaysLine1.setPainter(graphFlowDaysLine1Painter);
+    graphFlowDaysLine1.setLineWidth(2);
+    graphFlowDays.addGraphElement(graphFlowDaysLine1);
+
+    graphTempDays.setScale(10);
+    graphTempDays.setPosition(0, 0, 360, 120);
+    graphTempDays.setAlpha(6);
+    graphTempDays.setGraphAreaMargin(5, 25, 25, 5);
+    graphTempDays.setGraphAreaPadding(2, 0, 0, 0);
+    graphTempDays.setGraphRangeY(0, 100);
+
+    graphTempDaysMajorYAxisGrid.setScale(10);
+    graphTempDaysMajorYAxisGrid.setColor(touchgfx::Color::getColorFromRGB(61, 65, 66));
+    graphTempDaysMajorYAxisGrid.setInterval(20);
+    graphTempDaysMajorYAxisGrid.setLineWidth(1);
+    graphTempDays.addGraphElement(graphTempDaysMajorYAxisGrid);
+
+    graphTempDaysMajorYAxisLabel.setScale(10);
+    graphTempDaysMajorYAxisLabel.setInterval(20);
+    graphTempDaysMajorYAxisLabel.setLabelTypedText(touchgfx::TypedText(T___SINGLEUSE_JUEB));
+    graphTempDaysMajorYAxisLabel.setColor(touchgfx::Color::getColorFromRGB(196, 30, 22));
+    graphTempDays.addLeftElement(graphTempDaysMajorYAxisLabel);
+
+    graphTempDaysLine1Painter.setColor(touchgfx::Color::getColorFromRGB(196, 30, 22));
+    graphTempDaysLine1.setPainter(graphTempDaysLine1Painter);
+    graphTempDaysLine1.setLineWidth(2);
+    graphTempDays.addGraphElement(graphTempDaysLine1);
+
     add(__background);
     add(flexDownTemp);
     add(flexUpTemp);
@@ -394,6 +442,10 @@ Screen1ViewBase::Screen1ViewBase() :
     add(graphSpanDay);
     add(textArea6_1_1);
     add(hoursElapsed);
+    add(pressureError1);
+    add(pressureError2);
+    add(graphFlowDays);
+    add(graphTempDays);
 }
 
 void Screen1ViewBase::setupScreen()

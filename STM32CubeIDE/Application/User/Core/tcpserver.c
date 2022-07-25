@@ -5,7 +5,6 @@
  *      Author: controllerstech.com
  */
 
-
 #include "lwip/opt.h"
 
 #include "lwip/api.h"
@@ -13,6 +12,7 @@
 
 #include "tcpserver.h"
 #include "string.h"
+
 static struct netconn *conn, *newconn;
 static struct netbuf *buf;
 static ip_addr_t *addr;
@@ -20,9 +20,11 @@ static unsigned short port;
 char msg[100];
 char smsg[200];
 int len;
+int sendingState = 0;
 extern int minsDataCount;
 
 extern int flowSetValue;
+extern float avgFlow;
 
 
 
@@ -66,15 +68,21 @@ static void tcp_thread(void *arg)
 
 							strncpy (msg, buf->p->payload, buf->p->len);   // get the message from the client
 
-							executeCommand(msg);
+							checkCommand(msg);
 
 							netconn_write(newconn, smsg, len, NETCONN_COPY);  // send the message back to the client
 							memset (msg, '\0', 100);  // clear the buffer
 						}
 						while (netbuf_next(buf) >0);
 
+						if (sendingState == 0) {
+							len = sprintf (smsg, "The current flowrate is %d\n", (int)avgFlow);
+							netconn_write(newconn, smsg, len, NETCONN_COPY);
+							osDelay(10);
+						}
 						netbuf_delete(buf);
 					}
+
 
 					/* Close connection and discard connection identifier. */
 					netconn_close(newconn);
@@ -95,13 +103,52 @@ void tcpserver_init(void)
   sys_thread_new("tcp_thread", tcp_thread, NULL, DEFAULT_THREAD_STACKSIZE,osPriorityNormal);
 }
 
-void executeCommand(char command[])
+void checkCommand(char input[])
 {
-	if (command[0] == '1') {
-		//int newSetValue = atoi(command[1])*100 + atoi(command[1])*10 + atoi(command[2]);
-		//flowSetValue = newSetValue;
+	/*switch (input[0]) {
+	case ('G' | 'g'):
+		switch (input[3]) {
+		case ('F' | 'f'):
+			len = sprintf (smsg, "Received: \"%s\"\n Was the command \"getFlow\"?\n", input);
+			break;
+		}
+		break;
+	default:
+		len = sprintf (smsg, "Received: \"%s\"\n Unknown command\n", input);
+		break;
+	} */
+	if (input[0] == 'G' | input[0] == 'g') {
+		len = sprintf (smsg, "Received: \"%s\"\n Was the command \"getFlow\"?\n", input);
+		sendingState = 1;
 	} else {
-	// Or modify the message received, so that we can send it back to the client
-	len = sprintf (smsg, "Received: \"%s\"\n minsDataCount is: %d", command, minsDataCount);
+		len = sprintf (smsg, "Received: \"%s\"\n Unknown command\n", input);
 	}
+	/* Extract command */
+	char cmdOnly[8] = {'\0'};
+	int commandLength = 0;
+	do {
+		cmdOnly[commandLength] = input[commandLength];
+		commandLength++;
+		if (commandLength == 8) {break;}
+
+	} while (input[commandLength] != ' ');
+	char cmdOnly2[commandLength+1];
+	for (int x = 0;x<commandLength+1;x++) {
+		cmdOnly2[x] = cmdOnly[x];
+	}
+	char compare[8] = "getData";
+	//for (int z = commandLength; z<10; z++) {
+	//	cmdOnly[z] = '\0';
+	//}
+	if (cmdOnly==compare) {
+		len = sprintf (smsg, "Received: \"%s\"\n Was the command \"%s\"?\n MinsDataCount: %d\n", compare, cmdOnly, minsDataCount);
+	}
+	if (input[0] == '1') {
+		int newSetValue = atoi(&input[1]);
+		flowSetValue = newSetValue;
+		len = sprintf (smsg, "Received: \"%s\"\n Changed flowSetValue to: %d\n", input, newSetValue);
+	}
+	// Or modify the message received, so that we can send it back to the client
+	//len = sprintf (smsg, "Received: \"%s\"\n Was the command \"%s\"?\n I reached index %d\n", command, cmdOnly2, commandLength);
+	//}
 }

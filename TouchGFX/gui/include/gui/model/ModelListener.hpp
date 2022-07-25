@@ -42,6 +42,8 @@ public:
 
 	virtual void resetFlowControl() {}
 
+	virtual void sendPressureError() {}
+
 
 protected:
     Model* model;

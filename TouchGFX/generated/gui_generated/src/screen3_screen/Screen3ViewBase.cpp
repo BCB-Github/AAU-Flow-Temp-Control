@@ -276,6 +276,14 @@ Screen3ViewBase::Screen3ViewBase() :
     textArea9_1.setLinespacing(0);
     textArea9_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_5WSV));
 
+    calibrationFactor.setXY(3, 252);
+    calibrationFactor.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    calibrationFactor.setLinespacing(0);
+    Unicode::snprintf(calibrationFactorBuffer, CALIBRATIONFACTOR_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_U4W4).getText());
+    calibrationFactor.setWildcard(calibrationFactorBuffer);
+    calibrationFactor.resizeToCurrentText();
+    calibrationFactor.setTypedText(touchgfx::TypedText(T___SINGLEUSE_TW7T));
+
     add(__background);
     add(flexDownVol);
     add(flexUpVol);
@@ -318,6 +326,7 @@ Screen3ViewBase::Screen3ViewBase() :
     add(applyCalibration);
     add(textArea9);
     add(textArea9_1);
+    add(calibrationFactor);
 }
 
 void Screen3ViewBase::setupScreen()

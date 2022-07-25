@@ -20,8 +20,8 @@ extern int data3DaysFlow[1000];
 extern int data3DaysTemp[1000];
 extern int daysDataCount;
 extern int daysLoops;
-extern int data3MinsFlow[1000];
-extern int data3MinsTemp[1000];
+extern int data3MinsFlow[100];
+extern int data3MinsTemp[100];
 extern int minsDataCount;
 extern int minsLoops;
 
@@ -327,16 +327,23 @@ void Screen1View::resetFlowIcons()
 	stopFlow.setBitmaps(Bitmap(BITMAP_STOPDIS_ID), Bitmap(BITMAP_STOPDIS_ID));
 	stopFlow.setWidthHeight(30, 30);
 	stopFlow.invalidate();
+	pressureError1.setAlpha(0);
+	pressureError2.setAlpha(0);
 	flowStartState = 0;
 }
 
 void Screen1View::setSpanDays()
 {
 	graphState = 1;
-	graphTemp.clear();
-	graphTemp.dataCounterReset();
-	graphFlow.clear();
-	graphFlow.dataCounterReset();
+	graphTempDays.clear();
+	graphTempDays.dataCounterReset();
+	graphFlowDays.clear();
+	graphFlowDays.dataCounterReset();
+
+	graphTempDays.setAlpha(255);
+    graphFlowDays.setAlpha(255);
+    graphTemp.setAlpha(0);
+    graphFlow.setAlpha(0);
 	if (daysLoops == 0) {
 		for (int x = 0; x<daysDataCount; x++) {
 			graphTemp.addDataPointScaled(data3DaysTemp[x]);
@@ -360,6 +367,11 @@ void Screen1View::setSpanMinutes()
 	graphTemp.dataCounterReset();
 	graphFlow.clear();
 	graphFlow.dataCounterReset();
+
+	graphTempDays.setAlpha(0);
+    graphFlowDays.setAlpha(0);
+    graphTemp.setAlpha(255);
+    graphFlow.setAlpha(255);
 	if (minsLoops == 0) {
 		for (int x = 0; x<minsDataCount; x++) {
 			graphTemp.addDataPointScaled(data3MinsTemp[x]);
@@ -379,4 +391,10 @@ void Screen1View::setSpanMinutes()
 void Screen1View::calcETA()
 {
 	timeEstimate = volSetValue*60*1000 / flowSetValue;
+}
+
+void Screen1View::displayPressureError()
+{
+	pressureError1.setAlpha(255);
+	pressureError2.setAlpha(255);
 }

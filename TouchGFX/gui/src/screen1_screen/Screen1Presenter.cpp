@@ -63,3 +63,8 @@ void Screen1Presenter::resetFlowControl()
 {
 	view.resetFlowIcons();
 }
+
+void Screen1Presenter::sendPressureError()
+{
+	view.displayPressureError();
+}

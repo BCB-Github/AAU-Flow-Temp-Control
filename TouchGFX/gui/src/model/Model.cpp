@@ -27,6 +27,8 @@ extern int flowStartState;
 float testVal1 = 0;
 float testVal2 = 0;
 int duty = 0;
+int DPCounter = 0;
+int DPCounter2 = 0;
 
 extern "C"
 {
@@ -52,6 +54,8 @@ extern "C"
 
 	xQueueHandle updateDutyQ;
 
+/* Error Queues */
+	xQueueHandle pressureErrorQ;
 }
 
 Model::Model() : modelListener(0)
@@ -76,35 +80,40 @@ Model::Model() : modelListener(0)
 
 	updateDutyQ = xQueueGenericCreate(1, sizeof(int), 0);
 
+	pressureErrorQ = xQueueGenericCreate(1, sizeof(int), 0);
+
 }
 
 void Model::tick()
 {
 
 	/* The following five if statements check whether new Present Values have been sent to the queues */
-	if (xQueueReceive(updatePVTempQ, &tempPV, 0)==pdTRUE)
-	{
+	if (xQueueReceive(updatePVTempQ, &tempPV, 0)==pdTRUE) {
 		modelListener->setPVTemp(tempPV);
 		modelListener->setPVTempS2(tempPV);
-		modelListener->addDatapointTemp(tempPV);
+		if (DPCounter == 30) {
+			modelListener->addDatapointTemp(tempPV);
+			DPCounter = 0;
+		} else {DPCounter++;}
 	}
-	if (xQueueReceive(updatePVFlowQ, &flowPV, 0)==pdTRUE)
-	{
+	if (xQueueReceive(updatePVFlowQ, &flowPV, 0)==pdTRUE) {
 		modelListener->setPVFlow(flowPV);
 		modelListener->setPVFlowS2(flowPV);
-		modelListener->addDatapointFlow(flowPV);
+		if (DPCounter2 == 30) {
+			modelListener->addDatapointFlow(flowPV);
+			DPCounter2 = 0;
+		} else {DPCounter2++;}
 	}
-	if (xQueueReceive(updateTotalFlowQ, &flowTot, 0)==pdTRUE)
-	{
+	if (xQueueReceive(updateTotalFlowQ, &flowTot, 0)==pdTRUE) {
 		modelListener->setTotalFlow(flowTot);
+
 		modelListener->addDatapointVol(flowTot);
+
 	}
-	if (xQueueReceive(updatePressureQ, &pressurePV, 0)==pdTRUE)
-	{
+	if (xQueueReceive(updatePressureQ, &pressurePV, 0)==pdTRUE) {
 		modelListener->setPressureS2(pressurePV);
 	}
-	if (xQueueReceive(updateRpmQ, &rpmPV, 0)==pdTRUE)
-	{
+	if (xQueueReceive(updateRpmQ, &rpmPV, 0)==pdTRUE) {
 		modelListener->setRpmS2(rpmPV);
 	}
 
@@ -124,21 +133,24 @@ void Model::tick()
 		}
 
 
-	if (xQueueReceive(updateTest1Q, &testVal1, 0)==pdTRUE)
-		{
+	if (xQueueReceive(updateTest1Q, &testVal1, 0)==pdTRUE) {
 			modelListener->setTestVal1(testVal1);
 		}
-	if (xQueueReceive(updateTest2Q, &testVal2, 0)==pdTRUE)
-		{
+
+	if (xQueueReceive(updateTest2Q, &testVal2, 0)==pdTRUE) {
 			modelListener->setTestVal2(testVal2);
 		}
-	if (xQueueReceive(updateDutyQ, &duty, 0)==pdTRUE)
-		{
+
+	if (xQueueReceive(updateDutyQ, &duty, 0)==pdTRUE) {
 			modelListener->setDutyCycle(duty);
 		}
 
 	if (flowStartState == 2) {
 		modelListener->resetFlowControl();
+	}
+
+	if (xQueueReceive(pressureErrorQ, &placeholder, 0)==pdTRUE) {
+		modelListener->sendPressureError();
 	}
 }
 

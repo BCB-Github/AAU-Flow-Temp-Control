@@ -38,6 +38,7 @@ public:
     void setSpanMinutes();
     void calcETA();
 
+    void displayPressureError();
 
     void running();
 

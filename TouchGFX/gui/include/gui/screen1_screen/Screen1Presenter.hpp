@@ -40,6 +40,8 @@ public:
 
     void runProgress();
 
+    void sendPressureError();
+
 private:
     Screen1Presenter();
 
