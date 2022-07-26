@@ -6,6 +6,9 @@
   <Texts>
     <TextGroup Id="Group1" />
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_11I0" Alignment="Left" TypographyId="Typography15">
+        <Translation Language="GB">Flow control at max</Translation>
+      </Text>
       <Text Id="__SingleUse_JUEB" Alignment="Center" TypographyId="Small">
         <Translation Language="GB">&lt;&gt;</Translation>
       </Text>

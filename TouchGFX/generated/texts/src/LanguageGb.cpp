@@ -9,95 +9,96 @@ KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE;
 
 TEXT_LOCATION_FLASH_PRAGMA
 KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE = {
+    180, // T___SingleUse_11I0
     35, // T___SingleUse_JUEB
     35, // T___SingleUse_S1HR
-    468, // T___SingleUse_U4W4
+    488, // T___SingleUse_U4W4
     19, // T___SingleUse_TW7T
-    193, // T___SingleUse_18QL
+    213, // T___SingleUse_18QL
     37, // T___SingleUse_PDSI
-    370, // T___SingleUse_5WSV
-    437, // T___SingleUse_VO46
-    428, // T___SingleUse_8K8O
-    481, // T___SingleUse_QP9Y
+    390, // T___SingleUse_5WSV
+    457, // T___SingleUse_VO46
+    448, // T___SingleUse_8K8O
+    501, // T___SingleUse_QP9Y
     35, // T___SingleUse_1APN
-    481, // T___SingleUse_115H
+    501, // T___SingleUse_115H
     35, // T___SingleUse_GP7I
-    481, // T___SingleUse_1VDA
+    501, // T___SingleUse_1VDA
     35, // T___SingleUse_1DAN
     76, // T___SingleUse_0ANE
-    481, // T___SingleUse_FZ8F
-    188, // T___SingleUse_SJCG
-    211, // T___SingleUse_M22K
-    480, // T___SingleUse_N7PY
-    381, // T___SingleUse_WTVE
-    480, // T___SingleUse_AKV7
-    381, // T___SingleUse_BUBU
-    291, // T___SingleUse_9ZAK
-    480, // T___SingleUse_KHKS
-    480, // T___SingleUse_ZNIO
-    256, // T___SingleUse_PLNT
-    480, // T___SingleUse_Z2VN
-    381, // T___SingleUse_5F99
-    409, // T___SingleUse_131B
-    416, // T___SingleUse_60MR
-    359, // T___SingleUse_RAM8
+    501, // T___SingleUse_FZ8F
+    208, // T___SingleUse_SJCG
+    231, // T___SingleUse_M22K
+    500, // T___SingleUse_N7PY
+    401, // T___SingleUse_WTVE
+    500, // T___SingleUse_AKV7
+    401, // T___SingleUse_BUBU
+    311, // T___SingleUse_9ZAK
+    500, // T___SingleUse_KHKS
+    500, // T___SingleUse_ZNIO
+    276, // T___SingleUse_PLNT
+    500, // T___SingleUse_Z2VN
+    401, // T___SingleUse_5F99
+    429, // T___SingleUse_131B
+    436, // T___SingleUse_60MR
+    379, // T___SingleUse_RAM8
     114, // T___SingleUse_6CLK
-    480, // T___SingleUse_UQXR
-    480, // T___SingleUse_KDAH
-    256, // T___SingleUse_PDFB
-    291, // T___SingleUse_MIAO
-    480, // T___SingleUse_I9HP
-    480, // T___SingleUse_A6QO
-    256, // T___SingleUse_QXL3
-    276, // T___SingleUse_E467
-    449, // T___SingleUse_UZL2
-    430, // T___SingleUse_GWT3
-    481, // T___SingleUse_LERE
-    188, // T___SingleUse_UR5C
+    500, // T___SingleUse_UQXR
+    500, // T___SingleUse_KDAH
+    276, // T___SingleUse_PDFB
+    311, // T___SingleUse_MIAO
+    500, // T___SingleUse_I9HP
+    500, // T___SingleUse_A6QO
+    276, // T___SingleUse_QXL3
+    296, // T___SingleUse_E467
+    469, // T___SingleUse_UZL2
+    450, // T___SingleUse_GWT3
+    501, // T___SingleUse_LERE
+    208, // T___SingleUse_UR5C
     35, // T___SingleUse_S6BU
-    347, // T___SingleUse_U2DH
-    423, // T___SingleUse_ZXAU
+    367, // T___SingleUse_U2DH
+    443, // T___SingleUse_ZXAU
     35, // T___SingleUse_ICXT
-    393, // T___SingleUse_AZSF
+    413, // T___SingleUse_AZSF
     35, // T_jimmy
-    333, // T___SingleUse_SC1I
-    305, // T___SingleUse_2KT8
-    401, // T___SingleUse_LWY7
-    430, // T___SingleUse_DQZ7
-    430, // T___SingleUse_72AS
-    401, // T___SingleUse_E8MR
-    481, // T___SingleUse_XXO3
+    353, // T___SingleUse_SC1I
+    325, // T___SingleUse_2KT8
+    421, // T___SingleUse_LWY7
+    450, // T___SingleUse_DQZ7
+    450, // T___SingleUse_72AS
+    421, // T___SingleUse_E8MR
+    501, // T___SingleUse_XXO3
     0, // T___SingleUse_9ZJK
-    475, // T___SingleUse_OLGI
+    495, // T___SingleUse_OLGI
     98, // T___SingleUse_22DJ
-    465, // T___SingleUse_GQBS
-    245, // T___SingleUse_V666
-    479, // T___SingleUse_CCVH
-    228, // T___SingleUse_ICN1
+    485, // T___SingleUse_GQBS
+    265, // T___SingleUse_V666
+    499, // T___SingleUse_CCVH
+    248, // T___SingleUse_ICN1
     135, // T___SingleUse_ZP6C
     143, // T___SingleUse_TLTD
-    260, // T___SingleUse_IABV
-    481, // T___SingleUse_LHPL
+    280, // T___SingleUse_IABV
+    501, // T___SingleUse_LHPL
     60, // T___SingleUse_6V2X
-    455, // T___SingleUse_28ND
+    475, // T___SingleUse_28ND
     165, // T___SingleUse_FPPC
-    460, // T___SingleUse_AK80
+    480, // T___SingleUse_AK80
     150, // T___SingleUse_VFFK
-    347, // T___SingleUse_OWHL
-    443, // T___SingleUse_1BLF
-    319, // T___SingleUse_19KW
-    479, // T___SingleUse_YF1J
+    367, // T___SingleUse_OWHL
+    463, // T___SingleUse_1BLF
+    339, // T___SingleUse_19KW
+    499, // T___SingleUse_YF1J
     35, // T___SingleUse_U15I
-    483, // T___SingleUse_MXIN
-    251, // T___SingleUse_RQNO
-    481, // T___SingleUse_EMSI
-    180, // T___SingleUse_XTYX
-    481, // T___SingleUse_U8YI
+    503, // T___SingleUse_MXIN
+    271, // T___SingleUse_RQNO
+    501, // T___SingleUse_EMSI
+    200, // T___SingleUse_XTYX
+    501, // T___SingleUse_U8YI
     135, // T___SingleUse_81ZS
-    465, // T___SingleUse_XLJG
-    245, // T___SingleUse_VQ8W
-    384, // T___SingleUse_RHSD
-    470, // T___SingleUse_ZBMR
+    485, // T___SingleUse_XLJG
+    265, // T___SingleUse_VQ8W
+    404, // T___SingleUse_RHSD
+    490, // T___SingleUse_ZBMR
     35, // T___SingleUse_YKV5
     35 // T___SingleUse_5P8J
 };

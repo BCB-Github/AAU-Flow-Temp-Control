@@ -145,8 +145,6 @@ protected:
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  graphSpanDay;
     touchgfx::TextArea textArea6_1_1;
     touchgfx::TextAreaWithOneWildcard hoursElapsed;
-    touchgfx::TextArea pressureError1;
-    touchgfx::TextArea pressureError2;
     touchgfx::GraphScroll<1000> graphFlowDays;
     touchgfx::GraphElementLine graphFlowDaysLine1;
     touchgfx::PainterRGB565 graphFlowDaysLine1Painter;
@@ -156,6 +154,9 @@ protected:
     touchgfx::PainterRGB565 graphTempDaysLine1Painter;
     touchgfx::GraphElementGridY graphTempDaysMajorYAxisGrid;
     touchgfx::GraphLabelsY graphTempDaysMajorYAxisLabel;
+    touchgfx::TextArea pressureError1;
+    touchgfx::TextArea pressureError2;
+    touchgfx::TextArea saturationError;
 
     /*
      * Wildcard Buffers

@@ -1020,40 +1020,6 @@
             }
           },
           {
-            "Type": "TextArea",
-            "Name": "pressureError1",
-            "X": 83,
-            "Y": 52,
-            "Width": 173,
-            "Height": 18,
-            "TextId": "__SingleUse_PDSI",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 194,
-              "Green": 92,
-              "Blue": 19
-            },
-            "Alpha": 0,
-            "AutoSize": true
-          },
-          {
-            "Type": "TextArea",
-            "Name": "pressureError2",
-            "X": 101,
-            "Y": 71,
-            "Width": 136,
-            "Height": 18,
-            "TextId": "__SingleUse_18QL",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 194,
-              "Green": 92,
-              "Blue": 19
-            },
-            "Alpha": 0,
-            "AutoSize": true
-          },
-          {
             "Type": "DynamicGraph",
             "Name": "graphFlowDays",
             "Width": 360,
@@ -1148,6 +1114,57 @@
               "TextRotation": "0",
               "Position": "Left"
             }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "pressureError1",
+            "X": 83,
+            "Y": 52,
+            "Width": 173,
+            "Height": 18,
+            "TextId": "__SingleUse_PDSI",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 194,
+              "Green": 92,
+              "Blue": 19
+            },
+            "Alpha": 0,
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "pressureError2",
+            "X": 101,
+            "Y": 71,
+            "Width": 136,
+            "Height": 18,
+            "TextId": "__SingleUse_18QL",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 194,
+              "Green": 92,
+              "Blue": 19
+            },
+            "Alpha": 0,
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "saturationError",
+            "X": 94,
+            "Y": 29,
+            "Width": 150,
+            "Height": 18,
+            "TextId": "__SingleUse_11I0",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 194,
+              "Green": 92,
+              "Blue": 19
+            },
+            "Alpha": 0,
+            "AutoSize": true
           }
         ],
         "Interactions": [
