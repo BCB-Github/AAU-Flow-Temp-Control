@@ -77,7 +77,7 @@ static void tcp_thread(void *arg)
 							{
 								// semaphore must be taken before accessing the tcpsend function
 								osSemaphoreAcquire(tcpsemHandle,osWaitForever);
-								if (strlen(buf->p->payload) > 100) {
+								if ((buf->p->len) > 100) {
 									len = sprintf (smsg, "Input string too large, max input is 100 characters\n");
 									// send the data to the server
 									tcpsend(smsg);
