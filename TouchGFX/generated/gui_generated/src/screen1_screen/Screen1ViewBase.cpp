@@ -398,7 +398,7 @@ Screen1ViewBase::Screen1ViewBase() :
     saturationError.setColor(touchgfx::Color::getColorFromRGB(194, 92, 19));
     saturationError.setLinespacing(0);
     saturationError.setAlpha(0);
-    saturationError.setTypedText(touchgfx::TypedText(T___SINGLEUSE_11I0));
+    saturationError.setTypedText(touchgfx::TypedText(T___SINGLEUSE_OBXN));
 
     add(__background);
     add(flexDownTemp);

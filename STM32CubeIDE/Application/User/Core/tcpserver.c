@@ -25,6 +25,7 @@ static unsigned short port;
 char msg[100];
 char smsg[500];
 int len;
+int errorint;
 int sendingFlowState = 0;
 int sendingTempState = 0;
 extern int minsDataCount;
@@ -128,7 +129,16 @@ static void tcpsend_thread (void *arg)
 {
 	for (;;)
 	{
-		if ((sendingFlowState == 1) | (sendingTempState == 1))
+		if (xQueueReceive(sendServerErrorQ, &errorint, 0)==pdTRUE) {
+			osSemaphoreAcquire(tcpsemHandle,osWaitForever);
+			if (errorint == 0) {
+				len = sprintf(smsg, "Error: Flow control running at max\n");
+			} else if (errorint == 1) {
+				len = sprintf(smsg, "Error: Pressure limit reached, returning to standby\n");
+			}
+			tcpsend(smsg);
+		}
+		else if ((sendingFlowState == 1) | (sendingTempState == 1))
 		{
 			// semaphore must be taken before accessing the tcpsend function
 			osSemaphoreAcquire(tcpsemHandle,osWaitForever);

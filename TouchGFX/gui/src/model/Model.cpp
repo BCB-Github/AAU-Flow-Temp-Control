@@ -59,6 +59,7 @@ extern "C"
 /* Error Queues */
 	xQueueHandle pressureErrorQ;
 	xQueueHandle saturationErrorQ;
+	xQueueHandle sendServerErrorQ;
 }
 
 Model::Model() : modelListener(0)
@@ -84,6 +85,8 @@ Model::Model() : modelListener(0)
 	updateDutyQ = xQueueGenericCreate(1, sizeof(int), 0);
 
 	pressureErrorQ = xQueueGenericCreate(1, sizeof(int), 0);
+	saturationErrorQ = xQueueGenericCreate(1, sizeof(int), 0);
+	sendServerErrorQ = xQueueGenericCreate(1, sizeof(int), 0);
 
 }
 
@@ -162,14 +165,14 @@ void Model::tick()
 		modelListener->resetFlowControl();
 	}
 
-	if (xQueueReceive(pressureErrorQ, &placeholder, 0)==pdTRUE) {
+	/*if (xQueueReceive(pressureErrorQ, &placeholder, 0)==pdTRUE) {
 		modelListener->sendPressureError();
 		pressureErrorSent = 1;
 	}
 
 	if (xQueueReceive(saturationErrorQ, &placeholder, 0)==pdTRUE) {
 		modelListener->sendSaturationError();
-	}
+	}*/
 }
 
 

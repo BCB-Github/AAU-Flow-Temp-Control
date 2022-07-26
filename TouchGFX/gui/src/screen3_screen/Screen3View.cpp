@@ -268,7 +268,7 @@ void Screen3View::enableCorrection()
 
 void Screen3View::printFactor()
 {
-	Unicode::snprintf(calibrationFactorBuffer, CALIBRATIONFACTOR_SIZE, "%.2f", correctionFactor);
+	Unicode::snprintfFloat(calibrationFactorBuffer, CALIBRATIONFACTOR_SIZE, "%.2f", correctionFactor);
 	calibrationFactor.resizeToCurrentText();
 	calibrationFactor.invalidate();
 }

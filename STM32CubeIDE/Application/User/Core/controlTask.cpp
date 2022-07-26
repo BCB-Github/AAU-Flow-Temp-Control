@@ -24,6 +24,7 @@ float T1 = 0.01/60;
 
 extern xQueueHandle pressureErrorQ;
 extern xQueueHandle saturationErrorQ;
+extern xQueueHandle sendServerErrorQ;
 extern xQueueHandle motorSwitchQ;
 
 ControlClass::ControlClass() : pressure(0), pressureSV(0), kp_flow(0.001) , ki_flow(.003){
@@ -51,7 +52,7 @@ int  controlGetVar(ControlClass* ControlClass, char* varName){
 }
 
 void ControlClass::controlTemp(float controlMeas){
-	 static int maxVoltageCounter;
+
 		 static float controlMeasOld;
 		 float T = 0.01; // this might not be right
 
@@ -60,33 +61,16 @@ void ControlClass::controlTemp(float controlMeas){
 		 if (u_temp> 5)
 		 {
 			 u_temp= 5;
-			 maxVoltageCounter++;
 		 }
-		 else if( u_temp < 0)
+		 else if ( u_temp < 0)
 		 {
-			 maxVoltageCounter++;
-			 u_temp = 0;
-		 }
-		 else{
-
-			 maxVoltageCounter = 0;
+			  u_temp = 0;
 		 }
 
 		 u_old_temp = u_temp;
 		 controlMeasOld = controlMeas;
-		 if (maxVoltageCounter > 100) {
-			 // dvs nu har den kørt på max i et længer periode - send en fejl
-			 if (saturationErrorSent != 1) {
-				 xQueueSend(saturationErrorQ, &plimit, 0);
-				 saturationErrorSent = 1;
-			 }
 
-		 } else {
-			 if (saturationErrorSent == 1) {
-				 xQueueSend(saturationErrorQ, &plimit, 0);
-				 saturationErrorSent = 0;
-			 }
-		 }
+
 
 }
 
@@ -114,9 +98,21 @@ void ControlClass::controlFlow(float controlMeas){
 
 		 u_old_flow = u_flow;
 		 controlMeasOld = controlMeas;
-		 if (maxVoltageCounter > 100){
+		 if (maxVoltageCounter > 100) {
 			 // dvs nu har den kørt på max i et længer periode - send en fejl
+			 if (saturationErrorSent != 1) {
+				 xQueueSend(saturationErrorQ, &plimit, 0);
+				 xQueueSend(sendServerErrorQ, 0, 0);
+				 saturationErrorSent = 1;
+			 }
+
+		 } else {
+			 if (saturationErrorSent == 1) {
+				 xQueueSend(saturationErrorQ, &plimit, 0);
+				 saturationErrorSent = 0;
+			 }
 		 }
+
 }
 
 
@@ -229,6 +225,7 @@ void ControlClass::systemRun(){
 		if (pressure > plimit) {
 			systemFlowStatus = 3;
 			xQueueSend(pressureErrorQ, &flowStartState, 0);
+			xQueueSend(sendServerErrorQ, 1, 0);
 			break;
 		}
 
@@ -270,7 +267,7 @@ void ControlClass::systemRun(){
 		ccr1 = dutyVoltageFlow*32767;
 		TIM12->CCR1=(int)ccr1; // duty%=i/32767
 		//	if (timeStart >= testTimeSV){ // The test time has been achieved
-			if (flow < 10) // The motor has stopped
+			if (flow < 100) // The motor has stopped
 			{
 				// disable pwm output
 				systemFlowStatus = 5; // The test has been completed

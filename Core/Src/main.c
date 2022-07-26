@@ -1322,7 +1322,7 @@ void StartTaskSampling(void *argument)
 
     HAL_ADC_Start(&hadc1);
 	HAL_ADC_Start_DMA(&hadc1, &uhADCxConvertedValue, 10);
-	I2CInitialize();
+	//I2CInitialize();
 	extern float correctionFactor;
 
 

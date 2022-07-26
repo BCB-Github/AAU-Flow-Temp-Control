@@ -419,4 +419,4 @@ void Screen1View::displaySaturationError()
 	} else {
 		saturationError.setAlpha(0);
 	}
-}
+}//saturationError
