@@ -2,9 +2,12 @@
  * tcpserver.c
  *
  *  Created on: Apr 20, 2022
- *      Author: controllerstech.com
+ *      Author: controllerstech.com og Jakob
  */
 
+#include "cmsis_os.h"
+#include "FreeRTOS.h"
+#include "semphr.h"
 #include "lwip/opt.h"
 
 #include "lwip/api.h"
@@ -12,19 +15,22 @@
 
 #include "tcpserver.h"
 #include "string.h"
+//#include "tcpfunctions.h"
+extern osSemaphoreId_t tcpsemHandle;
 
 static struct netconn *conn, *newconn;
 static struct netbuf *buf;
 static ip_addr_t *addr;
 static unsigned short port;
 char msg[100];
-char smsg[200];
+char smsg[500];
 int len;
-int sendingState = 0;
+int sendingFlowState = 0;
+int sendingTempState = 0;
 extern int minsDataCount;
 
 extern int flowSetValue;
-extern float avgFlow;
+extern float avgFlow, avgTemp;
 
 
 
@@ -54,40 +60,51 @@ static void tcp_thread(void *arg)
 				/* Process the new connection. */
 				if (accept_err == ERR_OK)
 				{
-
-					/* receive the data from the client */
-					while (netconn_recv(newconn, &buf) == ERR_OK)
+					// Release the semaphore once the connection is successful
+					//sys_sem_signal(&tcpsem);
+					while (1)
 					{
-						/* Extrct the address and port in case they are required */
-						addr = netbuf_fromaddr(buf);  // get the address of the client
-						port = netbuf_fromport(buf);  // get the Port of the client
-
-						/* If there is some data remaining to be sent, the following process will continue */
-						do
+						/* receive the data from the client */
+						while (netconn_recv(newconn, &buf) == ERR_OK)
 						{
+							/* Extract the address and port in case they are required */
+							addr = netbuf_fromaddr(buf);  // get the address of the client
+							port = netbuf_fromport(buf);  // get the Port of the client
 
-							strncpy (msg, buf->p->payload, buf->p->len);   // get the message from the client
+							/* If there is some data remaining to be sent, the following process will continue */
+							do
+							{
+								// semaphore must be taken before accessing the tcpsend function
+								osSemaphoreAcquire(tcpsemHandle,osWaitForever);
+								if (strlen(buf->p->payload) > 100) {
+									len = sprintf (smsg, "Input string too large, max input is 100 characters\n");
+									// send the data to the server
+									tcpsend(smsg);
+								} else {
+									strncpy (msg, buf->p->payload, buf->p->len);   // get the message from the client
+									checkCommand(msg);
+									// send the data to the server
+									tcpsend(smsg);
+									memset (msg, '\0', 100);  // clear the buffer
+								}
 
-							checkCommand(msg);
+							}
+							while (netbuf_next(buf) >0);
 
-							netconn_write(newconn, smsg, len, NETCONN_COPY);  // send the message back to the client
-							memset (msg, '\0', 100);  // clear the buffer
+							netbuf_delete(buf);
 						}
-						while (netbuf_next(buf) >0);
-
-						if (sendingState == 0) {
+						/*if (sendingState == 1) {
 							len = sprintf (smsg, "The current flowrate is %d\n", (int)avgFlow);
 							netconn_write(newconn, smsg, len, NETCONN_COPY);
-							osDelay(10);
-						}
-						netbuf_delete(buf);
-					}
 
+						}*/
+					}
 
 					/* Close connection and discard connection identifier. */
 					netconn_close(newconn);
 					netconn_delete(newconn);
 				}
+
 			}
 		}
 		else
@@ -97,58 +114,52 @@ static void tcp_thread(void *arg)
 	}
 }
 
+void tcpsend (char *data)
+{
+	// send the data to the connected connection
+	netconn_write(newconn, smsg, strlen(smsg), NETCONN_COPY);
+	memset (smsg, '\0', 500);  // clear the output buffer
+	// release the semaphore
+	osSemaphoreRelease(tcpsemHandle);
+}
+
+
+static void tcpsend_thread (void *arg)
+{
+	for (;;)
+	{
+		if ((sendingFlowState == 1) | (sendingTempState == 1))
+		{
+			// semaphore must be taken before accessing the tcpsend function
+			osSemaphoreAcquire(tcpsemHandle,osWaitForever);
+
+			if (sendingFlowState == 1)
+			{
+				char flowmsg[100];
+				sprintf(flowmsg, "Current flow rate is: %d [ul/min]\n", (int)avgFlow);
+				strcat(smsg, flowmsg);
+			}
+			if (sendingTempState == 1)
+			{
+				char tempmsg[100];
+				int B4point;
+				float afterpoint;
+				B4point = (int)avgTemp;
+				afterpoint = ((avgTemp-B4point)*10);
+				sprintf(tempmsg, "Current temperature is: %d.%d [C]\n", B4point, (int)afterpoint);
+				strcat(smsg, tempmsg);
+			}
+			// send the data to the server
+			tcpsend(smsg);
+		}
+		osDelay(1000);
+	}
+}
 
 void tcpserver_init(void)
 {
-  sys_thread_new("tcp_thread", tcp_thread, NULL, DEFAULT_THREAD_STACKSIZE,osPriorityNormal);
+	//sys_sem_new(tcpsem, 0);  // the semaphore would prevent simultaneous access to tcpsend
+	sys_thread_new("tcp_thread", tcp_thread, NULL, DEFAULT_THREAD_STACKSIZE,osPriorityNormal);
+	sys_thread_new("tcpsend_thread", tcpsend_thread, NULL, DEFAULT_THREAD_STACKSIZE,osPriorityNormal);
 }
 
-void checkCommand(char input[])
-{
-	/*switch (input[0]) {
-	case ('G' | 'g'):
-		switch (input[3]) {
-		case ('F' | 'f'):
-			len = sprintf (smsg, "Received: \"%s\"\n Was the command \"getFlow\"?\n", input);
-			break;
-		}
-		break;
-	default:
-		len = sprintf (smsg, "Received: \"%s\"\n Unknown command\n", input);
-		break;
-	} */
-	if (input[0] == 'G' | input[0] == 'g') {
-		len = sprintf (smsg, "Received: \"%s\"\n Was the command \"getFlow\"?\n", input);
-		sendingState = 1;
-	} else {
-		len = sprintf (smsg, "Received: \"%s\"\n Unknown command\n", input);
-	}
-	/* Extract command */
-	char cmdOnly[8] = {'\0'};
-	int commandLength = 0;
-	do {
-		cmdOnly[commandLength] = input[commandLength];
-		commandLength++;
-		if (commandLength == 8) {break;}
-
-	} while (input[commandLength] != ' ');
-	char cmdOnly2[commandLength+1];
-	for (int x = 0;x<commandLength+1;x++) {
-		cmdOnly2[x] = cmdOnly[x];
-	}
-	char compare[8] = "getData";
-	//for (int z = commandLength; z<10; z++) {
-	//	cmdOnly[z] = '\0';
-	//}
-	if (cmdOnly==compare) {
-		len = sprintf (smsg, "Received: \"%s\"\n Was the command \"%s\"?\n MinsDataCount: %d\n", compare, cmdOnly, minsDataCount);
-	}
-	if (input[0] == '1') {
-		int newSetValue = atoi(&input[1]);
-		flowSetValue = newSetValue;
-		len = sprintf (smsg, "Received: \"%s\"\n Changed flowSetValue to: %d\n", input, newSetValue);
-	}
-	// Or modify the message received, so that we can send it back to the client
-	//len = sprintf (smsg, "Received: \"%s\"\n Was the command \"%s\"?\n I reached index %d\n", command, cmdOnly2, commandLength);
-	//}
-}

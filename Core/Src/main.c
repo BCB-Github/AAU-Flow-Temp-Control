@@ -34,13 +34,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "i2cUserFunctionsHeader.h"
-#include "UserFunctionsJMK.h"
 #include "controlTask.h"
 #include "controlTask.hpp"
 #include "time.h"
 #include "userStructs.h"
 //#include "tcpClient.h"
-//#include "tcpServer.h"
+#include "tcpserver.h"
+#include "lwip/api.h"
 
 /* Standard libraries if needed
 #include <stdio.h>
@@ -139,6 +139,11 @@ const osThreadAttr_t samplingTask_attributes = {
   .name = "samplingTask",
   .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal,
+};
+/* Definitions for tcpsem */
+osSemaphoreId_t tcpsemHandle;
+const osSemaphoreAttr_t tcpsem_attributes = {
+  .name = "tcpsem"
 };
 /* USER CODE BEGIN PV */
 static FMC_SDRAM_CommandTypeDef Command;
@@ -276,6 +281,10 @@ int main(void)
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
   /* USER CODE END RTOS_MUTEX */
+
+  /* Create the semaphores(s) */
+  /* creation of tcpsem */
+  tcpsemHandle = osSemaphoreNew(1, 1, &tcpsem_attributes);
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
@@ -1112,7 +1121,7 @@ float avgTemp = 0;
 float avgFlow = 0;
 float avgPressure = 0;
 
-int iterator = 0;
+//int iterator = 0;
 
 float t1 = 0;
 float dt1 = 0;
@@ -1120,7 +1129,12 @@ int init_int = 0;
 float freqRPM = 0;
 float rpm = 0;
 
-float volumeCounter = 0;
+//float volumeCounter = 0;
+
+extern struct netconn *newconn;
+extern char smsg[200];
+extern int sendingState, len;
+
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartDefaultTask */
@@ -1136,6 +1150,7 @@ void StartDefaultTask(void *argument)
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
   tcpserver_init();
+
   /* Infinite loop */
 
 
@@ -1307,6 +1322,7 @@ void StartTaskSampling(void *argument)
 
     HAL_ADC_Start(&hadc1);
 	HAL_ADC_Start_DMA(&hadc1, &uhADCxConvertedValue, 10);
+	I2CInitialize();
 	extern float correctionFactor;
 
 

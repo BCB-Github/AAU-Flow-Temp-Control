@@ -340,18 +340,6 @@ Screen1ViewBase::Screen1ViewBase() :
     hoursElapsed.resizeToCurrentText();
     hoursElapsed.setTypedText(touchgfx::TypedText(T___SINGLEUSE_5F99));
 
-    pressureError1.setXY(83, 52);
-    pressureError1.setColor(touchgfx::Color::getColorFromRGB(194, 92, 19));
-    pressureError1.setLinespacing(0);
-    pressureError1.setAlpha(0);
-    pressureError1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_PDSI));
-
-    pressureError2.setXY(101, 71);
-    pressureError2.setColor(touchgfx::Color::getColorFromRGB(194, 92, 19));
-    pressureError2.setLinespacing(0);
-    pressureError2.setAlpha(0);
-    pressureError2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_18QL));
-
     graphFlowDays.setScale(1);
     graphFlowDays.setPosition(0, 0, 360, 120);
     graphFlowDays.setAlpha(0);
@@ -393,6 +381,24 @@ Screen1ViewBase::Screen1ViewBase() :
     graphTempDaysLine1.setPainter(graphTempDaysLine1Painter);
     graphTempDaysLine1.setLineWidth(2);
     graphTempDays.addGraphElement(graphTempDaysLine1);
+
+    pressureError1.setXY(83, 52);
+    pressureError1.setColor(touchgfx::Color::getColorFromRGB(194, 92, 19));
+    pressureError1.setLinespacing(0);
+    pressureError1.setAlpha(0);
+    pressureError1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_PDSI));
+
+    pressureError2.setXY(101, 71);
+    pressureError2.setColor(touchgfx::Color::getColorFromRGB(194, 92, 19));
+    pressureError2.setLinespacing(0);
+    pressureError2.setAlpha(0);
+    pressureError2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_18QL));
+
+    saturationError.setXY(94, 29);
+    saturationError.setColor(touchgfx::Color::getColorFromRGB(194, 92, 19));
+    saturationError.setLinespacing(0);
+    saturationError.setAlpha(0);
+    saturationError.setTypedText(touchgfx::TypedText(T___SINGLEUSE_11I0));
 
     add(__background);
     add(flexDownTemp);
@@ -442,10 +448,11 @@ Screen1ViewBase::Screen1ViewBase() :
     add(graphSpanDay);
     add(textArea6_1_1);
     add(hoursElapsed);
-    add(pressureError1);
-    add(pressureError2);
     add(graphFlowDays);
     add(graphTempDays);
+    add(pressureError1);
+    add(pressureError2);
+    add(saturationError);
 }
 
 void Screen1ViewBase::setupScreen()

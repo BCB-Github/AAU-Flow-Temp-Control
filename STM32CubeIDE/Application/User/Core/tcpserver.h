@@ -10,5 +10,6 @@
 
 void tcpserver_init (void);
 void checkCommand(char input[]);
+void tcpsend (char *data);
 
 #endif /* INC_TCPSERVER_H_ */

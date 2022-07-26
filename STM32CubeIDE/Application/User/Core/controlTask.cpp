@@ -15,12 +15,15 @@
 
 extern int flowStartState;
 extern int flowStopState;
+int plimit = 5;
+int saturationErrorSent = 0;
 float oldFlow = 0;
 float oldFlow2 = 0;
 float oldFlow3 = 0;
 float T1 = 0.01/60;
 
 extern xQueueHandle pressureErrorQ;
+extern xQueueHandle saturationErrorQ;
 extern xQueueHandle motorSwitchQ;
 
 ControlClass::ControlClass() : pressure(0), pressureSV(0), kp_flow(0.001) , ki_flow(.003){
@@ -71,8 +74,18 @@ void ControlClass::controlTemp(float controlMeas){
 
 		 u_old_temp = u_temp;
 		 controlMeasOld = controlMeas;
-		 if (maxVoltageCounter > 100){
+		 if (maxVoltageCounter > 100) {
 			 // dvs nu har den kørt på max i et længer periode - send en fejl
+			 if (saturationErrorSent != 1) {
+				 xQueueSend(saturationErrorQ, &plimit, 0);
+				 saturationErrorSent = 1;
+			 }
+
+		 } else {
+			 if (saturationErrorSent == 1) {
+				 xQueueSend(saturationErrorQ, &plimit, 0);
+				 saturationErrorSent = 0;
+			 }
 		 }
 
 }
@@ -213,7 +226,7 @@ void ControlClass::systemRun(){
 	case 2: // control running high
 
 		// Pressure check
-		if (pressure > 5) {
+		if (pressure > plimit) {
 			systemFlowStatus = 3;
 			xQueueSend(pressureErrorQ, &flowStartState, 0);
 			break;
@@ -300,7 +313,7 @@ void ControlClass::systemRun(){
 			systemTempStatus = 0;
 			break;
 		case 2 : // The system is currently running
-			systemTempStatus = 0; // Set the control to ramp down to zero
+			systemTempStatus = 0;
 			break;
 		case 3:
 
@@ -328,16 +341,11 @@ void ControlClass::systemRun(){
 		systemTempStatus = 3;
 	}
 
-	else if(systemTempStatus ==4){
-
-		systemTempStatusSV = 0; // Test completed - do not run anymore
-	}
-
-
 
 	// This will be the operation of the control system
 	switch (systemTempStatus) {
 	default: // system Standby
+		TIM5->CCR4=1;
 		break;
 	case 1: // initialize
 
@@ -357,8 +365,6 @@ void ControlClass::systemRun(){
 		{
 			u_temp =0;
 		}
-
-
 		dutyVoltageTemp= u_temp/5;
 
 		// set output To temp
@@ -369,6 +375,8 @@ void ControlClass::systemRun(){
 
 	case 3: // system paused
 
+		// set output To temp
+		TIM5->CCR4=1;
 		break;
 
 	}

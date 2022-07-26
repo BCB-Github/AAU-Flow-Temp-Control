@@ -17,7 +17,10 @@ void Screen1Presenter::deactivate()
 
 }
 
-
+void Screen1Presenter::updateSetPoints()
+{
+	view.refreshSetPoints();
+}
 
 void Screen1Presenter::setPVTemp(float newTempPV)
 {
@@ -67,4 +70,9 @@ void Screen1Presenter::resetFlowControl()
 void Screen1Presenter::sendPressureError()
 {
 	view.displayPressureError();
+}
+
+void Screen1Presenter::sendSaturationError()
+{
+	view.displaySaturationError();
 }

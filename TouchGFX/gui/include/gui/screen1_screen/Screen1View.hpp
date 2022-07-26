@@ -12,6 +12,8 @@ public:
     virtual void setupScreen();
     virtual void tearDownScreen();
 
+    void refreshSetPoints();
+
     void updateTempPV(float newVal);
     void updateFlowPV(float newVal);
     void updateTotalFlow(float newVal);
@@ -39,6 +41,7 @@ public:
     void calcETA();
 
     void displayPressureError();
+    void displaySaturationError();
 
     void running();
 

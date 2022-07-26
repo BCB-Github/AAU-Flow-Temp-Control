@@ -27,6 +27,7 @@ public:
 
     virtual ~Screen1Presenter() {};
 
+    void updateSetPoints();
     void setPVTemp(float newTempPV);
     void setPVFlow(float newFlowPV);
     void setTotalFlow(float newTotalFlow);
@@ -41,6 +42,7 @@ public:
     void runProgress();
 
     void sendPressureError();
+    void sendSaturationError();
 
 private:
     Screen1Presenter();

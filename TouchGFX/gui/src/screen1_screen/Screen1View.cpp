@@ -54,6 +54,14 @@ void Screen1View::tearDownScreen()
     Screen1ViewBase::tearDownScreen();
 }
 
+void Screen1View::refreshSetPoints()
+{
+	printTempSV();
+	printFlowSV();
+	setTempIcons();
+	setFlowIcons();
+}
+
 /* The following functions update present and setpoint values of Temperature and Flow on Screen 1, also total flow */
 void Screen1View::updateTempPV(float newVal)
 {
@@ -355,7 +363,7 @@ void Screen1View::setSpanDays()
 			if (k == 1000) {k=0;}
 			graphTemp.addDataPointScaled(data3DaysTemp[k]);
 			graphFlow.addDataPoint(data3DaysFlow[k]);
-			k += 1;
+			k++;
 		}
 	}
 }
@@ -379,11 +387,11 @@ void Screen1View::setSpanMinutes()
 		}
 	} else {
 		int k = minsDataCount+1;
-		for (int y = 0; y<1000; y++) {
-			if (k == 1000) {k=0;}
+		for (int y = 0; y<100; y++) {
+			if (k == 100) {k=0;}
 			graphTemp.addDataPointScaled(data3MinsTemp[k]);
 			graphFlow.addDataPoint(data3MinsFlow[k]);
-			k += 1;
+			k++;
 		}
 	}
 }
@@ -395,6 +403,20 @@ void Screen1View::calcETA()
 
 void Screen1View::displayPressureError()
 {
-	pressureError1.setAlpha(255);
-	pressureError2.setAlpha(255);
+	if (pressureError1.getAlpha() == 0) {
+		pressureError1.setAlpha(255);
+		pressureError2.setAlpha(255);
+	} else {
+		pressureError1.setAlpha(0);
+		pressureError2.setAlpha(0);
+	}
+}
+
+void Screen1View::displaySaturationError()
+{
+	if (saturationError.getAlpha() == 0) {
+		saturationError.setAlpha(255);
+	} else {
+		saturationError.setAlpha(0);
+	}
 }

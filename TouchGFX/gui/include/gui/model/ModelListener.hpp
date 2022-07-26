@@ -19,6 +19,8 @@ public:
         model = m;
     }
 
+    virtual void updateSetPoints() {}
+
 	virtual void setPVTemp(float newTempPV) {}
 	virtual void setPVFlow(float newFlowPV) {}
 	virtual void setTotalFlow(float newTotalFlow) {}
@@ -43,6 +45,7 @@ public:
 	virtual void resetFlowControl() {}
 
 	virtual void sendPressureError() {}
+	virtual void sendSaturationError() {}
 
 
 protected:

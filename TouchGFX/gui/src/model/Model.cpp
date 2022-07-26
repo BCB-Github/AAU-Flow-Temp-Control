@@ -9,7 +9,7 @@ extern float temp;
 
 #include "queue.h"
 
-/* I use SV for Set Value and PV for Present Value */
+/* I use SV for Set Value and PV for Present Value, DP for DataPoint*/
 int placeholder;
 float tempDP = 0;
 float flowDP = 0;
@@ -29,6 +29,8 @@ float testVal2 = 0;
 int duty = 0;
 int DPCounter = 0;
 int DPCounter2 = 0;
+int updateValuesCounter = 0;
+int pressureErrorSent = 0;
 
 extern "C"
 {
@@ -56,6 +58,7 @@ extern "C"
 
 /* Error Queues */
 	xQueueHandle pressureErrorQ;
+	xQueueHandle saturationErrorQ;
 }
 
 Model::Model() : modelListener(0)
@@ -86,6 +89,16 @@ Model::Model() : modelListener(0)
 
 void Model::tick()
 {
+	if (updateValuesCounter == 50) {
+		modelListener->updateSetPoints();
+		updateValuesCounter = 0;
+		if (pressureErrorSent == 1) {
+			pressureErrorSent = 2;
+		} else if (pressureErrorSent == 2) {
+			modelListener->sendPressureError();
+			pressureErrorSent = 0;
+		}
+	} else {updateValuesCounter++; }
 
 	/* The following five if statements check whether new Present Values have been sent to the queues */
 	if (xQueueReceive(updatePVTempQ, &tempPV, 0)==pdTRUE) {
@@ -151,6 +164,11 @@ void Model::tick()
 
 	if (xQueueReceive(pressureErrorQ, &placeholder, 0)==pdTRUE) {
 		modelListener->sendPressureError();
+		pressureErrorSent = 1;
+	}
+
+	if (xQueueReceive(saturationErrorQ, &placeholder, 0)==pdTRUE) {
+		modelListener->sendSaturationError();
 	}
 }
 
