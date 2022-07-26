@@ -70,7 +70,7 @@ void checkCommand(char input[])
 					case ('f'):
 						flowStartState = 0;
 						flowStopState = 0;
-						xQueueSend(motorSwitchQ, 0, 0);
+						xQueueSend(motorSwitchQ, &flowStopState, 0);
 						len = sprintf (smsg, "Flow rate control stopped\n");
 						break;
 					case ('t'):
@@ -88,7 +88,7 @@ void checkCommand(char input[])
 					case ('f'):
 						flowStartState = 1;
 						flowStopState = 1;
-						xQueueSend(motorSwitchQ, 1, 0);
+						xQueueSend(motorSwitchQ, &flowStopState, 0);
 						len = sprintf (smsg, "Flow rate control started\n");
 						break;
 					case ('t'):
@@ -100,6 +100,9 @@ void checkCommand(char input[])
 						len = sprintf (smsg, "Unknown command. Type help for a list of commands\n");
 						break;
 				}
+				break;
+			default:
+				len = sprintf (smsg, "Unknown command. Type help for a list of commands\n");
 				break;
 			}
 		} else {
@@ -134,6 +137,7 @@ void checkCommand(char input[])
 					"Example forms: \"setflow750\" or \"settemp 42\"\n");
 			break;
 		}
+		break;
 
 
 

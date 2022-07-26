@@ -107,7 +107,7 @@ void Model::tick()
 	if (xQueueReceive(updatePVTempQ, &tempPV, 0)==pdTRUE) {
 		modelListener->setPVTemp(tempPV);
 		modelListener->setPVTempS2(tempPV);
-		if (DPCounter == 30) {
+		if (DPCounter == 20) {
 			modelListener->addDatapointTemp(tempPV);
 			DPCounter = 0;
 		} else {DPCounter++;}
@@ -115,7 +115,7 @@ void Model::tick()
 	if (xQueueReceive(updatePVFlowQ, &flowPV, 0)==pdTRUE) {
 		modelListener->setPVFlow(flowPV);
 		modelListener->setPVFlowS2(flowPV);
-		if (DPCounter2 == 30) {
+		if (DPCounter2 == 20) {
 			modelListener->addDatapointFlow(flowPV);
 			DPCounter2 = 0;
 		} else {DPCounter2++;}

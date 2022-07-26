@@ -16,6 +16,7 @@
 extern int flowStartState;
 extern int flowStopState;
 int plimit = 5;
+int errorPlaceholder = 0;
 int saturationErrorSent = 0;
 float oldFlow = 0;
 float oldFlow2 = 0;
@@ -101,14 +102,15 @@ void ControlClass::controlFlow(float controlMeas){
 		 if (maxVoltageCounter > 100) {
 			 // dvs nu har den kørt på max i et længer periode - send en fejl
 			 if (saturationErrorSent != 1) {
-				 xQueueSend(saturationErrorQ, &plimit, 0);
-				 xQueueSend(sendServerErrorQ, 0, 0);
+				 xQueueSend(saturationErrorQ, &errorPlaceholder, 0);
+				 errorPlaceholder = 0;
+				 xQueueSend(sendServerErrorQ, &errorPlaceholder, 0);
 				 saturationErrorSent = 1;
 			 }
 
 		 } else {
 			 if (saturationErrorSent == 1) {
-				 xQueueSend(saturationErrorQ, &plimit, 0);
+				 xQueueSend(saturationErrorQ, &errorPlaceholder, 0);
 				 saturationErrorSent = 0;
 			 }
 		 }
@@ -225,7 +227,8 @@ void ControlClass::systemRun(){
 		if (pressure > plimit) {
 			systemFlowStatus = 3;
 			xQueueSend(pressureErrorQ, &flowStartState, 0);
-			xQueueSend(sendServerErrorQ, 1, 0);
+			errorPlaceholder = 1;
+			xQueueSend(sendServerErrorQ, &errorPlaceholder, 0);
 			break;
 		}
 

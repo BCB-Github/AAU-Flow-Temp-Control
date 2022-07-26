@@ -7,6 +7,7 @@
 
 #include "cmsis_os.h"
 #include "FreeRTOS.h"
+#include "queue.h"
 #include "semphr.h"
 #include "lwip/opt.h"
 
@@ -33,12 +34,12 @@ extern int minsDataCount;
 extern int flowSetValue;
 extern float avgFlow, avgTemp;
 
-
+extern xQueueHandle sendServerErrorQ;
 
 /**** Send RESPONSE every time the client sends some data ******/
 static void tcp_thread(void *arg)
 {
-	err_t err, accept_err, recv_error;
+	err_t err, accept_err;
 
 	/* Create a new connection identifier. */
 	conn = netconn_new(NETCONN_TCP);
@@ -78,7 +79,7 @@ static void tcp_thread(void *arg)
 								// semaphore must be taken before accessing the tcpsend function
 								osSemaphoreAcquire(tcpsemHandle,osWaitForever);
 								if ((buf->p->len) > 100) {
-									len = sprintf (smsg, "Input string too large, max input is 100 characters\n");
+									len = sprintf (smsg, "Input string too large, max input is 99 characters\n");
 									// send the data to the server
 									tcpsend(smsg);
 								} else {
@@ -94,11 +95,6 @@ static void tcp_thread(void *arg)
 
 							netbuf_delete(buf);
 						}
-						/*if (sendingState == 1) {
-							len = sprintf (smsg, "The current flowrate is %d\n", (int)avgFlow);
-							netconn_write(newconn, smsg, len, NETCONN_COPY);
-
-						}*/
 					}
 
 					/* Close connection and discard connection identifier. */
