@@ -1,10 +1,13 @@
 ../../TouchGFX/gui/include/gui/model/ModelListener.hpp:22:15:virtual void ModelListener::setPVTemp(float)	0	static
 ../../TouchGFX/gui/include/gui/model/ModelListener.hpp:23:15:virtual void ModelListener::setPVFlow(float)	0	static
 ../../TouchGFX/gui/include/gui/model/ModelListener.hpp:24:15:virtual void ModelListener::setTotalFlow(float)	0	static
-../../TouchGFX/gui/include/gui/model/ModelListener.hpp:30:15:virtual void ModelListener::runProgress()	0	static
-../../TouchGFX/gui/include/gui/model/ModelListener.hpp:32:15:virtual void ModelListener::addDatapointTemp(float)	0	static
-../../TouchGFX/gui/include/gui/model/ModelListener.hpp:33:15:virtual void ModelListener::addDatapointFlow(float)	0	static
-../../TouchGFX/gui/include/gui/model/ModelListener.hpp:39:15:virtual void ModelListener::resetFlowControl()	0	static
+../../TouchGFX/gui/include/gui/model/ModelListener.hpp:30:15:virtual void ModelListener::setTimeElapsed(float)	0	static
+../../TouchGFX/gui/include/gui/model/ModelListener.hpp:31:15:virtual void ModelListener::setTimeElapsedS3(float)	0	static
+../../TouchGFX/gui/include/gui/model/ModelListener.hpp:33:15:virtual void ModelListener::runProgress()	0	static
+../../TouchGFX/gui/include/gui/model/ModelListener.hpp:35:15:virtual void ModelListener::addDatapointTemp(float)	0	static
+../../TouchGFX/gui/include/gui/model/ModelListener.hpp:36:15:virtual void ModelListener::addDatapointFlow(float)	0	static
+../../TouchGFX/gui/include/gui/model/ModelListener.hpp:37:15:virtual void ModelListener::addDatapointVol(float)	0	static
+../../TouchGFX/gui/include/gui/model/ModelListener.hpp:43:15:virtual void ModelListener::resetFlowControl()	0	static
 ../../TouchGFX/gui/include/gui/screen2_screen/Screen2Presenter.hpp:31:13:Screen2Presenter::~Screen2Presenter()	0	static
 C:/Users/barlo/git/AAU-Flow-Temp-Control/TouchGFX/gui/src/screen2_screen/Screen2Presenter.cpp:10:6:virtual void Screen2Presenter::activate()	0	static
 C:/Users/barlo/git/AAU-Flow-Temp-Control/TouchGFX/gui/src/screen2_screen/Screen2Presenter.cpp:19:6:virtual void Screen2Presenter::updateTempWildcard(float)	0	static

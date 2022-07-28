@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> SSI TEST </title>
+<!-- <meta http-equiv="refresh" content ="1"> -->
+</head>
+<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+<body>
+
+<h2>SSI with CGI Functionality for Electrolyzer Project</h2>
+
+<table style="width:100%">
+  <tr>
+    <td>Last Command</td>
+    <td>Flow</td>
+    <td>Temperature</td>
+  </tr>
+  <tr>
+      <td><!--#sP--></td>
+    <td><!--#sF--></td>
+    <td><!--#sT--></td>
+  </tr>
+</table>
+
+<p>This page refreshes every 1 second.</p>
+
+
+
+<h2>CGI Forms </h2>
+
+<form action = "/form.cgi">
+	<label for = "fname"> Command for STM : : </label> <br>
+	<input type="text" id = "name" name = "fname" value="John"><br><br>
+	<input type="submit" value ="Submit" onclick="refresh">
+</form>
+
+
+
+</body>
+</html>

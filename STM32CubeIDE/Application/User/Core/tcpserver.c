@@ -105,3 +105,8 @@ void executeCommand(char command[])
 	len = sprintf (smsg, "Received: \"%s\"\n minsDataCount is: %d", command, minsDataCount);
 	}
 }
+
+
+
+
+

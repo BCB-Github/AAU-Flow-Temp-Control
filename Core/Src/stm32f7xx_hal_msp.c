@@ -61,7 +61,7 @@ extern DMA_HandleTypeDef hdma_adc1;
 /* USER CODE END 0 */
 
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
-                                        /**
+                    /**
   * Initializes the Global MSP.
   */
 void HAL_MspInit(void)
@@ -682,6 +682,7 @@ void HAL_QSPI_MspDeInit(QSPI_HandleTypeDef* hqspi)
 */
 void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
 {
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
   if(htim_base->Instance==TIM1)
   {
   /* USER CODE BEGIN TIM1_MspInit 0 */
@@ -700,6 +701,18 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
   /* USER CODE END TIM5_MspInit 0 */
     /* Peripheral clock enable */
     __HAL_RCC_TIM5_CLK_ENABLE();
+
+    __HAL_RCC_GPIOI_CLK_ENABLE();
+    /**TIM5 GPIO Configuration
+    PI0     ------> TIM5_CH4
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_0;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF2_TIM5;
+    HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
+
   /* USER CODE BEGIN TIM5_MspInit 1 */
 
   /* USER CODE END TIM5_MspInit 1 */
@@ -721,27 +734,7 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if(htim->Instance==TIM5)
-  {
-  /* USER CODE BEGIN TIM5_MspPostInit 0 */
-
-  /* USER CODE END TIM5_MspPostInit 0 */
-    __HAL_RCC_GPIOI_CLK_ENABLE();
-    /**TIM5 GPIO Configuration
-    PI0     ------> TIM5_CH4
-    */
-    GPIO_InitStruct.Pin = GPIO_PIN_0;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    GPIO_InitStruct.Alternate = GPIO_AF2_TIM5;
-    HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
-
-  /* USER CODE BEGIN TIM5_MspPostInit 1 */
-
-  /* USER CODE END TIM5_MspPostInit 1 */
-  }
-  else if(htim->Instance==TIM12)
+  if(htim->Instance==TIM12)
   {
   /* USER CODE BEGIN TIM12_MspPostInit 0 */
 
@@ -790,6 +783,12 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
   /* USER CODE END TIM5_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_TIM5_CLK_DISABLE();
+
+    /**TIM5 GPIO Configuration
+    PI0     ------> TIM5_CH4
+    */
+    HAL_GPIO_DeInit(GPIOI, GPIO_PIN_0);
+
   /* USER CODE BEGIN TIM5_MspDeInit 1 */
 
   /* USER CODE END TIM5_MspDeInit 1 */

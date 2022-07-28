@@ -13,7 +13,7 @@ Application/User/gui/Model.o: \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
- ../../Core/Inc/userStructs.h
+ C:/Users/barlo/git/AAU-Flow-Temp-Control/STM32CubeIDE/Application/User/Core/userStructs.h
 ../../TouchGFX/gui/include/gui/model/Model.hpp:
 ../../TouchGFX/gui/include/gui/model/ModelListener.hpp:
 ../../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
@@ -27,4 +27,4 @@ Application/User/gui/Model.o: \
 ../../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
 ../../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:
 ../../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
-../../Core/Inc/userStructs.h:
+C:/Users/barlo/git/AAU-Flow-Temp-Control/STM32CubeIDE/Application/User/Core/userStructs.h:

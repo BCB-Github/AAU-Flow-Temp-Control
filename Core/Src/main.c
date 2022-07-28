@@ -38,6 +38,7 @@
 #include "controlTask.h"
 #include "controlTask.hpp"
 #include "time.h"
+#include "httpserver.h"
 #include "userStructs.h"
 //#include "tcpClient.h"
 //#include "tcpServer.h"
@@ -50,7 +51,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+#include "lwip/apps/httpd.h"
+extern struct netif gnetif;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -242,6 +244,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
+  //httpd_init();
 
   /* USER CODE END SysInit */
 
@@ -757,7 +760,6 @@ static void MX_TIM5_Init(void)
 
   TIM_ClockConfigTypeDef sClockSourceConfig = {0};
   TIM_MasterConfigTypeDef sMasterConfig = {0};
-  TIM_OC_InitTypeDef sConfigOC = {0};
 
   /* USER CODE BEGIN TIM5_Init 1 */
 
@@ -777,28 +779,15 @@ static void MX_TIM5_Init(void)
   {
     Error_Handler();
   }
-  if (HAL_TIM_PWM_Init(&htim5) != HAL_OK)
-  {
-    Error_Handler();
-  }
   sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
   if (HAL_TIMEx_MasterConfigSynchronization(&htim5, &sMasterConfig) != HAL_OK)
   {
     Error_Handler();
   }
-  sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 0;
-  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-  if (HAL_TIM_PWM_ConfigChannel(&htim5, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
-  {
-    Error_Handler();
-  }
   /* USER CODE BEGIN TIM5_Init 2 */
 
   /* USER CODE END TIM5_Init 2 */
-  HAL_TIM_MspPostInit(&htim5);
 
 }
 
@@ -1135,12 +1124,17 @@ void StartDefaultTask(void *argument)
   /* init code for LWIP */
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
-  tcpserver_init();
+   //tcpserver_init();
   /* Infinite loop */
+
+  http_server_init();
 
 
   for(;;)
   {
+
+
+
 	  /* First part calculates motor rpm from EXTI counter
 	   * waits an iteration to initiate  */
 

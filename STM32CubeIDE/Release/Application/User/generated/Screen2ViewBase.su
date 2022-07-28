@@ -62,4 +62,4 @@ C:/Users/barlo/git/AAU-Flow-Temp-Control/TouchGFX/generated/gui_generated/src/sc
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp:43:5:touchgfx::TextArea::TextArea()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp:62:5:touchgfx::TextAreaWithOneWildcard::TextAreaWithOneWildcard()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/buttons/BoxWithBorderButtonStyle.hpp:44:5:touchgfx::BoxWithBorderButtonStyle<T>::BoxWithBorderButtonStyle() [with T = touchgfx::ClickButtonTrigger]	16	static
-C:/Users/barlo/git/AAU-Flow-Temp-Control/TouchGFX/generated/gui_generated/src/screen2_screen/Screen2ViewBase.cpp:9:1:Screen2ViewBase::Screen2ViewBase()	128	static
+C:/Users/barlo/git/AAU-Flow-Temp-Control/TouchGFX/generated/gui_generated/src/screen2_screen/Screen2ViewBase.cpp:9:1:Screen2ViewBase::Screen2ViewBase()	136	static

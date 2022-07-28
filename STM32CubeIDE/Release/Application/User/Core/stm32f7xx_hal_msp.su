@@ -11,8 +11,8 @@ C:/Users/barlo/git/AAU-Flow-Temp-Control/Core/Src/stm32f7xx_hal_msp.c:397:6:HAL_
 C:/Users/barlo/git/AAU-Flow-Temp-Control/Core/Src/stm32f7xx_hal_msp.c:514:6:HAL_LTDC_MspDeInit	8	static
 C:/Users/barlo/git/AAU-Flow-Temp-Control/Core/Src/stm32f7xx_hal_msp.c:583:6:HAL_QSPI_MspInit	64	static
 C:/Users/barlo/git/AAU-Flow-Temp-Control/Core/Src/stm32f7xx_hal_msp.c:646:6:HAL_QSPI_MspDeInit	8	static
-C:/Users/barlo/git/AAU-Flow-Temp-Control/Core/Src/stm32f7xx_hal_msp.c:683:6:HAL_TIM_Base_MspInit	8	static
-C:/Users/barlo/git/AAU-Flow-Temp-Control/Core/Src/stm32f7xx_hal_msp.c:710:6:HAL_TIM_MspPostInit	40	static
-C:/Users/barlo/git/AAU-Flow-Temp-Control/Core/Src/stm32f7xx_hal_msp.c:762:6:HAL_TIM_Base_MspDeInit	0	static
-C:/Users/barlo/git/AAU-Flow-Temp-Control/Core/Src/stm32f7xx_hal_msp.c:897:6:HAL_SDRAM_MspInit	48	static
-C:/Users/barlo/git/AAU-Flow-Temp-Control/Core/Src/stm32f7xx_hal_msp.c:983:6:HAL_SDRAM_MspDeInit	8	static
+C:/Users/barlo/git/AAU-Flow-Temp-Control/Core/Src/stm32f7xx_hal_msp.c:683:6:HAL_TIM_Base_MspInit	48	static
+C:/Users/barlo/git/AAU-Flow-Temp-Control/Core/Src/stm32f7xx_hal_msp.c:734:6:HAL_TIM_MspPostInit	32	static
+C:/Users/barlo/git/AAU-Flow-Temp-Control/Core/Src/stm32f7xx_hal_msp.c:766:6:HAL_TIM_Base_MspDeInit	0	static
+C:/Users/barlo/git/AAU-Flow-Temp-Control/Core/Src/stm32f7xx_hal_msp.c:918:6:HAL_SDRAM_MspInit	48	static
+C:/Users/barlo/git/AAU-Flow-Temp-Control/Core/Src/stm32f7xx_hal_msp.c:1004:6:HAL_SDRAM_MspDeInit	8	static

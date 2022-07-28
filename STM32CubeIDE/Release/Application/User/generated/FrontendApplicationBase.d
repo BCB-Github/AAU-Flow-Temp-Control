@@ -97,6 +97,9 @@ Application/User/generated/FrontendApplicationBase.o: \
  ../../TouchGFX/gui/include/gui/screen2_screen/Screen2View.hpp \
  ../../TouchGFX/generated/gui_generated/include/gui_generated/screen2_screen/Screen2ViewBase.hpp \
  ../../TouchGFX/gui/include/gui/screen2_screen/Screen2Presenter.hpp \
+ ../../TouchGFX/gui/include/gui/screen3_screen/Screen3View.hpp \
+ ../../TouchGFX/generated/gui_generated/include/gui_generated/screen3_screen/Screen3ViewBase.hpp \
+ ../../TouchGFX/gui/include/gui/screen3_screen/Screen3Presenter.hpp \
  ../../TouchGFX/generated/texts/include/texts/TextKeysAndLanguages.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/platform/driver/lcd/LCD16bpp.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/lcd/LCD16DebugPrinter.hpp
@@ -197,6 +200,9 @@ Application/User/generated/FrontendApplicationBase.o: \
 ../../TouchGFX/gui/include/gui/screen2_screen/Screen2View.hpp:
 ../../TouchGFX/generated/gui_generated/include/gui_generated/screen2_screen/Screen2ViewBase.hpp:
 ../../TouchGFX/gui/include/gui/screen2_screen/Screen2Presenter.hpp:
+../../TouchGFX/gui/include/gui/screen3_screen/Screen3View.hpp:
+../../TouchGFX/generated/gui_generated/include/gui_generated/screen3_screen/Screen3ViewBase.hpp:
+../../TouchGFX/gui/include/gui/screen3_screen/Screen3Presenter.hpp:
 ../../TouchGFX/generated/texts/include/texts/TextKeysAndLanguages.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/platform/driver/lcd/LCD16bpp.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/lcd/LCD16DebugPrinter.hpp:

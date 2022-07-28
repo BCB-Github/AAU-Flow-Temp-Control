@@ -28,6 +28,8 @@
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp:127:18:virtual void touchgfx::TextArea::setXBaselineY(int16_t, int16_t)	16	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp:403:41:virtual const UnicodeChar* touchgfx::TextArea::getWildcard2() const	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp:81:41:virtual const UnicodeChar* touchgfx::TextAreaWithOneWildcard::getWildcard1() const	0	static
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp:144:41:virtual const UnicodeChar* touchgfx::TextAreaWithTwoWildcards::getWildcard1() const	0	static
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp:163:41:virtual const UnicodeChar* touchgfx::TextAreaWithTwoWildcards::getWildcard2() const	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/graph/AbstractDataGraph.hpp:168:18:virtual void touchgfx::AbstractDataGraph::setAlpha(uint8_t)	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/graph/AbstractDataGraph.hpp:436:18:virtual void touchgfx::AbstractDataGraph::setGraphRangeX(int, int)	4	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/graph/AbstractDataGraph.hpp:442:18:virtual void touchgfx::AbstractDataGraph::setGraphRangeX(float, float)	0	static
@@ -102,21 +104,21 @@
 ../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:37:18:virtual void Screen1ViewBase::decrementTemp()	0	static
 ../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:42:18:virtual void Screen1ViewBase::decrementFlow()	0	static
 ../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:47:18:virtual void Screen1ViewBase::incrementFlow()	0	static
-../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:52:18:virtual void Screen1ViewBase::incrementVol()	0	static
-../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:57:18:virtual void Screen1ViewBase::decrementVol()	0	static
-../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:62:18:virtual void Screen1ViewBase::limitVol()	0	static
-../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:67:18:virtual void Screen1ViewBase::startPauseTempControl()	0	static
-../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:72:18:virtual void Screen1ViewBase::stopTempControl()	0	static
-../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:77:18:virtual void Screen1ViewBase::startPauseFlowControl()	0	static
-../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:82:18:virtual void Screen1ViewBase::stopFlowControl()	0	static
-C:/Users/barlo/git/AAU-Flow-Temp-Control/TouchGFX/generated/gui_generated/src/screen1_screen/Screen1ViewBase.cpp:387:6:virtual void Screen1ViewBase::setupScreen()	0	static
+../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:52:18:virtual void Screen1ViewBase::startPauseTempControl()	0	static
+../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:57:18:virtual void Screen1ViewBase::stopTempControl()	0	static
+../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:62:18:virtual void Screen1ViewBase::startPauseFlowControl()	0	static
+../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:67:18:virtual void Screen1ViewBase::stopFlowControl()	0	static
+../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:72:18:virtual void Screen1ViewBase::setSpanMinutes()	0	static
+../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:77:18:virtual void Screen1ViewBase::setSpanDays()	0	static
+C:/Users/barlo/git/AAU-Flow-Temp-Control/TouchGFX/generated/gui_generated/src/screen1_screen/Screen1ViewBase.cpp:399:6:virtual void Screen1ViewBase::setupScreen()	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/buttons/ClickButtonTrigger.hpp:35:7:touchgfx::ClickButtonTrigger::~ClickButtonTrigger()	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/buttons/BoxWithBorderButtonStyle.hpp:41:7:touchgfx::BoxWithBorderButtonStyle<touchgfx::ClickButtonTrigger>::~BoxWithBorderButtonStyle()	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/buttons/BoxWithBorderButtonStyle.hpp:123:18:void touchgfx::BoxWithBorderButtonStyle<T>::handlePressedUpdated() [with T = touchgfx::ClickButtonTrigger]	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Callback.hpp:357:8:touchgfx::Callback<Screen1ViewBase, const touchgfx::AbstractButtonContainer&>::~Callback()	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/buttons/ImageButtonStyle.hpp:45:7:touchgfx::ImageButtonStyle<touchgfx::BoxWithBorderButtonStyle<touchgfx::ClickButtonTrigger> >::~ImageButtonStyle()	0	static
-../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/graph/GraphScroll.hpp:76:7:touchgfx::GraphScroll<100>::~GraphScroll()	0	static
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/graph/GraphScroll.hpp:76:7:touchgfx::GraphScroll<1000>::~GraphScroll()	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/graph/GraphElements.hpp:620:7:touchgfx::GraphElementGridY::~GraphElementGridY()	0	static
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp:122:7:touchgfx::TextAreaWithTwoWildcards::~TextAreaWithTwoWildcards()	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp:59:7:touchgfx::TextAreaWithOneWildcard::~TextAreaWithOneWildcard()	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Callback.hpp:386:18:void touchgfx::Callback<dest_type, T1, void, void>::execute(T1) [with dest_type = Screen1ViewBase; T1 = const touchgfx::AbstractButtonContainer&]	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Callback.hpp:396:18:bool touchgfx::Callback<dest_type, T1, void, void>::isValid() const [with dest_type = Screen1ViewBase; T1 = const touchgfx::AbstractButtonContainer&]	0	static
@@ -127,11 +129,12 @@ C:/Users/barlo/git/AAU-Flow-Temp-Control/TouchGFX/generated/gui_generated/src/sc
 ../../Middlewares/ST/touchgfx/framework/include/mvp/View.hpp:36:7:virtual touchgfx::View<Screen1Presenter>::~View()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/buttons/AbstractButtonContainer.hpp:34:7:virtual touchgfx::AbstractButtonContainer::~AbstractButtonContainer()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/buttons/ClickButtonTrigger.hpp:35:7:virtual touchgfx::ClickButtonTrigger::~ClickButtonTrigger()	8	static
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp:122:7:virtual touchgfx::TextAreaWithTwoWildcards::~TextAreaWithTwoWildcards()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp:59:7:virtual touchgfx::TextAreaWithOneWildcard::~TextAreaWithOneWildcard()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/graph/GraphElements.hpp:620:7:virtual touchgfx::GraphElementGridY::~GraphElementGridY()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/buttons/BoxWithBorderButtonStyle.hpp:41:7:virtual touchgfx::BoxWithBorderButtonStyle<touchgfx::ClickButtonTrigger>::~BoxWithBorderButtonStyle()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/buttons/ImageButtonStyle.hpp:45:7:virtual touchgfx::ImageButtonStyle<touchgfx::BoxWithBorderButtonStyle<touchgfx::ClickButtonTrigger> >::~ImageButtonStyle()	8	static
-../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/graph/GraphScroll.hpp:76:7:virtual touchgfx::GraphScroll<100>::~GraphScroll()	8	static
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/graph/GraphScroll.hpp:76:7:virtual touchgfx::GraphScroll<1000>::~GraphScroll()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Callback.hpp:357:8:virtual touchgfx::Callback<Screen1ViewBase, const touchgfx::AbstractButtonContainer&>::~Callback()	8	static
 ../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:26:13:virtual Screen1ViewBase::~Screen1ViewBase()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/graph/AbstractDataGraph.hpp:1172:18:virtual void touchgfx::AbstractDataGraph::invalidateContent() const	0	static
@@ -142,7 +145,7 @@ C:/Users/barlo/git/AAU-Flow-Temp-Control/TouchGFX/generated/gui_generated/src/sc
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/graph/AbstractDataGraph.hpp:1577:17:virtual int touchgfx::DynamicDataGraph::indexToDataPointXScaled(int16_t) const	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/buttons/ClickButtonTrigger.hpp:47:18:virtual void touchgfx::ClickButtonTrigger::handleClickEvent(const touchgfx::ClickEvent&)	16	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp:111:18:virtual void touchgfx::TextArea::setBaselineY(int16_t)	16	static
-C:/Users/barlo/git/AAU-Flow-Temp-Control/TouchGFX/generated/gui_generated/src/screen1_screen/Screen1ViewBase.cpp:392:6:void Screen1ViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer&)	8	static
+C:/Users/barlo/git/AAU-Flow-Temp-Control/TouchGFX/generated/gui_generated/src/screen1_screen/Screen1ViewBase.cpp:404:6:void Screen1ViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer&)	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Drawable.hpp:343:10:void touchgfx::Drawable::setXY(int16_t, int16_t)	16	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Drawable.hpp:411:10:void touchgfx::Drawable::setWidthHeight(int16_t, int16_t)	16	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Drawable.hpp:233:10:void touchgfx::Drawable::setPosition(int16_t, int16_t, int16_t, int16_t)	16	static
@@ -150,8 +153,8 @@ C:/Users/barlo/git/AAU-Flow-Temp-Control/TouchGFX/generated/gui_generated/src/sc
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Widget.hpp:36:7:touchgfx::Widget::Widget()	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Box.hpp:33:5:touchgfx::Box::Box()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp:429:9:touchgfx::TextArea::BoundingArea::BoundingArea()	0	static
-../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp:43:5:touchgfx::TextArea::TextArea()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp:46:36:virtual touchgfx::TextArea::BoundingArea touchgfx::TextAreaWithWildcardBase::calculateBoundingArea() const	8	static
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp:43:5:touchgfx::TextArea::TextArea()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp:62:5:touchgfx::TextAreaWithOneWildcard::TextAreaWithOneWildcard()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/CWRUtil.hpp:769:15:static touchgfx::CWRUtil::Q5 touchgfx::CWRUtil::muldiv_toQ5(int32_t, int32_t, int32_t)	24	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/graph/AbstractDataGraph.hpp:1278:25:virtual touchgfx::CWRUtil::Q5 touchgfx::AbstractDataGraph::valueToScreenYQ5(int) const	16	static
@@ -159,7 +162,7 @@ C:/Users/barlo/git/AAU-Flow-Temp-Control/TouchGFX/generated/gui_generated/src/sc
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/AbstractPainterRGB565.hpp:41:5:touchgfx::AbstractPainterRGB565::AbstractPainterRGB565()	16	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/graph/GraphLabels.hpp:43:5:touchgfx::GraphLabelsBase::GraphLabelsBase()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/buttons/BoxWithBorderButtonStyle.hpp:44:5:touchgfx::BoxWithBorderButtonStyle<T>::BoxWithBorderButtonStyle() [with T = touchgfx::ClickButtonTrigger]	16	static
-../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/graph/GraphScroll.hpp:79:5:touchgfx::GraphScroll<CAPACITY>::GraphScroll() [with short int CAPACITY = 100]	16	static
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/graph/GraphScroll.hpp:79:5:touchgfx::GraphScroll<CAPACITY>::GraphScroll() [with short int CAPACITY = 1000]	16	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/buttons/ImageButtonStyle.hpp:48:5:touchgfx::ImageButtonStyle<T>::ImageButtonStyle() [with T = touchgfx::BoxWithBorderButtonStyle<touchgfx::ClickButtonTrigger>]	24	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/buttons/BoxWithBorderButtonStyle.hpp:94:10:void touchgfx::BoxWithBorderButtonStyle<T>::setBoxWithBorderColors(touchgfx::colortype, touchgfx::colortype, touchgfx::colortype, touchgfx::colortype) [with T = touchgfx::ClickButtonTrigger]	4	static
 C:/Users/barlo/git/AAU-Flow-Temp-Control/TouchGFX/generated/gui_generated/src/screen1_screen/Screen1ViewBase.cpp:11:1:Screen1ViewBase::Screen1ViewBase()	320	static

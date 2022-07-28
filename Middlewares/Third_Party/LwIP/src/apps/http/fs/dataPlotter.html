@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+</style>
+
+<script>
+var xhr;
+function Timer1() {
+  xhr.onreadystatechange = function() {
+    document.getElementById("textarea").value = this.responseText;
+  }
+  xhr.open("GET", "getvalue", true);
+  xhr.send(null);
+  setTimeout("Timer1()", 1000);
+}
+
+
+
+function onload(){
+	xhr = new XMLHttpRequest ();
+  //Timer1();
+   	}
+    
+function green (){
+	xhr.open ("GET", "buttoncolor=G", true);
+    xhr.send(null);
+    }
+    
+function blue (){
+	xhr.open ("GET", "buttoncolor=B", true);
+    xhr.send(null);
+    }  
+
+
+</script>    
+
+</head>
+<body onload = "onload()">
+
+
+<h2>SSI with CGI Functionality for Electrolyzer Project</h2>
+
+<table style="width:100%">
+  <tr>
+    <td>Last Command</td>
+    <td>Flow</td>
+    <td>Temperature</td>
+  </tr>
+  <tr>
+      <td>
+      <label for="textarea"> Insert Value : </label>
+      <textarea id="textarea" style="vertical-align:middle" cols="20" rows="1"></textarea>
+      <p id="pID"> This is a paragraph </p>
+      </td>
+    <label for="td" id="tdLabelID"> tdLabelValue </label> 
+    <td id="tdStringValue">
+      String
+    </td>
+    <td><!--#sT--></td>
+  </tr>
+</table>
+
+<button type="button" onclick="doSomething()">Start</button>
+
+</body>
+<script src = "js/dataPlotter.js"> </script>
+</html>
